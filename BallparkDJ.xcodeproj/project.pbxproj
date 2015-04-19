@@ -1,0 +1,950 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04B28FDC19AA42AB00E37486 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B28FD619AA42AB00E37486 /* libTestFlight.a */; };
+		04B28FDD19AA42AB00E37486 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 04B28FD719AA42AB00E37486 /* README.md */; };
+		04B28FDE19AA42AB00E37486 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 04B28FD819AA42AB00E37486 /* release_notes.md */; };
+		04E9A67419A7AA7600419267 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A67119A7AA7600419267 /* IAPHelper.m */; };
+		04E9A67519A7AA7600419267 /* RageIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A67319A7AA7600419267 /* RageIAPHelper.m */; };
+		04E9A67919A7B79F00419267 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A67819A7B79F00419267 /* MBProgressHUD.m */; };
+		04E9A68519A8D58E00419267 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E9A68419A8D58E00419267 /* Security.framework */; };
+		04E9A68719A8D5C800419267 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E9A68619A8D5C800419267 /* libz.dylib */; };
+		8C2C08C516D7107C000B5C1E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2C08C416D7107C000B5C1E /* AudioToolbox.framework */; };
+		8C2C08C716D71086000B5C1E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2C08C616D71086000B5C1E /* MediaPlayer.framework */; };
+		8C2C08C916D71092000B5C1E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2C08C816D71092000B5C1E /* AVFoundation.framework */; };
+		8C2C08CB16D7109D000B5C1E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2C08CA16D7109D000B5C1E /* CoreFoundation.framework */; };
+		8C2C08DE16D71286000B5C1E /* 1024_1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2C08CE16D71286000B5C1E /* 1024_1024.png */; };
+		8C2C08E116D71286000B5C1E /* 1536_2008.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2C08D116D71286000B5C1E /* 1536_2008.png */; };
+		8C2C08E316D71286000B5C1E /* 320_480.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2C08D316D71286000B5C1E /* 320_480.png */; };
+		8C2C08E516D71286000B5C1E /* 512_512.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2C08D516D71286000B5C1E /* 512_512.png */; };
+		8C2C08E816D71286000B5C1E /* 640_1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2C08D816D71286000B5C1E /* 640_1136.png */; };
+		8C2C08E916D71286000B5C1E /* 640_960.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2C08D916D71286000B5C1E /* 640_960.png */; };
+		8C2C08EB16D71286000B5C1E /* 768_1004.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2C08DB16D71286000B5C1E /* 768_1004.png */; };
+		8C2C08EC16D71286000B5C1E /* mic.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2C08DC16D71286000B5C1E /* mic.png */; };
+		8C2C095016D73BCD000B5C1E /* DJLeague.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C094F16D73BCD000B5C1E /* DJLeague.m */; };
+		8C2C095316D73E4E000B5C1E /* DJPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C095216D73E4E000B5C1E /* DJPlayersViewController.m */; };
+		8C2C095916D73F4E000B5C1E /* DJDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C095816D73F4E000B5C1E /* DJDetailController.m */; };
+		8C2C095C16D73F79000B5C1E /* DJMusicEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C095B16D73F79000B5C1E /* DJMusicEditorController.m */; };
+		8CB00D2C16E854870088FB13 /* DJRecorderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB00D2B16E854870088FB13 /* DJRecorderController.m */; };
+		8CB00D3F16E856730088FB13 /* greenBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D3316E856730088FB13 /* greenBar.png */; };
+		8CB00D4116E856730088FB13 /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D3516E856730088FB13 /* pauseButton.png */; };
+		8CB00D4316E856730088FB13 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D3716E856730088FB13 /* playButton.png */; };
+		8CB00D4516E856730088FB13 /* recButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D3916E856730088FB13 /* recButton.png */; };
+		8CB00D4616E856730088FB13 /* redBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D3A16E856730088FB13 /* redBar.png */; };
+		8CB00D4716E856730088FB13 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D3B16E856730088FB13 /* stopButton.png */; };
+		8CB00D4A16E856730088FB13 /* yellowBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D3E16E856730088FB13 /* yellowBar.png */; };
+		8CB00D4C16E8569D0088FB13 /* clearBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D4B16E8569D0088FB13 /* clearBar.png */; };
+		8CB00D5016E8927D0088FB13 /* DJRecorderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D4F16E8927D0088FB13 /* DJRecorderController.xib */; };
+		A2152C6716E1B38800946094 /* DJTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6616E1B38800946094 /* DJTeam.m */; };
+		A2152C6A16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
+		A2152C6B16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
+		A2152C6E16E275CA00946094 /* DJAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6D16E275CA00946094 /* DJAudio.m */; };
+		A2152C6F16E275CA00946094 /* DJAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6D16E275CA00946094 /* DJAudio.m */; };
+		A21DF72F16EEF321006CBC91 /* DJLeagueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A269D43A16E43D56003E60F8 /* DJLeagueViewController.m */; };
+		A269D43D16E442F5003E60F8 /* DJTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6616E1B38800946094 /* DJTeam.m */; };
+		A269D43E16E4430F003E60F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2C08C816D71092000B5C1E /* AVFoundation.framework */; };
+		A2729CDC16E9AFDB00CA9913 /* DJOverlapSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = A2729CDB16E9AFDB00CA9913 /* DJOverlapSlider.m */; };
+		A2729CDE16E9B00300CA9913 /* DJOverlapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2729CDD16E9B00300CA9913 /* DJOverlapView.xib */; };
+		A2729CE216E9B8FC00CA9913 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2729CE116E9B8FB00CA9913 /* QuartzCore.framework */; };
+		A272BB3016D6D30800AE7ED1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A272BB2F16D6D30800AE7ED1 /* UIKit.framework */; };
+		A272BB3216D6D30800AE7ED1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A272BB3116D6D30800AE7ED1 /* Foundation.framework */; };
+		A272BB3416D6D30800AE7ED1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A272BB3316D6D30800AE7ED1 /* CoreGraphics.framework */; };
+		A272BB3C16D6D30800AE7ED1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A272BB3A16D6D30800AE7ED1 /* InfoPlist.strings */; };
+		A272BB3E16D6D30800AE7ED1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A272BB3D16D6D30800AE7ED1 /* main.m */; };
+		A272BB4216D6D30800AE7ED1 /* DJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A272BB4116D6D30800AE7ED1 /* DJAppDelegate.m */; };
+		A272BB5316D6D30800AE7ED1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A272BB5216D6D30800AE7ED1 /* SenTestingKit.framework */; };
+		A272BB5416D6D30800AE7ED1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A272BB2F16D6D30800AE7ED1 /* UIKit.framework */; };
+		A272BB5516D6D30800AE7ED1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A272BB3116D6D30800AE7ED1 /* Foundation.framework */; };
+		A272BB5E16D6D30800AE7ED1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A272BB5C16D6D30800AE7ED1 /* InfoPlist.strings */; };
+		A272BB6116D6D30800AE7ED1 /* BallparkDJTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A272BB6016D6D30800AE7ED1 /* BallparkDJTests.m */; };
+		A28AD01816EA65BD0015EEEC /* DJClipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28AD01616EA633A0015EEEC /* DJClipsView.xib */; };
+		A28FA26B17D82B41002829A2 /* songs.plist in Resources */ = {isa = PBXBuildFile; fileRef = A28FA26A17D82B41002829A2 /* songs.plist */; };
+		A29D096516E86D070032F51A /* DJMusicEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C9440F916E70EBD007898BC /* DJMusicEditorView.xib */; };
+		A29D096616E86D070032F51A /* DJLeagueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C42AC9916E2ED8C0040FFE1 /* DJLeagueView.xib */; };
+		A29D096716E86D070032F51A /* DJPlayersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C42AC9A16E2ED8C0040FFE1 /* DJPlayersView.xib */; };
+		A29D096816E86D070032F51A /* DJIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C42AC9616E2ED7F0040FFE1 /* DJIntroViewController.xib */; };
+		A29D096916E86D070032F51A /* DJDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E2FF416E6B5BD0065493B /* DJDetailView.xib */; };
+		A2A15EC816E92A3E00C85C36 /* DJClipsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A15EC716E92A3E00C85C36 /* DJClipsController.m */; };
+		A2B184C817C6F61900A1FB93 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B184C717C6F61900A1FB93 /* Default-568h@2x.png */; };
+		A2B184CA17C6F62F00A1FB93 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B184C917C6F62F00A1FB93 /* Default@2x.png */; };
+		A2B184CC17C6F66300A1FB93 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B184CB17C6F66300A1FB93 /* Default.png */; };
+		A2B75A1717C56E8900D2962D /* BPDJ_PE_Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B75A1617C56E8900D2962D /* BPDJ_PE_Stop.png */; };
+		A2D95E9217BAE43700159A47 /* BPDJ_PE_Edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D95E8F17BAE43700159A47 /* BPDJ_PE_Edit.png */; };
+		A2D95E9317BAE43700159A47 /* BPDJ_PE_Play.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D95E9017BAE43700159A47 /* BPDJ_PE_Play.png */; };
+		A2D95E9417BAE43700159A47 /* BPDJ_PE_Record.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D95E9117BAE43700159A47 /* BPDJ_PE_Record.png */; };
+		AB10667F188F6E6600F8EA60 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB10667E188F6E6600F8EA60 /* Images.xcassets */; };
+		ABAB188C18DF6C1700DAE277 /* MKStoreKitConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABAB188B18DF6C1700DAE277 /* MKStoreKitConfigs.plist */; };
+		ABB0DEA518D2ADF400ACECEC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB0DEA418D2ADF400ACECEC /* StoreKit.framework */; };
+		ABB4F8EB18974E3B00989B4B /* Action Speed Fighting.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8DC18974E1E00989B4B /* Action Speed Fighting.m4a */; };
+		ABB4F8EC18974E3B00989B4B /* Crank It Up.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8DD18974E1E00989B4B /* Crank It Up.m4a */; };
+		ABB4F8ED18974E3B00989B4B /* Heavy Fuel.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8DE18974E1E00989B4B /* Heavy Fuel.m4a */; };
+		ABB4F8EE18974E3B00989B4B /* Here Again.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8DF18974E1E00989B4B /* Here Again.m4a */; };
+		ABB4F8EF18974E3B00989B4B /* Just Score.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E018974E1E00989B4B /* Just Score.m4a */; };
+		ABB4F8F018974E3B00989B4B /* Knock You Out.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E118974E1E00989B4B /* Knock You Out.m4a */; };
+		ABB4F8F118974E3B00989B4B /* Loud And Proud.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E218974E1E00989B4B /* Loud And Proud.m4a */; };
+		ABB4F8F218974E3B00989B4B /* Man Up.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E318974E1E00989B4B /* Man Up.m4a */; };
+		ABB4F8F318974E3B00989B4B /* Party Smasher.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E418974E1E00989B4B /* Party Smasher.m4a */; };
+		ABB4F8F418974E3B00989B4B /* Power Shower.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E518974E1E00989B4B /* Power Shower.m4a */; };
+		ABB4F8F518974E3B00989B4B /* Robot Race.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E618974E1E00989B4B /* Robot Race.m4a */; };
+		ABB4F8F618974E3B00989B4B /* Speedway.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E718974E1E00989B4B /* Speedway.m4a */; };
+		ABB4F8F718974E3B00989B4B /* The Beast.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E818974E1E00989B4B /* The Beast.m4a */; };
+		ABB4F8F818974E3B00989B4B /* The Race For Action.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E918974E1E00989B4B /* The Race For Action.m4a */; };
+		ABB4F8F918974E3B00989B4B /* Undefeated.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8EA18974E1E00989B4B /* Undefeated.m4a */; };
+		ABDBE3831803A61D0030FE9E /* BPDJ_Slider2.png in Resources */ = {isa = PBXBuildFile; fileRef = ABDBE3801803A61D0030FE9E /* BPDJ_Slider2.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A272BB5716D6D30800AE7ED1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A272BB2416D6D30800AE7ED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A272BB2B16D6D30800AE7ED1;
+			remoteInfo = BallparkDJ;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		04B28FD619AA42AB00E37486 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		04B28FD719AA42AB00E37486 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		04B28FD819AA42AB00E37486 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		04B28FD919AA42AB00E37486 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		04B28FDA19AA42AB00E37486 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		04B28FDB19AA42AB00E37486 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		04E9A67019A7AA7600419267 /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
+		04E9A67119A7AA7600419267 /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
+		04E9A67219A7AA7600419267 /* RageIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RageIAPHelper.h; sourceTree = "<group>"; };
+		04E9A67319A7AA7600419267 /* RageIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RageIAPHelper.m; sourceTree = "<group>"; };
+		04E9A67719A7B79F00419267 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		04E9A67819A7B79F00419267 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		04E9A68419A8D58E00419267 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		04E9A68619A8D5C800419267 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		8C2C08C416D7107C000B5C1E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		8C2C08C616D71086000B5C1E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		8C2C08C816D71092000B5C1E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8C2C08CA16D7109D000B5C1E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		8C2C08CE16D71286000B5C1E /* 1024_1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1024_1024.png; sourceTree = "<group>"; };
+		8C2C08D116D71286000B5C1E /* 1536_2008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1536_2008.png; sourceTree = "<group>"; };
+		8C2C08D316D71286000B5C1E /* 320_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 320_480.png; sourceTree = "<group>"; };
+		8C2C08D516D71286000B5C1E /* 512_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 512_512.png; sourceTree = "<group>"; };
+		8C2C08D816D71286000B5C1E /* 640_1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 640_1136.png; sourceTree = "<group>"; };
+		8C2C08D916D71286000B5C1E /* 640_960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 640_960.png; sourceTree = "<group>"; };
+		8C2C08DB16D71286000B5C1E /* 768_1004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 768_1004.png; sourceTree = "<group>"; };
+		8C2C08DC16D71286000B5C1E /* mic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic.png; sourceTree = "<group>"; };
+		8C2C094C16D73B63000B5C1E /* DJTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJTeam.h; sourceTree = "<group>"; };
+		8C2C094E16D73BCD000B5C1E /* DJLeague.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJLeague.h; sourceTree = "<group>"; };
+		8C2C094F16D73BCD000B5C1E /* DJLeague.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJLeague.m; sourceTree = "<group>"; };
+		8C2C095116D73E4E000B5C1E /* DJPlayersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJPlayersViewController.h; sourceTree = "<group>"; };
+		8C2C095216D73E4E000B5C1E /* DJPlayersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJPlayersViewController.m; sourceTree = "<group>"; };
+		8C2C095716D73F4E000B5C1E /* DJDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJDetailController.h; sourceTree = "<group>"; };
+		8C2C095816D73F4E000B5C1E /* DJDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DJDetailController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8C2C095A16D73F79000B5C1E /* DJMusicEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJMusicEditorController.h; sourceTree = "<group>"; };
+		8C2C095B16D73F79000B5C1E /* DJMusicEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJMusicEditorController.m; sourceTree = "<group>"; };
+		8C3E2FF416E6B5BD0065493B /* DJDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJDetailView.xib; sourceTree = "<group>"; };
+		8C42AC9616E2ED7F0040FFE1 /* DJIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJIntroViewController.xib; sourceTree = "<group>"; };
+		8C42AC9916E2ED8C0040FFE1 /* DJLeagueView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJLeagueView.xib; sourceTree = "<group>"; };
+		8C42AC9A16E2ED8C0040FFE1 /* DJPlayersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJPlayersView.xib; sourceTree = "<group>"; };
+		8C9440F916E70EBD007898BC /* DJMusicEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJMusicEditorView.xib; sourceTree = "<group>"; };
+		8CB00D2A16E854870088FB13 /* DJRecorderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJRecorderController.h; sourceTree = "<group>"; };
+		8CB00D2B16E854870088FB13 /* DJRecorderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJRecorderController.m; sourceTree = "<group>"; };
+		8CB00D3316E856730088FB13 /* greenBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenBar.png; sourceTree = "<group>"; };
+		8CB00D3516E856730088FB13 /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
+		8CB00D3716E856730088FB13 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
+		8CB00D3916E856730088FB13 /* recButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recButton.png; sourceTree = "<group>"; };
+		8CB00D3A16E856730088FB13 /* redBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBar.png; sourceTree = "<group>"; };
+		8CB00D3B16E856730088FB13 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
+		8CB00D3E16E856730088FB13 /* yellowBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowBar.png; sourceTree = "<group>"; };
+		8CB00D4B16E8569D0088FB13 /* clearBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearBar.png; sourceTree = "<group>"; };
+		8CB00D4F16E8927D0088FB13 /* DJRecorderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJRecorderController.xib; sourceTree = "<group>"; };
+		A2152C6616E1B38800946094 /* DJTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJTeam.m; sourceTree = "<group>"; };
+		A2152C6816E275AC00946094 /* DJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DJPlayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A2152C6916E275AC00946094 /* DJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJPlayer.m; sourceTree = "<group>"; };
+		A2152C6C16E275CA00946094 /* DJAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAudio.h; sourceTree = "<group>"; };
+		A2152C6D16E275CA00946094 /* DJAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAudio.m; sourceTree = "<group>"; };
+		A269D43916E43D56003E60F8 /* DJLeagueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJLeagueViewController.h; sourceTree = "<group>"; };
+		A269D43A16E43D56003E60F8 /* DJLeagueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJLeagueViewController.m; sourceTree = "<group>"; };
+		A2729CDA16E9AFDB00CA9913 /* DJOverlapSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJOverlapSlider.h; sourceTree = "<group>"; };
+		A2729CDB16E9AFDB00CA9913 /* DJOverlapSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJOverlapSlider.m; sourceTree = "<group>"; };
+		A2729CDD16E9B00300CA9913 /* DJOverlapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJOverlapView.xib; sourceTree = "<group>"; };
+		A2729CE116E9B8FB00CA9913 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A272BB2C16D6D30800AE7ED1 /* BallparkDJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BallparkDJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A272BB2F16D6D30800AE7ED1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A272BB3116D6D30800AE7ED1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A272BB3316D6D30800AE7ED1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A272BB3916D6D30800AE7ED1 /* BallparkDJ-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BallparkDJ-Info.plist"; sourceTree = "<group>"; };
+		A272BB3B16D6D30800AE7ED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A272BB3D16D6D30800AE7ED1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A272BB3F16D6D30800AE7ED1 /* BallparkDJ-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BallparkDJ-Prefix.pch"; sourceTree = "<group>"; };
+		A272BB4016D6D30800AE7ED1 /* DJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJAppDelegate.h; sourceTree = "<group>"; };
+		A272BB4116D6D30800AE7ED1 /* DJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJAppDelegate.m; sourceTree = "<group>"; };
+		A272BB5116D6D30800AE7ED1 /* BallparkDJTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BallparkDJTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A272BB5216D6D30800AE7ED1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A272BB5B16D6D30800AE7ED1 /* BallparkDJTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BallparkDJTests-Info.plist"; sourceTree = "<group>"; };
+		A272BB5D16D6D30800AE7ED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A272BB5F16D6D30800AE7ED1 /* BallparkDJTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BallparkDJTests.h; sourceTree = "<group>"; };
+		A272BB6016D6D30800AE7ED1 /* BallparkDJTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BallparkDJTests.m; sourceTree = "<group>"; };
+		A28AD01616EA633A0015EEEC /* DJClipsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DJClipsView.xib; path = BallparkDJ/DJClipsView.xib; sourceTree = SOURCE_ROOT; };
+		A28FA26A17D82B41002829A2 /* songs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = songs.plist; path = ../../songs.plist; sourceTree = "<group>"; };
+		A2A15EC616E92A3E00C85C36 /* DJClipsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJClipsController.h; sourceTree = "<group>"; };
+		A2A15EC716E92A3E00C85C36 /* DJClipsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJClipsController.m; sourceTree = "<group>"; };
+		A2B184C717C6F61900A1FB93 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
+		A2B184C917C6F62F00A1FB93 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../Default@2x.png"; sourceTree = "<group>"; };
+		A2B184CB17C6F66300A1FB93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../Default.png; sourceTree = "<group>"; };
+		A2B75A1617C56E8900D2962D /* BPDJ_PE_Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_PE_Stop.png; sourceTree = "<group>"; };
+		A2D95E8F17BAE43700159A47 /* BPDJ_PE_Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_PE_Edit.png; sourceTree = "<group>"; };
+		A2D95E9017BAE43700159A47 /* BPDJ_PE_Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_PE_Play.png; sourceTree = "<group>"; };
+		A2D95E9117BAE43700159A47 /* BPDJ_PE_Record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_PE_Record.png; sourceTree = "<group>"; };
+		AB10667E188F6E6600F8EA60 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		ABAB188B18DF6C1700DAE277 /* MKStoreKitConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MKStoreKitConfigs.plist; sourceTree = "<group>"; };
+		ABB0DEA418D2ADF400ACECEC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		ABB4F8DC18974E1E00989B4B /* Action Speed Fighting.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Action Speed Fighting.m4a"; sourceTree = "<group>"; };
+		ABB4F8DD18974E1E00989B4B /* Crank It Up.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Crank It Up.m4a"; sourceTree = "<group>"; };
+		ABB4F8DE18974E1E00989B4B /* Heavy Fuel.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heavy Fuel.m4a"; sourceTree = "<group>"; };
+		ABB4F8DF18974E1E00989B4B /* Here Again.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Here Again.m4a"; sourceTree = "<group>"; };
+		ABB4F8E018974E1E00989B4B /* Just Score.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Just Score.m4a"; sourceTree = "<group>"; };
+		ABB4F8E118974E1E00989B4B /* Knock You Out.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Knock You Out.m4a"; sourceTree = "<group>"; };
+		ABB4F8E218974E1E00989B4B /* Loud And Proud.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Loud And Proud.m4a"; sourceTree = "<group>"; };
+		ABB4F8E318974E1E00989B4B /* Man Up.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Man Up.m4a"; sourceTree = "<group>"; };
+		ABB4F8E418974E1E00989B4B /* Party Smasher.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Party Smasher.m4a"; sourceTree = "<group>"; };
+		ABB4F8E518974E1E00989B4B /* Power Shower.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Power Shower.m4a"; sourceTree = "<group>"; };
+		ABB4F8E618974E1E00989B4B /* Robot Race.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Robot Race.m4a"; sourceTree = "<group>"; };
+		ABB4F8E718974E1E00989B4B /* Speedway.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Speedway.m4a; sourceTree = "<group>"; };
+		ABB4F8E818974E1E00989B4B /* The Beast.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Beast.m4a"; sourceTree = "<group>"; };
+		ABB4F8E918974E1E00989B4B /* The Race For Action.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Race For Action.m4a"; sourceTree = "<group>"; };
+		ABB4F8EA18974E1E00989B4B /* Undefeated.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Undefeated.m4a; sourceTree = "<group>"; };
+		ABDBE3801803A61D0030FE9E /* BPDJ_Slider2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_Slider2.png; sourceTree = "<group>"; };
+		F11930A1E2A846759F179DB7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A272BB2916D6D30800AE7ED1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04E9A68719A8D5C800419267 /* libz.dylib in Frameworks */,
+				04E9A68519A8D58E00419267 /* Security.framework in Frameworks */,
+				A2729CE216E9B8FC00CA9913 /* QuartzCore.framework in Frameworks */,
+				04B28FDC19AA42AB00E37486 /* libTestFlight.a in Frameworks */,
+				8C2C08CB16D7109D000B5C1E /* CoreFoundation.framework in Frameworks */,
+				ABB0DEA518D2ADF400ACECEC /* StoreKit.framework in Frameworks */,
+				8C2C08C916D71092000B5C1E /* AVFoundation.framework in Frameworks */,
+				8C2C08C716D71086000B5C1E /* MediaPlayer.framework in Frameworks */,
+				8C2C08C516D7107C000B5C1E /* AudioToolbox.framework in Frameworks */,
+				A272BB3016D6D30800AE7ED1 /* UIKit.framework in Frameworks */,
+				A272BB3216D6D30800AE7ED1 /* Foundation.framework in Frameworks */,
+				A272BB3416D6D30800AE7ED1 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A272BB4D16D6D30800AE7ED1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A269D43E16E4430F003E60F8 /* AVFoundation.framework in Frameworks */,
+				A272BB5316D6D30800AE7ED1 /* SenTestingKit.framework in Frameworks */,
+				A272BB5416D6D30800AE7ED1 /* UIKit.framework in Frameworks */,
+				A272BB5516D6D30800AE7ED1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04B28FD519AA42AB00E37486 /* TestFlightSDK3.0.2 */ = {
+			isa = PBXGroup;
+			children = (
+				04B28FD619AA42AB00E37486 /* libTestFlight.a */,
+				04B28FD719AA42AB00E37486 /* README.md */,
+				04B28FD819AA42AB00E37486 /* release_notes.md */,
+				04B28FD919AA42AB00E37486 /* TestFlight+AsyncLogging.h */,
+				04B28FDA19AA42AB00E37486 /* TestFlight+ManualSessions.h */,
+				04B28FDB19AA42AB00E37486 /* TestFlight.h */,
+			);
+			path = TestFlightSDK3.0.2;
+			sourceTree = "<group>";
+		};
+		04E9A66F19A7AA7600419267 /* in-appPurchase */ = {
+			isa = PBXGroup;
+			children = (
+				04E9A67019A7AA7600419267 /* IAPHelper.h */,
+				04E9A67119A7AA7600419267 /* IAPHelper.m */,
+				04E9A67219A7AA7600419267 /* RageIAPHelper.h */,
+				04E9A67319A7AA7600419267 /* RageIAPHelper.m */,
+			);
+			path = "in-appPurchase";
+			sourceTree = "<group>";
+		};
+		04E9A67619A7B79F00419267 /* MBProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				04E9A67719A7B79F00419267 /* MBProgressHUD.h */,
+				04E9A67819A7B79F00419267 /* MBProgressHUD.m */,
+			);
+			path = MBProgressBar;
+			sourceTree = "<group>";
+		};
+		8C2C08CC16D71286000B5C1E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				A2B184CB17C6F66300A1FB93 /* Default.png */,
+				AB10667D188F6DE200F8EA60 /* Icons */,
+				ABDBE3801803A61D0030FE9E /* BPDJ_Slider2.png */,
+				A2B184C917C6F62F00A1FB93 /* Default@2x.png */,
+				A2B184C717C6F61900A1FB93 /* Default-568h@2x.png */,
+				A2D95E8F17BAE43700159A47 /* BPDJ_PE_Edit.png */,
+				A2D95E9017BAE43700159A47 /* BPDJ_PE_Play.png */,
+				A2D95E9117BAE43700159A47 /* BPDJ_PE_Record.png */,
+				A2B75A1617C56E8900D2962D /* BPDJ_PE_Stop.png */,
+				8CB00D3216E855590088FB13 /* TEMP RECORDER IMAGES */,
+				8C2C08CE16D71286000B5C1E /* 1024_1024.png */,
+				8C2C08D116D71286000B5C1E /* 1536_2008.png */,
+				8C2C08D316D71286000B5C1E /* 320_480.png */,
+				8C2C08D516D71286000B5C1E /* 512_512.png */,
+				8C2C08D816D71286000B5C1E /* 640_1136.png */,
+				8C2C08D916D71286000B5C1E /* 640_960.png */,
+				8C2C08DB16D71286000B5C1E /* 768_1004.png */,
+				8C2C08DC16D71286000B5C1E /* mic.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		8C2C08ED16D7129D000B5C1E /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				ABB4F8DC18974E1E00989B4B /* Action Speed Fighting.m4a */,
+				ABB4F8DD18974E1E00989B4B /* Crank It Up.m4a */,
+				ABB4F8DE18974E1E00989B4B /* Heavy Fuel.m4a */,
+				ABB4F8DF18974E1E00989B4B /* Here Again.m4a */,
+				ABB4F8E018974E1E00989B4B /* Just Score.m4a */,
+				ABB4F8E118974E1E00989B4B /* Knock You Out.m4a */,
+				ABB4F8E218974E1E00989B4B /* Loud And Proud.m4a */,
+				ABB4F8E318974E1E00989B4B /* Man Up.m4a */,
+				ABB4F8E418974E1E00989B4B /* Party Smasher.m4a */,
+				ABB4F8E518974E1E00989B4B /* Power Shower.m4a */,
+				ABB4F8E618974E1E00989B4B /* Robot Race.m4a */,
+				ABB4F8E718974E1E00989B4B /* Speedway.m4a */,
+				ABB4F8E818974E1E00989B4B /* The Beast.m4a */,
+				ABB4F8E918974E1E00989B4B /* The Race For Action.m4a */,
+				ABB4F8EA18974E1E00989B4B /* Undefeated.m4a */,
+				A28FA26A17D82B41002829A2 /* songs.plist */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		8C2C091016D712B8000B5C1E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8CB00D4F16E8927D0088FB13 /* DJRecorderController.xib */,
+				8C9440F916E70EBD007898BC /* DJMusicEditorView.xib */,
+				8C42AC9916E2ED8C0040FFE1 /* DJLeagueView.xib */,
+				8C42AC9A16E2ED8C0040FFE1 /* DJPlayersView.xib */,
+				8C42AC9616E2ED7F0040FFE1 /* DJIntroViewController.xib */,
+				8C3E2FF416E6B5BD0065493B /* DJDetailView.xib */,
+				A2729CDD16E9B00300CA9913 /* DJOverlapView.xib */,
+				A28AD01616EA633A0015EEEC /* DJClipsView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		8C3E2FFF16E6F5660065493B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04B28FD519AA42AB00E37486 /* TestFlightSDK3.0.2 */,
+				04E9A67619A7B79F00419267 /* MBProgressBar */,
+				04E9A66F19A7AA7600419267 /* in-appPurchase */,
+				A2152C6C16E275CA00946094 /* DJAudio.h */,
+				A2152C6D16E275CA00946094 /* DJAudio.m */,
+				8C2C094C16D73B63000B5C1E /* DJTeam.h */,
+				A2152C6616E1B38800946094 /* DJTeam.m */,
+				A2152C6816E275AC00946094 /* DJPlayer.h */,
+				A2152C6916E275AC00946094 /* DJPlayer.m */,
+				8C2C094E16D73BCD000B5C1E /* DJLeague.h */,
+				8C2C094F16D73BCD000B5C1E /* DJLeague.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8CB00D3216E855590088FB13 /* TEMP RECORDER IMAGES */ = {
+			isa = PBXGroup;
+			children = (
+				8CB00D4B16E8569D0088FB13 /* clearBar.png */,
+				8CB00D3316E856730088FB13 /* greenBar.png */,
+				8CB00D3516E856730088FB13 /* pauseButton.png */,
+				8CB00D3716E856730088FB13 /* playButton.png */,
+				8CB00D3916E856730088FB13 /* recButton.png */,
+				8CB00D3A16E856730088FB13 /* redBar.png */,
+				8CB00D3B16E856730088FB13 /* stopButton.png */,
+				8CB00D3E16E856730088FB13 /* yellowBar.png */,
+			);
+			name = "TEMP RECORDER IMAGES";
+			sourceTree = "<group>";
+		};
+		A272BB2316D6D30800AE7ED1 = {
+			isa = PBXGroup;
+			children = (
+				A272BB3716D6D30800AE7ED1 /* BallparkDJ */,
+				A272BB5916D6D30800AE7ED1 /* BallparkDJTests */,
+				A272BB2E16D6D30800AE7ED1 /* Frameworks */,
+				A272BB2D16D6D30800AE7ED1 /* Products */,
+				F11930A1E2A846759F179DB7 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		A272BB2D16D6D30800AE7ED1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A272BB2C16D6D30800AE7ED1 /* BallparkDJ.app */,
+				A272BB5116D6D30800AE7ED1 /* BallparkDJTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A272BB2E16D6D30800AE7ED1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04E9A68619A8D5C800419267 /* libz.dylib */,
+				04E9A68419A8D58E00419267 /* Security.framework */,
+				ABB0DEA418D2ADF400ACECEC /* StoreKit.framework */,
+				A2729CE116E9B8FB00CA9913 /* QuartzCore.framework */,
+				8C2C08CA16D7109D000B5C1E /* CoreFoundation.framework */,
+				8C2C08C816D71092000B5C1E /* AVFoundation.framework */,
+				8C2C08C616D71086000B5C1E /* MediaPlayer.framework */,
+				8C2C08C416D7107C000B5C1E /* AudioToolbox.framework */,
+				A272BB2F16D6D30800AE7ED1 /* UIKit.framework */,
+				A272BB3116D6D30800AE7ED1 /* Foundation.framework */,
+				A272BB3316D6D30800AE7ED1 /* CoreGraphics.framework */,
+				A272BB5216D6D30800AE7ED1 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A272BB3716D6D30800AE7ED1 /* BallparkDJ */ = {
+			isa = PBXGroup;
+			children = (
+				8CB00D2A16E854870088FB13 /* DJRecorderController.h */,
+				8CB00D2B16E854870088FB13 /* DJRecorderController.m */,
+				A272BB4016D6D30800AE7ED1 /* DJAppDelegate.h */,
+				A272BB4116D6D30800AE7ED1 /* DJAppDelegate.m */,
+				8C3E2FFF16E6F5660065493B /* Model */,
+				8C2C091016D712B8000B5C1E /* Views */,
+				8C2C08ED16D7129D000B5C1E /* Music */,
+				8C2C08CC16D71286000B5C1E /* Images */,
+				A272BB3816D6D30800AE7ED1 /* Supporting Files */,
+				8C2C095116D73E4E000B5C1E /* DJPlayersViewController.h */,
+				8C2C095216D73E4E000B5C1E /* DJPlayersViewController.m */,
+				A269D43916E43D56003E60F8 /* DJLeagueViewController.h */,
+				A269D43A16E43D56003E60F8 /* DJLeagueViewController.m */,
+				8C2C095716D73F4E000B5C1E /* DJDetailController.h */,
+				8C2C095816D73F4E000B5C1E /* DJDetailController.m */,
+				8C2C095A16D73F79000B5C1E /* DJMusicEditorController.h */,
+				8C2C095B16D73F79000B5C1E /* DJMusicEditorController.m */,
+				A2729CDA16E9AFDB00CA9913 /* DJOverlapSlider.h */,
+				A2729CDB16E9AFDB00CA9913 /* DJOverlapSlider.m */,
+				A2A15EC616E92A3E00C85C36 /* DJClipsController.h */,
+				A2A15EC716E92A3E00C85C36 /* DJClipsController.m */,
+				AB10667E188F6E6600F8EA60 /* Images.xcassets */,
+			);
+			path = BallparkDJ;
+			sourceTree = "<group>";
+		};
+		A272BB3816D6D30800AE7ED1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A272BB3916D6D30800AE7ED1 /* BallparkDJ-Info.plist */,
+				A272BB3A16D6D30800AE7ED1 /* InfoPlist.strings */,
+				A272BB3D16D6D30800AE7ED1 /* main.m */,
+				A272BB3F16D6D30800AE7ED1 /* BallparkDJ-Prefix.pch */,
+				ABAB188B18DF6C1700DAE277 /* MKStoreKitConfigs.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A272BB5916D6D30800AE7ED1 /* BallparkDJTests */ = {
+			isa = PBXGroup;
+			children = (
+				A272BB5F16D6D30800AE7ED1 /* BallparkDJTests.h */,
+				A272BB6016D6D30800AE7ED1 /* BallparkDJTests.m */,
+				A272BB5A16D6D30800AE7ED1 /* Supporting Files */,
+			);
+			path = BallparkDJTests;
+			sourceTree = "<group>";
+		};
+		A272BB5A16D6D30800AE7ED1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A272BB5B16D6D30800AE7ED1 /* BallparkDJTests-Info.plist */,
+				A272BB5C16D6D30800AE7ED1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB10667D188F6DE200F8EA60 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A272BB2B16D6D30800AE7ED1 /* BallparkDJ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A272BB6416D6D30800AE7ED1 /* Build configuration list for PBXNativeTarget "BallparkDJ" */;
+			buildPhases = (
+				C181239CE9C243C4B8D1C9AD /* Check Pods Manifest.lock */,
+				A272BB2816D6D30800AE7ED1 /* Sources */,
+				A272BB2916D6D30800AE7ED1 /* Frameworks */,
+				A272BB2A16D6D30800AE7ED1 /* Resources */,
+				12E894987F2945DABD5955EC /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BallparkDJ;
+			productName = BallparkDJ;
+			productReference = A272BB2C16D6D30800AE7ED1 /* BallparkDJ.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A272BB5016D6D30800AE7ED1 /* BallparkDJTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A272BB6716D6D30800AE7ED1 /* Build configuration list for PBXNativeTarget "BallparkDJTests" */;
+			buildPhases = (
+				A272BB4C16D6D30800AE7ED1 /* Sources */,
+				A272BB4D16D6D30800AE7ED1 /* Frameworks */,
+				A272BB4E16D6D30800AE7ED1 /* Resources */,
+				A272BB4F16D6D30800AE7ED1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A272BB5816D6D30800AE7ED1 /* PBXTargetDependency */,
+			);
+			name = BallparkDJTests;
+			productName = BallparkDJTests;
+			productReference = A272BB5116D6D30800AE7ED1 /* BallparkDJTests.octest */;
+			productType = "com.apple.product-type.bundle.ocunit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A272BB2416D6D30800AE7ED1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DJ;
+				LastTestingUpgradeCheck = 0610;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Payne Software";
+				TargetAttributes = {
+					A272BB2B16D6D30800AE7ED1 = {
+						DevelopmentTeam = P4728B6L47;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					A272BB5016D6D30800AE7ED1 = {
+						DevelopmentTeam = P4728B6L47;
+					};
+				};
+			};
+			buildConfigurationList = A272BB2716D6D30800AE7ED1 /* Build configuration list for PBXProject "BallparkDJ" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A272BB2316D6D30800AE7ED1;
+			productRefGroup = A272BB2D16D6D30800AE7ED1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A272BB2B16D6D30800AE7ED1 /* BallparkDJ */,
+				A272BB5016D6D30800AE7ED1 /* BallparkDJTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A272BB2A16D6D30800AE7ED1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB4F8EB18974E3B00989B4B /* Action Speed Fighting.m4a in Resources */,
+				ABB4F8EC18974E3B00989B4B /* Crank It Up.m4a in Resources */,
+				ABB4F8ED18974E3B00989B4B /* Heavy Fuel.m4a in Resources */,
+				ABB4F8EE18974E3B00989B4B /* Here Again.m4a in Resources */,
+				ABB4F8EF18974E3B00989B4B /* Just Score.m4a in Resources */,
+				ABB4F8F018974E3B00989B4B /* Knock You Out.m4a in Resources */,
+				ABB4F8F118974E3B00989B4B /* Loud And Proud.m4a in Resources */,
+				04B28FDE19AA42AB00E37486 /* release_notes.md in Resources */,
+				ABB4F8F218974E3B00989B4B /* Man Up.m4a in Resources */,
+				ABB4F8F318974E3B00989B4B /* Party Smasher.m4a in Resources */,
+				ABB4F8F418974E3B00989B4B /* Power Shower.m4a in Resources */,
+				ABB4F8F518974E3B00989B4B /* Robot Race.m4a in Resources */,
+				ABB4F8F618974E3B00989B4B /* Speedway.m4a in Resources */,
+				ABB4F8F718974E3B00989B4B /* The Beast.m4a in Resources */,
+				ABB4F8F818974E3B00989B4B /* The Race For Action.m4a in Resources */,
+				ABB4F8F918974E3B00989B4B /* Undefeated.m4a in Resources */,
+				A29D096516E86D070032F51A /* DJMusicEditorView.xib in Resources */,
+				A29D096616E86D070032F51A /* DJLeagueView.xib in Resources */,
+				A29D096716E86D070032F51A /* DJPlayersView.xib in Resources */,
+				A29D096816E86D070032F51A /* DJIntroViewController.xib in Resources */,
+				A29D096916E86D070032F51A /* DJDetailView.xib in Resources */,
+				A272BB3C16D6D30800AE7ED1 /* InfoPlist.strings in Resources */,
+				8C2C08DE16D71286000B5C1E /* 1024_1024.png in Resources */,
+				ABDBE3831803A61D0030FE9E /* BPDJ_Slider2.png in Resources */,
+				8C2C08E116D71286000B5C1E /* 1536_2008.png in Resources */,
+				8C2C08E316D71286000B5C1E /* 320_480.png in Resources */,
+				8C2C08E516D71286000B5C1E /* 512_512.png in Resources */,
+				ABAB188C18DF6C1700DAE277 /* MKStoreKitConfigs.plist in Resources */,
+				AB10667F188F6E6600F8EA60 /* Images.xcassets in Resources */,
+				8C2C08E816D71286000B5C1E /* 640_1136.png in Resources */,
+				8C2C08E916D71286000B5C1E /* 640_960.png in Resources */,
+				04B28FDD19AA42AB00E37486 /* README.md in Resources */,
+				8C2C08EB16D71286000B5C1E /* 768_1004.png in Resources */,
+				8C2C08EC16D71286000B5C1E /* mic.png in Resources */,
+				8CB00D3F16E856730088FB13 /* greenBar.png in Resources */,
+				8CB00D4116E856730088FB13 /* pauseButton.png in Resources */,
+				8CB00D4316E856730088FB13 /* playButton.png in Resources */,
+				8CB00D4516E856730088FB13 /* recButton.png in Resources */,
+				8CB00D4616E856730088FB13 /* redBar.png in Resources */,
+				8CB00D4716E856730088FB13 /* stopButton.png in Resources */,
+				8CB00D4A16E856730088FB13 /* yellowBar.png in Resources */,
+				8CB00D4C16E8569D0088FB13 /* clearBar.png in Resources */,
+				8CB00D5016E8927D0088FB13 /* DJRecorderController.xib in Resources */,
+				A2729CDE16E9B00300CA9913 /* DJOverlapView.xib in Resources */,
+				A28AD01816EA65BD0015EEEC /* DJClipsView.xib in Resources */,
+				A2D95E9217BAE43700159A47 /* BPDJ_PE_Edit.png in Resources */,
+				A2D95E9317BAE43700159A47 /* BPDJ_PE_Play.png in Resources */,
+				A2D95E9417BAE43700159A47 /* BPDJ_PE_Record.png in Resources */,
+				A2B75A1717C56E8900D2962D /* BPDJ_PE_Stop.png in Resources */,
+				A2B184C817C6F61900A1FB93 /* Default-568h@2x.png in Resources */,
+				A2B184CA17C6F62F00A1FB93 /* Default@2x.png in Resources */,
+				A2B184CC17C6F66300A1FB93 /* Default.png in Resources */,
+				A28FA26B17D82B41002829A2 /* songs.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A272BB4E16D6D30800AE7ED1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A272BB5E16D6D30800AE7ED1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		12E894987F2945DABD5955EC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A272BB4F16D6D30800AE7ED1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		C181239CE9C243C4B8D1C9AD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A272BB2816D6D30800AE7ED1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A21DF72F16EEF321006CBC91 /* DJLeagueViewController.m in Sources */,
+				A272BB3E16D6D30800AE7ED1 /* main.m in Sources */,
+				A272BB4216D6D30800AE7ED1 /* DJAppDelegate.m in Sources */,
+				8C2C095016D73BCD000B5C1E /* DJLeague.m in Sources */,
+				04E9A67519A7AA7600419267 /* RageIAPHelper.m in Sources */,
+				8C2C095316D73E4E000B5C1E /* DJPlayersViewController.m in Sources */,
+				8C2C095916D73F4E000B5C1E /* DJDetailController.m in Sources */,
+				04E9A67419A7AA7600419267 /* IAPHelper.m in Sources */,
+				8C2C095C16D73F79000B5C1E /* DJMusicEditorController.m in Sources */,
+				A2152C6716E1B38800946094 /* DJTeam.m in Sources */,
+				A2152C6A16E275AC00946094 /* DJPlayer.m in Sources */,
+				A2152C6E16E275CA00946094 /* DJAudio.m in Sources */,
+				8CB00D2C16E854870088FB13 /* DJRecorderController.m in Sources */,
+				A2A15EC816E92A3E00C85C36 /* DJClipsController.m in Sources */,
+				A2729CDC16E9AFDB00CA9913 /* DJOverlapSlider.m in Sources */,
+				04E9A67919A7B79F00419267 /* MBProgressHUD.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A272BB4C16D6D30800AE7ED1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A272BB6116D6D30800AE7ED1 /* BallparkDJTests.m in Sources */,
+				A2152C6B16E275AC00946094 /* DJPlayer.m in Sources */,
+				A269D43D16E442F5003E60F8 /* DJTeam.m in Sources */,
+				A2152C6F16E275CA00946094 /* DJAudio.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A272BB5816D6D30800AE7ED1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A272BB2B16D6D30800AE7ED1 /* BallparkDJ */;
+			targetProxy = A272BB5716D6D30800AE7ED1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A272BB3A16D6D30800AE7ED1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A272BB3B16D6D30800AE7ED1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A272BB5C16D6D30800AE7ED1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A272BB5D16D6D30800AE7ED1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A272BB6216D6D30800AE7ED1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chad Payne (MHCKE5N2X8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chad Payne (MHCKE5N2X8)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "7791b1bd-1980-4816-88b7-390b1a8ec642";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A272BB6316D6D30800AE7ED1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiajie Fan (W3LGGL25X6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiajie Fan (W3LGGL25X6)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
+				"PROVISIONING_PROFILE[sdk=*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A272BB6516D6D30800AE7ED1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F11930A1E2A846759F179DB7 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
+				INFOPLIST_FILE = "BallparkDJ/BallparkDJ-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/BallparkDJ\\\"",
+					/Users/jonathan/Development/ballparkdj/TestFlightSDK3.0.0,
+					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.0",
+					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.2",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9aa50f36-e340-498d-becb-046e7a4e561b";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A272BB6616D6D30800AE7ED1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F11930A1E2A846759F179DB7 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
+				INFOPLIST_FILE = "BallparkDJ/BallparkDJ-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/BallparkDJ\\\"",
+					/Users/jonathan/Development/ballparkdj/TestFlightSDK3.0.0,
+					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.0",
+					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.2",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9aa50f36-e340-498d-becb-046e7a4e561b";
+				"PROVISIONING_PROFILE[sdk=*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A272BB6816D6D30800AE7ED1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BallparkDJ.app/BallparkDJ";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
+				INFOPLIST_FILE = "BallparkDJTests/BallparkDJTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		A272BB6916D6D30800AE7ED1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BallparkDJ.app/BallparkDJ";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
+				INFOPLIST_FILE = "BallparkDJTests/BallparkDJTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A272BB2716D6D30800AE7ED1 /* Build configuration list for PBXProject "BallparkDJ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A272BB6216D6D30800AE7ED1 /* Debug */,
+				A272BB6316D6D30800AE7ED1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A272BB6416D6D30800AE7ED1 /* Build configuration list for PBXNativeTarget "BallparkDJ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A272BB6516D6D30800AE7ED1 /* Debug */,
+				A272BB6616D6D30800AE7ED1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A272BB6716D6D30800AE7ED1 /* Build configuration list for PBXNativeTarget "BallparkDJTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A272BB6816D6D30800AE7ED1 /* Debug */,
+				A272BB6916D6D30800AE7ED1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A272BB2416D6D30800AE7ED1 /* Project object */;
+}

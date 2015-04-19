@@ -1,0 +1,24 @@
+{
+  "images" : [
+    {
+      "idiom" : "iphone",
+      "scale" : "1x",
+      "filename" : "BPDJ_Microphone4.png"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "filename" : "BPDJ_Microphone4S.png"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "BPDJ_Microphone.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
