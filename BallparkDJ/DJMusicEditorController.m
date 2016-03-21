@@ -151,7 +151,7 @@
 	// Do any additional setup after loading the view.
     
     //Recursive assignment to kick off the helper methods within the setter
-//     self.parentAudio = self.parentAudio;
+    self.parentAudio = self.parentAudio;
     
     if(self.parentAudio.isDJClip)
     {

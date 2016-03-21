@@ -2,19 +2,23 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "scale" : "1x",
-      "filename" : "BPDJ_Microphone4.png"
+      "filename" : "BPDJ_Microphone4.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "iphone",
-      "scale" : "2x",
-      "filename" : "BPDJ_Microphone4S.png"
+      "filename" : "BPDJ_Microphone4S.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "iphone",
       "filename" : "BPDJ_Microphone.png",
       "subtype" : "retina4",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x"
     }
   ],
   "info" : {

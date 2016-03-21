@@ -97,6 +97,7 @@
 		ABB4F8F818974E3B00989B4B /* The Race For Action.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E918974E1E00989B4B /* The Race For Action.m4a */; };
 		ABB4F8F918974E3B00989B4B /* Undefeated.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8EA18974E1E00989B4B /* Undefeated.m4a */; };
 		ABDBE3831803A61D0030FE9E /* BPDJ_Slider2.png in Resources */ = {isa = PBXBuildFile; fileRef = ABDBE3801803A61D0030FE9E /* BPDJ_Slider2.png */; };
+		D6E1D94A37A944FC1E2802E6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72455C8872E465702F5788AD /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,9 @@
 		04E9A67819A7B79F00419267 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		04E9A68419A8D58E00419267 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		04E9A68619A8D5C800419267 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		22BFCA16DCCBF1689634A772 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3C134111CE907BBC8EB55EDC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		72455C8872E465702F5788AD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2C08C416D7107C000B5C1E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8C2C08C616D71086000B5C1E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8C2C08C816D71092000B5C1E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -218,7 +222,6 @@
 		ABB4F8E918974E1E00989B4B /* The Race For Action.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Race For Action.m4a"; sourceTree = "<group>"; };
 		ABB4F8EA18974E1E00989B4B /* Undefeated.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Undefeated.m4a; sourceTree = "<group>"; };
 		ABDBE3801803A61D0030FE9E /* BPDJ_Slider2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_Slider2.png; sourceTree = "<group>"; };
-		F11930A1E2A846759F179DB7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +241,7 @@
 				A272BB3016D6D30800AE7ED1 /* UIKit.framework in Frameworks */,
 				A272BB3216D6D30800AE7ED1 /* Foundation.framework in Frameworks */,
 				A272BB3416D6D30800AE7ED1 /* CoreGraphics.framework in Frameworks */,
+				D6E1D94A37A944FC1E2802E6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,7 +395,7 @@
 				A272BB5916D6D30800AE7ED1 /* BallparkDJTests */,
 				A272BB2E16D6D30800AE7ED1 /* Frameworks */,
 				A272BB2D16D6D30800AE7ED1 /* Products */,
-				F11930A1E2A846759F179DB7 /* Pods.xcconfig */,
+				D76D5428D0F0D95A491E4C0E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -419,6 +423,7 @@
 				A272BB3116D6D30800AE7ED1 /* Foundation.framework */,
 				A272BB3316D6D30800AE7ED1 /* CoreGraphics.framework */,
 				A272BB5216D6D30800AE7ED1 /* SenTestingKit.framework */,
+				72455C8872E465702F5788AD /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -490,6 +495,15 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
+		D76D5428D0F0D95A491E4C0E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C134111CE907BBC8EB55EDC /* Pods.debug.xcconfig */,
+				22BFCA16DCCBF1689634A772 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -502,6 +516,7 @@
 				A272BB2916D6D30800AE7ED1 /* Frameworks */,
 				A272BB2A16D6D30800AE7ED1 /* Resources */,
 				12E894987F2945DABD5955EC /* Copy Pods Resources */,
+				526818C95321A7C54CBF0DA6 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -538,7 +553,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DJ;
-				LastTestingUpgradeCheck = 0610;
+				LastTestingUpgradeCheck = 0720;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Payne Software";
 				TargetAttributes = {
@@ -660,7 +675,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		526818C95321A7C54CBF0DA6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A272BB4F16D6D30800AE7ED1 /* ShellScript */ = {
@@ -772,6 +802,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Chad Payne (MHCKE5N2X8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chad Payne (MHCKE5N2X8)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -783,7 +814,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "7791b1bd-1980-4816-88b7-390b1a8ec642";
 				SDKROOT = iphoneos;
@@ -804,11 +835,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiajie Fan (W3LGGL25X6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiajie Fan (W3LGGL25X6)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
 				"PROVISIONING_PROFILE[sdk=*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
@@ -819,7 +851,7 @@
 		};
 		A272BB6516D6D30800AE7ED1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F11930A1E2A846759F179DB7 /* Pods.xcconfig */;
+			baseConfigurationReference = 3C134111CE907BBC8EB55EDC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -829,7 +861,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
 				INFOPLIST_FILE = "BallparkDJ/BallparkDJ-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/BallparkDJ\\\"",
@@ -838,7 +870,7 @@
 					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa50f36-e340-498d-becb-046e7a4e561b";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
@@ -847,7 +879,7 @@
 		};
 		A272BB6616D6D30800AE7ED1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F11930A1E2A846759F179DB7 /* Pods.xcconfig */;
+			baseConfigurationReference = 22BFCA16DCCBF1689634A772 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -857,7 +889,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
 				INFOPLIST_FILE = "BallparkDJ/BallparkDJ-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/BallparkDJ\\\"",
@@ -866,7 +898,7 @@
 					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa50f36-e340-498d-becb-046e7a4e561b";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
 				SDKROOT = iphoneos;
