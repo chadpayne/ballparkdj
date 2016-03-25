@@ -10,11 +10,17 @@
 #import <AVFoundation/AVAudioRecorder.h>
 #import <AVFoundation/AVAudioSettings.h>
 #import "DJAppDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface DJRecorderController : UIViewController <AVAudioPlayerDelegate>{
+@interface DJRecorderController : UIViewController <AVAudioPlayerDelegate,UIPopoverControllerDelegate, MBProgressHUDDelegate>{
 @private
     AVAudioRecorder* _recorder;
+    MBProgressHUD *HUD;
+    
+    NSArray *_products;
+    NSNumberFormatter * _priceFormatter;
 }
+@property (strong, nonatomic) DJAppDelegate* parentDelegate;
 @property(strong, nonatomic) AVAudioRecorder* recorder;
 @property (retain, nonatomic) DJAudio *announcement;
 @property(assign, nonatomic) BOOL isRecording;

@@ -13,25 +13,30 @@
 @synthesize overlap,musicStartTime,announcementDuration;
 @synthesize shouldFade;
 @synthesize title;
+@synthesize announcementClip;
+@synthesize musicClip;
 
 //Very confusing name–songDuration is the duration of the song
 // musicDuration is the duration of the music subclip
 -(double)songDuration {
-    return musicClip.duration;
+    return self.musicClip.duration;
 }
 
 #pragma mark - Initialization:
 
 -(id)init {
     self = [super init];
-    announcementClip = nil;
-    musicClip   = nil;
+    self.announcementClip = nil;
+    self.musicClip   = nil;
     
     overlap = -0.5;
     self.musicStartTime = 0.0;
     self.musicDuration = 8.0;
     shouldFade = false;
     self.shouldPlayAll = NO;
+    self.musicVolume = 1.0;
+    self.announcementVolume = 1.0;
+    self.currentVolumeMode = 2;
     
     timer = [[NSTimer alloc] init];
     return self;
@@ -44,23 +49,23 @@
     self = [super init];
     
     NSError *err = nil;
-    announcementClip    =  [[[AVAudioPlayer alloc]
+    self.announcementClip    =  [[[AVAudioPlayer alloc]
                                 initWithContentsOfURL:aPath
                                     error:&err] retain];
     if(err){
-        announcementClip = nil;
+        self.announcementClip = nil;
         err = nil;
     }
-    musicClip           =  [[[AVAudioPlayer alloc]
+    self.musicClip           =  [[[AVAudioPlayer alloc]
                                 initWithContentsOfURL:mPath
                                     error:&err] retain];
     if (err) {
         NSLog(@"%@", err);
-        musicClip = nil;
+        self.musicClip = nil;
         err = nil;
     }
-    [announcementClip prepareToPlay];
-    [musicClip prepareToPlay];
+    [self.announcementClip prepareToPlay];
+    [self.musicClip prepareToPlay];
     
     overlap = 0.0;
     musicStartTime = 0.0;
@@ -85,7 +90,8 @@
 
 //    NSLog(@"TEST: %@", [NSURL fileURLWithPathComponents:[NSArray arrayWithObjects:basePath, [[coder decodeObjectForKey:@"_announcementURL"] lastPathComponent], nil]]);
     
-    announcementClip =  [[AVAudioPlayer alloc]
+    
+    self.announcementClip =  [[AVAudioPlayer alloc]
                          initWithContentsOfURL:[NSURL fileURLWithPathComponents:[NSArray arrayWithObjects:basePath, [[coder decodeObjectForKey:@"_announcementURL"] lastPathComponent], nil]]
                                 error:nil];
     
@@ -93,7 +99,7 @@
         
 //        NSURL *url = [NSURL URLWithString:[coder decodeObjectForKey:@"_musicURL"]];
         
-        musicClip =         [[AVAudioPlayer alloc]
+        self.musicClip =         [[AVAudioPlayer alloc]
                             initWithContentsOfURL:[coder decodeObjectForKey:@"_musicURL"]
                                 error:nil];
     } else {
@@ -106,9 +112,9 @@
             path = [[NSBundle mainBundle] pathForResource:[coder decodeObjectForKey:@"_title"] ofType:@"m4a"];
 
         if(path)
-            musicClip = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] error:nil];
+            self.musicClip = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] error:nil];
         else
-            musicClip =         [[AVAudioPlayer alloc]
+            self.musicClip =         [[AVAudioPlayer alloc]
                                 initWithContentsOfURL:[NSURL fileURLWithPathComponents:[NSArray arrayWithObjects:[[NSBundle mainBundle] resourcePath], [[coder decodeObjectForKey:@"_musicURL"] lastPathComponent], nil]]
                                      error:nil];
         
@@ -117,8 +123,8 @@
         
     }
     
-    [announcementClip prepareToPlay];
-    [musicClip prepareToPlay];
+    [self.announcementClip prepareToPlay];
+    [self.musicClip prepareToPlay];
     
 //    [announcementClip play];
 //    [musicClip play];
@@ -133,7 +139,10 @@
     self.shouldFade =       [coder decodeBoolForKey:@"_shouldFade"];
     self.isDJClip =         [coder decodeBoolForKey:@"_djClip"];
     self.shouldPlayAll =    [coder decodeBoolForKey:@"_playAll"];
-    
+    self.currentVolumeMode = [coder decodeIntForKey:@"_volumeMode"];
+    self.announcementVolume = [coder decodeFloatForKey:@"_voiceVolume"];
+    self.musicVolume = [coder decodeFloatForKey:@"_musicVolume"];
+    self.announcementDuration = [coder decodeDoubleForKey:@"_voiceDuration"];
 //    [self play];
     [self stop];
     
@@ -141,8 +150,8 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:[announcementClip url] forKey:@"_announcementURL"];
-    [coder encodeObject:[musicClip url] forKey:@"_musicURL"];
+    [coder encodeObject:[self.announcementClip url] forKey:@"_announcementURL"];
+    [coder encodeObject:[self.musicClip url] forKey:@"_musicURL"];
     [coder encodeDouble:self.overlap forKey:@"_overlap"];
     [coder encodeDouble:self.musicStartTime forKey:@"_musicStartTime"];
     [coder encodeDouble:self.musicDuration forKey:@"_duration"];
@@ -150,6 +159,10 @@
     [coder encodeBool:self.isDJClip forKey:@"_djClip"];
     [coder encodeBool:self.shouldPlayAll forKey:@"_playAll"];
    [coder encodeObject:self.title forKey:@"_title"];
+    [coder encodeFloat:self.announcementVolume forKey:@"_voiceVolume"];
+    [coder encodeFloat:self.musicVolume forKey:@"_musicVolume"];
+    [coder encodeInt:self.currentVolumeMode forKey:@"_volumeMode"];
+    [coder encodeDouble:self.announcementDuration forKey:@"_voiceDuration"];
 }
 
 #pragma mark - Setter/Getters
@@ -157,28 +170,28 @@
 -(void)setAnnouncementClipPath:(NSURL *)aPath {
     NSError *err = nil;
     AVAudioPlayer *temp = [[AVAudioPlayer alloc] initWithContentsOfURL:aPath error:&err];
-    [announcementClip prepareToPlay];
+    [self.announcementClip prepareToPlay];
     //TODO: profile and make sure this doesn't leak the previous AVAudioPlayer
     if(temp) announcementClip = temp;
-    if(announcementClip) self.announcementDuration = announcementClip.duration;
+    if(self.announcementClip) self.announcementDuration = self.announcementClip.duration;
 }
 
 -(void)setMusicClipPath:(NSURL *)mPath {
-    if (musicClip) {
-        [musicClip stop];
+    if (self.musicClip) {
+        [self.musicClip stop];
     }
     NSError *err = nil;
     AVAudioPlayer *temp = [[AVAudioPlayer alloc] initWithContentsOfURL:mPath error:&err];
     [temp prepareToPlay];
     //TODO: profile and make sure this doesn't leak the previous AVAudioPlayer
     if(temp) {
-        musicClip = temp;
+        self.musicClip = temp;
     }
 }
 
 -(void)setEmptyAnnounceClip {
-    [announcementClip release];
-    announcementClip = nil;
+    [self.announcementClip release];
+    self.announcementClip = nil;
     [self.announcementURL release];
     self.announcementURL = nil;
     
@@ -188,8 +201,8 @@
 }
 
 -(void)setEmptyMusicClip {
-    [musicClip release];
-    musicClip = nil;
+    [self.musicClip release];
+    self.musicClip = nil;
     [self.musicURL release];
     self.musicURL = nil;
     
@@ -205,18 +218,18 @@
 #pragma mark - Playback:
 
 -(void)updateClips:(id)sender {
-    if(isFading && musicClip.volume > 0.0) {
-        musicClip.volume -= volumeInc;
-        announcementClip.volume -= volumeInc;
+    if(isFading && self.musicClip.volume > 0.0) {
+        self.musicClip.volume -= volumeInc;
+        self.announcementClip.volume -= volumeInc;
     }
     else if(!self.shouldPlayAll) {
-        if(musicClip.currentTime >= ((self.musicStartTime + self.musicDuration) - FADEOUT_TIME))
+        if(self.musicClip.currentTime >= ((self.musicStartTime + self.musicDuration) - FADEOUT_TIME))
             isFading = YES;
     } else {
-        if(musicClip.currentTime >= (musicClip.duration - FADEOUT_TIME))
+        if(self.musicClip.currentTime >= (self.musicClip.duration - FADEOUT_TIME))
             isFading = YES;
     }
-    if((endPoint <= fabs([startDate timeIntervalSinceNow])) || (musicClip.volume <= 0.0 || announcementClip.volume <= 0.0)) {
+    if((endPoint <= fabs([startDate timeIntervalSinceNow])) || (self.musicClip.volume <= 0.0 || self.announcementClip.volume <= 0.0)) {
         [self stop];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidFinish" object:self];
     }
@@ -229,30 +242,34 @@
         timer = nil;
     }
     
-    volumeInc = [musicClip volume] / (FADEOUT_TIME * 100);
+    self.announcementClip.volume = self.announcementVolume;
+    self.musicClip.volume = self.musicVolume;
+    
+    volumeInc = [self.musicClip volume] / (FADEOUT_TIME * 100);
     //    endPoint = ((musicDuration > (overlap + announcementClip.duration))
 //                 ? musicDuration : (overlap + announcementClip.duration)) +
 //                ((overlap > 0) ? overlap : 0);
 //
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidStart" object:self];
-    if (!announcementClip && musicClip) {
+    if (!self.announcementClip && self.musicClip) {
         [self playMusic];
         return;
-    } else if (!musicClip && announcementClip) {
+    } else if (!self.musicClip && self.announcementClip) {
         [self playAnnnouncement];
         return;
     } else if (self.overlap >= 0) {
-        [announcementClip playAtTime:announcementClip.deviceCurrentTime + fabs(overlap)];
-        if(self.musicDuration > (fabs(overlap) + announcementClip.duration)){
-            endPoint = (!self.shouldPlayAll) ? self.musicDuration : musicClip.duration;
-        } else endPoint = fabs(overlap) + ((!self.shouldPlayAll) ? self.announcementDuration : musicClip.duration);
-        [musicClip play];
+        [self.announcementClip playAtTime:self.announcementClip.deviceCurrentTime + fabs(overlap)];
+        if(self.musicDuration > (fabs(overlap) + self.announcementClip.duration)){
+            endPoint = (!self.shouldPlayAll) ? self.musicDuration : self.musicClip.duration;
+        } else endPoint = fabs(overlap) + ((!self.shouldPlayAll) ? self.announcementDuration : self.musicClip.duration);
+        [self.musicClip play];
     }
     else {
-        [musicClip playAtTime:musicClip.deviceCurrentTime + fabs(overlap)];
-        endPoint = fabs(overlap) + ((!self.shouldPlayAll) ? self.musicDuration : musicClip.duration);
+        [self.musicClip playAtTime:self.musicClip.deviceCurrentTime + fabs(overlap)];
+        endPoint = fabs(overlap) + ((!self.shouldPlayAll) ? self.musicDuration : self.musicClip.duration);
 
-        [announcementClip play];
+        [self.announcementClip play];
     }
 
     startDate = [[NSDate date] retain];
@@ -261,71 +278,71 @@
 
 -(void)playAnnnouncement {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidStart" object:self];
-    [announcementClip play];
+    [self.announcementClip play];
     timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(updateAnnouncePlay) userInfo:nil repeats:YES];
 }
 
 -(void)playMusic {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidStart" object:self];
-    [musicClip play];
+    [self.musicClip play];
     timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(updateMusicPlay) userInfo:nil repeats:YES];
 }
 
 -(void)updateMusicPlay {
-    if((musicClip.currentTime >= (((self.shouldPlayAll) ? musicClip.duration : (self.musicDuration + self.musicStartTime)))) || musicClip.volume <= 0.0) {
+    if((self.musicClip.currentTime >= (((self.shouldPlayAll) ? self.musicClip.duration : (self.musicDuration + self.musicStartTime)))) || musicClip.volume <= 0.0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidFinish" object:self];
         [self stop];
     }
     if(isFading)
-        musicClip.volume -= volumeInc;
-    else if (!self.shouldPlayAll && (musicClip.currentTime - self.musicStartTime) >= (self.musicDuration - FADEOUT_TIME))
+        self.musicClip.volume -= volumeInc;
+    else if (!self.shouldPlayAll && (self.musicClip.currentTime - self.musicStartTime) >= (self.musicDuration - FADEOUT_TIME))
         isFading = YES;
 }
 
 -(void)updateAnnouncePlay {
-    if ((announcementClip.currentTime >= self.announcementDuration-0.11) || announcementClip.volume <= 0.0) {
+    if ((self.announcementClip.currentTime >= self.announcementDuration-0.11) || self.announcementClip.volume <= 0.0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidFinish" object:self];
         [self stop];
     }
     if(isFading)
-        announcementClip.volume -= volumeInc;
+        self.announcementClip.volume -= volumeInc;
 }
 
 -(bool)isPlaying{
-    return ([musicClip isPlaying] || [announcementClip isPlaying]);
+    return ([self.musicClip isPlaying] || [self.announcementClip isPlaying]);
 }
 
 //The next two functions were added to allow checking the state of the individual
 //avaudio objects so that we can properly display ui elements when they are first displayed
 //For example: navigating to the edit view of a player that has had audio.music set up but not audio.announcement
 - (bool)isMusicClipValid {
-    if (musicClip)
+    if (self.musicClip)
         return YES;
     else
         return NO;
 }
 
 - (bool)isAnnouncementClipValid {
-    if(announcementClip)
+    if(self.announcementClip)
         return YES;
     else
         return NO;
 }
 
 -(void)stop {
-    [musicClip pause];
-    [announcementClip pause];
+    [self.musicClip pause];
+    [self.announcementClip pause];
     if (timer) {
         [timer invalidate];
         timer = nil;
 //        NSLog(@"Timer should stop!");
     }
     
-    musicClip.currentTime = musicStartTime;
-    announcementClip.currentTime = 0;
+    self.musicClip.currentTime = musicStartTime;
+    self.announcementClip.currentTime = 0;
     
-    musicClip.volume = 1.0;
-    announcementClip.volume = 1.0;
+    self.musicClip.volume = self.musicVolume;
+    self.announcementClip.volume = self.announcementVolume;
     
     isFading = NO;
 }

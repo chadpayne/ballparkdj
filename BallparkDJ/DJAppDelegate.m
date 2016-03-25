@@ -13,7 +13,7 @@
 #import "DJPlayersViewController.h"
 #import <AVFoundation/AVAudioSession.h>
 #import <AudioToolbox/AudioServices.h>
-#include "TestFlight.h"
+//#include "TestFlight.h"
 //#import "MKStoreManager.h"
 
 @implementation DJAppDelegate
@@ -41,7 +41,7 @@
     self.league = [[DJLeague alloc] init];
     [self switchViewToLeague];
     
-    [TestFlight takeOff:@"b94a4e80-cdd2-4cde-a84d-819ff93c571a"];
+//    [TestFlight takeOff:@"b94a4e80-cdd2-4cde-a84d-819ff93c571a"];
     
 //    [MKStoreManager sharedManager];
 //    [[MKStoreManager sharedManager] purchasableObjectsDescription];

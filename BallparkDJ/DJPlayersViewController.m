@@ -355,7 +355,30 @@
         [self setEditing:NO animated:YES];
     }
     else {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //        [defaults setBool:NO forKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+        //        [defaults synchronize];
+        BOOL isPurchased = [defaults boolForKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+        DJAudio* audio = [[self.team.players objectAtIndex:indexPath.row] audio];;
         
+        if (audio.announcementDuration >= 10.0 && isPurchased == NO){
+            //        [self ShowIAPAlert];
+            HUD = [MBProgressHUD showHUDAddedTo:[DJAppDelegate sharedDelegate].window animated:YES];
+            [[DJAppDelegate sharedDelegate].window addSubview:HUD];
+            
+            HUD.delegate = self;
+            HUD.labelText = @"Loading..";
+            
+            [HUD showWhileExecuting:@selector(removeHud) onTarget:self withObject:nil animated:YES];
+            
+            
+            [self reload];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+            
+            [self performSelector:@selector(presentIAPAlertViewForVoice) withObject:nil afterDelay:5.0];
+            [[self playBtn] setTitle:@"Play"];
+            return;
+        }
         DJPlayer    *player = [self.team.players objectAtIndex:indexPath.row];
         if(player.b_isBench == YES)
             return;
@@ -461,6 +484,18 @@
     if(self.team.players.count > 0)
     {
         lastPlayerIdx = self.team.players.count;
+        BOOL isDuplicate = false;
+        for (int i = 0 ; i < self.team.players.count; i++) {
+            DJPlayer* player = [self.team.players objectAtIndex:i];
+            int player_number = player.number;
+            NSString* player_name = player.name;
+            if ([p.name isEqualToString:player_name] && p.number == player_number) {
+                isDuplicate = true;
+            }
+        }
+        if (isDuplicate == true) {
+            return;
+        }
         [self.team insertObject:p inPlayersAtIndex:lastPlayerIdx];
         indexPath = [NSIndexPath indexPathForRow:[self.playerTable numberOfRowsInSection:0]-1 inSection:0];
         [self.playerTable insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -520,6 +555,30 @@
 - (IBAction)play:(id)sender {
 //    [[[[self team] objectInPlayersAtIndex:self.playerIndex] audio] stop];
 //    [[self.playerTable cellForRowAtIndexPath:[self.playerTable indexPathForSelectedRow]] setSelected:NO];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //        [defaults setBool:NO forKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+    //        [defaults synchronize];
+    BOOL isPurchased = [defaults boolForKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+    DJAudio* audio = [[self.team.players objectAtIndex:self.playerIndex] audio];;
+
+    if (audio.announcementDuration >= 10.0 && isPurchased == NO){
+//        [self ShowIAPAlert];
+        HUD = [MBProgressHUD showHUDAddedTo:[DJAppDelegate sharedDelegate].window animated:YES];
+        [[DJAppDelegate sharedDelegate].window addSubview:HUD];
+        
+        HUD.delegate = self;
+        HUD.labelText = @"Loading..";
+        
+        [HUD showWhileExecuting:@selector(removeHud) onTarget:self withObject:nil animated:YES];
+        
+        
+        [self reload];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+        
+        [self performSelector:@selector(presentIAPAlertViewForVoice) withObject:nil afterDelay:5.0];
+        [[self playBtn] setTitle:@"Play"];
+        return;
+    }
     [sender setEnabled:NO];
     if([[self.playBtn title] isEqual:@"Play"]) {
 //        if (UIBarButtonItemStyleDone == self.continuousBtn.style) { //continuous
@@ -627,14 +686,45 @@
         [self cancelQueue];
         return;
     }
-//    [self setActive:[[songQueue objectAtIndex:0] audio]];
+    UITableViewCell* cell = [self.playerTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:songQueue.location inSection:0]];
+    NSIndexPath *indexPath = [self.playerTable indexPathForCell:cell];
+    DJAudio* audio = [[self.team.players objectAtIndex:indexPath.row] audio];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //        [defaults setBool:NO forKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+    //        [defaults synchronize];
+    BOOL isPurchased = [defaults boolForKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+    if (audio.announcementDuration >= 10.0 && isPurchased == NO){
+//        songQueue = NSMakeRange(++songQueue.location, --songQueue.length);
+//        if (0 == songQueue.length) {
+//            [self cancelQueue];
+//            return;
+//        }
+        HUD = [MBProgressHUD showHUDAddedTo:[DJAppDelegate sharedDelegate].window animated:YES];
+        [[DJAppDelegate sharedDelegate].window addSubview:HUD];
+        
+        HUD.delegate = self;
+        HUD.labelText = @"Loading..";
+        
+        [HUD showWhileExecuting:@selector(removeHud) onTarget:self withObject:nil animated:YES];
+        
+        
+        [self reload];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+        
+        [self performSelector:@selector(presentIAPAlertViewForVoice) withObject:nil afterDelay:5.0];
+        return;
+    }
+    
     [self playSingle:[self.playerTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:songQueue.location inSection:0]]];
+//    [self setActive:[[songQueue objectAtIndex:0] audio]];
+    
 }
 
 -(void)setActive:(DJAudio *)active {
     if (_active.isPlaying) [_active stopWithFade];
     _active = active;
     if(nil != _active) {
+        
         [_active play];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"_ActiveDidPlay" object:self];
     }
@@ -665,7 +755,11 @@
         }
     }];
 }
-
+- (void)presentIAPAlertViewForVoice {
+    UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"The free version of BallparkDJ allows playback of voice recordings up to 10 seconds. Click below to purchase the full version for unlimited voice duration." delegate:self cancelButtonTitle:@"Continue Evaluating" otherButtonTitles:@"Upgrade to Pro ($6.99)", @"I've Already Upgraded!", nil];
+    [a show];
+    [a release];
+}
 - (void)presentIAPAlertView {
     UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"BallparkDJ is free for evaluation allowing up to 3 teams and 3 players per team.  Upgrade to the Pro version which allows full functionality with unlimited teams and unlimited players per team." delegate:self cancelButtonTitle:@"Continue Evaluating" otherButtonTitles:@"Upgrade to Pro ($6.99)", @"I've Already Upgraded!", nil];
     [a show];
@@ -683,6 +777,8 @@
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    self.playBtn.title = @"Play";
     switch (buttonIndex) {
         case 0:
             return;

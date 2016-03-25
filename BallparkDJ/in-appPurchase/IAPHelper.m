@@ -126,7 +126,7 @@ NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurcha
     NSLog(@"Failed to load list of products.");
     _productsRequest = nil;
     
-    _completionHandler(NO, nil);
+//    _completionHandler(NO, nil);
     _completionHandler = nil;
 }
 

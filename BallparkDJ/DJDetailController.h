@@ -13,8 +13,13 @@
 #import "DJPlayer.h"
 #import "DJOverlapSlider.h"
 #import <QuartzCore/QuartzCore.h>
+#import <StoreKit/StoreKit.h>
+#import "MBProgressHUD.h"
 
-@interface DJDetailController : UIViewController <UIAlertViewDelegate,UIPopoverControllerDelegate>
+@interface DJDetailController : UIViewController <UIAlertViewDelegate,UIPopoverControllerDelegate,MBProgressHUDDelegate>{
+    MBProgressHUD *HUD;
+    NSArray *_products;
+}
 
 //Model objects
 @property (retain, nonatomic) DJTeam *team;
@@ -35,6 +40,18 @@
 @property (retain, nonatomic) IBOutlet UIButton *musicPlayBtn;
 @property (retain, nonatomic) IBOutlet UIView *musicEdit;
 @property (retain, nonatomic) IBOutlet UISwitch *benchSlider;
+@property (retain, nonatomic) IBOutlet UIView *vwRelativeVolume;
+@property (retain, nonatomic) IBOutlet UISlider *sliderVolumeMode;
+@property (retain, nonatomic) IBOutlet UILabel *lblRoudestMusic;
+@property (retain, nonatomic) IBOutlet UIButton *btnRoudestMusic;
+@property (retain, nonatomic) IBOutlet UILabel *lblRouderMusic;
+@property (retain, nonatomic) IBOutlet UIButton *btnRouderMusic;
+@property (retain, nonatomic) IBOutlet UILabel *lblEven;
+@property (retain, nonatomic) IBOutlet UIButton *btnEven;
+@property (retain, nonatomic) IBOutlet UILabel *lblRouderVoice;
+@property (retain, nonatomic) IBOutlet UIButton *btnRouderVoice;
+@property (retain, nonatomic) IBOutlet UILabel *lblRoudestVoice;
+@property (retain, nonatomic) IBOutlet UIButton *btnRoudestVoice;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withPlayer:(DJPlayer *)p;
 

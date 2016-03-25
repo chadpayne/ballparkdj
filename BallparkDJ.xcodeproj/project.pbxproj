@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04B28FDC19AA42AB00E37486 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B28FD619AA42AB00E37486 /* libTestFlight.a */; };
-		04B28FDD19AA42AB00E37486 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 04B28FD719AA42AB00E37486 /* README.md */; };
-		04B28FDE19AA42AB00E37486 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 04B28FD819AA42AB00E37486 /* release_notes.md */; };
 		04E9A67419A7AA7600419267 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A67119A7AA7600419267 /* IAPHelper.m */; };
 		04E9A67519A7AA7600419267 /* RageIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A67319A7AA7600419267 /* RageIAPHelper.m */; };
 		04E9A67919A7B79F00419267 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A67819A7B79F00419267 /* MBProgressHUD.m */; };
@@ -111,12 +108,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04B28FD619AA42AB00E37486 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		04B28FD719AA42AB00E37486 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		04B28FD819AA42AB00E37486 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		04B28FD919AA42AB00E37486 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		04B28FDA19AA42AB00E37486 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		04B28FDB19AA42AB00E37486 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		04E9A67019A7AA7600419267 /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
 		04E9A67119A7AA7600419267 /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
 		04E9A67219A7AA7600419267 /* RageIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RageIAPHelper.h; sourceTree = "<group>"; };
@@ -232,7 +223,6 @@
 				04E9A68719A8D5C800419267 /* libz.dylib in Frameworks */,
 				04E9A68519A8D58E00419267 /* Security.framework in Frameworks */,
 				A2729CE216E9B8FC00CA9913 /* QuartzCore.framework in Frameworks */,
-				04B28FDC19AA42AB00E37486 /* libTestFlight.a in Frameworks */,
 				8C2C08CB16D7109D000B5C1E /* CoreFoundation.framework in Frameworks */,
 				ABB0DEA518D2ADF400ACECEC /* StoreKit.framework in Frameworks */,
 				8C2C08C916D71092000B5C1E /* AVFoundation.framework in Frameworks */,
@@ -259,19 +249,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04B28FD519AA42AB00E37486 /* TestFlightSDK3.0.2 */ = {
-			isa = PBXGroup;
-			children = (
-				04B28FD619AA42AB00E37486 /* libTestFlight.a */,
-				04B28FD719AA42AB00E37486 /* README.md */,
-				04B28FD819AA42AB00E37486 /* release_notes.md */,
-				04B28FD919AA42AB00E37486 /* TestFlight+AsyncLogging.h */,
-				04B28FDA19AA42AB00E37486 /* TestFlight+ManualSessions.h */,
-				04B28FDB19AA42AB00E37486 /* TestFlight.h */,
-			);
-			path = TestFlightSDK3.0.2;
-			sourceTree = "<group>";
-		};
 		04E9A66F19A7AA7600419267 /* in-appPurchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,7 +335,6 @@
 		8C3E2FFF16E6F5660065493B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				04B28FD519AA42AB00E37486 /* TestFlightSDK3.0.2 */,
 				04E9A67619A7B79F00419267 /* MBProgressBar */,
 				04E9A66F19A7AA7600419267 /* in-appPurchase */,
 				A2152C6C16E275CA00946094 /* DJAudio.h */,
@@ -554,7 +530,7 @@
 			attributes = {
 				CLASSPREFIX = DJ;
 				LastTestingUpgradeCheck = 0720;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Payne Software";
 				TargetAttributes = {
 					A272BB2B16D6D30800AE7ED1 = {
@@ -603,7 +579,6 @@
 				ABB4F8EF18974E3B00989B4B /* Just Score.m4a in Resources */,
 				ABB4F8F018974E3B00989B4B /* Knock You Out.m4a in Resources */,
 				ABB4F8F118974E3B00989B4B /* Loud And Proud.m4a in Resources */,
-				04B28FDE19AA42AB00E37486 /* release_notes.md in Resources */,
 				ABB4F8F218974E3B00989B4B /* Man Up.m4a in Resources */,
 				ABB4F8F318974E3B00989B4B /* Party Smasher.m4a in Resources */,
 				ABB4F8F418974E3B00989B4B /* Power Shower.m4a in Resources */,
@@ -627,7 +602,6 @@
 				AB10667F188F6E6600F8EA60 /* Images.xcassets in Resources */,
 				8C2C08E816D71286000B5C1E /* 640_1136.png in Resources */,
 				8C2C08E916D71286000B5C1E /* 640_960.png in Resources */,
-				04B28FDD19AA42AB00E37486 /* README.md in Resources */,
 				8C2C08EB16D71286000B5C1E /* 768_1004.png in Resources */,
 				8C2C08EC16D71286000B5C1E /* mic.png in Resources */,
 				8CB00D3F16E856730088FB13 /* greenBar.png in Resources */,
@@ -799,10 +773,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Chad Payne (MHCKE5N2X8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chad Payne (MHCKE5N2X8)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -816,7 +791,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "7791b1bd-1980-4816-88b7-390b1a8ec642";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -832,8 +807,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiajie Fan (W3LGGL25X6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiajie Fan (W3LGGL25X6)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -842,8 +817,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
-				"PROVISIONING_PROFILE[sdk=*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -855,23 +830,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chad Payne (P4728B6L47)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chad Payne (P4728B6L47)";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
 				INFOPLIST_FILE = "BallparkDJ/BallparkDJ-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/BallparkDJ\\\"",
-					/Users/jonathan/Development/ballparkdj/TestFlightSDK3.0.0,
-					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.0",
-					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.2",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.BallparkDJ.BallparkDJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "8fcf3373-8373-4817-87b1-7e3321a615e9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8fcf3373-8373-4817-87b1-7e3321a615e9";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -883,24 +856,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chad Payne (P4728B6L47)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chad Payne (P4728B6L47)";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
 				INFOPLIST_FILE = "BallparkDJ/BallparkDJ-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/BallparkDJ\\\"",
-					/Users/jonathan/Development/ballparkdj/TestFlightSDK3.0.0,
-					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.0",
-					"$(PROJECT_DIR)/BallparkDJ/TestFlightSDK3.0.2",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.BallparkDJ.BallparkDJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f1ff1c87-0bb4-467a-8b98-15705adf0f4f";
+				PROVISIONING_PROFILE = "8fcf3373-8373-4817-87b1-7e3321a615e9";
+				"PROVISIONING_PROFILE[sdk=*]" = "8fcf3373-8373-4817-87b1-7e3321a615e9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8fcf3373-8373-4817-87b1-7e3321a615e9";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -919,6 +890,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
 				INFOPLIST_FILE = "BallparkDJTests/BallparkDJTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BallparkDJ.BallparkDJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -939,6 +911,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
 				INFOPLIST_FILE = "BallparkDJTests/BallparkDJTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BallparkDJ.BallparkDJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";

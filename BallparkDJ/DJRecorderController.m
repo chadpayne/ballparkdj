@@ -8,12 +8,17 @@
 
 #import "DJRecorderController.h"
 #import <CoreAudio/CoreAudioTypes.h>
+#import "RageIAPHelper.h"
+#import <StoreKit/StoreKit.h>
+#import "MBProgressHUD.h"
+#import "DJAppDelegate.h"
 
-@interface DJRecorderController (){
+@interface DJRecorderController ()<UIAlertViewDelegate>{
     NSTimer* _timer;
     NSInteger _count;
     float _tmrSeconds;
     NSURL *announceURL;
+    
 }
 @end
 
@@ -106,7 +111,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFinishPurchase)
+                                                 name:@"InAppPurchase" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFinishRestore)
+                                                 name:@"RestoreInAppPurchase" object:nil];
 //    SVSegmentedControl *redSC = [[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"Cancel", @"No Audio", @"Done", nil]];
 //    [redSC addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 //	
@@ -159,7 +168,10 @@
     [self setPlayButton:nil];
     [super viewDidUnload];
 }
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewWillDisappear:animated];
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -278,90 +290,92 @@
         self.cancelDoneButton.hidden = YES;
         self.playButton.hidden = YES;
     }else {
-        [_timer invalidate];
-        self.recorder.meteringEnabled = NO;
-        [self.recordButton setImage:[UIImage imageNamed:@"recButton.png"]
-                           forState:UIControlStateNormal];
-        [self.recorder stop];
-        AVAudioSession *session = [AVAudioSession sharedInstance];
-        NSError *audioSessionError = nil;
-        [session setCategory:AVAudioSessionCategoryPlayback
-                 withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker
-                       error:&audioSessionError];
         
-        CGRect rect = self.recordButton.frame;
-        rect.origin.x = 41;
-        self.recordButton.frame = rect;
-
-        self.cancelDoneButton.hidden = NO;
-        self.playButton.hidden = NO;
-        
-        self.elapsedTimeMeter.textColor = [UIColor redColor];
-        announceURL = [self.recorder url];
-        self.tapToStop.enabled = NO;
-        
-        for (UIImageView* img in powerMeterL0) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }
-        for (UIImageView* img in powerMeterL1) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL2) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL3) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL4) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL5) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL6) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL7) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL8) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL9) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL10) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL11) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL12) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL13) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL14) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL15) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL16) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL17) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL18) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL19) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL20) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL21) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL22) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL23) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL24) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL25) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL26) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }            for (UIImageView* img in powerMeterL27) {
-            [img setImage:[UIImage imageNamed:@"clearBar.png"]];
-        }
-        
+        [self recordFinalize];
     }
 }
-
+-(void)recordFinalize {
+    [_timer invalidate];
+    self.recorder.meteringEnabled = NO;
+    [self.recordButton setImage:[UIImage imageNamed:@"recButton.png"]
+                       forState:UIControlStateNormal];
+    [self.recorder stop];
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *audioSessionError = nil;
+    [session setCategory:AVAudioSessionCategoryPlayback
+             withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker
+                   error:&audioSessionError];
+    
+    CGRect rect = self.recordButton.frame;
+    rect.origin.x = 41;
+    self.recordButton.frame = rect;
+    
+    self.cancelDoneButton.hidden = NO;
+    self.playButton.hidden = NO;
+    
+    self.elapsedTimeMeter.textColor = [UIColor redColor];
+    announceURL = [self.recorder url];
+    self.tapToStop.enabled = NO;
+    
+    for (UIImageView* img in powerMeterL0) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }
+    for (UIImageView* img in powerMeterL1) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL2) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL3) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL4) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL5) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL6) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL7) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL8) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL9) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL10) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL11) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL12) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL13) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL14) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL15) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL16) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL17) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL18) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL19) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL20) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL21) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL22) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL23) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL24) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL25) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL26) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }            for (UIImageView* img in powerMeterL27) {
+        [img setImage:[UIImage imageNamed:@"clearBar.png"]];
+    }
+}
 -(void)initializeRecordedAnnouncement{
     
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -459,6 +473,9 @@
 -(void)updateUI{
     
     if ([self.recorder isRecording]) {
+        _tmrSeconds = [[NSNumber numberWithDouble:[self.recorder currentTime]] floatValue];
+        
+        self.elapsedTimeMeter.text = [NSString stringWithFormat:@"%1.1f", _tmrSeconds];
         self.mainPic.image = [UIImage imageNamed:@"RecordingMic"];
         //update power meter LEDs levels are in dB
         [self.recorder updateMeters];
@@ -715,9 +732,7 @@
             }
         }
         
-        _tmrSeconds = [[NSNumber numberWithDouble:[self.recorder currentTime]] floatValue];
         
-        self.elapsedTimeMeter.text = [NSString stringWithFormat:@"%1.1f", _tmrSeconds];
         
     } else {
         for (UIImageView* img in powerMeterL0) {
@@ -806,5 +821,92 @@
         }
     }
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == [alertView cancelButtonIndex]) {
+        NSLog(@"Cancel");
+    }
+    else if(buttonIndex == 1) {
+        NSLog(@"Purchase");
+        HUD = [MBProgressHUD showHUDAddedTo:[DJAppDelegate sharedDelegate].window animated:YES];
+        [[DJAppDelegate sharedDelegate].window addSubview:HUD];
+        HUD.delegate = self;
+        HUD.dimBackground = YES;
+        HUD.labelText = @"Loading...";
+        [HUD show:YES];
+        
+        
+        SKProduct *product = _products[0];
+        
+        NSLog(@"Buying %@...", product.productIdentifier);
+        [[RageIAPHelper sharedInstance] buyProduct:product];
+        
+        [self performSelector:@selector(stopHUDLoop) withObject:nil afterDelay:12.0];
+    }
+    else if(buttonIndex == 2) {
+        HUD = [MBProgressHUD showHUDAddedTo:[DJAppDelegate sharedDelegate].window animated:YES];
+        [[DJAppDelegate sharedDelegate].window addSubview:HUD];
+        HUD.delegate = self;
+        HUD.dimBackground = YES;
+        HUD.labelText = @"Loading...";
+        [HUD show:YES];
+        
+        
+        [[RageIAPHelper sharedInstance] restoreCompletedTransactions];
+        
+        [self performSelector:@selector(stopHUDLoop) withObject:nil afterDelay:12.0];
+    }
+    
+    
+}
+-(void)stopHUDLoop
+{
+    if(HUD == nil)
+        return;
+    
+    [HUD show:NO];
+    [HUD removeFromSuperview];
+    HUD = nil;
+}
+- (void) onFinishPurchase
+{
+    [self stopHUDLoop];
+}
 
+- (void) onFinishRestore
+{
+    [self stopHUDLoop];
+    
+    [[[UIAlertView alloc] initWithTitle:@"Congratulation!" message:@"Successfully Restored" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    
+}
+- (void)presentIAPAlertView {
+    UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"The free version of BallparkDJ allows playback of voice recordings up to 15 seconds. Click below to purchase the full version for unlimited voice duration." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upgrade to Pro ($6.99)", @"I've Already Upgraded!", nil];
+    [a show];
+    [a release];
+}
+- (void)reload {
+    _products = nil;
+    [[RageIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+        if (success) {
+            _products = [products retain];
+        }
+    }];
+    
+    NSLog(@"_products in reload : %@", _products);
+}
+- (void)removeHud
+{
+    sleep(4);
+    
+    //    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)productPurchased:(NSNotification *)notification {
+    
+    NSString * productIdentifier = notification.object;
+    [_products enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
+        if ([product.productIdentifier isEqualToString:productIdentifier]) {
+            *stop = YES;
+        }
+    }];
+}
 @end

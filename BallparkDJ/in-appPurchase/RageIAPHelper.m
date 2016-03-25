@@ -14,8 +14,8 @@
     static dispatch_once_t once;
     static RageIAPHelper * sharedInstance;
     dispatch_once(&once, ^{
-//        NSSet * productIdentifiers = [NSSet setWithObjects: @"com.ballpark.moreplayer", nil];
         NSSet * productIdentifiers = [NSSet setWithObjects: @"com.BallparkDJ.BallparkDJ.FullVersion0", nil];
+//        NSSet * productIdentifiers = [NSSet setWithObjects: @"com.automusic.item", nil];
 
         sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
     });

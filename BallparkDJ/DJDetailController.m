@@ -11,11 +11,17 @@
 #import "DJPlayersViewController.h"
 #import "DJMusicEditorController.h"
 #import "DJRecorderController.h"
+#import "RageIAPHelper.h"
 
 @interface DJDetailController (){
     bool newPlayer;
     float overlapHeight;
     NSTimer *overlapTimer;
+    CGSize screenSize;
+    CGSize lblSize;
+    int currentVolumeMode;
+    CGFloat currentVoiceVolume;
+    CGFloat currentMusicVolume;
 }
 
 @end
@@ -34,8 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem * backButton = [[[UIBarButtonItem alloc] initWithTitle:@"Player" style:UIBarButtonItemStyleDone target:self action:@selector(backButtonPressed:)]autorelease];
-    [self.navigationItem setBackBarButtonItem:backButton];
+//    UIBarButtonItem * backButton = [[[UIBarButtonItem alloc] initWithTitle:@"Player" style:UIBarButtonItemStyleDone target:self action:@selector(backButtonPressed:)]autorelease];
+//    [self.navigationItem setBackBarButtonItem:backButton];
     
     self.overlapSlider = [[DJOverlapSlider alloc] initWithFrame:CGRectMake(100, 700, 500, 300)];
     [self.view addSubview:self.overlapSlider];
@@ -46,11 +52,44 @@
     [self.announceEditBtn.layer setCornerRadius:8.0f];
     [self.musicEditBtn.layer setCornerRadius:8.0f];
     [self.musicPlayBtn.layer setCornerRadius:8.0f];
+    
+    currentVoiceVolume = 1.0;
+    currentMusicVolume = 1.0;
+    
+    currentVolumeMode = 2;
+    screenSize = [UIScreen mainScreen].bounds.size;
+    lblSize = self.lblRouderMusic.frame.size;
+    [self replaceLabels];
    
     if(self.player){
         newPlayer = false;
         self.playerNameField.text = self.player.name;
         [self.benchSlider setOn:self.player.b_isBench];
+        self.player.audio.musicClip.volume = self.player.audio.musicVolume;
+        self.player.audio.announcementClip.volume = self.player.audio.musicVolume;
+        
+        switch (self.player.audio.currentVolumeMode) {
+            case 0:
+                currentVolumeMode = 0;
+                break;
+            case 1:
+                currentVolumeMode = 1;
+                break;
+            case 2:
+                currentVolumeMode = 2;
+                break;
+            case 3:
+                currentVolumeMode = 3;
+                break;
+            case 4:
+                currentVolumeMode = 4;
+                break;
+            default:
+                break;
+        }
+        
+        self.sliderVolumeMode.value = currentVolumeMode;
+        [self ApplyVolumeMode];
         
         self.playerNumberField.text = (self.player.number == -42) ? @"" : [NSString stringWithFormat:@"%d",self.player.number];
         if(self.player.name != NULL){
@@ -58,7 +97,6 @@
         }
         
 //        [self setSliderValues];
-        
         if(self.player.audio.isMusicClipValid){
             [self showMusicPlay];
         }
@@ -70,9 +108,11 @@
         if(!self.announcePlayBtn.isHidden && !self.musicPlayBtn.isHidden){
             [self.playBtn setEnabled:TRUE];
             [self.overlapSlider setHidden:FALSE];
+            [self.vwRelativeVolume setHidden:FALSE];
         } else{
             [self.playBtn setEnabled:FALSE];
             [self.overlapSlider setHidden:TRUE];
+            [self.vwRelativeVolume setHidden:TRUE];
         }
         
     }
@@ -82,6 +122,7 @@
         [self setSliderValues];
         [self.playBtn setEnabled:FALSE];
         [self.overlapSlider setHidden:TRUE];
+        [self.vwRelativeVolume setHidden:TRUE];
         [self.playerNameField becomeFirstResponder];
     }
     
@@ -100,6 +141,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playAudio:) name:@"DJOverlapDidReleaseNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAudio:) name:@"DJOverlapDidSelectNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAudio:) name:@"DJAudioDidFinish" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFinishPurchase)
+                                                 name:@"InAppPurchase" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFinishRestore)
+                                                 name:@"RestoreInAppPurchase" object:nil];
   
 	// Do any additional setup after loading the view.
 }
@@ -148,11 +194,88 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)replaceLabels {
+    CGFloat distance = (screenSize.width - 5 * lblSize.width - 40) / 4;
+    self.lblRoudestMusic.frame = CGRectMake(20, self.lblRoudestMusic.frame.origin.y, lblSize.width, lblSize.height);
+    self.btnRoudestMusic.frame = CGRectMake(20, self.lblRoudestMusic.frame.origin.y, lblSize.width, lblSize.height);
+    self.lblRouderMusic.frame = CGRectMake(20 + lblSize.width + distance, self.lblRouderMusic.frame.origin.y, lblSize.width, lblSize.height);
+    self.btnRouderMusic.frame = CGRectMake(20 + lblSize.width + distance, self.lblRouderMusic.frame.origin.y, lblSize.width, lblSize.height);
+    self.lblEven.frame = CGRectMake((screenSize.width - lblSize.width) / 2, self.lblEven.frame.origin.y, lblSize.width, lblSize.height);
+    self.btnEven.frame = CGRectMake((screenSize.width - lblSize.width) / 2, self.lblEven.frame.origin.y, lblSize.width, lblSize.height);
+    self.lblRouderVoice.frame = CGRectMake( (screenSize.width + lblSize.width ) / 2 + distance, self.lblRouderVoice.frame.origin.y, lblSize.width, lblSize.height);
+    self.btnRouderVoice.frame = CGRectMake( (screenSize.width + lblSize.width ) / 2 + distance, self.lblRouderVoice.frame.origin.y, lblSize.width, lblSize.height);
+    self.lblRoudestVoice.frame = CGRectMake((screenSize.width + 3 * lblSize.width ) / 2 + distance * 2, self.lblRoudestVoice.frame.origin.y, lblSize.width, lblSize.height);
+    self.btnRoudestVoice.frame = CGRectMake((screenSize.width + 3 * lblSize.width ) / 2 + distance * 2, self.lblRoudestVoice.frame.origin.y, lblSize.width, lblSize.height);
+}
+- (IBAction)actionVolumeSlider:(id)sender{
+    UISlider* slider = (UISlider*)sender;
+    int sliderValue = (int)(slider.value + 0.5);
+    slider.value = sliderValue;
+    if (sliderValue != currentVolumeMode) {
+        currentVolumeMode = sliderValue;
+        self.player.audio.currentVolumeMode = currentVolumeMode;
+        [self ApplyVolumeMode];
+    }
+}
+- (IBAction)actionVolumeButton:(id)sender {
+    UIButton* button = (UIButton*)sender;
+    currentVolumeMode = (int)button.tag;
+    self.player.audio.currentVolumeMode = currentVolumeMode;
+    self.sliderVolumeMode.value = currentVolumeMode;
+    [self ApplyVolumeMode];
+}
+- (void) ApplyVolumeMode {
+    switch (currentVolumeMode) {
+        case 0:
+            self.player.audio.announcementClip.volume = 0.36;
+            self.player.audio.musicClip.volume = 1.0;
+            currentMusicVolume = 1.0;
+            self.player.audio.musicVolume = 1.0;
+            currentVoiceVolume = 0.3;
+            self.player.audio.announcementVolume = 0.3;
+            break;
+        case 1:
+            self.player.audio.announcementClip.volume = 0.6;
+            self.player.audio.musicClip.volume = 1.0;
+            currentMusicVolume = 1.0;
+            self.player.audio.musicVolume = 1.0;
+            currentVoiceVolume = 0.6;
+            self.player.audio.announcementVolume = 0.6;
+            break;
+        case 2:
+            self.player.audio.announcementClip.volume = 1.0;
+            self.player.audio.musicClip.volume = 1.0;
+            currentMusicVolume = 1.0;
+            self.player.audio.announcementVolume = 1.0;
+            currentVoiceVolume = 1.0;
+            self.player.audio.musicVolume = 1.0;
+            break;
+        case 3:
+            self.player.audio.announcementClip.volume = 1.0;
+            self.player.audio.musicClip.volume = 0.6;
+            currentMusicVolume = 0.6;
+            self.player.audio.announcementVolume = 1.0;
+            currentVoiceVolume = 1.0;
+            self.player.audio.musicVolume = 0.6;
+            break;
+        case 4:
+            self.player.audio.announcementClip.volume = 1.0;
+            self.player.audio.musicClip.volume = 0.3;
+            currentMusicVolume = 0.3;
+            currentVoiceVolume = 1.0;
+            self.player.audio.musicVolume = 0.3;
+            self.player.audio.announcementVolume = 1.0;
+            break;
+        default:
+            break;
+    }
+}
 - (void)showMusicPlay{
     [self.musicPlayBtn setHidden:FALSE];
     
     if (!self.announcePlayBtn.isHidden) {
         [self.overlapSlider setHidden:FALSE];
+        [self.vwRelativeVolume setHidden:FALSE];
         [self.playBtn setEnabled:YES];
     }
     [self setSliderValues];
@@ -164,6 +287,7 @@
     [self.announcePlayBtn setHidden:FALSE];
     if(!self.musicPlayBtn.isHidden){
         [self.overlapSlider setHidden:FALSE];
+        [self.vwRelativeVolume setHidden:FALSE];
         [self.playBtn setEnabled:YES];
     }
     [self setSliderValues];
@@ -200,40 +324,40 @@
     self.overlapSlider.trailingDelay = self.player.audio.overlap;
 }
 
-- (void)backButtonPressed:(id)sender{
-    if([self.player.audio isPlaying]){
-        [[[self player] audio] stop];
-    }
-    UIAlertView *derp = [[UIAlertView alloc] initWithTitle:@"Save?"
-                                                    message:@"Would you like to save your player?"
-                                                   delegate:self
-                                          cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles: @"Yes", @"No", nil];
-    
-    [derp show];
-    [derp release];
-}
+//- (void)backButtonPressed:(id)sender{
+//    if([self.player.audio isPlaying]){
+//        [[[self player] audio] stop];
+//    }
+//    UIAlertView *derp = [[UIAlertView alloc] initWithTitle:@"Save?"
+//                                                    message:@"Would you like to save your player?"
+//                                                   delegate:self
+//                                          cancelButtonTitle:@"Cancel"
+//                                          otherButtonTitles: @"Yes", @"No", nil];
+//    
+//    [derp show];
+//    [derp release];
+//}
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == [alertView cancelButtonIndex]) {
-        
-    }
-    else if(buttonIndex == 1){
-        NSLog(@"%@",[alertView buttonTitleAtIndex:1]);
-        if(newPlayer){
-            [(DJPlayersViewController *)self.parent addNewPlayerToTeam:self.player];
-        } else {
-            [((DJPlayersViewController *)self.parent).team.players removeObjectAtIndex:self.playerIndex];
-            [((DJPlayersViewController *)self.parent).team.players insertObject:self.player atIndex:self.playerIndex];
-            [((DJPlayersViewController *)self.parent).playerTable reloadData];
-        }
-        [self.navigationController popToViewController:self.parent animated:YES];
-        [(DJPlayersViewController *)self.parent save];
-    }
-    else if(buttonIndex == 2){
-          [self.navigationController popToViewController:self.parent animated:YES];
-    }
-}
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+//    if (buttonIndex == [alertView cancelButtonIndex]) {
+//        
+//    }
+//    else if(buttonIndex == 1){
+//        NSLog(@"%@",[alertView buttonTitleAtIndex:1]);
+//        if(newPlayer){
+//            [(DJPlayersViewController *)self.parent addNewPlayerToTeam:self.player];
+//        } else {
+//            [((DJPlayersViewController *)self.parent).team.players removeObjectAtIndex:self.playerIndex];
+//            [((DJPlayersViewController *)self.parent).team.players insertObject:self.player atIndex:self.playerIndex];
+//            [((DJPlayersViewController *)self.parent).playerTable reloadData];
+//        }
+//        [self.navigationController popToViewController:self.parent animated:YES];
+//        [(DJPlayersViewController *)self.parent save];
+//    }
+//    else if(buttonIndex == 2){
+//          [self.navigationController popToViewController:self.parent animated:YES];
+//    }
+//}
 
 //=================================
 //
@@ -346,6 +470,7 @@
         [self.player.audio stop];
         self.musicPlayBtn.selected = NO;
     } else {
+        self.player.audio.musicClip.volume = currentMusicVolume;
         [self.player.audio playMusic];
         self.musicPlayBtn.selected = YES;
     }
@@ -381,6 +506,7 @@
         [self.player.audio stop];
         self.announcePlayBtn.selected = NO;
     } else {
+        self.player.audio.announcementClip.volume = currentVoiceVolume;
         [self.player.audio playAnnnouncement];
         self.announcePlayBtn.selected = YES;
     }
@@ -393,6 +519,17 @@
         self.musicPlayBtn.selected = NO;
         self.announcePlayBtn.selected = NO;
     } else {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //        [defaults setBool:NO forKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+        //        [defaults synchronize];
+        BOOL isPurchased = [defaults boolForKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+        if (self.player.audio.announcementDuration >= 10.0 && isPurchased == NO){
+            [self ShowIAPAlert];
+            self.playBtn.title = @"Play";
+            return;
+        }
+        self.player.audio.announcementClip.volume = currentVoiceVolume;
+        self.player.audio.musicClip.volume = currentMusicVolume;
         [self.player.audio play];
         self.playBtn.title = @"Stop";
     }
@@ -419,12 +556,14 @@
     self.announcePlayBtn.selected = NO;
     self.announcePlayBtn.hidden = TRUE;
     [self.overlapSlider setHidden:TRUE];
+    [self.vwRelativeVolume setHidden:TRUE];
     [self.playBtn setEnabled:NO];
 }
 
 -(void)respondToRemovedAudio:(id)sender {
     [self.musicPlayBtn setHidden:TRUE];
     [self.overlapSlider setHidden:TRUE];
+    [self.vwRelativeVolume setHidden:TRUE];
     [self.playBtn setEnabled:NO];
 }
 
@@ -450,5 +589,109 @@
     }
     return nil;
 }
+- (void)ShowIAPAlert {
+    HUD = [MBProgressHUD showHUDAddedTo:[DJAppDelegate sharedDelegate].window animated:YES];
+    [[DJAppDelegate sharedDelegate].window addSubview:HUD];
+    
+    HUD.delegate = self;
+    HUD.labelText = @"Loading..";
+    
+    [HUD showWhileExecuting:@selector(removeHud) onTarget:self withObject:nil animated:YES];
+    
+    
+    [self reload];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+    
+    [self performSelector:@selector(presentIAPAlertView) withObject:nil afterDelay:5.0];
+}
+- (void)presentIAPAlertView {
+    UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"The free version of BallparkDJ allows playback of voice recordings up to 10 seconds. Click below to purchase the full version for unlimited voice duration." delegate:self cancelButtonTitle:@"Continue Evaluating" otherButtonTitles:@"Upgrade to Pro ($6.99)", @"I've Already Upgraded!", nil];
+    [a show];
+    [a release];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    self.playBtn.title = @"Play";
+    if (buttonIndex == [alertView cancelButtonIndex]) {
+        NSLog(@"Cancel");
+    }
+    else if(buttonIndex == 1) {
+        NSLog(@"Purchase");
+        HUD = [MBProgressHUD showHUDAddedTo:[DJAppDelegate sharedDelegate].window animated:YES];
+        [[DJAppDelegate sharedDelegate].window addSubview:HUD];
+        HUD.delegate = self;
+        HUD.dimBackground = YES;
+        HUD.labelText = @"Loading...";
+        [HUD show:YES];
+        
+        
+        SKProduct *product = _products[0];
+        
+        NSLog(@"Buying %@...", product.productIdentifier);
+        [[RageIAPHelper sharedInstance] buyProduct:product];
+        
+        [self performSelector:@selector(stopHUDLoop) withObject:nil afterDelay:12.0];
+    }
+    else if(buttonIndex == 2) {
+        HUD = [MBProgressHUD showHUDAddedTo:[DJAppDelegate sharedDelegate].window animated:YES];
+        [[DJAppDelegate sharedDelegate].window addSubview:HUD];
+        HUD.delegate = self;
+        HUD.dimBackground = YES;
+        HUD.labelText = @"Loading...";
+        [HUD show:YES];
+        
+        
+        [[RageIAPHelper sharedInstance] restoreCompletedTransactions];
+        
+        [self performSelector:@selector(stopHUDLoop) withObject:nil afterDelay:12.0];
+    }
+    
+    
+}
+-(void)stopHUDLoop
+{
+    if(HUD == nil)
+        return;
+    
+    [HUD show:NO];
+    [HUD removeFromSuperview];
+    HUD = nil;
+}
+- (void) onFinishPurchase
+{
+    [self stopHUDLoop];
+}
 
+- (void) onFinishRestore
+{
+    [self stopHUDLoop];
+    
+    [[[UIAlertView alloc] initWithTitle:@"Congratulation!" message:@"Successfully Restored" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    
+}
+- (void)reload {
+    _products = nil;
+    [[RageIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+        if (success) {
+            _products = [products retain];
+        }
+    }];
+    
+    NSLog(@"_products in reload : %@", _products);
+}
+- (void)removeHud
+{
+    sleep(4);
+    
+    //    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)productPurchased:(NSNotification *)notification {
+    
+    NSString * productIdentifier = notification.object;
+    [_products enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
+        if ([product.productIdentifier isEqualToString:productIdentifier]) {
+            *stop = YES;
+        }
+    }];
+}
 @end

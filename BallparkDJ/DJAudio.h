@@ -4,8 +4,8 @@
 #define FADEOUT_TIME 2.0
 
 @interface DJAudio : NSObject <NSCoding> {
-    AVAudioPlayer *announcementClip;
-    AVAudioPlayer *musicClip;
+//    AVAudioPlayer *announcementClip;
+//    AVAudioPlayer *musicClip;
     
     bool isFading;
     double volumeInc;
@@ -17,10 +17,14 @@
     
     NSDate *startDate;
 }
+@property (retain,nonatomic) AVAudioPlayer *announcementClip;
+@property (retain,nonatomic) AVAudioPlayer *musicClip;
 @property (retain,nonatomic) NSURL *announcementURL;
 @property (retain,nonatomic) NSURL *musicURL;
 @property (retain, nonatomic) NSString    *title;
-
+@property (assign, nonatomic) CGFloat announcementVolume;
+@property (assign, nonatomic) CGFloat musicVolume;
+@property (assign, nonatomic) int currentVolumeMode;
 @property (assign,readonly,nonatomic) double songDuration;
 
 /*
