@@ -12,6 +12,7 @@
 		04E9A67919A7B79F00419267 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A67819A7B79F00419267 /* MBProgressHUD.m */; };
 		04E9A68519A8D58E00419267 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E9A68419A8D58E00419267 /* Security.framework */; };
 		04E9A68719A8D5C800419267 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E9A68619A8D5C800419267 /* libz.dylib */; };
+		252F6BBA48700E8E980107DC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72455C8872E465702F5788AD /* libPods.a */; };
 		8C2C08C516D7107C000B5C1E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2C08C416D7107C000B5C1E /* AudioToolbox.framework */; };
 		8C2C08C716D71086000B5C1E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2C08C616D71086000B5C1E /* MediaPlayer.framework */; };
 		8C2C08C916D71092000B5C1E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2C08C816D71092000B5C1E /* AVFoundation.framework */; };
@@ -94,7 +95,6 @@
 		ABB4F8F818974E3B00989B4B /* The Race For Action.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8E918974E1E00989B4B /* The Race For Action.m4a */; };
 		ABB4F8F918974E3B00989B4B /* Undefeated.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABB4F8EA18974E1E00989B4B /* Undefeated.m4a */; };
 		ABDBE3831803A61D0030FE9E /* BPDJ_Slider2.png in Resources */ = {isa = PBXBuildFile; fileRef = ABDBE3801803A61D0030FE9E /* BPDJ_Slider2.png */; };
-		D6E1D94A37A944FC1E2802E6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72455C8872E465702F5788AD /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,7 +231,7 @@
 				A272BB3016D6D30800AE7ED1 /* UIKit.framework in Frameworks */,
 				A272BB3216D6D30800AE7ED1 /* Foundation.framework in Frameworks */,
 				A272BB3416D6D30800AE7ED1 /* CoreGraphics.framework in Frameworks */,
-				D6E1D94A37A944FC1E2802E6 /* libPods.a in Frameworks */,
+				252F6BBA48700E8E980107DC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,6 +841,14 @@
 					"$(inherited)",
 					"\\\"$(SRCROOT)/BallparkDJ\\\"",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BallparkDJ.BallparkDJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8fcf3373-8373-4817-87b1-7e3321a615e9";
@@ -866,6 +874,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/BallparkDJ\\\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BallparkDJ.BallparkDJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
