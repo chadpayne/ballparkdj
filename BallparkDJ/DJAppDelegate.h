@@ -12,7 +12,7 @@
 @interface DJAppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (retain, nonatomic) DJLeague* league;
+@property (strong, nonatomic) DJLeague* league;
 
 @property (nonatomic) BOOL IS_IN_APP;
 @property (nonatomic) BOOL IS_PURCHASED_FULL_VERSION;

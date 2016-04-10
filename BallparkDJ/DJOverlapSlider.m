@@ -89,7 +89,6 @@ double const _sliderCenter = 151.5;
         self = [xib objectAtIndex:0];
         UIGestureRecognizer* slidr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSlide:)];
         [self addGestureRecognizer:slidr];
-        [slidr release];
         _maxValueBottom = 10.0f;
         _maxValueTop = 10.0f;
        // self.keyFirst.backgroundColor = [UIColor colorWithRed:1
@@ -124,7 +123,6 @@ double const _sliderCenter = 151.5;
         [layer1 setBorderWidth:1.0];
 
     }
-    [self retain];
     return self;
 }
 
@@ -225,13 +223,4 @@ double const _sliderCenter = 151.5;
    
 }
 
-- (void)dealloc {
-    [announceBox release];
-    [musicBox release];
-    [sliderLabel release];
-    [keyFirst release];
-    [keyLast release];
-    [delayLabel release];
-    [super dealloc];
-}
 @end

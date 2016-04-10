@@ -22,36 +22,36 @@
 }
 
 //Model objects
-@property (retain, nonatomic) DJTeam *team;
-@property (retain, nonatomic) DJPlayer *player;
+@property (strong, nonatomic) DJTeam *team;
+@property (strong, nonatomic) DJPlayer *player;
 @property (assign, nonatomic) int playerIndex;
-@property (assign, nonatomic) UIViewController *parent;
+@property (weak, nonatomic) UIViewController *parent;
 
 //View Objects
-@property (retain, nonatomic) IBOutlet UITextField *playerNumberField;
-@property (retain, nonatomic) IBOutlet UITextField *playerNameField;
-@property (retain, nonatomic) IBOutlet UIButton *announceEditBtn;
-@property (retain, nonatomic) IBOutlet UIButton *announcePlayBtn;
-@property (retain, nonatomic) IBOutlet UIView *announceEdit;
-@property (retain, nonatomic) DJOverlapSlider* overlapSlider;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *playBtn;
+@property (strong, nonatomic) IBOutlet UITextField *playerNumberField;
+@property (strong, nonatomic) IBOutlet UITextField *playerNameField;
+@property (strong, nonatomic) IBOutlet UIButton *announceEditBtn;
+@property (strong, nonatomic) IBOutlet UIButton *announcePlayBtn;
+@property (strong, nonatomic) IBOutlet UIView *announceEdit;
+@property (strong, nonatomic) DJOverlapSlider* overlapSlider;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *playBtn;
 
-@property (retain, nonatomic) IBOutlet UIButton *musicEditBtn;
-@property (retain, nonatomic) IBOutlet UIButton *musicPlayBtn;
-@property (retain, nonatomic) IBOutlet UIView *musicEdit;
-@property (retain, nonatomic) IBOutlet UISwitch *benchSlider;
-@property (retain, nonatomic) IBOutlet UIView *vwRelativeVolume;
-@property (retain, nonatomic) IBOutlet UISlider *sliderVolumeMode;
-@property (retain, nonatomic) IBOutlet UILabel *lblRoudestMusic;
-@property (retain, nonatomic) IBOutlet UIButton *btnRoudestMusic;
-@property (retain, nonatomic) IBOutlet UILabel *lblRouderMusic;
-@property (retain, nonatomic) IBOutlet UIButton *btnRouderMusic;
-@property (retain, nonatomic) IBOutlet UILabel *lblEven;
-@property (retain, nonatomic) IBOutlet UIButton *btnEven;
-@property (retain, nonatomic) IBOutlet UILabel *lblRouderVoice;
-@property (retain, nonatomic) IBOutlet UIButton *btnRouderVoice;
-@property (retain, nonatomic) IBOutlet UILabel *lblRoudestVoice;
-@property (retain, nonatomic) IBOutlet UIButton *btnRoudestVoice;
+@property (strong, nonatomic) IBOutlet UIButton *musicEditBtn;
+@property (strong, nonatomic) IBOutlet UIButton *musicPlayBtn;
+@property (strong, nonatomic) IBOutlet UIView *musicEdit;
+@property (strong, nonatomic) IBOutlet UISwitch *benchSlider;
+@property (strong, nonatomic) IBOutlet UIView *vwRelativeVolume;
+@property (strong, nonatomic) IBOutlet UISlider *sliderVolumeMode;
+@property (strong, nonatomic) IBOutlet UILabel *lblRoudestMusic;
+@property (strong, nonatomic) IBOutlet UIButton *btnRoudestMusic;
+@property (strong, nonatomic) IBOutlet UILabel *lblRouderMusic;
+@property (strong, nonatomic) IBOutlet UIButton *btnRouderMusic;
+@property (strong, nonatomic) IBOutlet UILabel *lblEven;
+@property (strong, nonatomic) IBOutlet UIButton *btnEven;
+@property (strong, nonatomic) IBOutlet UILabel *lblRouderVoice;
+@property (strong, nonatomic) IBOutlet UIButton *btnRouderVoice;
+@property (strong, nonatomic) IBOutlet UILabel *lblRoudestVoice;
+@property (strong, nonatomic) IBOutlet UIButton *btnRoudestVoice;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withPlayer:(DJPlayer *)p;
 

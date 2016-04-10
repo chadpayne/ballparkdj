@@ -49,16 +49,16 @@
     self = [super init];
     
     NSError *err = nil;
-    self.announcementClip    =  [[[AVAudioPlayer alloc]
+    self.announcementClip    =  [[AVAudioPlayer alloc]
                                 initWithContentsOfURL:aPath
-                                    error:&err] retain];
+                                    error:&err];
     if(err){
         self.announcementClip = nil;
         err = nil;
     }
-    self.musicClip           =  [[[AVAudioPlayer alloc]
+    self.musicClip           =  [[AVAudioPlayer alloc]
                                 initWithContentsOfURL:mPath
-                                    error:&err] retain];
+                                    error:&err];
     if (err) {
         NSLog(@"%@", err);
         self.musicClip = nil;
@@ -129,8 +129,8 @@
 //    [announcementClip play];
 //    [musicClip play];
     
-    self.musicURL =         [[coder decodeObjectForKey:@"_musicURL"] retain];
-    self.title =         [[coder decodeObjectForKey:@"_title"] retain];
+    self.musicURL =         [coder decodeObjectForKey:@"_musicURL"];
+    self.title =         [coder decodeObjectForKey:@"_title"];
     
 //    self.announcementURL =  [coder decodeObjectForKey:@"_announcementURL"];
     self.overlap =          [coder decodeDoubleForKey:@"_overlap"];
@@ -190,9 +190,9 @@
 }
 
 -(void)setEmptyAnnounceClip {
-    [self.announcementClip release];
+    self.announcementClip;
     self.announcementClip = nil;
-    [self.announcementURL release];
+    self.announcementURL;
     self.announcementURL = nil;
     
     self.overlap = 0;
@@ -201,9 +201,9 @@
 }
 
 -(void)setEmptyMusicClip {
-    [self.musicClip release];
+    self.musicClip;
     self.musicClip = nil;
-    [self.musicURL release];
+    self.musicURL;
     self.musicURL = nil;
     
     self.title = @"Test";
@@ -272,7 +272,7 @@
         [self.announcementClip play];
     }
 
-    startDate = [[NSDate date] retain];
+    startDate = [NSDate date];
     timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(updateClips:) userInfo:nil repeats:YES];
 }
 

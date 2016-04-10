@@ -36,17 +36,17 @@
 
 }
 
-@property (assign, nonatomic) DJAudio *active; 
+@property (weak, nonatomic) DJAudio *active; 
 
-@property (retain, nonatomic) IBOutlet UITableView *playerTable;
-@property (retain, nonatomic) DJTeam *team;
+@property (strong, nonatomic) IBOutlet UITableView *playerTable;
+@property (strong, nonatomic) DJTeam *team;
 @property (assign, nonatomic) int playerIndex;
 
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *playBtn;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *continuousBtn;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *playBtn;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *continuousBtn;
 
-@property (assign, nonatomic) DJAudio *audioPlayer;
-@property (retain, nonatomic) DJAppDelegate* parentDelegate;
+@property (weak, nonatomic) DJAudio *audioPlayer;
+@property (strong, nonatomic) DJAppDelegate* parentDelegate;
 
 - (void)save;
 - (IBAction)play:(id)sender;

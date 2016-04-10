@@ -13,8 +13,8 @@
     
 }
 
-@property (nonatomic,retain) DJAudio *audio;
-@property (nonatomic,retain) NSString *name;
+@property (nonatomic,strong) DJAudio *audio;
+@property (nonatomic,strong) NSString *name;
 @property (nonatomic,assign) int number;
 @property BOOL  b_isBench;
 

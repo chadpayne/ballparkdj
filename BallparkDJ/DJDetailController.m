@@ -409,24 +409,6 @@
 }
 
 
-- (void)dealloc {
-   /* [_team release];
-    [_player release];
-   
-    [_playerNameField release];
-    [_playerNumberField release];
-    [_playBtn release];
-    [_announceEdit release];
-    [_musicEdit release];
-    [_announceEdit release];
-    [_announceEditBtn release];
-    [_musicEdit release];
-    [_musicEditBtn release];
-    [_musicPlayBtn release];
-    [_announcePlayBtn release];*/
-    [_benchSlider release];
-    [super dealloc];
-}
 - (void)viewDidUnload {
 //    [self setTeam:nil];
 ////    [self setPlayer:nil];
@@ -484,7 +466,7 @@
         [self.player.audio stop];
     }
  
-    DJRecorderController* voiceRecorder = [[[DJRecorderController alloc] initWithNibName:@"DJRecorderController" bundle:nil]autorelease];
+    DJRecorderController* voiceRecorder = [[DJRecorderController alloc] initWithNibName:@"DJRecorderController" bundle:nil];
     NSDateFormatter *formatter;
     NSString        *dateString;
     
@@ -493,7 +475,6 @@
     
     dateString = [formatter stringFromDate:[NSDate date]];
     NSLog(@"%@", dateString);
-    [formatter release];
     voiceRecorder.announcement = self.player.audio;
     [voiceRecorder initRecorderWithFileName:[NSString stringWithFormat:@"%@",dateString]];
 
@@ -607,7 +588,6 @@
 - (void)presentIAPAlertView {
     UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"The free version of BallparkDJ allows playback of voice recordings up to 10 seconds. Click below to purchase the full version for unlimited voice duration." delegate:self cancelButtonTitle:@"Continue Evaluating" otherButtonTitles:@"Upgrade to Pro ($6.99)", @"I've Already Upgraded!", nil];
     [a show];
-    [a release];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
@@ -673,7 +653,7 @@
     _products = nil;
     [[RageIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         if (success) {
-            _products = [products retain];
+            _products = products;
         }
     }];
     

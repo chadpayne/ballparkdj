@@ -18,7 +18,7 @@
     AVAudioPlayer *previewPlayer;
 }
 
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 -(id)initWithDJAudio:(DJAudio *)pAudio;
 

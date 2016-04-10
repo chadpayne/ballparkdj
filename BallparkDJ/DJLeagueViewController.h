@@ -20,8 +20,8 @@
 
 }
 
-@property (retain, nonatomic) IBOutlet UITableView *teamTable;
+@property (strong, nonatomic) IBOutlet UITableView *teamTable;
 @property (strong, nonatomic) DJAppDelegate* parentDelegate;
-@property (retain, nonatomic) IBOutlet UIView *teamNameView;
-@property (retain, nonatomic) IBOutlet UITextField *teamNameField;
+@property (strong, nonatomic) IBOutlet UIView *teamNameView;
+@property (strong, nonatomic) IBOutlet UITextField *teamNameField;
 @end

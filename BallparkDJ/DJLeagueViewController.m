@@ -55,14 +55,11 @@
     UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title = @"Teams";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-    [temporaryBarButtonItem release];
     
     UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showTeamNameView:)];
     longPressRecognizer.minimumPressDuration = 0.4;
 //    [teamTable addGestureRecognizer:longPressRecognizer];
-    [longPressRecognizer release];
 //    [self.view sendSubviewToBack:teamTable];
-    [addteamBTN release];
 	// Do any additional setup after loading the view.
     self.editButtonItem.action = @selector(setEditing);
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -105,8 +102,8 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:CellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryNone;
     [cell setEditingAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
@@ -153,7 +150,7 @@
         [self editTeamOnRow:selectedTeamIdx];
     }
     else{
-        DJPlayersViewController *playersView = [[[DJPlayersViewController alloc] initWithNibName:@"DJPlayersView" bundle:nil]autorelease];
+        DJPlayersViewController *playersView = [[DJPlayersViewController alloc] initWithNibName:@"DJPlayersView" bundle:nil];
         [playersView setParentDelegate:self.parentDelegate];
         [playersView setTeam: [self.parentDelegate.league getObjectAtIndex:indexPath.row]];
         [self.navigationController pushViewController:playersView animated:YES];
@@ -207,14 +204,14 @@
 //
 //======================================
 - (IBAction)addNewTeam {
-    DJTeam *t = [[[DJTeam alloc] initWithName:self.teamNameField.text] autorelease];
+    DJTeam *t = [[DJTeam alloc] initWithName:self.teamNameField.text];
 //    [t setTeamName: self.teamNameField.text];
     [self.parentDelegate.league addTeam:t];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow: [self.teamTable numberOfRowsInSection:0] inSection:0];
     [self.teamTable insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     [[self.teamTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.teamTable numberOfRowsInSection:0]inSection:0]] setHidden:FALSE];
     self.teamNameField.text = @"";
-    DJPlayersViewController *playersView = [[[DJPlayersViewController alloc] initWithNibName:@"DJPlayersView" bundle:nil]autorelease];
+    DJPlayersViewController *playersView = [[DJPlayersViewController alloc] initWithNibName:@"DJPlayersView" bundle:nil];
     [playersView setParentDelegate:self.parentDelegate];
     [playersView setTeam: t];
  
@@ -282,13 +279,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [_teamNameField release];
-    [_teamNameView release];
-    [_teamTable release];
-    [parentDelegate release];
-    [super dealloc];
-}
 - (void)viewDidUnload {
     [self setTeamNameField:nil];
     [self setTeamNameView:nil];
@@ -393,7 +383,7 @@ UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"Ballpa
     _products = nil;
     [[RageIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         if (success) {
-            _products = [products retain];
+            _products = products;
         }
     }];
     

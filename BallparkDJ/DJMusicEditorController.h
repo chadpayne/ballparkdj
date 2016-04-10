@@ -22,35 +22,35 @@
 
 @property (assign, nonatomic) double songStart;
 @property (assign, nonatomic) double songLength;
-@property (retain, nonatomic) NSTimer *startTimer;
-@property (retain, nonatomic) NSTimer *lengthTimer;
-@property (retain, nonatomic) NSTimer *replayTimer;
-@property (retain, nonatomic) NSTimer *stopTimer;
+@property (strong, nonatomic) NSTimer *startTimer;
+@property (strong, nonatomic) NSTimer *lengthTimer;
+@property (strong, nonatomic) NSTimer *replayTimer;
+@property (strong, nonatomic) NSTimer *stopTimer;
 
 
 //Model Properties
 //@property (retain, nonatomic, readonly) AVAudioPlayer *music;
-@property (assign, nonatomic) DJAudio *parentAudio;
-@property (retain, nonatomic) NSURL* audioURL;
+@property (weak, nonatomic) DJAudio *parentAudio;
+@property (strong, nonatomic) NSURL* audioURL;
 //View Properties
 
-@property (retain, nonatomic) IBOutlet UISegmentedControl *songLibraryBtn;
-@property (assign, nonatomic) IBOutlet UILabel *titleLabel;
-@property (assign, nonatomic) IBOutlet UILabel *artistLabel;
-@property (retain, nonatomic) IBOutlet UITextField *songStartTextView;
-@property (retain, nonatomic) IBOutlet UITextField *songStartLabel;
-@property (retain, nonatomic) IBOutlet UIButton *songStartForward;
-@property (retain, nonatomic) IBOutlet UIButton *songStartBackward;
-@property (retain, nonatomic) IBOutlet UISlider *songStartSlider;
-@property (retain, nonatomic) IBOutlet UITextField *songLengthTextView;
-@property (retain, nonatomic) IBOutlet UITextField *songLengthLabel;
-@property (retain, nonatomic) IBOutlet UIButton *songLengthForward;
-@property (retain, nonatomic) IBOutlet UIButton *songLengthBackward;
-@property (retain, nonatomic) IBOutlet UISlider *songLengthSlider;
-@property (retain, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *playBtn;
-@property (retain, nonatomic) IBOutlet UISwitch *wholeSongSwitch;
-@property (retain, nonatomic) IBOutlet UILabel *wholeSongLabel;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *songLibraryBtn;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *artistLabel;
+@property (strong, nonatomic) IBOutlet UITextField *songStartTextView;
+@property (strong, nonatomic) IBOutlet UITextField *songStartLabel;
+@property (strong, nonatomic) IBOutlet UIButton *songStartForward;
+@property (strong, nonatomic) IBOutlet UIButton *songStartBackward;
+@property (strong, nonatomic) IBOutlet UISlider *songStartSlider;
+@property (strong, nonatomic) IBOutlet UITextField *songLengthTextView;
+@property (strong, nonatomic) IBOutlet UITextField *songLengthLabel;
+@property (strong, nonatomic) IBOutlet UIButton *songLengthForward;
+@property (strong, nonatomic) IBOutlet UIButton *songLengthBackward;
+@property (strong, nonatomic) IBOutlet UISlider *songLengthSlider;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *playBtn;
+@property (strong, nonatomic) IBOutlet UISwitch *wholeSongSwitch;
+@property (strong, nonatomic) IBOutlet UILabel *wholeSongLabel;
 
 -(void)showUI;
 -(void)hideUITotally:(BOOL)bol;

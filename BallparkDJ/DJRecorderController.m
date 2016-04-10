@@ -105,7 +105,6 @@
     if (![self.recorder prepareToRecord]) {
         NSLog(@"error creating stream - recorder");
     }
-    [recorderSettings release];
 }
 
 - (void)viewDidLoad
@@ -181,46 +180,6 @@
     }
 }
 
-- (void)dealloc {
-    [elapsedTimeMeter release];
-    [recordPauseButton release];
-    /*[powerMeterL0 release];
-    [powerMeterL1 release];
-    [powerMeterL2 release];
-    [powerMeterL3 release];
-    [powerMeterL4 release];
-    [powerMeterL5 release];
-    [powerMeterL6 release];
-    [powerMeterL7 release];
-    [powerMeterL8 release];
-    [powerMeterL9 release];
-    [powerMeterL8 release];
-    [powerMeterL9 release];
-    [powerMeterL10 release];
-    [powerMeterL11 release];
-    [powerMeterL12 release];
-    [powerMeterL13 release];
-    [powerMeterL14 release];
-    [powerMeterL15 release];
-    [powerMeterL16 release];
-    [powerMeterL17 release];
-    [powerMeterL18 release];
-    [powerMeterL19 release];
-    [powerMeterL20 release];
-    [powerMeterL21 release];
-    [powerMeterL22 release];
-    [powerMeterL23 release];
-    [powerMeterL24 release];
-    [powerMeterL25 release];
-    [powerMeterL26 release];
-    [powerMeterL27 release];*/
-    [cancelDoneButton release];
-    [recordButton release];
-    [mainPic release];
-    [playButton release];
-    [_tapToStop release];
-    [super dealloc];
-}
 
 -(void)countdownToRecord{
     
@@ -277,11 +236,11 @@
 
         _count = 2;
         self.mainPic.image = [UIImage imageNamed:@"RecCount3"];
-        _timer = [[NSTimer scheduledTimerWithTimeInterval:1.0
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(countdownToRecord)
                                                 userInfo:nil
-                                                 repeats:YES] retain];
+                                                 repeats:YES];
         
         CGRect rect = self.recordButton.frame;
         rect.origin.x = 104;
@@ -383,9 +342,6 @@
     NSString* dPath = [documentsDirectory stringByAppendingPathComponent:self.filename];
     NSURL* soundFileURL = [NSURL fileURLWithPath:dPath];
     NSError* playerError = nil;
-    if (_musicPlayer) {
-        [_musicPlayer release];
-    }
     _musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:&playerError];
     [self.musicPlayer setDelegate:self];
     
@@ -882,13 +838,12 @@
 - (void)presentIAPAlertView {
     UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"The free version of BallparkDJ allows playback of voice recordings up to 15 seconds. Click below to purchase the full version for unlimited voice duration." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upgrade to Pro ($6.99)", @"I've Already Upgraded!", nil];
     [a show];
-    [a release];
 }
 - (void)reload {
     _products = nil;
     [[RageIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         if (success) {
-            _products = [products retain];
+            _products = products;
         }
     }];
     

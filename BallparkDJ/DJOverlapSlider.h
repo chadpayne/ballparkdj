@@ -10,12 +10,12 @@
 
 @interface DJOverlapSlider : UIView{
 }
-@property (retain, nonatomic) IBOutlet UIView *announceBox;
-@property (retain, nonatomic) IBOutlet UIView *musicBox;
-@property (retain, nonatomic) IBOutlet UILabel *sliderLabel;
-@property (retain, nonatomic) IBOutlet UIView *keyFirst;
-@property (retain, nonatomic) IBOutlet UIView *keyLast;
-@property (retain, nonatomic) IBOutlet UILabel *delayLabel;
+@property (strong, nonatomic) IBOutlet UIView *announceBox;
+@property (strong, nonatomic) IBOutlet UIView *musicBox;
+@property (strong, nonatomic) IBOutlet UILabel *sliderLabel;
+@property (strong, nonatomic) IBOutlet UIView *keyFirst;
+@property (strong, nonatomic) IBOutlet UIView *keyLast;
+@property (strong, nonatomic) IBOutlet UILabel *delayLabel;
 
 @property(assign, nonatomic) double trailingDelay;
 @property(assign, nonatomic) bool topFirst;

@@ -75,7 +75,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -104,7 +104,6 @@
     
     if(playerIndex) {
         [previewPlayer stop];
-        [previewPlayer release];
         previewPlayer = nil;
         [(UIButton *)[[[(UITableView *)[cell superview] cellForRowAtIndexPath:playerIndex] contentView] viewWithTag:BUTTON_TAG]
             setSelected:NO];
@@ -119,7 +118,6 @@
         }
     }
     else {
-        [playerIndex release];
         playerIndex = nil;
     }
     
@@ -171,11 +169,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [_tableView release];
-    [audio release];
-    [super dealloc];
-}
 
 - (void)viewDidUnload {
     [self setTableView:nil];

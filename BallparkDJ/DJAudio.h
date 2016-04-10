@@ -17,11 +17,11 @@
     
     NSDate *startDate;
 }
-@property (retain,nonatomic) AVAudioPlayer *announcementClip;
-@property (retain,nonatomic) AVAudioPlayer *musicClip;
-@property (retain,nonatomic) NSURL *announcementURL;
-@property (retain,nonatomic) NSURL *musicURL;
-@property (retain, nonatomic) NSString    *title;
+@property (strong,nonatomic) AVAudioPlayer *announcementClip;
+@property (strong,nonatomic) AVAudioPlayer *musicClip;
+@property (strong,nonatomic) NSURL *announcementURL;
+@property (strong,nonatomic) NSURL *musicURL;
+@property (strong, nonatomic) NSString    *title;
 @property (assign, nonatomic) CGFloat announcementVolume;
 @property (assign, nonatomic) CGFloat musicVolume;
 @property (assign, nonatomic) int currentVolumeMode;

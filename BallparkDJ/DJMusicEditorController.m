@@ -133,8 +133,8 @@
             self.parentAudio = audio;
         }
         
-        UIBarButtonItem *cancelBtn = [[[UIBarButtonItem alloc] initWithTitle:@"      CANCEL      " style:UIBarButtonItemStyleDone target:self action:@selector(cancel)] autorelease];
-        UIBarButtonItem *doneBtn = [[[UIBarButtonItem alloc] initWithTitle:@"        DONE        " style:UIBarButtonItemStyleDone target:self action:@selector(done)] autorelease];
+        UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"      CANCEL      " style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
+        UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"        DONE        " style:UIBarButtonItemStyleDone target:self action:@selector(done)];
     
         [doneBtn setWidth: self.view.frame.size.width/2];
         [cancelBtn setWidth: self.view.frame.size.width/2];
@@ -158,7 +158,7 @@
         self.titleLabel.text = [NSString stringWithFormat:@" Title: %@", [[self.parentAudio.musicURL.lastPathComponent componentsSeparatedByString:@"."] objectAtIndex:0]];
     }
     
-    UIBarButtonItem *backButton = [[[UIBarButtonItem alloc] initWithTitle:@"Player Detail" style:UIBarButtonItemStyleDone target:self action:@selector(backButtonPressed:)]autorelease];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Player Detail" style:UIBarButtonItemStyleDone target:self action:@selector(backButtonPressed:)];
     [self.navigationItem setBackBarButtonItem:backButton];
 
 }
@@ -310,7 +310,6 @@
         mediaPicker.showsCloudItems = NO;
         mediaPicker.prompt = @"Choose a song";
         [self presentViewController:mediaPicker animated:YES completion:nil];
-        [mediaPicker release];
     }
     else if(sender.selectedSegmentIndex == 1) {
         DJClipsController *clips = [[DJClipsController alloc] initWithDJAudio:_parentAudio];
@@ -439,7 +438,7 @@
 
 - (IBAction)songLengthChanged:(id)sender {
     [self.parentAudio stop];
-    NSNumberFormatter* numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"##.#"];
     
     if (self.replayTimer) {
@@ -575,32 +574,6 @@
 
 #pragma mark - Apple Unload
 
-- (void)dealloc {
-    [_startTimer release];
-    [_lengthTimer release];
-    [_replayTimer release];
-    [_stopTimer release];
-    [_audioURL release];
-    [_songStartTextView release];
-    [_songLengthTextView release];
-    [_toolbar release];
-    [_playBtn release];
-    [_titleLabel release];
-    [_artistLabel release];
-    [_songLibraryBtn release];
-    [_songLengthSlider release];
-    [_songStartSlider release];
-    [_audioURL release];
-    [_songStartLabel release];
-    [_songLengthLabel release];
-    [_songStartForward release];
-    [_songStartBackward release];
-    [_songLengthBackward release];
-    [_songLengthForward release];
-    [_wholeSongSwitch release];
-    [_wholeSongLabel release];
-    [super dealloc];
-}
 - (void)viewDidUnload {
     [self setStartTimer:nil];
     [self setLengthTimer:nil];

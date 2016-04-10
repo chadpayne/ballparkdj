@@ -18,14 +18,14 @@
 -(id)init{
     self = [super init];
     self.teamName = @"";
-    self.players = [[[NSMutableArray alloc] init] autorelease];
+    self.players = [[NSMutableArray alloc] init];
     return self;
 }
 
 -(id)initWithName:(NSString *)name {
     self = [super init];
     self.teamName = name;
-    self.players = [[[NSMutableArray alloc] init] autorelease];
+    self.players = [[NSMutableArray alloc] init];
     return self;
 }
 
@@ -52,8 +52,8 @@
     self = [super init];
     
     self.players = [[NSMutableArray alloc] init];
-    self.players = [[coder decodeObjectForKey:@"_players"] retain];
-    self.teamName = [[coder decodeObjectForKey:@"_name"] retain];
+    self.players = [coder decodeObjectForKey:@"_players"];
+    self.teamName = [coder decodeObjectForKey:@"_name"];
     
     return self;
 }

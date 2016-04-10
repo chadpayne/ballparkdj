@@ -22,21 +22,21 @@
 }
 @property (strong, nonatomic) DJAppDelegate* parentDelegate;
 @property(strong, nonatomic) AVAudioRecorder* recorder;
-@property (retain, nonatomic) DJAudio *announcement;
+@property (strong, nonatomic) DJAudio *announcement;
 @property(assign, nonatomic) BOOL isRecording;
 
-@property (retain, nonatomic) IBOutlet UILabel *elapsedTimeMeter;
-@property (retain, nonatomic) IBOutlet UIButton *recordPauseButton;
-@property (retain, nonatomic) IBOutlet UIButton *playButton;
-@property (retain, nonatomic) IBOutlet UISegmentedControl *cancelDoneButton;
-@property (retain, nonatomic) IBOutlet UIButton *recordButton
+@property (strong, nonatomic) IBOutlet UILabel *elapsedTimeMeter;
+@property (strong, nonatomic) IBOutlet UIButton *recordPauseButton;
+@property (strong, nonatomic) IBOutlet UIButton *playButton;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *cancelDoneButton;
+@property (strong, nonatomic) IBOutlet UIButton *recordButton
 ;
-@property (retain, nonatomic) IBOutlet UIImageView *mainPic;
+@property (strong, nonatomic) IBOutlet UIImageView *mainPic;
 
 @property(copy, nonatomic) NSString* filename;
 @property(strong, nonatomic) AVAudioPlayer* musicPlayer;
 
-@property (retain, nonatomic) IBOutlet UITapGestureRecognizer *tapToStop;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapToStop;
 
 - (void)initRecorderWithFileName:(NSString*)fileName;
 - (IBAction)recordPauseButtonDidGetPressed:(id)sender;
@@ -45,34 +45,34 @@
 //- (IBAction)cancelButtonPressed:(UIButton *)sender;
 //- (IBAction)doneButtonPressed:(UIButton *)sender;
 
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL0;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL1;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL2;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL3;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL4;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL5;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL6;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL7;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL8;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL9;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL10;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL11;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL12;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL13;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL14;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL15;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL16;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL17;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL18;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL19;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL20;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL21;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL22;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL23;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL24;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL25;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL26;
-@property (retain, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL27;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL0;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL1;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL2;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL3;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL4;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL5;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL6;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL7;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL8;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL9;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL10;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL11;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL12;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL13;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL14;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL15;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL16;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL17;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL18;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL19;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL20;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL21;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL22;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL23;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL24;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL25;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL26;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *powerMeterL27;
 
 
 @end

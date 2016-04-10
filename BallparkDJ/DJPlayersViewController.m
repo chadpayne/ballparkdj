@@ -27,14 +27,12 @@
 {
     if (to != from) {
         id obj = [self objectAtIndex:from];
-        [obj retain];
         [self removeObjectAtIndex:from];
         if (to >= [self count]) {
             [self addObject:obj];
         } else {
             [self insertObject:obj atIndex:to];
         }
-        [obj release];
     }
 }
 @end
@@ -69,8 +67,8 @@
 
     
     playerEditing = false;
-    UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(callDetailViewForNewPlayer:)]autorelease];
-    UIBarButtonItem * backButton = [[[UIBarButtonItem alloc] initWithTitle:@"Players" style:UIBarButtonItemStyleDone target:self action:@selector(backButtonPressed:)]autorelease];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(callDetailViewForNewPlayer:)];
+    UIBarButtonItem * backButton = [[UIBarButtonItem alloc] initWithTitle:@"Players" style:UIBarButtonItemStyleDone target:self action:@selector(backButtonPressed:)];
     [self.navigationItem setBackBarButtonItem:backButton];
     //[self.navigationItem setLeftBarButtonItem:backButton animated:YES];
     self.editButtonItem.action = @selector(setEditing);
@@ -180,7 +178,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
     
-    DJDetailController *detailViewController = [[[DJDetailController alloc] initWithNibName:@"DJDetailView" bundle:nil]autorelease];
+    DJDetailController *detailViewController = [[DJDetailController alloc] initWithNibName:@"DJDetailView" bundle:nil];
     detailViewController.parent = self;
     detailViewController.team = self.team;
     detailViewController.playerIndex = [self.playerTable numberOfRowsInSection:0]-2;
@@ -218,8 +216,8 @@
     
     UILabel *label;
     
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                   reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                   reuseIdentifier:CellIdentifier];
     CGRect rect = cell.bounds;
     rect.origin.x = 20;
     rect.size.width = 280;
@@ -436,7 +434,7 @@
 {
     int benchIndex = [self getFirstBenchIndex];
     
-    DJPlayer *object = [[self.team.players objectAtIndex:sourceIndexPath.row] retain];
+    DJPlayer *object = [self.team.players objectAtIndex:sourceIndexPath.row];
     
     int val = destinationIndexPath.row;
     
@@ -445,7 +443,6 @@
     
     [self.team.players removeObjectAtIndex:sourceIndexPath.row];
     [self.team.players insertObject:object atIndex:destinationIndexPath.row];
-    [object release];
     
     [tableView reloadData];
 
@@ -515,7 +512,7 @@
 
 -(void)callDetailViewOnRow:(NSInteger)selectedRow{
     
-    DJDetailController *detailViewController = [[[DJDetailController alloc] initWithNibName:@"DJDetailView" bundle:nil withPlayer:[self.team objectInPlayersAtIndex:selectedRow]]autorelease];
+    DJDetailController *detailViewController = [[DJDetailController alloc] initWithNibName:@"DJDetailView" bundle:nil withPlayer:[self.team objectInPlayersAtIndex:selectedRow]];
     detailViewController.parent = self;
     detailViewController.team = self.team;
     detailViewController.playerIndex = self.playerIndex;
@@ -530,15 +527,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [_playerTable release];
-//    [_team release];
-//    [_audioPlayer release];
-//    [_parentDelegate release];
-    [_playBtn release];
-    [_continuousBtn release];
-    [super dealloc];
-}
 
 - (void)viewDidUnload {
     [self setPlayerTable:nil];
@@ -758,7 +746,6 @@
 - (void)presentIAPAlertViewForVoice {
     UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"The free version of BallparkDJ allows playback of voice recordings up to 10 seconds. Click below to purchase the full version for unlimited voice duration." delegate:self cancelButtonTitle:@"Continue Evaluating" otherButtonTitles:@"Upgrade to Pro ($6.99)", @"I've Already Upgraded!", nil];
     [a show];
-    [a release];
 }
 - (void)presentIAPAlertView {
     UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"BallparkDJ is free for evaluation allowing up to 3 teams and 3 players per team.  Upgrade to the Pro version which allows full functionality with unlimited teams and unlimited players per team." delegate:self cancelButtonTitle:@"Continue Evaluating" otherButtonTitles:@"Upgrade to Pro ($6.99)", @"I've Already Upgraded!", nil];
@@ -845,7 +832,7 @@
     _products = nil;
     [[RageIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         if (success) {
-            _products = [products retain];
+            _products = products;
         }
     }];
     

@@ -18,15 +18,10 @@
 
 @implementation DJAppDelegate
 
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -118,9 +113,8 @@
     DJLeagueViewController* leagueViewController = [[DJLeagueViewController alloc] initWithNibName:@"DJLeagueView" bundle:nil];
     
     [leagueViewController setParentDelegate:self];
-    [leagueViewController autorelease];
     
-    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:leagueViewController] autorelease];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:leagueViewController];
     navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.2 green:.2 blue:0.2 alpha:1.0];
     [self.window setRootViewController:navigationController];
 }

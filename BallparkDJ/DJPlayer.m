@@ -20,7 +20,7 @@
 -(id)init {
     self = [super init];
     if (self) {
-        self.audio = [[[DJAudio alloc] init] autorelease];
+        self.audio = [[DJAudio alloc] init];
     }
     return self;
 }
@@ -29,7 +29,7 @@
     self = [super init];
     self.name = pName;
     self.number = pNumber;
-    self.audio = [[[DJAudio alloc] init] autorelease];
+    self.audio = [[DJAudio alloc] init];
     self.b_isBench = NO;
     
     return self;
