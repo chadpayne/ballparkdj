@@ -566,12 +566,19 @@
 
 -(void)duplicateTeam
 {
-    UIAlertController *tempController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Not Implemented" preferredStyle:UIAlertControllerStyleAlert];
+    DJLeague *league = ((DJAppDelegate *)[[UIApplication sharedApplication] delegate]).league;
+    DJTeam *newTeam = [league duplicateTeam:self.team];
+    
+    NSString *msg = [NSString stringWithFormat:@"New Team name is %@.", newTeam.teamName];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController popToRootViewControllerAnimated:NO];
         
     }];
-    [tempController addAction:okButton];
-    [self presentViewController:tempController animated:NO completion:nil];
+    [alertController addAction:okButton];
+    
+    [self presentViewController:alertController animated:NO completion:nil];
 }
 
 -(void)orderVoice

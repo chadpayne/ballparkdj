@@ -71,4 +71,80 @@
     [self.teams exchangeObjectAtIndex:origin.row withObjectAtIndex:destination.row];
 }
 
+-(DJTeam *)duplicateTeam:(DJTeam *)team
+{
+    NSData *teamData = [NSKeyedArchiver archivedDataWithRootObject:team];
+    
+    if (teamData == nil)
+    {
+        // ::TODO: Indicate operation failed
+        return nil;
+    }
+    
+    DJTeam *newTeam = [NSKeyedUnarchiver unarchiveObjectWithData:teamData];
+    newTeam.teamName = [self generateUniqueTeamName:newTeam];
+    
+    [self.teams addObject:newTeam];
+    
+    // Force save
+    [self encode];
+
+    // Send Notification so main UI can refresh
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:nil];
+    
+    return newTeam;
+}
+
+-(NSString *)generateUniqueTeamName:(DJTeam *)team
+{
+    BOOL teamNameFound = false;
+    
+    for (DJTeam *aTeam in self.teams)
+    {
+        if ([team.teamName isEqualToString:aTeam.teamName])
+        {
+            teamNameFound = true;
+            break;
+        }
+    }
+    
+    if (!teamNameFound)
+    {
+        return team.teamName;
+    }
+    
+    NSArray *teamNameComponents = [team.teamName componentsSeparatedByString:@"-"];
+    NSString *teamNamePrefix = @"";
+    
+    if (teamNameComponents.count == 1)
+    {
+        teamNamePrefix = teamNameComponents[0];
+    }
+    else
+    {
+        for (int i=0; i < teamNameComponents.count-1; i++)
+        {
+            teamNamePrefix = [teamNamePrefix stringByAppendingString:teamNameComponents[i]];
+            
+            if (i < teamNameComponents.count-2)
+            {
+                teamNamePrefix = [teamNamePrefix stringByAppendingString:@"-"];
+            }
+        }
+    }
+    
+    NSInteger teamSuffixIndex = 0;
+    for (DJTeam *aTeam in self.teams)
+    {
+        if ([aTeam.teamName hasPrefix:teamNamePrefix])
+        {
+            teamSuffixIndex++;
+        }
+    }
+    
+    NSString *teamName = [[NSString alloc] initWithFormat:@"%@-%ld",teamNamePrefix, (long)teamSuffixIndex];
+    return teamName;
+}
+
+
 @end

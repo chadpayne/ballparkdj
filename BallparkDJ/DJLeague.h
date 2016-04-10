@@ -23,6 +23,8 @@
 -(DJTeam *)getObjectAtIndex:(int)idx;
 -(void)addTeam:(DJTeam*) team;
 -(void)insertObject:(DJTeam *)object inTeamsAtIndex:(int)index;
+-(DJTeam *)duplicateTeam:(DJTeam *)team;
+
 
 - (void)reorderTeams:(NSIndexPath *)origin toIndexPath:(NSIndexPath *)destination;
 //-(void)encodeWithCoder:(NSCoder *)coder;

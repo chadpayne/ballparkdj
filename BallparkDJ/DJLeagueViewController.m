@@ -41,6 +41,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFinishRestore)
                                                  name:@"RestoreInAppPurchase" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teamDataUpdated) name:@"DJTeamDataUpdated" object:nil];
 
     
     selectedTeamIdx = -1;
@@ -80,6 +82,11 @@
 
 
 #pragma mark - TABLE VIEW FUNCTIONS
+- (void)teamDataUpdated
+{
+    [self.teamTable reloadData];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
