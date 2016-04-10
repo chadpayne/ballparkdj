@@ -527,16 +527,63 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)actionsButtonClicked:(id)sender
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Actions" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *shareAction = [UIAlertAction actionWithTitle:@"Share Team" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self shareTeam];
+    }];
 
-- (void)viewDidUnload {
-    [self setPlayerTable:nil];
-    [self setTeam:nil];
-    [self setAudioPlayer:nil];
-    [self setParentDelegate:nil];
-    [self setPlayBtn:nil];
-    [self setContinuousBtn:nil];
-    [super viewDidUnload];
+    UIAlertAction *duplicateTeamAction = [UIAlertAction actionWithTitle:@"Duplicate Team" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self duplicateTeam];
+    }];
+
+    UIAlertAction *orderVoiceAction = [UIAlertAction actionWithTitle:@"Order Voice" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self orderVoice];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:shareAction];
+    [alertController addAction:duplicateTeamAction];
+    [alertController addAction:orderVoiceAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+
 }
+
+-(void)shareTeam
+{
+    UIAlertController *tempController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Not Implemented" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [tempController addAction:okButton];
+    [self presentViewController:tempController animated:NO completion:nil];
+}
+
+-(void)duplicateTeam
+{
+    UIAlertController *tempController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Not Implemented" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [tempController addAction:okButton];
+    [self presentViewController:tempController animated:NO completion:nil];
+}
+
+-(void)orderVoice
+{
+    UIAlertController *tempController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Not Implemented" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [tempController addAction:okButton];
+    [self presentViewController:tempController animated:NO completion:nil];
+}
+
 
 #pragma mark - Song Queue:
 
