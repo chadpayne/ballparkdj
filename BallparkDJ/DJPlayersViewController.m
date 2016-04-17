@@ -7,6 +7,7 @@
 //
 
 #import "DJPlayersViewController.h"
+#import "BallparkDJ-Swift.h"
 //#import "MKStoreKitConfigs.h"
 //#import "MKStoreManager.h"
 #import "RageIAPHelper.h"
@@ -556,12 +557,16 @@
 
 -(void)shareTeam
 {
+    DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
+    [uploader shareTeam:self.team];
+/*
     UIAlertController *tempController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Not Implemented" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     [tempController addAction:okButton];
     [self presentViewController:tempController animated:NO completion:nil];
+*/ 
 }
 
 -(void)duplicateTeam

@@ -39,6 +39,7 @@
 		8CB00D4A16E856730088FB13 /* yellowBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D3E16E856730088FB13 /* yellowBar.png */; };
 		8CB00D4C16E8569D0088FB13 /* clearBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D4B16E8569D0088FB13 /* clearBar.png */; };
 		8CB00D5016E8927D0088FB13 /* DJRecorderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D4F16E8927D0088FB13 /* DJRecorderController.xib */; };
+		954326B61CBC9214009F6927 /* DJTeamUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954326B51CBC9214009F6927 /* DJTeamUploader.swift */; };
 		A2152C6716E1B38800946094 /* DJTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6616E1B38800946094 /* DJTeam.m */; };
 		A2152C6A16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
 		A2152C6B16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
@@ -156,6 +157,8 @@
 		8CB00D3E16E856730088FB13 /* yellowBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowBar.png; sourceTree = "<group>"; };
 		8CB00D4B16E8569D0088FB13 /* clearBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearBar.png; sourceTree = "<group>"; };
 		8CB00D4F16E8927D0088FB13 /* DJRecorderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJRecorderController.xib; sourceTree = "<group>"; };
+		954326B41CBC9214009F6927 /* BallparkDJ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BallparkDJ-Bridging-Header.h"; sourceTree = "<group>"; };
+		954326B51CBC9214009F6927 /* DJTeamUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJTeamUploader.swift; sourceTree = "<group>"; };
 		A2152C6616E1B38800946094 /* DJTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJTeam.m; sourceTree = "<group>"; };
 		A2152C6816E275AC00946094 /* DJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DJPlayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A2152C6916E275AC00946094 /* DJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJPlayer.m; sourceTree = "<group>"; };
@@ -418,6 +421,7 @@
 				A272BB3816D6D30800AE7ED1 /* Supporting Files */,
 				8C2C095116D73E4E000B5C1E /* DJPlayersViewController.h */,
 				8C2C095216D73E4E000B5C1E /* DJPlayersViewController.m */,
+				954326B51CBC9214009F6927 /* DJTeamUploader.swift */,
 				A269D43916E43D56003E60F8 /* DJLeagueViewController.h */,
 				A269D43A16E43D56003E60F8 /* DJLeagueViewController.m */,
 				8C2C095716D73F4E000B5C1E /* DJDetailController.h */,
@@ -429,6 +433,7 @@
 				A2A15EC616E92A3E00C85C36 /* DJClipsController.h */,
 				A2A15EC716E92A3E00C85C36 /* DJClipsController.m */,
 				AB10667E188F6E6600F8EA60 /* Images.xcassets */,
+				954326B41CBC9214009F6927 /* BallparkDJ-Bridging-Header.h */,
 			);
 			path = BallparkDJ;
 			sourceTree = "<group>";
@@ -529,7 +534,8 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DJ;
-				LastTestingUpgradeCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
+				LastTestingUpgradeCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Payne Software";
 				TargetAttributes = {
@@ -708,6 +714,7 @@
 				8C2C095016D73BCD000B5C1E /* DJLeague.m in Sources */,
 				04E9A67519A7AA7600419267 /* RageIAPHelper.m in Sources */,
 				8C2C095316D73E4E000B5C1E /* DJPlayersViewController.m in Sources */,
+				954326B61CBC9214009F6927 /* DJTeamUploader.swift in Sources */,
 				8C2C095916D73F4E000B5C1E /* DJDetailController.m in Sources */,
 				04E9A67419A7AA7600419267 /* IAPHelper.m in Sources */,
 				8C2C095C16D73F79000B5C1E /* DJMusicEditorController.m in Sources */,
@@ -830,6 +837,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chad Payne (P4728B6L47)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chad Payne (P4728B6L47)";
@@ -838,6 +846,7 @@
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
 				INFOPLIST_FILE = "BallparkDJ/BallparkDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/BallparkDJ\\\"",
@@ -855,6 +864,8 @@
 				PROVISIONING_PROFILE = "8fcf3373-8373-4817-87b1-7e3321a615e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8fcf3373-8373-4817-87b1-7e3321a615e9";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "BallparkDJ/BallparkDJ-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -865,6 +876,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chad Payne (P4728B6L47)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chad Payne (P4728B6L47)";
@@ -873,6 +885,7 @@
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
 				INFOPLIST_FILE = "BallparkDJ/BallparkDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/BallparkDJ\\\"",
@@ -891,6 +904,8 @@
 				"PROVISIONING_PROFILE[sdk=*]" = "8fcf3373-8373-4817-87b1-7e3321a615e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8fcf3373-8373-4817-87b1-7e3321a615e9";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "BallparkDJ/BallparkDJ-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

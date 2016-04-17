@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSMutableArray *players;
 @property (strong, nonatomic) NSString *teamName;
+@property (strong, nonatomic) NSString *teamId;
 
 -(id)initWithName:(NSString *)name;
 
