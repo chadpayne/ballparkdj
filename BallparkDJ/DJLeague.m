@@ -95,6 +95,21 @@
     return newTeam;
 }
 
+-(void)importTeam:(DJTeam *)team
+{
+    DJTeam *newTeam = team;
+    newTeam.teamName = [self generateUniqueTeamName:newTeam];
+
+    [self.teams addObject:newTeam];
+    
+    // Force save
+    [self encode];
+    
+    // Send Notification so main UI can refresh
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:nil];
+}
+
+
 -(NSString *)generateUniqueTeamName:(DJTeam *)team
 {
     BOOL teamNameFound = false;

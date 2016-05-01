@@ -24,6 +24,7 @@
 -(void)addTeam:(DJTeam*) team;
 -(void)insertObject:(DJTeam *)object inTeamsAtIndex:(int)index;
 -(DJTeam *)duplicateTeam:(DJTeam *)team;
+-(void)importTeam:(DJTeam *)team;
 
 
 - (void)reorderTeams:(NSIndexPath *)origin toIndexPath:(NSIndexPath *)destination;

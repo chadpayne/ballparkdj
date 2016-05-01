@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class DJTeamUploader : NSObject
 {
@@ -21,6 +22,54 @@ public class DJTeamUploader : NSObject
     {
         return NSUUID().UUIDString
     }
+    
+    public func importTeam(teamID:String)
+    {
+        let serverURL = NSURL(string: "\(baseServerURL)/team/\(teamID)")
+        let request = NSMutableURLRequest(URL: serverURL!)
+        request.HTTPMethod = "GET"
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, error in
+
+            if let teamDict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+            {
+                let team = DJTeam()
+                
+                team.teamId = teamDict["id"] as? String
+                team.teamName = teamDict["name"] as? String
+                team.players = NSMutableArray()
+                
+                if let playersDict = teamDict["players"] as? [[String:AnyObject]]
+                {
+                    for playerDict in playersDict
+                    {
+                        let player = DJPlayer()
+                        player.name = playerDict["name"] as? String
+                        
+                        if let playerNumber = playerDict["number"] as? NSNumber
+                        {
+                            player.number = playerNumber.intValue
+                        }
+                        
+                        if let playerBenched = playerDict["benched"] as? NSNumber
+                        {
+                            player.b_isBench = playerBenched.boolValue
+                        }
+                        
+                        team.players.addObject(player)
+                    }
+                }
+  
+                if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
+                {
+                    appDelegate.league.importTeam(team)
+                }
+                
+            }
+        }
+        
+        task.resume()
+    }
 
     public func shareTeam(team:DJTeam)
     {
@@ -32,12 +81,28 @@ public class DJTeamUploader : NSObject
         let contentType = "application/json"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
-        var teamDict = [String:String]()
+        var teamDict = [String:AnyObject]()
         if let teamID = team.teamId
         {
             teamDict["id"] = teamID
         }
         teamDict["name"] = team.teamName
+        
+        var playersDict = [[String:AnyObject]]()
+        
+        for player in team.players
+        {
+            var playerDict = [String:AnyObject]()
+            playerDict["name"] = player.name
+            
+            playerDict["number"] = player.number!
+            playerDict["benched"] = NSNumber(bool: player.b_isBench)
+            
+            playersDict.append(playerDict)
+        }
+
+        teamDict["players"] = playersDict
+        
         
         let httpBody = try! NSJSONSerialization.dataWithJSONObject(teamDict, options: .PrettyPrinted)
         
@@ -58,9 +123,16 @@ public class DJTeamUploader : NSObject
                 if let teamID = resultsDict["id"] as? String
                 {
                     team.teamId = teamID
+                    print("Success!")
+                    //self.shareTeamFiles(team)
+                    
+                    self.importTeam(teamID)
+                }
+                else
+                {
+                    print("Error: \(resultsDict)")
                 }
                 
-                self.shareTeamFiles(team)
             }
             else
             {
