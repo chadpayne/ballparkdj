@@ -71,7 +71,7 @@ public class DJTeamUploader : NSObject
         task.resume()
     }
 
-    public func shareTeam(team:DJTeam)
+    public func shareTeam(team:DJTeam, completion: (DJTeam) -> Void)
     {
         let serverURL = NSURL(string: "\(baseServerURL)/team")
         let request = NSMutableURLRequest(URL: serverURL!)
@@ -125,8 +125,7 @@ public class DJTeamUploader : NSObject
                     team.teamId = teamID
                     print("Success!")
                     //self.shareTeamFiles(team)
-                    
-                    self.importTeam(teamID)
+                    completion(team)
                 }
                 else
                 {

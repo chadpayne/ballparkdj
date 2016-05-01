@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <MessageUI/MessageUI.h>
+
 #import "DJAudio.h"
 #import "DJAppDelegate.h"
 #import "DJDetailController.h"
@@ -19,7 +21,7 @@
 
 #define NEXT_UP_TAG 117117
 
-@interface DJPlayersViewController : UIViewController<AVAudioPlayerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, MBProgressHUDDelegate>{
+@interface DJPlayersViewController : UIViewController<AVAudioPlayerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, MBProgressHUDDelegate,MFMailComposeViewControllerDelegate>{
     
 //    UIColor *defaultcolor;
     UIColor *upnextColor;

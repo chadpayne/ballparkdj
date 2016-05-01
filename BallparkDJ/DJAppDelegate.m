@@ -16,6 +16,8 @@
 //#include "TestFlight.h"
 //#import "MKStoreManager.h"
 
+#import "BallparkDJ-Swift.h"
+
 @implementation DJAppDelegate
 
 
@@ -123,6 +125,19 @@
 + (DJAppDelegate*)sharedDelegate
 {
     return (DJAppDelegate*)[[UIApplication sharedApplication] delegate];
+}
+
+-(BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if (![[url scheme] isEqualToString:@"com.ballparkdj.team-import"])
+    {
+        return NO;
+    }
+    
+    DJTeamUploader *teamUploader = [[DJTeamUploader alloc] init];
+    [teamUploader importTeam:[url host]];
+    
+    return YES;
 }
 
 @end

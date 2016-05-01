@@ -12,6 +12,7 @@
 //#import "MKStoreManager.h"
 #import "RageIAPHelper.h"
 #import <StoreKit/StoreKit.h>
+#import <MessageUI/MessageUI.h>
 
 #define SINGLE_LABEL @"Single Play"
 #define CONTINUOUS_LABEL @"Continuous Play"
@@ -39,9 +40,11 @@
 @end
 
 
-@interface DJPlayersViewController (){
+@interface DJPlayersViewController ()<UINavigationControllerDelegate> {
     bool playerEditing;
 }
+
+@property(nonatomic,strong) MFMailComposeViewController *mailController;
 
 @end
 
@@ -558,15 +561,19 @@
 -(void)shareTeam
 {
     DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
-    [uploader shareTeam:self.team];
-/*
-    UIAlertController *tempController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Not Implemented" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    
+    [uploader shareTeam:self.team completion:^(DJTeam *team) {
+
+        NSString *shareLink = [NSString stringWithFormat:@"com.ballparkdj.team-import://%@", team.teamId];
+        
+        self.mailController = [[MFMailComposeViewController alloc] init];
+        self.mailController.mailComposeDelegate = self;
+        [self.mailController setSubject:[NSString stringWithFormat:@"Sharing of my Ballpark DJ Team: %@",team.teamName]];
+        [self.mailController setMessageBody:[NSString stringWithFormat:@"Click on the following link to start the process of importing my team.\n\n%@", shareLink] isHTML:NO];
+         
+        [self presentViewController:self.mailController animated:YES completion:nil];
         
     }];
-    [tempController addAction:okButton];
-    [self presentViewController:tempController animated:NO completion:nil];
-*/ 
 }
 
 -(void)duplicateTeam
@@ -897,5 +904,12 @@
     
     NSLog(@"_products in reload : %@", _products);
 }
+
+#pragma mark - Mail delegate methods
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end
