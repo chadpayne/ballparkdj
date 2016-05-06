@@ -23,6 +23,37 @@ public class DJTeamUploader : NSObject
         return NSUUID().UUIDString
     }
     
+    func fileURL(fileName:String) -> NSURL? {
+        
+        let fileManager = NSFileManager.defaultManager()
+        let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        
+        // If array of path is empty the document folder not found
+        guard urls.count != 0 else { return nil }
+        
+        let url = urls.first!.URLByAppendingPathComponent(fileName)
+        return url
+    }
+    
+    func importTeamAudioFiles(team:DJTeam)
+    {
+        var operationQueue = NSOperationQueue()
+        
+        for player in team.players
+        {
+            if let url = player.audio?.announcementURL
+            {
+                // ::TODO:: Convert to Web Request
+                
+                
+            }
+            
+        }
+        
+        operationQueue.waitUntilAllOperationsAreFinished()
+        
+    }
+    
     public func importTeam(teamID:String)
     {
         let serverURL = NSURL(string: "\(baseServerURL)/team/\(teamID)")
@@ -56,9 +87,44 @@ public class DJTeamUploader : NSObject
                             player.b_isBench = playerBenched.boolValue
                         }
                         
+                        if let audioDict = playerDict["playerAudio"] as? [String:AnyObject]
+                        {
+                            if let announcmentURL = audioDict["announcementUrl"] as? String
+                            {
+                                player.audio.announcementURL = self.fileURL(announcmentURL)
+                            }
+                            
+                            if let overlap = audioDict["overlap"] as? Double
+                            {
+                                player.audio.overlap = overlap
+                            }
+                            
+                            
+                            // ::TODO:: Parse rest of these fields!
+                            
+/*                            audioDict["overlap"] = audio.overlap
+                            audioDict["musicStartTime"] = audio.musicStartTime
+                            audioDict["musicDuration"] = audio.musicDuration
+                            audioDict["shouldFade"] = audio.shouldFade
+                            audioDict["djFileName"] = audio.DJAudioFileName
+                            audioDict["djClip"] = audio.isDJClip
+                            audioDict["announcmentVolume"] = audio.announcementVolume
+                            audioDict["shouldPlayAll"] = audio.shouldPlayAll
+                            audioDict["title"] = audio.title
+                            audioDict["musicVolume"] = audio.musicVolume
+                            audioDict["currentVolumeMode"] = NSNumber(int:audio.currentVolumeMode)
+                            audioDict["announcmentDuration"] = audio.announcementDuration
+*/
+                        }
+                        
+
+                        
+                        
                         team.players.addObject(player)
                     }
                 }
+                
+                self.importTeamAudioFiles(team)
   
                 if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
                 {
@@ -98,6 +164,28 @@ public class DJTeamUploader : NSObject
             playerDict["number"] = player.number!
             playerDict["benched"] = NSNumber(bool: player.b_isBench)
             
+            var audioDict = [String:AnyObject]()
+            if let audio = player.audio
+            {
+                if let announcementURL = audio?.announcementClip?.url?.absoluteString
+                {
+                    audioDict["announcementUrl"] = announcementURL
+                }
+                audioDict["overlap"] = audio.overlap
+                audioDict["musicStartTime"] = audio.musicStartTime
+                audioDict["musicDuration"] = audio.musicDuration
+                audioDict["shouldFade"] = audio.shouldFade
+                audioDict["djFileName"] = audio.DJAudioFileName
+                audioDict["djClip"] = audio.isDJClip
+                audioDict["announcmentVolume"] = audio.announcementVolume
+                audioDict["shouldPlayAll"] = audio.shouldPlayAll
+                audioDict["title"] = audio.title
+                audioDict["musicVolume"] = audio.musicVolume
+                audioDict["currentVolumeMode"] = NSNumber(int:audio.currentVolumeMode)
+                audioDict["announcmentDuration"] = audio.announcementDuration
+            }
+            playerDict["playerAudio"] = audioDict
+            
             playersDict.append(playerDict)
         }
 
@@ -124,8 +212,7 @@ public class DJTeamUploader : NSObject
                 {
                     team.teamId = teamID
                     print("Success!")
-                    //self.shareTeamFiles(team)
-                    completion(team)
+                    self.shareTeamFiles(team,completion: completion)
                 }
                 else
                 {
@@ -144,7 +231,7 @@ public class DJTeamUploader : NSObject
     }
 
     
-    public func shareTeamFiles(team:DJTeam)
+    public func shareTeamFiles(team:DJTeam, completion: (DJTeam) -> Void)
     {
         let boundary = generateBoundaryString()
         
@@ -157,15 +244,18 @@ public class DJTeamUploader : NSObject
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
         var params = [String:String]()
-        var paths = [String]()
+        var paths = [NSURL]()
 
         params["teamId"] = team.teamId
         
-        let path = NSBundle.mainBundle().pathForResource("playButton", ofType: "png")
-        paths.append(path!)
+        for player in team.players
+        {
+            if let announcementURL = player.audio?.announcementClip?.url
+            {
+                paths.append(announcementURL)
+            }
 
-        let path2 = NSBundle.mainBundle().pathForResource("stopButton", ofType: "png")
-        paths.append(path2!)
+        }
 
         let httpBody = createBodyWithBoundary(boundary, params: params, paths: paths, fieldName: "file")
         
@@ -181,12 +271,14 @@ public class DJTeamUploader : NSObject
             let result = NSString(data: data!
                 , encoding: NSUTF8StringEncoding)
             print(result)
+            
+            completion(team)
         }
         
         task.resume()
     }
     
-    func createBodyWithBoundary(boundary:String, params:[String:String], paths:[String], fieldName:String) -> NSData
+    func createBodyWithBoundary(boundary:String, params:[String:String], paths:[NSURL], fieldName:String) -> NSData
     {
         let httpBody = NSMutableData()
         
@@ -199,8 +291,8 @@ public class DJTeamUploader : NSObject
 
         for path in paths
         {
-            let filename = NSString(string: path).lastPathComponent
-            let data = NSData(contentsOfFile: path)
+            let filename = NSString(string: path.absoluteString).lastPathComponent
+            let data = NSData(contentsOfURL:  path)
             let mimetype = "application/octet-stream"
             
             httpBody.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
