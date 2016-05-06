@@ -39,6 +39,9 @@
 @property (assign,nonatomic) BOOL isDJClip;
 @property (assign, nonatomic) BOOL shouldPlayAll;
 
+@property (strong,nonatomic) NSString *DJAudioFileName;
+
+
 /*
  * NSCoding methods
  */

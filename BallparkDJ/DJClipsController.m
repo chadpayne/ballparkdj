@@ -139,6 +139,7 @@
         [editor.artistLabel setText:@" Artist: Ballpark DJ"];
         
         editor.parentAudio.isDJClip = YES;
+        editor.parentAudio.DJAudioFileName = [object objectForKey:@"file"];
         [editor setSongLength:[(NSNumber *)[object objectForKey:@"length"] doubleValue]];
         [editor setSongStart:[(NSNumber *)[object objectForKey:@"start"] doubleValue]];
 

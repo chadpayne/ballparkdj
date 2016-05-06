@@ -143,6 +143,13 @@
     self.announcementVolume = [coder decodeFloatForKey:@"_voiceVolume"];
     self.musicVolume = [coder decodeFloatForKey:@"_musicVolume"];
     self.announcementDuration = [coder decodeDoubleForKey:@"_voiceDuration"];
+    
+    if ([coder containsValueForKey:@"_djAudioFileName"])
+    {
+        self.DJAudioFileName = [coder decodeObjectForKey:@"_djAudioFileName"];
+    }
+    
+    
 //    [self play];
     [self stop];
     
@@ -163,6 +170,11 @@
     [coder encodeFloat:self.musicVolume forKey:@"_musicVolume"];
     [coder encodeInt:self.currentVolumeMode forKey:@"_volumeMode"];
     [coder encodeDouble:self.announcementDuration forKey:@"_voiceDuration"];
+    
+    if (self.DJAudioFileName)
+    {
+        [coder encodeObject:self.DJAudioFileName forKey:@"_djAudioFileName"];
+    }
 }
 
 #pragma mark - Setter/Getters
