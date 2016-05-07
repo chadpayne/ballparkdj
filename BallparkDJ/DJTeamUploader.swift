@@ -12,6 +12,7 @@ import UIKit
 public class DJTeamUploader : NSObject
 {
     let baseServerURL = "http://104.196.10.190"
+    var operationQueue = NSOperationQueue()
     
     override init()
     {
@@ -37,20 +38,28 @@ public class DJTeamUploader : NSObject
     
     func importTeamAudioFiles(team:DJTeam)
     {
-        var operationQueue = NSOperationQueue()
-        
         for player in team.players
         {
             if let url = player.audio?.announcementURL
             {
-                // ::TODO:: Convert to Web Request
+                let myURL = NSURL(string: "\(baseServerURL)/teamfiles/\(team.teamId)/\(url)")
+
+                let operation = DataTaskOperation.init(URL: myURL!)
+                                {
+                                    data, response, error in
+                                    
+                                    if let httpResponse = response as? NSHTTPURLResponse {
+                                        print("Status code \(httpResponse.statusCode)")
+                                    }
+                                    
+                                    let outputURL = self.fileURL("\(team.teamId)-\(url)")
+                                    data?.writeToURL(outputURL!, atomically: true)
+                                }
                 
-                
+                operationQueue.addOperation(operation)
             }
             
         }
-        
-        operationQueue.waitUntilAllOperationsAreFinished()
         
     }
     
@@ -99,27 +108,56 @@ public class DJTeamUploader : NSObject
                                 player.audio.overlap = overlap
                             }
                             
+                            if let musicStartTime = audioDict["musicStartTime"] as? Double
+                            {
+                                player.audio.musicStartTime = musicStartTime
+                            }
                             
-                            // ::TODO:: Parse rest of these fields!
+                            if let shouldFade = audioDict["shouldFade"] as? Bool
+                            {
+                                player.audio.shouldFade = shouldFade
+                            }
                             
-/*                            audioDict["overlap"] = audio.overlap
-                            audioDict["musicStartTime"] = audio.musicStartTime
-                            audioDict["musicDuration"] = audio.musicDuration
-                            audioDict["shouldFade"] = audio.shouldFade
-                            audioDict["djFileName"] = audio.DJAudioFileName
-                            audioDict["djClip"] = audio.isDJClip
-                            audioDict["announcmentVolume"] = audio.announcementVolume
-                            audioDict["shouldPlayAll"] = audio.shouldPlayAll
-                            audioDict["title"] = audio.title
-                            audioDict["musicVolume"] = audio.musicVolume
-                            audioDict["currentVolumeMode"] = NSNumber(int:audio.currentVolumeMode)
-                            audioDict["announcmentDuration"] = audio.announcementDuration
-*/
-                        }
-                        
+                            if let djFileName = audioDict["djFileName"] as? String
+                            {
+                                player.audio.DJAudioFileName = djFileName
+                            }
 
-                        
-                        
+                            if let djClip = audioDict["djClip"] as? Bool
+                            {
+                                player.audio.isDJClip = djClip
+                            }
+
+                            if let announcmentVolume = audioDict["announcmentVolume"] as? CGFloat
+                            {
+                                player.audio.announcementVolume = announcmentVolume
+                            }
+
+                            if let shouldPlayAll = audioDict["shouldPlayAll"] as? Bool
+                            {
+                                player.audio.shouldPlayAll = shouldPlayAll
+                            }
+                            
+                            if let title = audioDict["title"] as? String
+                            {
+                                player.audio.title = title
+                            }
+
+                            if let musicVolume = audioDict["musicVolume"] as? CGFloat
+                            {
+                                player.audio.musicVolume = musicVolume
+                            }
+
+                            if let currentVolumeMode = audioDict["currentVolumeMode"] as? Int32
+                            {
+                                player.audio.currentVolumeMode = currentVolumeMode
+                            }
+                            
+                            if let announcementDuration = audioDict["announcementDuration"] as? Double
+                            {
+                                player.audio.announcementDuration = announcementDuration
+                            }
+                        }
                         team.players.addObject(player)
                     }
                 }
@@ -167,7 +205,7 @@ public class DJTeamUploader : NSObject
             var audioDict = [String:AnyObject]()
             if let audio = player.audio
             {
-                if let announcementURL = audio?.announcementClip?.url?.absoluteString
+                if let announcementURL = audio?.announcementClip?.url?.lastPathComponent
                 {
                     audioDict["announcementUrl"] = announcementURL
                 }
