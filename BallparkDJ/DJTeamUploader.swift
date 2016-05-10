@@ -36,11 +36,21 @@ public class DJTeamUploader : NSObject
         return url
     }
     
+    func createTeamDirectory(team:DJTeam)
+    {
+        let url = fileURL(team.teamId)
+        
+        if NSFileManager.defaultManager().fileExistsAtPath((url?.path)!) == false
+        {
+            try! NSFileManager.defaultManager().createDirectoryAtURL(url!, withIntermediateDirectories: true, attributes: nil)
+        }
+    }
+    
     func importTeamAudioFiles(team:DJTeam)
     {
         for player in team.players
         {
-            if let url = player.audio?.announcementURL
+            if let url = player.audio?.announcementURL.lastPathComponent
             {
                 let myURL = NSURL(string: "\(baseServerURL)/teamfiles/\(team.teamId)/\(url)")
 
@@ -52,15 +62,28 @@ public class DJTeamUploader : NSObject
                                         print("Status code \(httpResponse.statusCode)")
                                     }
                                     
-                                    let outputURL = self.fileURL("\(team.teamId)-\(url)")
-                                    data?.writeToURL(outputURL!, atomically: true)
+                                    player.audio?.announcementURL = self.fileURL("\(team.teamId)-\(url)")
+                                    
+                                    data?.writeToURL((player.audio?.announcementURL!)!, atomically: true)
+                                    
+                                    player.audio?.announcementClip = try! AVAudioPlayer(contentsOfURL:(player.audio?.announcementURL!)!)
+                                    
+                                    if player.audio?.isDJClip == true
+                                    {
+                                        if let audioURL = NSBundle.mainBundle().pathForResource(player.audio?.title, ofType: "m4a")
+                                        {
+                                            player.audio?.musicClip = try! AVAudioPlayer(contentsOfURL:NSURL(fileURLWithPath: audioURL))
+                                        }
+
+                                    }
                                 }
                 
                 operationQueue.addOperation(operation)
             }
-            
         }
+
         
+        operationQueue.waitUntilAllOperationsAreFinished()
     }
     
     public func importTeam(teamID:String)
@@ -100,7 +123,7 @@ public class DJTeamUploader : NSObject
                         {
                             if let announcmentURL = audioDict["announcementUrl"] as? String
                             {
-                                player.audio.announcementURL = self.fileURL(announcmentURL)
+                                player.audio.announcementURL = self.fileURL("\(announcmentURL)")
                             }
                             
                             if let overlap = audioDict["overlap"] as? Double
@@ -153,22 +176,28 @@ public class DJTeamUploader : NSObject
                                 player.audio.currentVolumeMode = currentVolumeMode
                             }
                             
-                            if let announcementDuration = audioDict["announcementDuration"] as? Double
+                            if let announcementDuration = audioDict["announcmentDuration"] as? Double
                             {
-                                player.audio.announcementDuration = announcementDuration
+                                if player.audio.isDJClip == false
+                                {
+                                    player.audio.announcementDuration = announcementDuration
+                                }
                             }
                         }
                         team.players.addObject(player)
                     }
                 }
                 
-                self.importTeamAudioFiles(team)
-  
-                if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
+                dispatch_async(dispatch_get_global_queue(0, 0))
                 {
-                    appDelegate.league.importTeam(team)
+                    //self.createTeamDirectory(team)
+                    self.importTeamAudioFiles(team)
+      
+                    if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
+                    {
+                        appDelegate.league.importTeam(team)
+                    }
                 }
-                
             }
         }
         

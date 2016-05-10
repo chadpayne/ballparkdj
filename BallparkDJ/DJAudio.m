@@ -52,16 +52,21 @@
     self.announcementClip    =  [[AVAudioPlayer alloc]
                                 initWithContentsOfURL:aPath
                                     error:&err];
+    self.announcementURL = aPath;
     if(err){
         self.announcementClip = nil;
+        self.announcementURL = nil;
         err = nil;
     }
     self.musicClip           =  [[AVAudioPlayer alloc]
                                 initWithContentsOfURL:mPath
                                     error:&err];
+    
+    self.musicURL = mPath;
     if (err) {
         NSLog(@"%@", err);
         self.musicClip = nil;
+        self.musicURL = nil;
         err = nil;
     }
     [self.announcementClip prepareToPlay];
@@ -132,7 +137,7 @@
     self.musicURL =         [coder decodeObjectForKey:@"_musicURL"];
     self.title =         [coder decodeObjectForKey:@"_title"];
     
-//    self.announcementURL =  [coder decodeObjectForKey:@"_announcementURL"];
+    self.announcementURL =  [coder decodeObjectForKey:@"_announcementURL"];
     self.overlap =          [coder decodeDoubleForKey:@"_overlap"];
     self.musicStartTime =   [coder decodeDoubleForKey:@"_musicStartTime"];
     self.musicDuration =    [coder decodeDoubleForKey:@"_duration"];
@@ -157,7 +162,7 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:[self.announcementClip url] forKey:@"_announcementURL"];
+    [coder encodeObject:self.announcementURL forKey:@"_announcementURL"];
     [coder encodeObject:[self.musicClip url] forKey:@"_musicURL"];
     [coder encodeDouble:self.overlap forKey:@"_overlap"];
     [coder encodeDouble:self.musicStartTime forKey:@"_musicStartTime"];
