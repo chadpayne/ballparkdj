@@ -13,6 +13,7 @@ public class DJTeamUploader : NSObject
 {
     let baseServerURL = "http://104.196.10.190"
     var operationQueue = NSOperationQueue()
+    var HUD:MBProgressHUD!
     
     override init()
     {
@@ -88,6 +89,12 @@ public class DJTeamUploader : NSObject
     
     public func importTeam(teamID:String)
     {
+        HUD = MBProgressHUD.showHUDAddedTo(DJAppDelegate.sharedDelegate().window, animated: true)
+        DJAppDelegate.sharedDelegate().window.addSubview(HUD)
+        HUD.labelText = "Importing..";
+        HUD.show(true)
+
+        
         let serverURL = NSURL(string: "\(baseServerURL)/team/\(teamID)")
         let request = NSMutableURLRequest(URL: serverURL!)
         request.HTTPMethod = "GET"
@@ -197,6 +204,8 @@ public class DJTeamUploader : NSObject
                     {
                         appDelegate.league.importTeam(team)
                     }
+                    self.HUD.hide(true)
+                    self.HUD = nil
                 }
             }
         }
