@@ -59,9 +59,9 @@ public class DJTeamUploader : NSObject
                                 {
                                     data, response, error in
                                     
-                                    if let httpResponse = response as? NSHTTPURLResponse {
-                                        print("Status code \(httpResponse.statusCode)")
-                                    }
+                                    guard let httpResponse = response as? NSHTTPURLResponse else { return }
+                                    guard httpResponse.statusCode == 200 else { return }
+                                    
                                     
                                     player.audio?.announcementURL = self.fileURL("\(team.teamId)-\(url)")
                                     
@@ -200,12 +200,13 @@ public class DJTeamUploader : NSObject
                     //self.createTeamDirectory(team)
                     self.importTeamAudioFiles(team)
       
-                    if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
-                    {
-                        appDelegate.league.importTeam(team)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
+                        {
+                            appDelegate.league.importTeam(team)
+                        }
+                        self.HUD.hide(true)
                     }
-                    self.HUD.hide(true)
-                    self.HUD = nil
                 }
             }
         }
