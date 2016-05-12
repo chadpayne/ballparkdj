@@ -214,11 +214,74 @@ public class DJTeamUploader : NSObject
         task.resume()
     }
 
+    public func orderVoice(team:DJTeam, completion: (DJTeam) -> Void)
+    {
+        shareTeam(team) { team in
+            if team.teamId != nil
+            {
+                let serverURL = NSURL(string: "\(self.baseServerURL)/ordervoice")
+                let request = NSMutableURLRequest(URL: serverURL!)
+                
+                request.HTTPMethod = "POST"
+                
+                let contentType = "application/json"
+                request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+                
+                var teamDict = [String:AnyObject]()
+                if let teamID = team.teamId
+                {
+                    teamDict["teamId"] = teamID
+                }
+                teamDict["name"] = team.teamName
+                teamDict["teamOwnerEmail"] = team.teamOwnerEmail
+                
+                let httpBody = try! NSJSONSerialization.dataWithJSONObject(teamDict, options: .PrettyPrinted)
+                
+                let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: httpBody)
+                {
+                    data, response, error in
+                    if (error != nil)
+                    {
+                        // ::TODO:: Display error
+                        print(error)
+                        return;
+                    }
+                    
+                    if let orderData = data
+                    {
+                        let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
+                        
+                        if let orderId = resultsDict["id"] as? String
+                        {
+                            print("Success! - OrderID \(orderId)")
+                        }
+                        else
+                        {
+                            print("Error: \(resultsDict)")
+                        }
+                    }
+                    else
+                    {
+                        // ::TODO:: Display error
+                    }
+                    
+                    completion(team)
+                }
+                task.resume()
+            }
+            else
+            {
+                completion(team)
+            }
+        }
+    }
+
+    
     public func shareTeam(team:DJTeam, completion: (DJTeam) -> Void)
     {
         let serverURL = NSURL(string: "\(baseServerURL)/team")
         let request = NSMutableURLRequest(URL: serverURL!)
-        
+
         request.HTTPMethod = "PUT"
         
         let contentType = "application/json"
@@ -230,6 +293,7 @@ public class DJTeamUploader : NSObject
             teamDict["id"] = teamID
         }
         teamDict["name"] = team.teamName
+        teamDict["teamOwnerEmail"] = team.teamOwnerEmail
         
         var playersDict = [[String:AnyObject]]()
         

@@ -39,12 +39,19 @@
 }
 @end
 
+enum PostAuthenticationAction
+{
+    SHARE_TEAM,
+    ORDER_VOICE
+};
 
-@interface DJPlayersViewController ()<UINavigationControllerDelegate> {
+
+@interface DJPlayersViewController ()<UINavigationControllerDelegate,EmailAddressViewControllerDelegate> {
     bool playerEditing;
 }
 
 @property(nonatomic,strong) MFMailComposeViewController *mailController;
+@property(nonatomic,assign) enum PostAuthenticationAction action;
 
 @end
 
@@ -558,9 +565,36 @@
 
 }
 
+-(BOOL)userEmailAddressExists
+{
+    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    
+    if (email == nil)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+
 -(void)shareTeam
 {
     DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
+    
+    if (![self userEmailAddressExists]) {
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
+        
+        EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
+        emailAddressViewController.delegate = self;
+        
+        self.action = SHARE_TEAM;
+        
+        [self presentViewController:emailAddressViewController animated:YES completion:nil];
+        return;
+    }
+    
     
     [uploader shareTeam:self.team completion:^(DJTeam *team) {
 
@@ -595,12 +629,35 @@
 
 -(void)orderVoice
 {
-    UIAlertController *tempController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Not Implemented" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
+    
+    if (![self userEmailAddressExists]) {
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
+        
+        EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
+        emailAddressViewController.delegate = self;
+        
+        self.action = SHARE_TEAM;
+        
+        [self presentViewController:emailAddressViewController animated:YES completion:nil];
+        return;
+    }
+    
+    
+    [uploader orderVoice:self.team completion:^(DJTeam *team) {
+
+        dispatch_async(dispatch_get_main_queue(),^() {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Please check your email for the next steps to order a voice." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        });
         
     }];
-    [tempController addAction:okButton];
-    [self presentViewController:tempController animated:NO completion:nil];
 }
 
 
@@ -911,5 +968,23 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - EmailAddressViewController delegate
+-(void)emailAddressEntered:(NSString *)emailAddress
+{
+    // Store user email
+    [[NSUserDefaults standardUserDefaults] setObject:emailAddress forKey:@"userEmailAddress"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if (self.action == SHARE_TEAM)
+    {
+        self.team.teamOwnerEmail = emailAddress;
+        [self shareTeam];
+    }
+    else if (self.action == ORDER_VOICE)
+    {
+        self.team.teamOwnerEmail = emailAddress;
+        [self orderVoice];
+    }
+}
 
 @end

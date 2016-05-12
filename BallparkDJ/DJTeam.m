@@ -55,6 +55,11 @@
     self.players = [coder decodeObjectForKey:@"_players"];
     self.teamName = [coder decodeObjectForKey:@"_name"];
     
+    if ([coder containsValueForKey:@"_teamOwnerEmail"])
+    {
+        self.teamOwnerEmail = [coder decodeObjectForKey:@"_teamOwnerEmail"];
+    }
+    
     return self;
 }
 
@@ -82,6 +87,11 @@
     [coder encodeObject:players forKey:@"_players"];
     //[coder encodeObject:[NSKeyedArchiver archivedDataWithRootObject:players] forKey:@"_players"];
     [coder encodeObject:teamName forKey:@"_name"];
+    
+    if (self.teamOwnerEmail)
+    {
+        [coder encodeObject:self.teamOwnerEmail forKey:@"_teamOwnerEmail"];
+    }
 }
 
 @end

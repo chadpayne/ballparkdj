@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iUD-66-Sf5">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Email Address View Controller-->
+        <scene sceneID="TEF-ao-NlH">
+            <objects>
+                <viewController storyboardIdentifier="emailAddress" id="iUD-66-Sf5" customClass="EmailAddressViewController" customModule="BallparkDJ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SS3-Re-xIl"/>
+                        <viewControllerLayoutGuide type="bottom" id="rEX-Cf-dri"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HTx-fD-ixf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8R-C2-p0P">
+                                <rect key="frame" x="20" y="107.5" width="113" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HgI-gs-InR">
+                                <rect key="frame" x="141" y="107" width="431" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Vz-p7-Eay">
+                                <rect key="frame" x="20" y="28" width="560" height="49.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">This functionality requires your email address.    We need this information to be able to automatically create a user account to store data on our server.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DmZ-aF-lZT">
+                                <rect key="frame" x="269" y="165" width="62" height="30"/>
+                                <state key="normal" title="Continue"/>
+                                <connections>
+                                    <action selector="continueButtonClicked:" destination="iUD-66-Sf5" eventType="touchUpInside" id="dXF-pJ-BPS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DmZ-aF-lZT" firstAttribute="centerX" secondItem="HTx-fD-ixf" secondAttribute="centerX" id="1g2-w0-Kci"/>
+                            <constraint firstItem="r8R-C2-p0P" firstAttribute="top" secondItem="HgI-gs-InR" secondAttribute="top" id="68X-Yt-lmB"/>
+                            <constraint firstAttribute="trailing" secondItem="5Vz-p7-Eay" secondAttribute="trailing" constant="20" symbolic="YES" id="8tC-uy-EgG"/>
+                            <constraint firstItem="HgI-gs-InR" firstAttribute="top" secondItem="5Vz-p7-Eay" secondAttribute="bottom" constant="30" id="9jA-1q-FXX"/>
+                            <constraint firstItem="r8R-C2-p0P" firstAttribute="leading" secondItem="HTx-fD-ixf" secondAttribute="leading" constant="20" symbolic="YES" id="CNf-0u-EUL"/>
+                            <constraint firstItem="DmZ-aF-lZT" firstAttribute="top" secondItem="HgI-gs-InR" secondAttribute="bottom" constant="28" id="DMd-04-gPH"/>
+                            <constraint firstItem="5Vz-p7-Eay" firstAttribute="top" secondItem="SS3-Re-xIl" secondAttribute="bottom" constant="8" symbolic="YES" id="Hyn-Oe-Zbv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HgI-gs-InR" secondAttribute="trailing" constant="8" id="ZVS-6u-7qS"/>
+                            <constraint firstItem="HgI-gs-InR" firstAttribute="leading" secondItem="r8R-C2-p0P" secondAttribute="trailing" constant="8" id="fPH-na-Nd0"/>
+                            <constraint firstItem="5Vz-p7-Eay" firstAttribute="leading" secondItem="HTx-fD-ixf" secondAttribute="leading" constant="20" symbolic="YES" id="x81-ip-4Qi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailAddressTextField" destination="HgI-gs-InR" id="Lh1-El-Pr9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZPb-tQ-xgd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="285" y="295"/>
+        </scene>
+    </scenes>
+</document>

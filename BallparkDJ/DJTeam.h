@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableArray<DJPlayer *> *players;
 @property (strong, nonatomic) NSString *teamName;
 @property (strong, nonatomic) NSString *teamId;
+@property (strong, nonatomic) NSString *teamOwnerEmail;
 
 -(id)initWithName:(NSString *)name;
 
