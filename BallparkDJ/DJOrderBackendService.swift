@@ -101,4 +101,51 @@ import Foundation
     }
 
     
+    public static func markOrderComplete(authToken:String, order:DJVoiceOrder, completion: (DJVoiceOrder!, NSError?) -> Void)
+    {
+        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/admin-api/recordingOrder")
+        let request = NSMutableURLRequest(URL: serverURL!)
+        
+        request.HTTPMethod = "PUT"
+        
+        let contentType = "application/json"
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        
+        order.orderStatus = DJVoiceOrderStatus.VOICED
+        
+        guard let orderData = order.toJSON() else { completion(nil,nil); return; }
+        let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
+        print("\(orderDataString)")
+        
+        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: orderData)
+        {
+            data, response, error in
+            if (error != nil)
+            {
+                completion(nil,error!)
+                return;
+            }
+            
+            if let orderData = data
+            {
+                let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
+                print("\(orderDataString)")
+                
+                if let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+                {
+                    let voiceOrder = DJVoiceOrder(dictionary: resultsDict)
+                    completion(voiceOrder, nil)
+                    return
+                }
+                completion(nil, nil)
+            }
+            else
+            {
+                completion(nil,nil)
+            }
+        }
+        task.resume()
+    }
+    
 }

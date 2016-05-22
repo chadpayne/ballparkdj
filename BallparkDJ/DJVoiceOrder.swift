@@ -8,24 +8,24 @@
 
 import Foundation
 
-@objc public enum DJVoiceOrderStatus : Int
+enum DJVoiceOrderStatus : String
 {
-    case NEW
-    case VOICING
-    case PAID
-    case REVOICING
-    case SHARED
-    case VOICED
+    case NEW = "NEW"
+    case VOICING = "VOICING"
+    case PAID = "PAID"
+    case REVOICING = "REVOICING"
+    case SHARED = "SHARED"
+    case VOICED = "VOICED"
 }
 
 public class DJVoiceOrder : NSObject
 {
-    var voiceProviderId:String!
-    var orderId:String!
-    var teamId:String!
-    var teamName:String!
-    var teamOwnerEmail:String!
-    var orderStatus:DJVoiceOrderStatus!
+    var voiceProviderId:String?
+    var orderId:String?
+    var teamId:String?
+    var teamName:String?
+    var teamOwnerEmail:String?
+    var orderStatus:DJVoiceOrderStatus
     
     init(orderId:String, voiceProviderId:String, teamName:String, teamOwnerEmail:String, orderStatus:DJVoiceOrderStatus, teamId:String)
     {
@@ -44,8 +44,38 @@ public class DJVoiceOrder : NSObject
         teamName = dictionary["teamName"] as? String
         teamOwnerEmail = dictionary["teamOwnerEmail"] as? String
         teamId = dictionary["teamId"] as? String
-        orderStatus = dictionary["orderStatus"] as? DJVoiceOrderStatus
+        //orderStatus = dictionary["orderStatus"] as? String //as DJVoiceOrderStatus
+        orderStatus = .NEW
     }
     
+    func toDictionary() -> [String:AnyObject]
+    {
+        var dict = [String:AnyObject]()
+       
+        dict["id"] = orderId
+        dict["teamName"] = teamName
+        dict["voiceProvierId"] = voiceProviderId
+        dict["teamOwnerEmail"] = teamOwnerEmail
+        dict["status"] = orderStatus.rawValue
+        dict["teamId"] = teamId
+        
+        return dict
+        
+    }
+
+    func toJSON() -> NSData?
+    {
+        do
+        {
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(toDictionary(), options: .PrettyPrinted)
+            return jsonData
+        }
+        catch _ as NSError
+        {
+            
+        }
+        
+        return nil
+    }
     
 }
