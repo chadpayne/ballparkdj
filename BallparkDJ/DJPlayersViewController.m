@@ -595,6 +595,8 @@ enum PostAuthenticationAction
         return;
     }
     
+    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    
     
     [uploader shareTeam:self.team completion:^(DJTeam *team) {
 
@@ -644,6 +646,7 @@ enum PostAuthenticationAction
         return;
     }
     
+    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
     
     [uploader orderVoice:self.team completion:^(DJTeam *team) {
 

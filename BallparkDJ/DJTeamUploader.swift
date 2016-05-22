@@ -232,7 +232,7 @@ public class DJTeamUploader : NSObject
                 {
                     teamDict["teamId"] = teamID
                 }
-                teamDict["name"] = team.teamName
+                teamDict["teamName"] = team.teamName
                 teamDict["teamOwnerEmail"] = team.teamOwnerEmail
                 
                 let httpBody = try! NSJSONSerialization.dataWithJSONObject(teamDict, options: .PrettyPrinted)
@@ -249,6 +249,9 @@ public class DJTeamUploader : NSObject
                     
                     if let orderData = data
                     {
+                        let orderString = String(data: orderData, encoding: NSUTF8StringEncoding)
+                        print("\(orderString)")
+                        
                         let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
                         
                         if let orderId = resultsDict["id"] as? String
