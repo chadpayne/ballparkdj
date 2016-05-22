@@ -11,7 +11,7 @@ import UIKit
 
 public class DJTeamUploader : NSObject
 {
-    let baseServerURL = "http://104.196.10.190"
+    let baseServerURL = DJServerInfo.baseServerURL
     var operationQueue = NSOperationQueue()
     var HUD:MBProgressHUD!
     

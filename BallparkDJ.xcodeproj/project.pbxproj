@@ -41,6 +41,9 @@
 		8CB00D5016E8927D0088FB13 /* DJRecorderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CB00D4F16E8927D0088FB13 /* DJRecorderController.xib */; };
 		9514C89E1CE4175400B9E286 /* Security.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9514C89D1CE4175400B9E286 /* Security.storyboard */; };
 		9514C8A11CE41A7B00B9E286 /* EmailAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A01CE41A7B00B9E286 /* EmailAddressViewController.swift */; };
+		9514C8A31CF1598E00B9E286 /* DJOrderBackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A21CF1598E00B9E286 /* DJOrderBackendService.swift */; };
+		9514C8A51CF15A2D00B9E286 /* DJServerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A41CF15A2D00B9E286 /* DJServerInfo.swift */; };
+		9514C8A71CF1F0B800B9E286 /* DJVoiceOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A61CF1F0B800B9E286 /* DJVoiceOrder.swift */; };
 		954326B61CBC9214009F6927 /* DJTeamUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954326B51CBC9214009F6927 /* DJTeamUploader.swift */; };
 		9571D7ED1CDC3C9400FFCCE6 /* DataTaskOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */; };
 		9571D7EF1CDC3CB500FFCCE6 /* AsynchronousOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EE1CDC3CB500FFCCE6 /* AsynchronousOperation.h */; };
@@ -165,6 +168,9 @@
 		8CB00D4F16E8927D0088FB13 /* DJRecorderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJRecorderController.xib; sourceTree = "<group>"; };
 		9514C89D1CE4175400B9E286 /* Security.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Security.storyboard; path = ../Security.storyboard; sourceTree = "<group>"; };
 		9514C8A01CE41A7B00B9E286 /* EmailAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAddressViewController.swift; sourceTree = "<group>"; };
+		9514C8A21CF1598E00B9E286 /* DJOrderBackendService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJOrderBackendService.swift; sourceTree = "<group>"; };
+		9514C8A41CF15A2D00B9E286 /* DJServerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJServerInfo.swift; sourceTree = "<group>"; };
+		9514C8A61CF1F0B800B9E286 /* DJVoiceOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJVoiceOrder.swift; sourceTree = "<group>"; };
 		954326B41CBC9214009F6927 /* BallparkDJ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BallparkDJ-Bridging-Header.h"; sourceTree = "<group>"; };
 		954326B51CBC9214009F6927 /* DJTeamUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJTeamUploader.swift; sourceTree = "<group>"; };
 		9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTaskOperation.h; sourceTree = "<group>"; };
@@ -456,8 +462,11 @@
 				8C2C08CC16D71286000B5C1E /* Images */,
 				A272BB3816D6D30800AE7ED1 /* Supporting Files */,
 				8C2C095116D73E4E000B5C1E /* DJPlayersViewController.h */,
+				9514C8A21CF1598E00B9E286 /* DJOrderBackendService.swift */,
+				9514C8A61CF1F0B800B9E286 /* DJVoiceOrder.swift */,
 				8C2C095216D73E4E000B5C1E /* DJPlayersViewController.m */,
 				954326B51CBC9214009F6927 /* DJTeamUploader.swift */,
+				9514C8A41CF15A2D00B9E286 /* DJServerInfo.swift */,
 				A269D43916E43D56003E60F8 /* DJLeagueViewController.h */,
 				A269D43A16E43D56003E60F8 /* DJLeagueViewController.m */,
 				8C2C095716D73F4E000B5C1E /* DJDetailController.h */,
@@ -746,10 +755,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A21DF72F16EEF321006CBC91 /* DJLeagueViewController.m in Sources */,
+				9514C8A31CF1598E00B9E286 /* DJOrderBackendService.swift in Sources */,
 				9571D7EF1CDC3CB500FFCCE6 /* AsynchronousOperation.h in Sources */,
 				A272BB3E16D6D30800AE7ED1 /* main.m in Sources */,
 				A272BB4216D6D30800AE7ED1 /* DJAppDelegate.m in Sources */,
 				9514C8A11CE41A7B00B9E286 /* EmailAddressViewController.swift in Sources */,
+				9514C8A51CF15A2D00B9E286 /* DJServerInfo.swift in Sources */,
 				8C2C095016D73BCD000B5C1E /* DJLeague.m in Sources */,
 				04E9A67519A7AA7600419267 /* RageIAPHelper.m in Sources */,
 				8C2C095316D73E4E000B5C1E /* DJPlayersViewController.m in Sources */,
@@ -763,6 +774,7 @@
 				A2152C6E16E275CA00946094 /* DJAudio.m in Sources */,
 				8CB00D2C16E854870088FB13 /* DJRecorderController.m in Sources */,
 				A2A15EC816E92A3E00C85C36 /* DJClipsController.m in Sources */,
+				9514C8A71CF1F0B800B9E286 /* DJVoiceOrder.swift in Sources */,
 				A2729CDC16E9AFDB00CA9913 /* DJOverlapSlider.m in Sources */,
 				9571D7ED1CDC3C9400FFCCE6 /* DataTaskOperation.h in Sources */,
 				9571D7F31CDC3D2D00FFCCE6 /* AsynchronousOperation.m in Sources */,
