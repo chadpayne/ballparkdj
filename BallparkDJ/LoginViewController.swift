@@ -16,6 +16,20 @@ public class LoginViewController : UIViewController
     
     @IBAction func loginButtonClicked(sender: AnyObject)
     {
-        VoiceProviderLogin.login(userName.text!, password: passwordTextField.text!)
+        DJOrderBackendService.login(userName.text!, password: passwordTextField.text!) { authToken, error in
+            DJOrderBackendService.getRecordingOrders(authToken)
+            {
+                orders, error in
+                VoiceProviderLogin.processOrders(orders)
+                
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    self.performSegueWithIdentifier("record", sender: self)
+                }
+                
+            }
+        }
+        
+        
     }
 }

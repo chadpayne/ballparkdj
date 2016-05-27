@@ -47,6 +47,7 @@
 		9514C8AA1CF29D7F00B9E286 /* VoiceProviderLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A91CF29D7F00B9E286 /* VoiceProviderLogin.swift */; };
 		9514C8AC1CF53E0300B9E286 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8AB1CF53E0300B9E286 /* LoginViewController.swift */; };
 		9514C8AE1CF6779300B9E286 /* VoiceProvider.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9514C8AD1CF6779300B9E286 /* VoiceProvider.storyboard */; };
+		9514C8B11CF7EF2900B9E286 /* DJVoiceProviderRecorderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8B01CF7EF2900B9E286 /* DJVoiceProviderRecorderController.m */; };
 		954326B61CBC9214009F6927 /* DJTeamUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954326B51CBC9214009F6927 /* DJTeamUploader.swift */; };
 		9571D7ED1CDC3C9400FFCCE6 /* DataTaskOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */; };
 		9571D7EF1CDC3CB500FFCCE6 /* AsynchronousOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EE1CDC3CB500FFCCE6 /* AsynchronousOperation.h */; };
@@ -177,6 +178,8 @@
 		9514C8A91CF29D7F00B9E286 /* VoiceProviderLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceProviderLogin.swift; sourceTree = "<group>"; };
 		9514C8AB1CF53E0300B9E286 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9514C8AD1CF6779300B9E286 /* VoiceProvider.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VoiceProvider.storyboard; sourceTree = "<group>"; };
+		9514C8AF1CF7EF2900B9E286 /* DJVoiceProviderRecorderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJVoiceProviderRecorderController.h; sourceTree = "<group>"; };
+		9514C8B01CF7EF2900B9E286 /* DJVoiceProviderRecorderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJVoiceProviderRecorderController.m; sourceTree = "<group>"; };
 		954326B41CBC9214009F6927 /* BallparkDJ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BallparkDJ-Bridging-Header.h"; sourceTree = "<group>"; };
 		954326B51CBC9214009F6927 /* DJTeamUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJTeamUploader.swift; sourceTree = "<group>"; };
 		9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTaskOperation.h; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 				9514C8A91CF29D7F00B9E286 /* VoiceProviderLogin.swift */,
 				9514C8AB1CF53E0300B9E286 /* LoginViewController.swift */,
 				9514C8AD1CF6779300B9E286 /* VoiceProvider.storyboard */,
+				9514C8AF1CF7EF2900B9E286 /* DJVoiceProviderRecorderController.h */,
+				9514C8B01CF7EF2900B9E286 /* DJVoiceProviderRecorderController.m */,
 			);
 			name = "Voice Provider";
 			sourceTree = "<group>";
@@ -795,6 +800,7 @@
 				9514C8AA1CF29D7F00B9E286 /* VoiceProviderLogin.swift in Sources */,
 				A2A15EC816E92A3E00C85C36 /* DJClipsController.m in Sources */,
 				9514C8A71CF1F0B800B9E286 /* DJVoiceOrder.swift in Sources */,
+				9514C8B11CF7EF2900B9E286 /* DJVoiceProviderRecorderController.m in Sources */,
 				A2729CDC16E9AFDB00CA9913 /* DJOverlapSlider.m in Sources */,
 				9571D7ED1CDC3C9400FFCCE6 /* DataTaskOperation.h in Sources */,
 				9571D7F31CDC3D2D00FFCCE6 /* AsynchronousOperation.m in Sources */,
