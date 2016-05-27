@@ -44,6 +44,9 @@
 		9514C8A31CF1598E00B9E286 /* DJOrderBackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A21CF1598E00B9E286 /* DJOrderBackendService.swift */; };
 		9514C8A51CF15A2D00B9E286 /* DJServerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A41CF15A2D00B9E286 /* DJServerInfo.swift */; };
 		9514C8A71CF1F0B800B9E286 /* DJVoiceOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A61CF1F0B800B9E286 /* DJVoiceOrder.swift */; };
+		9514C8AA1CF29D7F00B9E286 /* VoiceProviderLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8A91CF29D7F00B9E286 /* VoiceProviderLogin.swift */; };
+		9514C8AC1CF53E0300B9E286 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8AB1CF53E0300B9E286 /* LoginViewController.swift */; };
+		9514C8AE1CF6779300B9E286 /* VoiceProvider.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9514C8AD1CF6779300B9E286 /* VoiceProvider.storyboard */; };
 		954326B61CBC9214009F6927 /* DJTeamUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954326B51CBC9214009F6927 /* DJTeamUploader.swift */; };
 		9571D7ED1CDC3C9400FFCCE6 /* DataTaskOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */; };
 		9571D7EF1CDC3CB500FFCCE6 /* AsynchronousOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EE1CDC3CB500FFCCE6 /* AsynchronousOperation.h */; };
@@ -171,6 +174,9 @@
 		9514C8A21CF1598E00B9E286 /* DJOrderBackendService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJOrderBackendService.swift; sourceTree = "<group>"; };
 		9514C8A41CF15A2D00B9E286 /* DJServerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJServerInfo.swift; sourceTree = "<group>"; };
 		9514C8A61CF1F0B800B9E286 /* DJVoiceOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJVoiceOrder.swift; sourceTree = "<group>"; };
+		9514C8A91CF29D7F00B9E286 /* VoiceProviderLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceProviderLogin.swift; sourceTree = "<group>"; };
+		9514C8AB1CF53E0300B9E286 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9514C8AD1CF6779300B9E286 /* VoiceProvider.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VoiceProvider.storyboard; sourceTree = "<group>"; };
 		954326B41CBC9214009F6927 /* BallparkDJ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BallparkDJ-Bridging-Header.h"; sourceTree = "<group>"; };
 		954326B51CBC9214009F6927 /* DJTeamUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJTeamUploader.swift; sourceTree = "<group>"; };
 		9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTaskOperation.h; sourceTree = "<group>"; };
@@ -395,6 +401,16 @@
 			name = Security;
 			sourceTree = "<group>";
 		};
+		9514C8A81CF29D5900B9E286 /* Voice Provider */ = {
+			isa = PBXGroup;
+			children = (
+				9514C8A91CF29D7F00B9E286 /* VoiceProviderLogin.swift */,
+				9514C8AB1CF53E0300B9E286 /* LoginViewController.swift */,
+				9514C8AD1CF6779300B9E286 /* VoiceProvider.storyboard */,
+			);
+			name = "Voice Provider";
+			sourceTree = "<group>";
+		};
 		9571D7EB1CDC3C5600FFCCE6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,6 +465,7 @@
 		A272BB3716D6D30800AE7ED1 /* BallparkDJ */ = {
 			isa = PBXGroup;
 			children = (
+				9514C8A81CF29D5900B9E286 /* Voice Provider */,
 				9514C89F1CE41A5800B9E286 /* Security */,
 				9571D7EB1CDC3C5600FFCCE6 /* Network */,
 				959419531CCEE96400D8DCF4 /* BallparkDJ.entitlements */,
@@ -660,6 +677,7 @@
 				8CB00D4116E856730088FB13 /* pauseButton.png in Resources */,
 				8CB00D4316E856730088FB13 /* playButton.png in Resources */,
 				8CB00D4516E856730088FB13 /* recButton.png in Resources */,
+				9514C8AE1CF6779300B9E286 /* VoiceProvider.storyboard in Resources */,
 				8CB00D4616E856730088FB13 /* redBar.png in Resources */,
 				8CB00D4716E856730088FB13 /* stopButton.png in Resources */,
 				8CB00D4A16E856730088FB13 /* yellowBar.png in Resources */,
@@ -754,6 +772,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9514C8AC1CF53E0300B9E286 /* LoginViewController.swift in Sources */,
 				A21DF72F16EEF321006CBC91 /* DJLeagueViewController.m in Sources */,
 				9514C8A31CF1598E00B9E286 /* DJOrderBackendService.swift in Sources */,
 				9571D7EF1CDC3CB500FFCCE6 /* AsynchronousOperation.h in Sources */,
@@ -773,6 +792,7 @@
 				A2152C6A16E275AC00946094 /* DJPlayer.m in Sources */,
 				A2152C6E16E275CA00946094 /* DJAudio.m in Sources */,
 				8CB00D2C16E854870088FB13 /* DJRecorderController.m in Sources */,
+				9514C8AA1CF29D7F00B9E286 /* VoiceProviderLogin.swift in Sources */,
 				A2A15EC816E92A3E00C85C36 /* DJClipsController.m in Sources */,
 				9514C8A71CF1F0B800B9E286 /* DJVoiceOrder.swift in Sources */,
 				A2729CDC16E9AFDB00CA9913 /* DJOverlapSlider.m in Sources */,

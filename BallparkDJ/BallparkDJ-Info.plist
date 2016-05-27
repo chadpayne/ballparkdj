@@ -30,6 +30,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.ballparkdj.team-import</string>
+				<string>com.ballparkdj.team-admin</string>
 			</array>
 		</dict>
 	</array>

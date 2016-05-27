@@ -129,15 +129,22 @@
 
 -(BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    if (![[url scheme] isEqualToString:@"com.ballparkdj.team-import"])
+    if ([[url scheme] isEqualToString:@"com.ballparkdj.team-import"])
     {
-        return NO;
+        DJTeamUploader *teamUploader = [[DJTeamUploader alloc] init];
+        [teamUploader importTeam:[url host]];
+        
+        return YES;
     }
+
+    if ([[url scheme] isEqualToString:@"com.ballparkdj.team-admin"])
+    {
+        [VoiceProviderLogin login:url];
+        return YES;
+    }
+
     
-    DJTeamUploader *teamUploader = [[DJTeamUploader alloc] init];
-    [teamUploader importTeam:[url host]];
-    
-    return YES;
+    return NO;
 }
 
 @end
