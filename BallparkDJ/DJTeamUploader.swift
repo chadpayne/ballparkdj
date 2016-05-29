@@ -60,7 +60,7 @@ public class DJTeamUploader : NSObject
                                     data, response, error in
                                     
                                     guard let httpResponse = response as? NSHTTPURLResponse else { return }
-                                    guard httpResponse.statusCode == 200 else { return }
+                                    guard httpResponse.statusCode == 200 || httpResponse.statusCode == 302 else { return }
                                     
                                     
                                     player.audio?.announcementURL = self.fileURL("\(team.teamId)-\(url)")
@@ -82,122 +82,141 @@ public class DJTeamUploader : NSObject
                 operationQueue.addOperation(operation)
             }
         }
-
-        
-        operationQueue.waitUntilAllOperationsAreFinished()
     }
-
-    public func performImportTeam(teamID:String, completion:(team:DJTeam) -> ())
+    
+    public func parseTeamFromData(data:NSData) -> DJTeam?
     {
-        let serverURL = NSURL(string: "\(baseServerURL)/team/\(teamID)")
-        let request = NSMutableURLRequest(URL: serverURL!)
-        request.HTTPMethod = "GET"
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, error in
+        if let teamDict = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+        {
+            let team = DJTeam()
             
-            if let teamDict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+            team.teamId = teamDict["id"] as? String
+            team.teamName = teamDict["name"] as? String
+            team.players = NSMutableArray()
+            
+            if let playersDict = teamDict["players"] as? [[String:AnyObject]]
             {
-                let team = DJTeam()
-                
-                team.teamId = teamDict["id"] as? String
-                team.teamName = teamDict["name"] as? String
-                team.players = NSMutableArray()
-                
-                if let playersDict = teamDict["players"] as? [[String:AnyObject]]
+                for playerDict in playersDict
                 {
-                    for playerDict in playersDict
+                    let player = DJPlayer()
+                    player.name = playerDict["name"] as? String
+                    
+                    if let playerNumber = playerDict["number"] as? NSNumber
                     {
-                        let player = DJPlayer()
-                        player.name = playerDict["name"] as? String
-                        
-                        if let playerNumber = playerDict["number"] as? NSNumber
-                        {
-                            player.number = playerNumber.intValue
-                        }
-                        
-                        if let playerBenched = playerDict["benched"] as? NSNumber
-                        {
-                            player.b_isBench = playerBenched.boolValue
-                        }
-                        
-                        if let audioDict = playerDict["playerAudio"] as? [String:AnyObject]
-                        {
-                            if let announcmentURL = audioDict["announcementUrl"] as? String
-                            {
-                                player.audio.announcementURL = self.fileURL("\(announcmentURL)")
-                            }
-                            
-                            if let overlap = audioDict["overlap"] as? Double
-                            {
-                                player.audio.overlap = overlap
-                            }
-                            
-                            if let musicStartTime = audioDict["musicStartTime"] as? Double
-                            {
-                                player.audio.musicStartTime = musicStartTime
-                            }
-                            
-                            if let shouldFade = audioDict["shouldFade"] as? Bool
-                            {
-                                player.audio.shouldFade = shouldFade
-                            }
-                            
-                            if let djFileName = audioDict["djFileName"] as? String
-                            {
-                                player.audio.DJAudioFileName = djFileName
-                            }
-                            
-                            if let djClip = audioDict["djClip"] as? Bool
-                            {
-                                player.audio.isDJClip = djClip
-                            }
-                            
-                            if let announcmentVolume = audioDict["announcmentVolume"] as? CGFloat
-                            {
-                                player.audio.announcementVolume = announcmentVolume
-                            }
-                            
-                            if let shouldPlayAll = audioDict["shouldPlayAll"] as? Bool
-                            {
-                                player.audio.shouldPlayAll = shouldPlayAll
-                            }
-                            
-                            if let title = audioDict["title"] as? String
-                            {
-                                player.audio.title = title
-                            }
-                            
-                            if let musicVolume = audioDict["musicVolume"] as? CGFloat
-                            {
-                                player.audio.musicVolume = musicVolume
-                            }
-                            
-                            if let currentVolumeMode = audioDict["currentVolumeMode"] as? Int32
-                            {
-                                player.audio.currentVolumeMode = currentVolumeMode
-                            }
-                            
-                            if let announcementDuration = audioDict["announcmentDuration"] as? Double
-                            {
-                                if player.audio.isDJClip == false
-                                {
-                                    player.audio.announcementDuration = announcementDuration
-                                }
-                            }
-                        }
-                        team.players.addObject(player)
+                        player.number = playerNumber.intValue
                     }
-                }
-                
-                dispatch_async(dispatch_get_global_queue(0, 0))
-                {
-                    self.importTeamAudioFiles(team)
-                    completion(team: team)
+                    
+                    if let playerBenched = playerDict["benched"] as? NSNumber
+                    {
+                        player.b_isBench = playerBenched.boolValue
+                    }
+                    
+                    if let audioDict = playerDict["playerAudio"] as? [String:AnyObject]
+                    {
+                        if let announcmentURL = audioDict["announcementUrl"] as? String
+                        {
+                            player.audio.announcementURL = self.fileURL("\(announcmentURL)")
+                        }
+                        
+                        if let overlap = audioDict["overlap"] as? Double
+                        {
+                            player.audio.overlap = overlap
+                        }
+                        
+                        if let musicStartTime = audioDict["musicStartTime"] as? Double
+                        {
+                            player.audio.musicStartTime = musicStartTime
+                        }
+                        
+                        if let shouldFade = audioDict["shouldFade"] as? Bool
+                        {
+                            player.audio.shouldFade = shouldFade
+                        }
+                        
+                        if let djFileName = audioDict["djFileName"] as? String
+                        {
+                            player.audio.DJAudioFileName = djFileName
+                        }
+                        
+                        if let djClip = audioDict["djClip"] as? Bool
+                        {
+                            player.audio.isDJClip = djClip
+                        }
+                        
+                        if let announcmentVolume = audioDict["announcmentVolume"] as? CGFloat
+                        {
+                            player.audio.announcementVolume = announcmentVolume
+                        }
+                        
+                        if let shouldPlayAll = audioDict["shouldPlayAll"] as? Bool
+                        {
+                            player.audio.shouldPlayAll = shouldPlayAll
+                        }
+                        
+                        if let title = audioDict["title"] as? String
+                        {
+                            player.audio.title = title
+                        }
+                        
+                        if let musicVolume = audioDict["musicVolume"] as? CGFloat
+                        {
+                            player.audio.musicVolume = musicVolume
+                        }
+                        
+                        if let currentVolumeMode = audioDict["currentVolumeMode"] as? Int32
+                        {
+                            player.audio.currentVolumeMode = currentVolumeMode
+                        }
+                        
+                        if let announcementDuration = audioDict["announcmentDuration"] as? Double
+                        {
+                            if player.audio.isDJClip == false
+                            {
+                                player.audio.announcementDuration = announcementDuration
+                            }
+                        }
+                    }
+                    team.players.addObject(player)
                 }
             }
+            
+            return team;
         }
         
-        task.resume()
+        return nil;
+    }
+
+    public func performImportTeams(teamIDs:[String], completion:(teams:[DJTeam]) -> ())
+    {
+        dispatch_async(dispatch_get_global_queue(0, 0))
+        {
+            var teams:[DJTeam] = [DJTeam]()
+            
+            for teamID in teamIDs
+            {
+                let serverURL = NSURL(string: "\(self.baseServerURL)/team/\(teamID)")
+                
+                let operation = DataTaskOperation.init(URL: serverURL!)
+                                {
+                                    data, response, error in
+                                    
+                                    guard let httpResponse = response as? NSHTTPURLResponse else { return }
+                                    guard httpResponse.statusCode == 200 || httpResponse.statusCode == 302 else { return }
+                                    
+                                    guard let data = data else { return }
+                                    if let team = self.parseTeamFromData(data)
+                                    {
+                                        teams.append(team)
+                                        self.importTeamAudioFiles(team)
+                                    }
+                                }
+                self.operationQueue.addOperation(operation)
+            }
+            
+            self.operationQueue.waitUntilAllOperationsAreFinished()
+            
+            completion(teams: teams)
+        }
     }
     
     public func importTeam(teamID:String)
@@ -312,6 +331,7 @@ public class DJTeamUploader : NSObject
                 {
                     //self.createTeamDirectory(team)
                     self.importTeamAudioFiles(team)
+                    self.operationQueue.waitUntilAllOperationsAreFinished()
       
                     dispatch_async(dispatch_get_main_queue()) {
                         if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate

@@ -72,248 +72,229 @@
             </objects>
             <point key="canvasLocation" x="103" y="333"/>
         </scene>
-        <!--Voice Provider Recorder Controller-->
+        <!--Voice Provider View Controller-->
         <scene sceneID="5Mm-h8-axx">
             <objects>
-                <viewController id="P7L-0l-yqx" customClass="DJVoiceProviderRecorderController" sceneMemberID="viewController">
+                <viewController id="P7L-0l-yqx" customClass="DJVoiceProviderViewController" customModule="BallparkDJ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZnS-yF-xQ6"/>
-                        <viewControllerLayoutGuide type="bottom" id="iV6-U3-VkE"/>
+                        <viewControllerLayoutGuide type="top" id="5co-1Z-OYU"/>
+                        <viewControllerLayoutGuide type="bottom" id="57b-6B-1qF"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ShJ-q6-1k8">
+                    <view key="view" contentMode="scaleToFill" id="gPx-rM-GJc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleAspectFill" fixedFrame="YES" image="RecordingMic" translatesAutoresizingMaskIntoConstraints="NO" id="Cil-ye-Lu1">
-                                <rect key="frame" x="0.0" y="-25" width="320" height="480"/>
-                                <gestureRecognizers/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Uv-1l-gcV" userLabel="Button - Record">
-                                <rect key="frame" x="41" y="364" width="113" height="44"/>
-                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal" image="recButton.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69t-A1-j2Z" userLabel="Button - Play">
-                                <rect key="frame" x="165" y="364" width="115" height="45"/>
-                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal" image="playButton.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Ready" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rAb-9o-v2t">
-                                <rect key="frame" x="65" y="51" width="190" height="51"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Record Voice" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="GcG-9X-Nc2">
-                                <rect key="frame" x="41" y="13" width="239" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="QCV-6Q-I8M">
-                                <rect key="frame" x="316" y="399" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="zw2-Qi-CeM">
-                                <rect key="frame" x="280" y="339" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="X5i-5n-BiE">
-                                <rect key="frame" x="280" y="330" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="mzh-Z2-kBv">
-                                <rect key="frame" x="280" y="322" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="2vq-Xu-wmy">
-                                <rect key="frame" x="280" y="313" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="b9h-9d-7oa">
-                                <rect key="frame" x="280" y="305" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="gtw-1Q-9Ce">
-                                <rect key="frame" x="280" y="296" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bcr-q3-iVB">
-                                <rect key="frame" x="280" y="288" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="HlM-Qg-zsI">
-                                <rect key="frame" x="280" y="279" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="xqN-Jg-g66">
-                                <rect key="frame" x="280" y="271" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z4J-au-tVS">
-                                <rect key="frame" x="280" y="262" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="OWW-HO-HGs">
-                                <rect key="frame" x="280" y="254" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="0FB-7e-YoG">
-                                <rect key="frame" x="280" y="245" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="YTz-Dt-GVd">
-                                <rect key="frame" x="280" y="237" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Naz-Gy-oAv">
-                                <rect key="frame" x="280" y="228" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="qD0-31-3za">
-                                <rect key="frame" x="280" y="220" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="MEP-Lj-Tpa">
-                                <rect key="frame" x="280" y="211" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Str-Xb-4EJ">
-                                <rect key="frame" x="280" y="203" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="LOg-Za-Nu1">
-                                <rect key="frame" x="280" y="194" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="cLO-HP-ZVA">
-                                <rect key="frame" x="280" y="186" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="1oY-dg-nkb">
-                                <rect key="frame" x="280" y="177" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="whv-es-Im3">
-                                <rect key="frame" x="280" y="169" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="f2h-6h-Atq">
-                                <rect key="frame" x="280" y="160" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tmc-jy-Qog">
-                                <rect key="frame" x="280" y="152" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="mjs-hZ-uI6">
-                                <rect key="frame" x="280" y="143" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="SkS-gT-kgo">
-                                <rect key="frame" x="280" y="135" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="lDR-Rh-JnP">
-                                <rect key="frame" x="280" y="126" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="FOl-kP-hNp">
-                                <rect key="frame" x="280" y="118" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="xpo-N1-FIX">
-                                <rect key="frame" x="0.0" y="347" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="3lD-EN-T7C">
-                                <rect key="frame" x="0.0" y="339" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="KXh-LO-IzE">
-                                <rect key="frame" x="0.0" y="330" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="SUG-o9-qCA">
-                                <rect key="frame" x="0.0" y="322" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="eph-3Y-OhQ">
-                                <rect key="frame" x="0.0" y="313" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="MRi-hy-ucr">
-                                <rect key="frame" x="0.0" y="305" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-tQ-XYe">
-                                <rect key="frame" x="0.0" y="296" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-76-pjy">
-                                <rect key="frame" x="0.0" y="288" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="N9K-xT-vwv">
-                                <rect key="frame" x="0.0" y="279" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="TD0-AB-c5a">
-                                <rect key="frame" x="0.0" y="271" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="sJ8-lA-j4O">
-                                <rect key="frame" x="0.0" y="262" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="gyJ-fY-ofU">
-                                <rect key="frame" x="0.0" y="254" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="gIk-91-JxE">
-                                <rect key="frame" x="0.0" y="245" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="YUS-8X-lD2">
-                                <rect key="frame" x="0.0" y="237" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="7BX-AS-Db2">
-                                <rect key="frame" x="0.0" y="228" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Om-dD-nSH">
-                                <rect key="frame" x="0.0" y="220" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wvd-kR-Oit">
-                                <rect key="frame" x="0.0" y="211" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="h0B-rl-k9h">
-                                <rect key="frame" x="0.0" y="203" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="v7g-cR-mKG">
-                                <rect key="frame" x="0.0" y="194" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="cPg-Ye-4BH">
-                                <rect key="frame" x="0.0" y="186" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="iPo-64-7Ms">
-                                <rect key="frame" x="0.0" y="177" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="oKz-9S-ma6">
-                                <rect key="frame" x="0.0" y="169" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="v52-65-2OA">
-                                <rect key="frame" x="0.0" y="160" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="n77-zA-Uco">
-                                <rect key="frame" x="0.0" y="152" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="e9L-Om-Zx4">
-                                <rect key="frame" x="0.0" y="143" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="PUe-OI-ubb">
-                                <rect key="frame" x="0.0" y="135" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="HKC-cU-GSc">
-                                <rect key="frame" x="0.0" y="126" width="40" height="9"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="clearBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="V3R-JJ-4xl">
-                                <rect key="frame" x="0.0" y="118" width="40" height="9"/>
-                            </imageView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XsZ-MI-iMv">
-                                <rect key="frame" x="0.0" y="426" width="320" height="30"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <segments>
-                                    <segment title="Cancel"/>
-                                    <segment title="No Audio" width="85"/>
-                                    <segment title="Done"/>
-                                </segments>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </segmentedControl>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KjY-3q-vyv">
+                                <rect key="frame" x="20" y="28" width="263" height="349"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PUK-7H-G5v">
+                                        <rect key="frame" x="0.0" y="0.0" width="237" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Voices to Record #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxd-ED-Hop">
+                                                <rect key="frame" x="0.0" y="0.0" width="144" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrK-mr-TDl">
+                                                <rect key="frame" x="154" y="0.0" width="9" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="out of" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THZ-Iu-2gO">
+                                                <rect key="frame" x="173" y="0.0" width="45" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuM-wp-W6Y">
+                                                <rect key="frame" x="228" y="0.0" width="9" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BzY-Nl-NY0">
+                                        <rect key="frame" x="0.0" y="29" width="222" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Teams to Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXG-qb-6ap">
+                                                <rect key="frame" x="0.0" y="0.0" width="129" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwB-tg-UaF">
+                                                <rect key="frame" x="139" y="0.0" width="9" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="out of" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-zG-JIS">
+                                                <rect key="frame" x="158" y="0.0" width="45" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTF-VL-rVf">
+                                                <rect key="frame" x="213" y="0.0" width="9" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Jlo-gS-DkI">
+                                        <rect key="frame" x="0.0" y="57" width="183" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Team Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8W3-62-VC4">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="xxxxxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAq-Kx-WX6">
+                                                <rect key="frame" x="106" y="0.0" width="77" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4zt-yA-2tU">
+                                        <rect key="frame" x="0.0" y="86" width="140" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZV-pR-7Bs">
+                                                <rect key="frame" x="0.0" y="0.0" width="47" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xL-qJ-QL1">
+                                                <rect key="frame" x="57" y="0.0" width="9" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="out of" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyu-Qu-3IY">
+                                                <rect key="frame" x="76" y="0.0" width="45" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccx-7p-etK">
+                                                <rect key="frame" x="131" y="0.0" width="9" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TjO-YS-xAU">
+                                        <rect key="frame" x="0.0" y="114" width="184" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmH-Md-ddu">
+                                                <rect key="frame" x="0.0" y="0.0" width="97" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="xxxxxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-nC-5oB">
+                                                <rect key="frame" x="107" y="0.0" width="77" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmC-fQ-lBT">
+                                        <rect key="frame" x="0.0" y="143" width="137" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rr0-gR-6dt">
+                                                <rect key="frame" x="0.0" y="0.0" width="137" height="30"/>
+                                                <state key="normal" title="Play Provided Audio"/>
+                                                <connections>
+                                                    <action selector="playProvidedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="xf0-3t-ANC"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Sq-LC-xhh">
+                                        <rect key="frame" x="0.0" y="181" width="263" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJq-V7-elT">
+                                                <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
+                                                <state key="normal" title="Record"/>
+                                                <connections>
+                                                    <action selector="recordStopAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="SxH-GV-PFi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as">
+                                                <rect key="frame" x="69" y="0.0" width="142" height="30"/>
+                                                <state key="normal" title="Play Recorded Audio"/>
+                                                <connections>
+                                                    <action selector="playRecordedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="vCn-3S-k4R"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6">
+                                                <rect key="frame" x="231" y="0.0" width="32" height="30"/>
+                                                <state key="normal" title="Next"/>
+                                                <connections>
+                                                    <action selector="nextButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="d9s-bT-QaC"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zkm-2x-S1H">
+                                        <rect key="frame" x="0.0" y="219" width="183" height="130"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyT-dh-5tX">
+                                                <rect key="frame" x="0.0" y="0.0" width="183" height="30"/>
+                                                <state key="normal" title="Send Recordings to Server"/>
+                                                <connections>
+                                                    <action selector="sendRecordingsToServerButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="Nvb-yH-NrC"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1T-lM-ZlE">
+                                                <rect key="frame" x="0.0" y="50" width="183" height="30"/>
+                                                <state key="normal" title="Refresh"/>
+                                                <connections>
+                                                    <action selector="refreshButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="9Qu-In-7uj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2w9-fK-1SN">
+                                                <rect key="frame" x="0.0" y="100" width="183" height="30"/>
+                                                <state key="normal" title="Reset"/>
+                                                <connections>
+                                                    <action selector="resetButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="4c5-J2-POF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KjY-3q-vyv" firstAttribute="leading" secondItem="gPx-rM-GJc" secondAttribute="leading" constant="20" symbolic="YES" id="LTG-Mw-A7h"/>
+                            <constraint firstItem="KjY-3q-vyv" firstAttribute="top" secondItem="5co-1Z-OYU" secondAttribute="bottom" constant="8" symbolic="YES" id="lmu-mP-NWy"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="currentPlayerNameLabel" destination="vAu-nC-5oB" id="6WI-CR-gx4"/>
+                        <outlet property="currentPlayerVoiceIndexLabel" destination="0xL-qJ-QL1" id="Z5H-7f-SYL"/>
+                        <outlet property="currentTeamIndexLabel" destination="wwB-tg-UaF" id="czf-wH-LY9"/>
+                        <outlet property="currentTeamNameLabel" destination="lAq-Kx-WX6" id="uiR-LI-fFY"/>
+                        <outlet property="currentVoiceIndexLabel" destination="RrK-mr-TDl" id="49f-qn-1hB"/>
+                        <outlet property="numVoicesToRecordLabel" destination="WuM-wp-W6Y" id="XrM-Wt-jve"/>
+                        <outlet property="totalTeamIndexLabel" destination="gTF-VL-rVf" id="VSg-1B-BTK"/>
+                        <outlet property="totalTeamPlayersLabel" destination="ccx-7p-etK" id="I3q-oI-aop"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mIh-bN-H9b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="810" y="325"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="RecordingMic" width="320" height="480"/>
-        <image name="clearBar.png" width="40" height="8"/>
-        <image name="playButton.png" width="256" height="100"/>
-        <image name="recButton.png" width="256" height="100"/>
-    </resources>
 </document>

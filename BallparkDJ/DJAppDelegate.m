@@ -139,7 +139,7 @@
 
     if ([[url scheme] isEqualToString:@"com.ballparkdj.team-admin"])
     {
-        [VoiceProviderLogin login:url];
+        [VoiceProviderLogin login];
         return YES;
     }
 
