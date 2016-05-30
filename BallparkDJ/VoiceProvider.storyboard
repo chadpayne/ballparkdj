@@ -85,7 +85,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KjY-3q-vyv">
-                                <rect key="frame" x="20" y="28" width="263" height="349"/>
+                                <rect key="frame" x="20" y="28" width="237" height="349"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PUK-7H-G5v">
                                         <rect key="frame" x="0.0" y="0.0" width="237" height="21"/>
@@ -221,24 +221,31 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Sq-LC-xhh">
-                                        <rect key="frame" x="0.0" y="181" width="263" height="30"/>
+                                        <rect key="frame" x="0.0" y="181" width="203" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJq-V7-elT">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
                                                 <state key="normal" title="Record"/>
                                                 <connections>
-                                                    <action selector="recordStopAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="SxH-GV-PFi"/>
+                                                    <action selector="recordAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="XQS-X8-Rla"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as">
-                                                <rect key="frame" x="69" y="0.0" width="142" height="30"/>
-                                                <state key="normal" title="Play Recorded Audio"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5x-dA-515">
+                                                <rect key="frame" x="69" y="0.0" width="32" height="30"/>
+                                                <state key="normal" title="Stop"/>
+                                                <connections>
+                                                    <action selector="stopAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="eSp-ze-1sy"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as">
+                                                <rect key="frame" x="121" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="Play"/>
                                                 <connections>
                                                     <action selector="playRecordedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="vCn-3S-k4R"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6">
-                                                <rect key="frame" x="231" y="0.0" width="32" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6">
+                                                <rect key="frame" x="171" y="0.0" width="32" height="30"/>
                                                 <state key="normal" title="Next"/>
                                                 <connections>
                                                     <action selector="nextButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="d9s-bT-QaC"/>
@@ -288,6 +295,9 @@
                         <outlet property="currentTeamNameLabel" destination="lAq-Kx-WX6" id="uiR-LI-fFY"/>
                         <outlet property="currentVoiceIndexLabel" destination="RrK-mr-TDl" id="49f-qn-1hB"/>
                         <outlet property="numVoicesToRecordLabel" destination="WuM-wp-W6Y" id="XrM-Wt-jve"/>
+                        <outlet property="playButton" destination="Vji-Pv-1as" id="vJK-FK-Lf0"/>
+                        <outlet property="recordButton" destination="LJq-V7-elT" id="GjJ-le-jcX"/>
+                        <outlet property="stopButton" destination="Z5x-dA-515" id="Zad-SR-kJR"/>
                         <outlet property="totalTeamIndexLabel" destination="gTF-VL-rVf" id="VSg-1B-BTK"/>
                         <outlet property="totalTeamPlayersLabel" destination="ccx-7p-etK" id="I3q-oI-aop"/>
                     </connections>

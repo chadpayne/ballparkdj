@@ -26,7 +26,7 @@
 @property (assign, nonatomic) CGFloat musicVolume;
 @property (assign, nonatomic) int currentVolumeMode;
 @property (assign,readonly,nonatomic) double songDuration;
-
+@property (strong,nonatomic) NSURL *voiceProviderURL;
 /*
  * Negative value = announcement first
  * Positive value = music first

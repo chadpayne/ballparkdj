@@ -17,10 +17,14 @@ public class LoginViewController : UIViewController
     var fetchedOrders:[DJVoiceOrder]!
     var fetchedTeams:[DJTeam]!
     var teamUploader = DJTeamUploader();
+    var savedAuthToken:String!
     
     @IBAction func loginButtonClicked(sender: AnyObject)
     {
         DJOrderBackendService.login(userName.text!, password: passwordTextField.text!) { authToken, error in
+            
+            self.savedAuthToken = authToken
+            
             DJOrderBackendService.getRecordingOrders(authToken)
             {
                 orders, error in
@@ -51,6 +55,7 @@ public class LoginViewController : UIViewController
             {
                 voiceProviderViewController.orders = fetchedOrders
                 voiceProviderViewController.teams = fetchedTeams
+                voiceProviderViewController.authToken = savedAuthToken
             }
         }
     }

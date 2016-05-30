@@ -11,7 +11,7 @@ import UIKit
 
 public class DJTeamUploader : NSObject
 {
-    let baseServerURL = DJServerInfo.baseServerURL
+    static let baseServerURL = DJServerInfo.baseServerURL
     var operationQueue = NSOperationQueue()
     var HUD:MBProgressHUD!
     
@@ -20,7 +20,7 @@ public class DJTeamUploader : NSObject
     
     }
     
-    func generateBoundaryString() -> String
+    static func generateBoundaryString() -> String
     {
         return NSUUID().UUIDString
     }
@@ -53,7 +53,7 @@ public class DJTeamUploader : NSObject
         {
             if let url = player.audio?.announcementURL?.lastPathComponent
             {
-                let myURL = NSURL(string: "\(baseServerURL)/teamfiles/\(team.teamId)/\(url)")
+                let myURL = NSURL(string: "\(DJServerInfo.baseServerURL)/teamfiles/\(team.teamId)/\(url)")
 
                 let operation = DataTaskOperation.init(URL: myURL!)
                                 {
@@ -194,7 +194,7 @@ public class DJTeamUploader : NSObject
             
             for teamID in teamIDs
             {
-                let serverURL = NSURL(string: "\(self.baseServerURL)/team/\(teamID)")
+                let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/team/\(teamID)")
                 
                 let operation = DataTaskOperation.init(URL: serverURL!)
                                 {
@@ -219,15 +219,17 @@ public class DJTeamUploader : NSObject
         }
     }
     
-    public func importTeam(teamID:String)
+    public func importTeam(teamID:String?)
     {
+        guard let teamID = teamID else { return }
+        
         HUD = MBProgressHUD.showHUDAddedTo(DJAppDelegate.sharedDelegate().window, animated: true)
         DJAppDelegate.sharedDelegate().window.addSubview(HUD)
         HUD.labelText = "Importing..";
         HUD.show(true)
 
         
-        let serverURL = NSURL(string: "\(baseServerURL)/team/\(teamID)")
+        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/team/\(teamID)")
         let request = NSMutableURLRequest(URL: serverURL!)
         request.HTTPMethod = "GET"
         
@@ -352,7 +354,7 @@ public class DJTeamUploader : NSObject
         shareTeam(team) { team in
             if team.teamId != nil
             {
-                let serverURL = NSURL(string: "\(self.baseServerURL)/ordervoice")
+                let serverURL = NSURL(string: "\(DJTeamUploader.baseServerURL)/ordervoice")
                 let request = NSMutableURLRequest(URL: serverURL!)
                 
                 request.HTTPMethod = "POST"
@@ -412,10 +414,14 @@ public class DJTeamUploader : NSObject
         }
     }
 
-    
     public func shareTeam(team:DJTeam, completion: (DJTeam) -> Void)
     {
-        let serverURL = NSURL(string: "\(baseServerURL)/team")
+        DJTeamUploader.shareTeam(team,voicerMode: false, completion: completion)
+    }
+    
+    public static func shareTeam(team:DJTeam, voicerMode:Bool, completion: (DJTeam) -> Void)
+    {
+        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/team")
         let request = NSMutableURLRequest(URL: serverURL!)
 
         request.HTTPMethod = "PUT"
@@ -444,9 +450,19 @@ public class DJTeamUploader : NSObject
             var audioDict = [String:AnyObject]()
             if let audio = player.audio
             {
-                if let announcementURL = audio?.announcementClip?.url?.lastPathComponent
+                if voicerMode
                 {
-                    audioDict["announcementUrl"] = announcementURL
+                    if let announcementURL = audio?.voiceProviderURL.lastPathComponent
+                    {
+                        audioDict["announcementUrl"] = announcementURL
+                    }
+                }
+                else
+                {
+                    if let announcementURL = audio?.announcementClip?.url?.lastPathComponent
+                    {
+                        audioDict["announcementUrl"] = announcementURL
+                    }
                 }
                 audioDict["overlap"] = audio.overlap
                 audioDict["musicStartTime"] = audio.musicStartTime
@@ -489,7 +505,15 @@ public class DJTeamUploader : NSObject
                 {
                     team.teamId = teamID
                     print("Success!")
-                    self.shareTeamFiles(team,completion: completion)
+                    
+                    if voicerMode == false
+                    {
+                        DJTeamUploader.shareTeamFiles(team, completion: completion)
+                    }
+                    else
+                    {
+                        completion(team)
+                    }
                 }
                 else
                 {
@@ -508,11 +532,11 @@ public class DJTeamUploader : NSObject
     }
 
     
-    public func shareTeamFiles(team:DJTeam, completion: (DJTeam) -> Void)
+    public static func shareTeamFiles(team:DJTeam, completion: (DJTeam) -> Void)
     {
-        let boundary = generateBoundaryString()
+        let boundary = DJTeamUploader.generateBoundaryString()
         
-        let serverURL = NSURL(string: "\(baseServerURL)/uploadTeamFiles")
+        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/uploadTeamFiles")
         let request = NSMutableURLRequest(URL: serverURL!)
         
         request.HTTPMethod = "POST"
@@ -534,7 +558,7 @@ public class DJTeamUploader : NSObject
 
         }
 
-        let httpBody = createBodyWithBoundary(boundary, params: params, paths: paths, fieldName: "file")
+        let httpBody = DJTeamUploader.createBodyWithBoundary(boundary, params: params, paths: paths, fieldName: "file")
         
         let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: httpBody)
         {
@@ -554,8 +578,46 @@ public class DJTeamUploader : NSObject
         
         task.resume()
     }
+  
+    public static func uploadTeamFiles(teamId:String, paths:[NSURL], completion: () -> Void)
+    {
+        let boundary = generateBoundaryString()
+        
+        let serverURL = NSURL(string: "\(baseServerURL)/uploadTeamFiles")
+        let request = NSMutableURLRequest(URL: serverURL!)
+        
+        request.HTTPMethod = "POST"
+        
+        let contentType = "multipart/form-data; boundary=\(boundary)"
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        var params = [String:String]()
+        
+        params["teamId"] = teamId
+        
+        let httpBody = createBodyWithBoundary(boundary, params: params, paths: paths, fieldName: "file")
+        
+        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: httpBody)
+        {
+            data, response, error in
+            if ((error) != nil)
+            {
+                print(error)
+                return;
+            }
+            
+            let result = NSString(data: data!
+                , encoding: NSUTF8StringEncoding)
+            print(result)
+            
+            completion()
+        }
+        
+        task.resume()
+    }
+
     
-    func createBodyWithBoundary(boundary:String, params:[String:String], paths:[NSURL], fieldName:String) -> NSData
+    static func createBodyWithBoundary(boundary:String, params:[String:String], paths:[NSURL], fieldName:String) -> NSData
     {
         let httpBody = NSMutableData()
         

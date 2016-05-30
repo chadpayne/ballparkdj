@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DJVoiceProviderViewController: UIViewController {
+class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
 
     var orders:[DJVoiceOrder]!
     var teams:[DJTeam]!
@@ -17,6 +17,7 @@ class DJVoiceProviderViewController: UIViewController {
     var currentPlayerIndex = 0;
     var currentPlayer:DJPlayer!
     var currentTeam:DJTeam!
+    var authToken:String!
     
     
     @IBOutlet weak var currentVoiceIndexLabel: UILabel!
@@ -24,6 +25,7 @@ class DJVoiceProviderViewController: UIViewController {
     @IBOutlet weak var numVoicesToRecordLabel: UILabel!
 
     @IBOutlet weak var currentTeamIndexLabel: UILabel!
+    @IBOutlet weak var recordButton: UIButton!
     
     @IBOutlet weak var totalTeamIndexLabel: UILabel!
     
@@ -37,6 +39,13 @@ class DJVoiceProviderViewController: UIViewController {
     
     
     @IBOutlet weak var currentPlayerNameLabel: UILabel!
+    
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
+    
+    var audioPlayer: AVAudioPlayer?
+    var audioRecorder: AVAudioRecorder?
+
     
     func resetUI()
     {
@@ -58,6 +67,16 @@ class DJVoiceProviderViewController: UIViewController {
         }
         
         // ::TODO:: Handle case where there is No work - UI should be all zero's
+        if teams.count == 0
+        {
+            let alertController = UIAlertController(title: "Info", message: "No voices to record", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+            alertController.addAction(okAction)
+            presentViewController(alertController, animated: false, completion: nil)
+
+            
+            //dismissViewControllerAnimated(true, completion: nil)
+        }
         
         
     }
@@ -105,14 +124,19 @@ class DJVoiceProviderViewController: UIViewController {
             currentPlayer = currentTeam.players[currentPlayerIndex] as! DJPlayer
             currentPlayerNameLabel.text = currentPlayer.name
         }
+
+        playButton.enabled = true
+        stopButton.enabled = true
         
+        prepareRecorder()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         resetUI()
+        prepareRecorder()
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -120,37 +144,177 @@ class DJVoiceProviderViewController: UIViewController {
     }
     
 
-    @IBAction func playProvidedAudioButtonClicked(sender: AnyObject) {
+    @IBAction func playProvidedAudioButtonClicked(sender: AnyObject)
+    {
+        currentPlayer.audio.announcementClip.play()
     }
     
-    @IBAction func recordStopAudioButtonClicked(sender: AnyObject) {
+    func prepareRecorder()
+    {
+        var error:NSError?
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyyHHmmSS";
+        let dateString = formatter.stringFromDate(NSDate())
+        
+        let dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let docsDir = dirPaths[0]
+        let soundFilePath = (docsDir as NSString).stringByAppendingPathComponent(dateString)
+        let soundFileURL = NSURL(fileURLWithPath: soundFilePath)
+        let recordSettings = [AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue,
+                              AVEncoderBitRateKey: 96, AVNumberOfChannelsKey: 2, AVSampleRateKey: 44100.0, AVLinearPCMBitDepthKey: 32, AVLinearPCMIsBigEndianKey: 0, AVLinearPCMIsFloatKey: 0, AVEncoderBitDepthHintKey: 16, AVFormatIDKey: Int(kAudioFormatAppleIMA4)]
+        
+        do {
+            audioRecorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings as! [String:AnyObject])
+        } catch let error1 as NSError {
+            error = error1
+            audioRecorder = nil
+        }
+        catch {
+            
+        }
+
+        audioRecorder?.prepareToRecord()
+        
+        if currentPlayer != nil
+        {
+            currentPlayer.audio.voiceProviderURL = soundFileURL
+        }
     }
+
+    @IBAction func recordAudioButtonClicked(sender: AnyObject)
+    {
+        if audioRecorder?.recording == false {
+            playButton.enabled = false
+            stopButton.enabled = true
+            audioRecorder?.prepareToRecord()
+            audioRecorder?.record()
+        }
+    }
+
     
-    @IBAction func playRecordedAudioButtonClicked(sender: AnyObject) {
+    @IBAction func stopAudioButtonClicked(sender: AnyObject)
+    {
+        stopButton.enabled = false
+        playButton.enabled = true
+        recordButton.enabled = true
+        
+        if audioRecorder?.recording == true {
+            audioRecorder?.stop()
+        } else {
+            audioPlayer?.stop()
+        }
+    }
+
+    
+    @IBAction func playRecordedAudioButtonClicked(sender: AnyObject)
+    {
+        if audioRecorder?.recording == false {
+            stopButton.enabled = true
+            recordButton.enabled = false
+            
+            var error: NSError?
+            
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOfURL: (audioRecorder?.url)!)
+            } catch let error1 as NSError {
+                error = error1
+                audioPlayer = nil
+            }
+            catch {
+                
+            }
+            
+            audioPlayer?.delegate = self
+            
+            if let err = error {
+                print("audioPlayer error: \(err.localizedDescription)")
+            } else {
+                audioPlayer?.play()
+            }
+            
+        }
     }
     
     @IBAction func nextButtonClicked(sender: AnyObject) {
         moveToNextPlayer()
     }
     
-    @IBAction func sendRecordingsToServerButtonClicked(sender: AnyObject) {
+    @IBAction func sendRecordingsToServerButtonClicked(sender: AnyObject)
+    {
+        for team in teams
+        {
+            var allAudioRecordedForTeam = true
+            var filePaths = [NSURL]()
+            for player in team.players
+            {
+                if player.audio!.voiceProviderURL == nil
+                {
+                    allAudioRecordedForTeam = false
+                    break
+                }
+                else
+                {
+                    filePaths.append(player.audio!.voiceProviderURL)
+                }
+            }
+            
+            if allAudioRecordedForTeam
+            {
+                let sem = dispatch_semaphore_create(0)
+                
+                DJTeamUploader.shareTeam(team, voicerMode: true)
+                { team in
+                    DJTeamUploader.uploadTeamFiles(team.teamId, paths: filePaths) {
+                        
+                        guard let order = self.getOrderForTeam(team) else { dispatch_semaphore_signal(sem); return }
+                        
+                        DJOrderBackendService.markOrderComplete(self.authToken, order: order)
+                        {_,_ in
+                            dispatch_semaphore_signal(sem)
+                            
+                        }
+                    }
+                }
+
+                dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER)
+            }
+            
+        }
+    }
+    
+    func getOrderForTeam(team:DJTeam) -> DJVoiceOrder?
+    {
+        for order in orders {
+            if order.teamId == team.teamId
+            {
+                return order
+            }
+        }
+        
+        return nil
     }
     
     @IBAction func refreshButtonClicked(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Info", message: "Not implemented yet", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alertController.addAction(okAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     
-    @IBAction func resetButtonClicked(sender: AnyObject) {
-    }
-    
-    /*
-    // MARK: - Navigation
+    @IBAction func resetButtonClicked(sender: AnyObject)
+    {
+        let alertController = UIAlertController(title: "Info", message: "Not implemented yet", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alertController.addAction(okAction)
+        presentViewController(alertController, animated: true, completion: nil)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+        recordButton.enabled = true
+        stopButton.enabled = false
+    }
 
 }
