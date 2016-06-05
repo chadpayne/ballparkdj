@@ -143,6 +143,12 @@
         return YES;
     }
 
+    if ([[url scheme] isEqualToString:@"com.ballparkdj.order-import"])
+    {
+        // ::TODO:: Process Order Import
+        return YES;
+    }
+
     
     return NO;
 }
