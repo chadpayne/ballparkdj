@@ -97,6 +97,16 @@
 
 -(void)importTeam:(DJTeam *)team
 {
+    // Check to see if we are updating a team 
+    for (DJTeam *aTeam in self.teams)
+    {
+        if ([aTeam.teamId isEqualToString:team.teamId])
+        {
+            [self encode];
+            return;
+        }
+    }
+    
     DJTeam *newTeam = team;
     newTeam.teamName = [self generateUniqueTeamName:newTeam];
 

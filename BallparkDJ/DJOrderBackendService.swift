@@ -148,4 +148,48 @@ import Foundation
         task.resume()
     }
     
+    public static func getPurchasedVoiceOrder(orderId:String, completion: (DJVoiceOrder!, NSError?) -> Void)
+    {
+        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/ordervoice/\(orderId)")
+        let request = NSMutableURLRequest(URL: serverURL!)
+        
+        request.HTTPMethod = "GET"
+        
+        let contentType = "application/json"
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request)
+        {
+            data, response, error in
+            if (error != nil)
+            {
+                completion(nil,error!)
+                return;
+            }
+            
+            if let orderData = data
+            {
+                let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
+                print("\(orderDataString)")
+                
+                let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
+                
+                if let dict = resultsDict as?  [String:AnyObject]
+                {
+                    let voiceOrder = DJVoiceOrder(dictionary: dict)
+                    completion(voiceOrder,nil)
+                    return
+                }
+                
+                completion(nil, nil)
+            }
+            else
+            {
+                completion(nil,nil)
+            }
+        }
+        task.resume()
+    }
+
+    
 }

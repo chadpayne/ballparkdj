@@ -145,7 +145,14 @@
 
     if ([[url scheme] isEqualToString:@"com.ballparkdj.order-import"])
     {
-        // ::TODO:: Process Order Import
+        [DJOrderBackendService getPurchasedVoiceOrder:[url host] completion:^(DJVoiceOrder *order,NSError *error) {
+            
+            if (order.teamId != nil)
+            {
+                DJTeamUploader *teamUploader = [[DJTeamUploader alloc] init];
+                [teamUploader importTeam:order.teamId];
+            }
+        }];
         return YES;
     }
 
