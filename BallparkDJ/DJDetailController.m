@@ -13,7 +13,7 @@
 #import "DJRecorderController.h"
 #import "RageIAPHelper.h"
 
-@interface DJDetailController (){
+@interface DJDetailController ()<DJOverlapSliderDelegate>{
     bool newPlayer;
     float overlapHeight;
     NSTimer *overlapTimer;
@@ -44,6 +44,7 @@
 //    [self.navigationItem setBackBarButtonItem:backButton];
     
     self.overlapSlider = [[DJOverlapSlider alloc] initWithFrame:CGRectMake(100, 700, 500, 300)];
+    self.overlapSlider.delegate = self;
     [self.view addSubview:self.overlapSlider];
     [self.overlapSlider setFrame:CGRectMake(0, 256, 320, 120)];
     
@@ -192,6 +193,19 @@
 //    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super viewWillDisappear:animated];
+}
+
+- (void)doubleTapped
+{
+    currentVolumeMode++;
+    if (currentVolumeMode >= 5)
+    {
+        currentVolumeMode = 0;
+    }
+    
+    self.sliderVolumeMode.value = currentVolumeMode;
+    [self ApplyVolumeMode];
+
 }
 
 - (void)replaceLabels {

@@ -89,6 +89,11 @@ double const _sliderCenter = 151.5;
         self = [xib objectAtIndex:0];
         UIGestureRecognizer* slidr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSlide:)];
         [self addGestureRecognizer:slidr];
+        
+        UITapGestureRecognizer *dblClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dblClick:)];
+        dblClick.numberOfTapsRequired = 2;
+        [self addGestureRecognizer:dblClick];
+        
         _maxValueBottom = 10.0f;
         _maxValueTop = 10.0f;
        // self.keyFirst.backgroundColor = [UIColor colorWithRed:1
@@ -125,6 +130,11 @@ double const _sliderCenter = 151.5;
     }
     return self;
 }
+
+-(void)dblClick:(UITapGestureRecognizer*)gestureRecognizer{
+    [self.delegate doubleTapped];
+}
+
 
 -(void)handleSlide:(UIPanGestureRecognizer*)gestureRecognizer{
     

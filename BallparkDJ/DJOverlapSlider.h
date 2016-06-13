@@ -8,6 +8,10 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+@protocol DJOverlapSliderDelegate
+-(void)doubleTapped;
+@end
+
 @interface DJOverlapSlider : UIView{
 }
 @property (strong, nonatomic) IBOutlet UIView *announceBox;
@@ -22,4 +26,7 @@
 @property(assign, nonatomic) double maxValueTop;
 @property(assign, nonatomic) double maxValueBottom;
 @property(assign, nonatomic) CGPoint touchPos;
+
+@property(assign,nonatomic) id<DJOverlapSliderDelegate> delegate;
+
 @end
