@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DJVoiceProviderViewControllerDelegate {
+    func getOrdersAndTeams(completion:(orders:[DJVoiceOrder], teams:[DJTeam]) -> ())
+}
+
 class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
 
     var orders:[DJVoiceOrder]!
@@ -15,10 +19,12 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     var currentTeamIndex = 0;
     var currentPlayerIndex = 0;
+    var currentTotalRecordingIndex = 0;
     var currentPlayer:DJPlayer!
     var currentTeam:DJTeam!
     var authToken:String!
     
+    var delegate:DJVoiceProviderViewControllerDelegate?
     
     @IBOutlet weak var currentVoiceIndexLabel: UILabel!
     
@@ -60,6 +66,8 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         numVoicesToRecordLabel.text = "\(totalNumVoices)"
         
         currentVoiceIndexLabel.text = "\(1)"
+        currentTotalRecordingIndex = 1;
+
         
         if teams.count > 0
         {
@@ -101,6 +109,10 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     {
         currentPlayerIndex += 1
         
+        currentTotalRecordingIndex = currentTotalRecordingIndex + 1
+        currentVoiceIndexLabel.text = "\(currentTotalRecordingIndex)"
+
+        
         if currentPlayerIndex >= teams[currentTeamIndex].players.count
         {
             if currentTeamIndex+1 < teams.count
@@ -123,6 +135,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         {
             currentPlayer = currentTeam.players[currentPlayerIndex] as! DJPlayer
             currentPlayerNameLabel.text = currentPlayer.name
+            currentPlayerVoiceIndexLabel.text = "\(currentPlayerIndex+1)"
         }
 
         playButton.enabled = true
@@ -305,10 +318,12 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     @IBAction func resetButtonClicked(sender: AnyObject)
     {
-        let alertController = UIAlertController(title: "Info", message: "Not implemented yet", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-        alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        delegate?.getOrdersAndTeams() {
+            orders, teams in
+                self.teams = teams
+                self.orders = orders
+                self.resetUI()
+        }
 
     }
     

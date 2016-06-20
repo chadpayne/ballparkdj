@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class LoginViewController : UIViewController
+public class LoginViewController : UIViewController,DJVoiceProviderViewControllerDelegate
 {
     @IBOutlet weak var userName: UITextField!
     
@@ -25,24 +25,12 @@ public class LoginViewController : UIViewController
             
             self.savedAuthToken = authToken
             
-            DJOrderBackendService.getRecordingOrders(authToken)
-            {
-                orders, error in
-  
-
-                var teamIds:[String] = [String]()
-                orders.forEach() { order in teamIds.append(order.teamId!) }
-                
-                self.teamUploader.performImportTeams(teamIds) {
-                    teams in
-                        self.fetchedOrders = orders
-                        self.fetchedTeams = teams
-                
-                    dispatch_async(dispatch_get_main_queue())
-                    {
-                        self.fetchedOrders = orders
-                        self.performSegueWithIdentifier("record", sender: self)
-                    }
+            self.getOrdersAndTeams() { orders, teams in
+                self.fetchedOrders = orders
+                self.fetchedTeams = teams
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    self.performSegueWithIdentifier("record", sender: self)
                 }
             }
         }
@@ -56,7 +44,26 @@ public class LoginViewController : UIViewController
                 voiceProviderViewController.orders = fetchedOrders
                 voiceProviderViewController.teams = fetchedTeams
                 voiceProviderViewController.authToken = savedAuthToken
+                voiceProviderViewController.delegate = self
             }
         }
+    }
+    
+    public func getOrdersAndTeams(completion:(orders:[DJVoiceOrder], teams:[DJTeam]) -> ())
+    {
+        DJOrderBackendService.getRecordingOrders(savedAuthToken)
+        {
+            orders, error in
+            
+            var teamIds:[String] = [String]()
+            orders.forEach() { order in teamIds.append(order.teamId!) }
+            
+            self.teamUploader.performImportTeams(teamIds) {
+                teams in
+
+                completion(orders: orders,teams: teams)
+            }
+        }
+        
     }
 }
