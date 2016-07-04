@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="syo-1s-iaS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="syo-1s-iaS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -230,21 +230,21 @@
                                                     <action selector="recordAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="XQS-X8-Rla"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5x-dA-515">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5x-dA-515">
                                                 <rect key="frame" x="69" y="0.0" width="32" height="30"/>
                                                 <state key="normal" title="Stop"/>
                                                 <connections>
                                                     <action selector="stopAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="eSp-ze-1sy"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as">
                                                 <rect key="frame" x="121" y="0.0" width="30" height="30"/>
                                                 <state key="normal" title="Play"/>
                                                 <connections>
                                                     <action selector="playRecordedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="vCn-3S-k4R"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6">
                                                 <rect key="frame" x="171" y="0.0" width="32" height="30"/>
                                                 <state key="normal" title="Next"/>
                                                 <connections>
@@ -294,6 +294,7 @@
                         <outlet property="currentTeamIndexLabel" destination="wwB-tg-UaF" id="czf-wH-LY9"/>
                         <outlet property="currentTeamNameLabel" destination="lAq-Kx-WX6" id="uiR-LI-fFY"/>
                         <outlet property="currentVoiceIndexLabel" destination="RrK-mr-TDl" id="49f-qn-1hB"/>
+                        <outlet property="nextButton" destination="0ya-sJ-pz6" id="eKl-T6-MdK"/>
                         <outlet property="numVoicesToRecordLabel" destination="WuM-wp-W6Y" id="XrM-Wt-jve"/>
                         <outlet property="playButton" destination="Vji-Pv-1as" id="vJK-FK-Lf0"/>
                         <outlet property="recordButton" destination="LJq-V7-elT" id="GjJ-le-jcX"/>

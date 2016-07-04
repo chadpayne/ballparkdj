@@ -49,8 +49,11 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
+    @IBOutlet weak var nextButton: UIButton!
     var audioPlayer: AVAudioPlayer?
     var audioRecorder: AVAudioRecorder?
+    
+    var currentSoundFileURL:NSURL?
 
     
     func resetUI()
@@ -86,7 +89,9 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             //dismissViewControllerAnimated(true, completion: nil)
         }
         
-        
+        stopButton.enabled = false
+        playButton.enabled = false
+        nextButton.enabled = false
     }
     
     func setupUIForTeam(team:DJTeam)
@@ -138,8 +143,10 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             currentPlayerVoiceIndexLabel.text = "\(currentPlayerIndex+1)"
         }
 
-        playButton.enabled = true
-        stopButton.enabled = true
+        stopButton.enabled = false
+        playButton.enabled = false
+        nextButton.enabled = false
+
         
         prepareRecorder()
     }
@@ -184,7 +191,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             audioRecorder = nil
         }
         catch {
-            
+           print("Error creating recorder!!!")
         }
 
         audioRecorder?.prepareToRecord()
@@ -193,6 +200,8 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         {
             currentPlayer.audio.voiceProviderURL = soundFileURL
         }
+        
+        currentSoundFileURL = soundFileURL
     }
 
     @IBAction func recordAudioButtonClicked(sender: AnyObject)
@@ -200,6 +209,10 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         if audioRecorder?.recording == false {
             playButton.enabled = false
             stopButton.enabled = true
+            recordButton.enabled = false
+
+            try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryRecord, withOptions: AVAudioSessionCategoryOptions.AllowBluetooth)
+            
             audioRecorder?.prepareToRecord()
             audioRecorder?.record()
         }
@@ -211,9 +224,19 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         stopButton.enabled = false
         playButton.enabled = true
         recordButton.enabled = true
+        nextButton.enabled = true
         
         if audioRecorder?.recording == true {
             audioRecorder?.stop()
+            
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            } catch let error1 as NSError {
+                print("Error \(error1.localizedDescription)")
+            } catch {
+                print("Sucks to be me")
+            }
+            
         } else {
             audioPlayer?.stop()
         }
@@ -229,13 +252,13 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             var error: NSError?
             
             do {
-                audioPlayer = try AVAudioPlayer(contentsOfURL: (audioRecorder?.url)!)
+                audioPlayer = try AVAudioPlayer(contentsOfURL:currentSoundFileURL!)
             } catch let error1 as NSError {
                 error = error1
                 audioPlayer = nil
             }
             catch {
-                
+                print("Some other exception!!!");
             }
             
             audioPlayer?.delegate = self
@@ -243,6 +266,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             if let err = error {
                 print("audioPlayer error: \(err.localizedDescription)")
             } else {
+                audioPlayer?.prepareToPlay()
                 audioPlayer?.play()
             }
             
@@ -326,8 +350,18 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         }
 
     }
+  
+    func audioRecorderBeginInterruption(recorder: AVAudioRecorder) {
+        print("Here1!!!")
+    }
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+        recordButton.enabled = true
+        stopButton.enabled = false
+    }
+
+    func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: NSError?) {
+        print("Error decoding!")
         recordButton.enabled = true
         stopButton.enabled = false
     }
