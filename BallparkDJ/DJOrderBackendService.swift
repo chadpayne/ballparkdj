@@ -172,6 +172,8 @@ import Foundation
                 let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
                 print("\(orderDataString)")
                 
+                // ::TODO:: Check that we are not nil
+                
                 let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
                 
                 if let dict = resultsDict as?  [String:AnyObject]
