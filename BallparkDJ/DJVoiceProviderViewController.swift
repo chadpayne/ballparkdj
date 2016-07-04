@@ -112,6 +112,10 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     func moveToNextPlayer()
     {
+        stopButton.enabled = false
+        playButton.enabled = false
+        nextButton.enabled = false
+        
         currentPlayerIndex += 1
         
         currentTotalRecordingIndex = currentTotalRecordingIndex + 1
@@ -134,6 +138,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
                 let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
                 alertController.addAction(okAction)
                 presentViewController(alertController, animated: true, completion: nil)
+                return
             }
         }
         else
@@ -142,12 +147,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             currentPlayerNameLabel.text = currentPlayer.name
             currentPlayerVoiceIndexLabel.text = "\(currentPlayerIndex+1)"
         }
-
-        stopButton.enabled = false
-        playButton.enabled = false
-        nextButton.enabled = false
-
-        
+       
         prepareRecorder()
     }
     
@@ -166,6 +166,16 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
 
     @IBAction func playProvidedAudioButtonClicked(sender: AnyObject)
     {
+        if (currentPlayer.audio.announcementClip == nil)
+        {
+            let alertController = UIAlertController(title: "Info", message: "No supplied audio for player!", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+            alertController.addAction(okAction)
+            presentViewController(alertController, animated: false, completion: nil)
+            
+            return
+        }
+        
         currentPlayer.audio.announcementClip.play()
     }
     
