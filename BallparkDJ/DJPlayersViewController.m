@@ -640,7 +640,7 @@ enum PostAuthenticationAction
         EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
         emailAddressViewController.delegate = self;
         
-        self.action = SHARE_TEAM;
+        self.action = ORDER_VOICE;
         
         [self presentViewController:emailAddressViewController animated:YES completion:nil];
         return;
