@@ -26,14 +26,19 @@ public class DJVoiceOrder : NSObject
     var teamName:String?
     var teamOwnerEmail:String?
     var orderStatus:DJVoiceOrderStatus
+    var orderCompletionDate:NSDate?
+    var revoicingAvailable:Bool?
+    var revoicingExpirationDate:NSDate?
     
-    init(orderId:String, voiceProviderId:String, teamName:String, teamOwnerEmail:String, orderStatus:DJVoiceOrderStatus, teamId:String)
+    
+    init(orderId:String, voiceProviderId:String, teamName:String, teamOwnerEmail:String, orderStatus:DJVoiceOrderStatus, teamId:String, revoicingAvailable:Bool)
     {
         self.orderId = orderId
         self.voiceProviderId = voiceProviderId
         self.teamId = teamId
         self.teamName = teamName
         self.teamOwnerEmail = teamOwnerEmail
+        self.revoicingAvailable = revoicingAvailable
         self.orderStatus = orderStatus
     }
 
@@ -46,6 +51,19 @@ public class DJVoiceOrder : NSObject
         teamId = dictionary["teamId"] as? String
         //orderStatus = dictionary["orderStatus"] as? String //as DJVoiceOrderStatus
         orderStatus = .NEW
+        revoicingAvailable = dictionary["revoicingAvailable"] as? Bool
+        
+        if let revoiceMilliSeconds = dictionary["revoicingExpirationDate"] as? NSTimeInterval
+        {
+            let revoiceSeconds = revoiceMilliSeconds / 1000.0
+            revoicingExpirationDate = NSDate(timeIntervalSince1970: revoiceSeconds)
+        }
+ 
+        if let orderCompleteMilliSeconds = dictionary["orderCompletionDate"] as? NSTimeInterval
+        {
+            let orderCompleteSeconds = orderCompleteMilliSeconds / 1000.0
+            orderCompletionDate = NSDate(timeIntervalSince1970: orderCompleteSeconds)
+        }
     }
     
     func toDictionary() -> [String:AnyObject]

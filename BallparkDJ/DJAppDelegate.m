@@ -145,12 +145,16 @@
 
     if ([[url scheme] isEqualToString:@"com.ballparkdj.order-import"])
     {
-        [DJOrderBackendService getPurchasedVoiceOrder:[url host] completion:^(DJVoiceOrder *order,NSError *error) {
+        NSString *voiceOrderID = [url host];
+        
+        [DJOrderBackendService getPurchasedVoiceOrder:voiceOrderID completion:^(DJVoiceOrder *order,NSError *error) {
+            
+            NSLog(@"Voice re-voice expiration date = %@", order.revoicingExpirationDate);
             
             if (order.teamId != nil)
             {
                 DJTeamUploader *teamUploader = [[DJTeamUploader alloc] init];
-                [teamUploader importTeam:order.teamId];
+                [teamUploader importOrder:order];
             }
         }];
         return YES;

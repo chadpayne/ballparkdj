@@ -218,8 +218,25 @@ public class DJTeamUploader : NSObject
             completion(teams: teams)
         }
     }
-    
+
+    public func importOrder(voiceOrder:DJVoiceOrder)
+    {
+        importTeam(voiceOrder.teamId) {
+            team in
+            
+            // ::TODO:: Add Order information to Team
+            print("Add voice expiration data to team - so we know later on if voice can be revoiced")
+             
+        }
+    }
+
     public func importTeam(teamID:String?)
+    {
+        importTeam(teamID, completionBlock: nil)
+    }
+
+    
+    public func importTeam(teamID:String?, completionBlock:((team:DJTeam) -> ())?)
     {
         guard let teamID = teamID else { return }
         
@@ -339,6 +356,11 @@ public class DJTeamUploader : NSObject
                         if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
                         {
                             appDelegate.league.importTeam(team)
+                            
+                            if let completionBlock = completionBlock
+                            {
+                                completionBlock(team:team)
+                            }
                         }
                         self.HUD.hide(true)
                     }
