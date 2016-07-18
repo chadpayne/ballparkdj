@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *teamName;
 @property (strong, nonatomic) NSString *teamId;
 @property (strong, nonatomic) NSString *teamOwnerEmail;
+@property (strong, nonatomic) NSDate *orderRevoiceExpirationDate;
 
 -(id)initWithName:(NSString *)name;
 

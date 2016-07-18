@@ -224,9 +224,10 @@ public class DJTeamUploader : NSObject
         importTeam(voiceOrder.teamId) {
             team in
             
-            // ::TODO:: Add Order information to Team
-            print("Add voice expiration data to team - so we know later on if voice can be revoiced")
-             
+            if let expirationDate = voiceOrder.revoicingExpirationDate
+            {
+                team.orderRevoiceExpirationDate = expirationDate
+            }
         }
     }
 

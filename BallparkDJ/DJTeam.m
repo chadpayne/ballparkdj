@@ -60,6 +60,11 @@
         self.teamOwnerEmail = [coder decodeObjectForKey:@"_teamOwnerEmail"];
     }
     
+    if ([coder containsValueForKey:@"_orderRevoiceExpirationDate"])
+    {
+        self.orderRevoiceExpirationDate = [coder decodeObjectForKey:@"_orderRevoiceExpirationDate"];
+    }
+    
     return self;
 }
 
@@ -91,6 +96,11 @@
     if (self.teamOwnerEmail)
     {
         [coder encodeObject:self.teamOwnerEmail forKey:@"_teamOwnerEmail"];
+    }
+
+    if (self.orderRevoiceExpirationDate)
+    {
+        [coder encodeObject:self.orderRevoiceExpirationDate forKey:@"_orderRevoiceExpirationDate"];
     }
 }
 
