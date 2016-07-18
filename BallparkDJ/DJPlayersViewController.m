@@ -553,12 +553,27 @@ enum PostAuthenticationAction
     UIAlertAction *orderVoiceAction = [UIAlertAction actionWithTitle:@"Order Voice" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self orderVoice];
     }];
+
+    UIAlertAction *voiceReorderVoiceAction = [UIAlertAction actionWithTitle:@"Request Voice Order Redo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self revoiceOrder];
+    }];
+
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
     [alertController addAction:shareAction];
     [alertController addAction:duplicateTeamAction];
-    [alertController addAction:orderVoiceAction];
+    
+    if (self.team.orderRevoiceExpirationDate != nil && [self.team.orderRevoiceExpirationDate compare:[NSDate date]] == NSOrderedDescending)
+    {
+        [alertController addAction:voiceReorderVoiceAction];
+    }
+    else
+    {
+        [alertController addAction:orderVoiceAction];
+    }
+
+    
     [alertController addAction:cancelAction];
     
     [self presentViewController:alertController animated:YES completion:nil];
@@ -577,7 +592,11 @@ enum PostAuthenticationAction
     return YES;
 }
 
-
+-(void)revoiceOrder
+{
+    
+}
+                                                        
 -(void)shareTeam
 {
     DJTeamUploader *uploader = [[DJTeamUploader alloc] init];

@@ -356,12 +356,12 @@ public class DJTeamUploader : NSObject
                     dispatch_async(dispatch_get_main_queue()) {
                         if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
                         {
-                            appDelegate.league.importTeam(team)
-                            
                             if let completionBlock = completionBlock
                             {
                                 completionBlock(team:team)
                             }
+                            appDelegate.league.importTeam(team)
+                            
                         }
                         self.HUD.hide(true)
                     }
