@@ -268,6 +268,12 @@
 //                ((overlap > 0) ? overlap : 0);
 //
     
+    // If Announcment duration is not set - we will set it so that audio plays
+    if (self.announcementClip && self.announcementDuration == 0)
+    {
+        self.announcementDuration = self.announcementClip.duration;
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidStart" object:self];
     if (!self.announcementClip && self.musicClip) {
         [self playMusic];
