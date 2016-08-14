@@ -65,6 +65,11 @@
         self.orderRevoiceExpirationDate = [coder decodeObjectForKey:@"_orderRevoiceExpirationDate"];
     }
     
+    if ([coder containsValueForKey:@"_orderId"])
+    {
+        self.orderId = [coder decodeObjectForKey:@"_orderId"];
+    }
+    
     return self;
 }
 
@@ -101,6 +106,11 @@
     if (self.orderRevoiceExpirationDate)
     {
         [coder encodeObject:self.orderRevoiceExpirationDate forKey:@"_orderRevoiceExpirationDate"];
+    }
+    
+    if (self.orderId)
+    {
+        [coder encodeObject:self.orderId forKey:@"_orderId"];
     }
 }
 
