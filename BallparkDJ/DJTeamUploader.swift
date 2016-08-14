@@ -227,6 +227,7 @@ public class DJTeamUploader : NSObject
             if let expirationDate = voiceOrder.revoicingExpirationDate
             {
                 team.orderRevoiceExpirationDate = expirationDate
+                team.orderId = voiceOrder.orderId!
             }
         }
     }
@@ -392,6 +393,11 @@ public class DJTeamUploader : NSObject
                 }
                 teamDict["teamName"] = team.teamName
                 teamDict["teamOwnerEmail"] = team.teamOwnerEmail
+                
+                if let orderId = team.orderId
+                {
+                    teamDict["orderId"] = orderId
+                }
                 
                 let httpBody = try! NSJSONSerialization.dataWithJSONObject(teamDict, options: .PrettyPrinted)
                 
