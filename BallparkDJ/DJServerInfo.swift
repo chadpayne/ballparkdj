@@ -10,5 +10,5 @@ import Foundation
 
 public class DJServerInfo
 {
-    static let baseServerURL = "http://dev.ballparkdj.com"
+    static let baseServerURL = "http://order.ballparkdj.com"
 }
