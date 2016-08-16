@@ -612,6 +612,17 @@ enum PostAuthenticationAction
     
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
     
+    // ::TODO:: remove hardcoding
+    BOOL revoice = true;
+    for (DJPlayer *player in self.team.players)
+    {
+        if (revoice)
+        {
+            player.revoicePlayer = TRUE;
+        }
+        revoice = !revoice;
+    }
+    
     [uploader orderVoice:self.team completion:^(DJTeam *team) {
         
         dispatch_async(dispatch_get_main_queue(),^() {
@@ -625,10 +636,6 @@ enum PostAuthenticationAction
         });
         
     }];
-    
-    // Call server method to set status to revoicing (so it show's up on voicers list of voices)
-    
-    // Force every other voice to be re-recorded
 }
                                                         
 -(void)shareTeam
@@ -649,6 +656,7 @@ enum PostAuthenticationAction
     }
     
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+  //  self.team.teamOwnerEmail = @"kurtn@22ndcenturysoftware.com";
     
     
     [uploader shareTeam:self.team completion:^(DJTeam *team) {
@@ -699,7 +707,7 @@ enum PostAuthenticationAction
         return;
     }
     
-    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    //self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
     
     [uploader orderVoice:self.team completion:^(DJTeam *team) {
 

@@ -108,6 +108,13 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             currentPlayerNameLabel.text = team.players[0].name
             currentPlayer = team.players[0] as! DJPlayer
         }
+        
+        let order = getOrderForTeam(currentTeam)
+        if order!.orderStatus == .REVOICING && currentPlayer?.revoicePlayer == false
+        {
+            moveToNextPlayer();
+        }
+        
     }
     
     func moveToNextPlayer()
@@ -146,6 +153,12 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             currentPlayer = currentTeam.players[currentPlayerIndex] as! DJPlayer
             currentPlayerNameLabel.text = currentPlayer.name
             currentPlayerVoiceIndexLabel.text = "\(currentPlayerIndex+1)"
+        }
+        
+        let order = getOrderForTeam(currentTeam)
+        if order!.orderStatus == .REVOICING && currentPlayer?.revoicePlayer == false
+        {
+            moveToNextPlayer();
         }
        
         prepareRecorder()

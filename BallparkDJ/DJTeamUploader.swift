@@ -111,6 +111,11 @@ public class DJTeamUploader : NSObject
                         player.b_isBench = playerBenched.boolValue
                     }
                     
+                    if let revoicePlayer = playerDict["revoicePlayer"] as? Bool
+                    {
+                        player.revoicePlayer = revoicePlayer
+                    }
+                    
                     if let audioDict = playerDict["playerAudio"] as? [String:AnyObject]
                     {
                         if let announcmentURL = audioDict["announcementUrl"] as? String
@@ -475,6 +480,7 @@ public class DJTeamUploader : NSObject
             
             playerDict["number"] = player.number!
             playerDict["benched"] = NSNumber(bool: player.b_isBench)
+            playerDict["revoicePlayer"] = player.revoicePlayer
             
             var audioDict = [String:AnyObject]()
             if let audio = player.audio
