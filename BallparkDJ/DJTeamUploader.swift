@@ -396,7 +396,7 @@ public class DJTeamUploader : NSObject
                 
                 if let orderId = team.orderId
                 {
-                    teamDict["orderId"] = orderId
+                    teamDict["id"] = orderId
                 }
                 
                 let httpBody = try! NSJSONSerialization.dataWithJSONObject(teamDict, options: .PrettyPrinted)

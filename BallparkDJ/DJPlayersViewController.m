@@ -594,7 +594,41 @@ enum PostAuthenticationAction
 
 -(void)revoiceOrder
 {
+    // ::TODO:: Check to see if any voices have been flagged as needing revoice
     
+    DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
+    if (![self userEmailAddressExists]) {
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
+        
+        EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
+        emailAddressViewController.delegate = self;
+        
+        self.action = ORDER_VOICE;
+        
+        [self presentViewController:emailAddressViewController animated:YES completion:nil];
+        return;
+    }
+    
+    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    
+    [uploader orderVoice:self.team completion:^(DJTeam *team) {
+        
+        dispatch_async(dispatch_get_main_queue(),^() {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Your request has been received. We will notify you once we have completed the revoicing." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+            
+            [alertController addAction:okAction];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+        });
+        
+    }];
+    
+    // Call server method to set status to revoicing (so it show's up on voicers list of voices)
+    
+    // Force every other voice to be re-recorded
 }
                                                         
 -(void)shareTeam
