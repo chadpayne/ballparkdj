@@ -594,9 +594,6 @@ enum PostAuthenticationAction
 
 -(void)revoiceOrder
 {
-    // ::TODO:: Check to see if any voices have been flagged as needing revoice
-    
-    DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
     if (![self userEmailAddressExists]) {
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
@@ -612,30 +609,9 @@ enum PostAuthenticationAction
     
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
     
-    // ::TODO:: remove hardcoding
-    BOOL revoice = true;
-    for (DJPlayer *player in self.team.players)
-    {
-        if (revoice)
-        {
-            player.revoicePlayer = TRUE;
-        }
-        revoice = !revoice;
-    }
-    
-    [uploader orderVoice:self.team completion:^(DJTeam *team) {
-        
-        dispatch_async(dispatch_get_main_queue(),^() {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Your request has been received. We will notify you once we have completed the revoicing." preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-            
-            [alertController addAction:okAction];
-            
-            [self presentViewController:alertController animated:YES completion:nil];
-        });
-        
-    }];
+    DJPlayerRevoiceViewController *viewController = [[DJPlayerRevoiceViewController alloc] initWithNibName:@"DJPlayerRevoiceView" bundle:[NSBundle mainBundle]];
+    viewController.team = self.team;
+    [self presentViewController:viewController animated:YES completion:nil];
 }
                                                         
 -(void)shareTeam
