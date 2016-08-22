@@ -49,8 +49,15 @@ public class DJVoiceOrder : NSObject
         teamName = dictionary["teamName"] as? String
         teamOwnerEmail = dictionary["teamOwnerEmail"] as? String
         teamId = dictionary["teamId"] as? String
-        //orderStatus = dictionary["orderStatus"] as? String //as DJVoiceOrderStatus
+        
         orderStatus = .NEW
+        if let orderStatusString = dictionary["status"] as? String
+        {
+            if let tmpOrderStatus =  DJVoiceOrderStatus(rawValue: orderStatusString)
+            {
+                orderStatus = tmpOrderStatus
+            }
+        }
         revoicingAvailable = dictionary["revoicingAvailable"] as? Bool
         
         if let revoiceMilliSeconds = dictionary["revoicingExpirationDate"] as? NSTimeInterval

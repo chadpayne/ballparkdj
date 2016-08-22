@@ -112,6 +112,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         let order = getOrderForTeam(currentTeam)
         if order!.orderStatus == .REVOICING && currentPlayer?.revoicePlayer == false
         {
+            currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
             moveToNextPlayer();
         }
         
@@ -158,6 +159,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         let order = getOrderForTeam(currentTeam)
         if order!.orderStatus == .REVOICING && currentPlayer?.revoicePlayer == false
         {
+            currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
             moveToNextPlayer();
         }
        
