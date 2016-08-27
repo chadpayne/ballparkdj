@@ -343,6 +343,11 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             }
             
         }
+        
+        let alertController = UIAlertController(title: "Info", message: "Orders uploaded to server", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alertController.addAction(okAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func getOrderForTeam(team:DJTeam) -> DJVoiceOrder?
