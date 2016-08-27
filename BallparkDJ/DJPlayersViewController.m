@@ -683,7 +683,7 @@ enum PostAuthenticationAction
         return;
     }
     
-    //self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
     
     [uploader orderVoice:self.team completion:^(DJTeam *team) {
 

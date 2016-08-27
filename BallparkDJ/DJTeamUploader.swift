@@ -175,10 +175,7 @@ public class DJTeamUploader : NSObject
                         
                         if let announcementDuration = audioDict["announcmentDuration"] as? Double
                         {
-                            if player.audio.isDJClip == false
-                            {
-                                player.audio.announcementDuration = announcementDuration
-                            }
+                            player.audio.announcementDuration = announcementDuration
                         }
                     }
                     team.players.addObject(player)
@@ -343,10 +340,7 @@ public class DJTeamUploader : NSObject
                             
                             if let announcementDuration = audioDict["announcmentDuration"] as? Double
                             {
-                                if player.audio.isDJClip == false
-                                {
-                                    player.audio.announcementDuration = announcementDuration
-                                }
+                                player.audio.announcementDuration = announcementDuration
                             }
                         }
                         team.players.addObject(player)

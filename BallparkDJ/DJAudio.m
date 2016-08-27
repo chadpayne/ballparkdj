@@ -8,9 +8,13 @@
 
 #import "DJAudio.h"
 
+@interface DJAudio()
+@property(nonatomic,assign) BOOL durationAdjusted;
+@end
+
 @implementation DJAudio
 
-@synthesize overlap,musicStartTime,announcementDuration;
+@synthesize overlap,musicStartTime;
 @synthesize shouldFade;
 @synthesize title;
 @synthesize announcementClip;
@@ -251,6 +255,20 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidFinish" object:self];
     }
 }
+
+-(double)announcementDuration
+{
+    if (!self.durationAdjusted) {
+        if (self.announcementClip)
+        {
+            _announcementDuration = self.announcementClip.duration;
+        }
+        self.durationAdjusted = true;
+    }
+    
+    return _announcementDuration;
+}
+
 -(void)play {
     if(self.isPlaying) return;
     
@@ -267,12 +285,6 @@
 //                 ? musicDuration : (overlap + announcementClip.duration)) +
 //                ((overlap > 0) ? overlap : 0);
 //
-    
-    // If Announcment duration is not set - we will set it so that audio plays
-    if (self.announcementClip && self.announcementDuration == 0)
-    {
-        self.announcementDuration = self.announcementClip.duration;
-    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DJAudioDidStart" object:self];
     if (!self.announcementClip && self.musicClip) {
