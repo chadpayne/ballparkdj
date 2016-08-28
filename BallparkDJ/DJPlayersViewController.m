@@ -688,7 +688,7 @@ enum PostAuthenticationAction
     [uploader orderVoice:self.team completion:^(DJTeam *team) {
 
         dispatch_async(dispatch_get_main_queue(),^() {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Please check your email for the next steps to order a voice." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Success" message:@"Team Uploaded: Please check your email to complete the voice order." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         
