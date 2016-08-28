@@ -14,6 +14,7 @@ protocol DJVoiceProviderViewControllerDelegate {
 
 class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
 
+    @IBOutlet weak var playAudioButton: UIButton!
     var orders:[DJVoiceOrder]!
     var teams:[DJTeam]!
     
@@ -114,8 +115,18 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         {
             currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
             moveToNextPlayer();
+            return;
         }
         
+        if (currentPlayer.audio.announcementClip != nil)
+        {
+            playAudioButton.enabled = true
+            playProvidedAudioButtonClicked(self)
+        }
+        else
+        {
+            playAudioButton.enabled = false
+        }
     }
     
     func moveToNextPlayer()
@@ -161,8 +172,19 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         {
             currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
             moveToNextPlayer();
+            return;
         }
        
+        if (currentPlayer.audio.announcementClip != nil)
+        {
+            playAudioButton.enabled = true
+            playProvidedAudioButtonClicked(self)
+        }
+        else
+        {
+            playAudioButton.enabled = false
+        }
+        
         prepareRecorder()
     }
     
