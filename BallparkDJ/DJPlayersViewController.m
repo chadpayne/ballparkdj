@@ -287,10 +287,13 @@ enum PostAuthenticationAction
             }
             topDigits = [[topDigits stringByPaddingToLength:4 withString:@" " startingAtIndex:0] stringByAppendingString:@"\t"];;
         }
-        else {  topDigits = [NSString stringWithFormat:@"\t     "];
+        else {
+            topDigits = [NSString stringWithFormat:@"\t     "];
         }
 
         label.text = [topDigits stringByAppendingString:tempPlayer.name];
+        UIFont *defaultFont = label.font;
+        label.font = [UIFont fontWithName:@"Courier" size:defaultFont.pointSize];
     }
     
     return cell;
