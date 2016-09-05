@@ -103,6 +103,8 @@ enum PostAuthenticationAction
     
 	// Do any additional setup after loading the view.
     self.title = @"Players";
+    
+    [self.playerTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"PlayerCell"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -165,6 +167,7 @@ enum PostAuthenticationAction
     NSUserDefaults  *userDefaults = [NSUserDefaults standardUserDefaults];
 
     BOOL isPurchased = [userDefaults boolForKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+    isPurchased = YES;
     
     if (self.team.players.count >= 3 && (isPurchased != YES))
     {
@@ -227,8 +230,8 @@ enum PostAuthenticationAction
     
     UILabel *label;
     
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                   reuseIdentifier:CellIdentifier];
+    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
     CGRect rect = cell.bounds;
     rect.origin.x = 20;
     rect.size.width = 280;
@@ -752,11 +755,17 @@ enum PostAuthenticationAction
 }
 
 - (void)playSingle:(UITableViewCell *)sender {
+    [self playSingle:sender indexPath:nil];
+}
+
+- (void)playSingle:(UITableViewCell *)sender indexPath:(NSIndexPath *)path
+{
     self.playBtn.title = @"Stop";
     
-    NSIndexPath *indexPath = [self.playerTable indexPathForCell:sender];
+    NSIndexPath *indexPath = path ?: [self.playerTable indexPathForCell:sender];
     [self setActive:[[self.team.players objectAtIndex:indexPath.row] audio]];
     [self.playerTable selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [self.playerTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
 
 
     //Remove content view:
@@ -840,9 +849,11 @@ enum PostAuthenticationAction
         [self cancelQueue];
         return;
     }
-    UITableViewCell* cell = [self.playerTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:songQueue.location inSection:0]];
-    NSIndexPath *indexPath = [self.playerTable indexPathForCell:cell];
-    DJAudio* audio = [[self.team.players objectAtIndex:indexPath.row] audio];
+    DJPlayer *player = self.team.players[songQueue.location];
+    
+    
+//    NSIndexPath *indexPath = [self.playerTable indexPathForCell:cell];
+    DJAudio* audio = [player audio];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     //        [defaults setBool:NO forKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
     //        [defaults synchronize];
@@ -869,7 +880,9 @@ enum PostAuthenticationAction
         return;
     }
     
-    [self playSingle:[self.playerTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:songQueue.location inSection:0]]];
+    NSIndexPath *fullPath = [NSIndexPath indexPathForRow:songQueue.location inSection:0];
+    
+    [self playSingle:[self.playerTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:songQueue.location inSection:0]] indexPath:fullPath];
 //    [self setActive:[[songQueue objectAtIndex:0] audio]];
     
 }
