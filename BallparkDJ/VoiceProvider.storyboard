@@ -85,7 +85,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KjY-3q-vyv">
-                                <rect key="frame" x="20" y="28" width="237" height="349"/>
+                                <rect key="frame" x="20" y="28" width="237" height="377"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PUK-7H-G5v">
                                         <rect key="frame" x="0.0" y="0.0" width="237" height="21"/>
@@ -208,10 +208,27 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmC-fQ-lBT">
-                                        <rect key="frame" x="0.0" y="143" width="72" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m43-qo-fEY">
+                                        <rect key="frame" x="0.0" y="143" width="168" height="21"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rr0-gR-6dt">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Voice Format:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwI-3N-C9D">
+                                                <rect key="frame" x="0.0" y="0.0" width="106" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="zzzzzzz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NpW-Jj-htV">
+                                                <rect key="frame" x="106" y="0.0" width="62" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmC-fQ-lBT">
+                                        <rect key="frame" x="0.0" y="171" width="72" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rr0-gR-6dt">
                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
                                                 <state key="normal" title="Play Audio"/>
                                                 <connections>
@@ -221,7 +238,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Sq-LC-xhh">
-                                        <rect key="frame" x="0.0" y="181" width="203" height="30"/>
+                                        <rect key="frame" x="0.0" y="209" width="203" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJq-V7-elT">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
@@ -254,7 +271,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zkm-2x-S1H">
-                                        <rect key="frame" x="0.0" y="219" width="183" height="130"/>
+                                        <rect key="frame" x="0.0" y="247" width="183" height="130"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyT-dh-5tX">
                                                 <rect key="frame" x="0.0" y="0.0" width="183" height="30"/>
@@ -302,6 +319,7 @@
                         <outlet property="stopButton" destination="Z5x-dA-515" id="Zad-SR-kJR"/>
                         <outlet property="totalTeamIndexLabel" destination="gTF-VL-rVf" id="VSg-1B-BTK"/>
                         <outlet property="totalTeamPlayersLabel" destination="ccx-7p-etK" id="I3q-oI-aop"/>
+                        <outlet property="voiceFormatLabel" destination="NpW-Jj-htV" id="EJw-VX-RXU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mIh-bN-H9b" userLabel="First Responder" sceneMemberID="firstResponder"/>

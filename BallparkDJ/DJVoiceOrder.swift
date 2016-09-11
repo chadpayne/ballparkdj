@@ -18,6 +18,13 @@ enum DJVoiceOrderStatus : String
     case VOICED = "VOICED"
 }
 
+enum PlayerVoiceFormat : String
+{
+    case NOW_BATTING_PLAYERNUMBER_PLAYERNAME = "NOW_BATTING_PLAYERNUMBER_PLAYERNAME"
+    case NOW_BATTING_FORTEAM_PLAYERNUMBER_PLAYERNAME = "NOW_BATTING_FORTEAM_PLAYERNUMBER_PLAYERNAME"
+    case PLAYERNUMBER_PLAYERNAME = "PLAYERNUMBER_PLAYERNAME"
+}
+
 public class DJVoiceOrder : NSObject
 {
     var voiceProviderId:String?
@@ -26,12 +33,13 @@ public class DJVoiceOrder : NSObject
     var teamName:String?
     var teamOwnerEmail:String?
     var orderStatus:DJVoiceOrderStatus
+    var playerVoiceFormat:PlayerVoiceFormat
     var orderCompletionDate:NSDate?
     var revoicingAvailable:Bool?
     var revoicingExpirationDate:NSDate?
     
     
-    init(orderId:String, voiceProviderId:String, teamName:String, teamOwnerEmail:String, orderStatus:DJVoiceOrderStatus, teamId:String, revoicingAvailable:Bool)
+    init(orderId:String, voiceProviderId:String, teamName:String, teamOwnerEmail:String, orderStatus:DJVoiceOrderStatus, teamId:String, revoicingAvailable:Bool, playerVoiceFormat:PlayerVoiceFormat)
     {
         self.orderId = orderId
         self.voiceProviderId = voiceProviderId
@@ -40,6 +48,7 @@ public class DJVoiceOrder : NSObject
         self.teamOwnerEmail = teamOwnerEmail
         self.revoicingAvailable = revoicingAvailable
         self.orderStatus = orderStatus
+        self.playerVoiceFormat = playerVoiceFormat
     }
 
     init (dictionary:[String:AnyObject])
@@ -58,6 +67,17 @@ public class DJVoiceOrder : NSObject
                 orderStatus = tmpOrderStatus
             }
         }
+        
+        playerVoiceFormat = .NOW_BATTING_PLAYERNUMBER_PLAYERNAME
+        if let voiceFormatString = dictionary["voiceFormat"] as? String
+        {
+            if let tmpVoiceFormat =  PlayerVoiceFormat(rawValue: voiceFormatString)
+            {
+                playerVoiceFormat = tmpVoiceFormat
+            }
+        }
+        
+        
         revoicingAvailable = dictionary["revoicingAvailable"] as? Bool
         
         if let revoiceMilliSeconds = dictionary["revoicingExpirationDate"] as? NSTimeInterval

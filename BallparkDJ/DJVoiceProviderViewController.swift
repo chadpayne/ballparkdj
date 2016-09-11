@@ -27,6 +27,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     var delegate:DJVoiceProviderViewControllerDelegate?
     
+    @IBOutlet weak var voiceFormatLabel: UILabel!
     @IBOutlet weak var currentVoiceIndexLabel: UILabel!
     
     @IBOutlet weak var numVoicesToRecordLabel: UILabel!
@@ -126,6 +127,19 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         else
         {
             playAudioButton.enabled = false
+        }
+        
+        switch (order!.playerVoiceFormat)
+        {
+            case .NOW_BATTING_PLAYERNUMBER_PLAYERNAME:
+                voiceFormatLabel.text = "Now Batting - Player # - Player Name"
+                break
+            case .NOW_BATTING_FORTEAM_PLAYERNUMBER_PLAYERNAME:
+                voiceFormatLabel.text = "Now Batting For Team- Player # - Player Name"
+                break
+            case .PLAYERNUMBER_PLAYERNAME:
+                voiceFormatLabel.text = "Player # - Player Name"
+                break
         }
     }
     
