@@ -14,7 +14,7 @@ protocol DJVoiceProviderViewControllerDelegate {
 
 class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
 
-    @IBOutlet weak var playAudioButton: UIButton!
+    @IBOutlet weak var playAudioButton: FUIButton!
     var orders:[DJVoiceOrder]!
     var teams:[DJTeam]!
     
@@ -33,7 +33,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     @IBOutlet weak var numVoicesToRecordLabel: UILabel!
 
     @IBOutlet weak var currentTeamIndexLabel: UILabel!
-    @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var recordButton: FUIButton!
     
     @IBOutlet weak var totalTeamIndexLabel: UILabel!
     
@@ -48,15 +48,38 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     @IBOutlet weak var currentPlayerNameLabel: UILabel!
     
-    @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var playButton: FUIButton!
+    @IBOutlet weak var stopButton: FUIButton!
     
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButton: FUIButton!
     var audioPlayer: AVAudioPlayer?
     var audioRecorder: AVAudioRecorder?
     
+    @IBOutlet weak var doneUploadButton: FUIButton!
     var currentSoundFileURL:NSURL?
 
+    func setupButton(button:FUIButton)
+    {
+        button.buttonColor = UIColor.turquoiseColor()
+        button.shadowColor = UIColor.greenSeaColor()
+        button.shadowHeight = 3.0
+        button.cornerRadius = 6.0
+        button.titleLabel?.font = UIFont.boldFlatFontOfSize(16)
+        button.setTitleColor(UIColor.cloudsColor(), forState: .Normal)
+        button.setTitleColor(UIColor.cloudsColor(), forState: .Highlighted)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupButton(playButton)
+        setupButton(stopButton)
+        setupButton(nextButton)
+        setupButton(recordButton)
+        setupButton(doneUploadButton)
+        setupButton(playAudioButton)
+    }
+    
     
     func resetUI()
     {

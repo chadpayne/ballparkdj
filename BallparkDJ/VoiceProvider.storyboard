@@ -85,7 +85,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KjY-3q-vyv">
-                                <rect key="frame" x="20" y="28" width="237" height="377"/>
+                                <rect key="frame" x="20" y="28" width="237" height="277"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PUK-7H-G5v">
                                         <rect key="frame" x="0.0" y="0.0" width="237" height="21"/>
@@ -228,7 +228,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmC-fQ-lBT">
                                         <rect key="frame" x="0.0" y="171" width="72" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rr0-gR-6dt">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rr0-gR-6dt" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
                                                 <state key="normal" title="Play Audio"/>
                                                 <connections>
@@ -240,28 +240,28 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Sq-LC-xhh">
                                         <rect key="frame" x="0.0" y="209" width="203" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJq-V7-elT">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJq-V7-elT" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
                                                 <state key="normal" title="Record"/>
                                                 <connections>
                                                     <action selector="recordAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="XQS-X8-Rla"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5x-dA-515">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5x-dA-515" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
                                                 <rect key="frame" x="69" y="0.0" width="32" height="30"/>
                                                 <state key="normal" title="Stop"/>
                                                 <connections>
                                                     <action selector="stopAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="eSp-ze-1sy"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
                                                 <rect key="frame" x="121" y="0.0" width="30" height="30"/>
                                                 <state key="normal" title="Play"/>
                                                 <connections>
                                                     <action selector="playRecordedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="vCn-3S-k4R"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
                                                 <rect key="frame" x="171" y="0.0" width="32" height="30"/>
                                                 <state key="normal" title="Next"/>
                                                 <connections>
@@ -271,27 +271,13 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zkm-2x-S1H">
-                                        <rect key="frame" x="0.0" y="247" width="183" height="130"/>
+                                        <rect key="frame" x="0.0" y="247" width="99" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyT-dh-5tX">
-                                                <rect key="frame" x="0.0" y="0.0" width="183" height="30"/>
-                                                <state key="normal" title="Send Recordings to Server"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyT-dh-5tX" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="30"/>
+                                                <state key="normal" title="Done / Upload"/>
                                                 <connections>
                                                     <action selector="sendRecordingsToServerButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="Nvb-yH-NrC"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1T-lM-ZlE">
-                                                <rect key="frame" x="0.0" y="50" width="183" height="30"/>
-                                                <state key="normal" title="Refresh"/>
-                                                <connections>
-                                                    <action selector="refreshButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="9Qu-In-7uj"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2w9-fK-1SN">
-                                                <rect key="frame" x="0.0" y="100" width="183" height="30"/>
-                                                <state key="normal" title="Reset"/>
-                                                <connections>
-                                                    <action selector="resetButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="4c5-J2-POF"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -311,9 +297,10 @@
                         <outlet property="currentTeamIndexLabel" destination="wwB-tg-UaF" id="czf-wH-LY9"/>
                         <outlet property="currentTeamNameLabel" destination="lAq-Kx-WX6" id="uiR-LI-fFY"/>
                         <outlet property="currentVoiceIndexLabel" destination="RrK-mr-TDl" id="49f-qn-1hB"/>
+                        <outlet property="doneUploadButton" destination="EyT-dh-5tX" id="2fD-pk-Epi"/>
                         <outlet property="nextButton" destination="0ya-sJ-pz6" id="eKl-T6-MdK"/>
                         <outlet property="numVoicesToRecordLabel" destination="WuM-wp-W6Y" id="XrM-Wt-jve"/>
-                        <outlet property="playAudioButton" destination="rr0-gR-6dt" id="CVP-Vv-Leh"/>
+                        <outlet property="playAudioButton" destination="rr0-gR-6dt" id="2Xn-ff-xlf"/>
                         <outlet property="playButton" destination="Vji-Pv-1as" id="vJK-FK-Lf0"/>
                         <outlet property="recordButton" destination="LJq-V7-elT" id="GjJ-le-jcX"/>
                         <outlet property="stopButton" destination="Z5x-dA-515" id="Zad-SR-kJR"/>
