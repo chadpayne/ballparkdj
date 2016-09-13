@@ -28,9 +28,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     var delegate:DJVoiceProviderViewControllerDelegate?
     
     @IBOutlet weak var voiceFormatLabel: UILabel!
-    @IBOutlet weak var currentVoiceIndexLabel: UILabel!
     
-    @IBOutlet weak var numVoicesToRecordLabel: UILabel!
 
     @IBOutlet weak var currentTeamIndexLabel: UILabel!
     @IBOutlet weak var recordButton: FUIButton!
@@ -91,9 +89,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         
         var totalNumVoices = 0
         teams.forEach() { totalNumVoices += $0.players.count }
-        numVoicesToRecordLabel.text = "\(totalNumVoices)"
         
-        currentVoiceIndexLabel.text = "\(1)"
         currentTotalRecordingIndex = 1;
 
         
@@ -175,7 +171,6 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         currentPlayerIndex += 1
         
         currentTotalRecordingIndex = currentTotalRecordingIndex + 1
-        currentVoiceIndexLabel.text = "\(currentTotalRecordingIndex)"
 
         
         if currentPlayerIndex >= teams[currentTeamIndex].players.count
