@@ -231,15 +231,23 @@ enum PostAuthenticationAction
     UILabel *label;
     
     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
     CGRect rect = cell.bounds;
     rect.origin.x = 20;
     rect.size.width = 280;
 
-    label = [[UILabel alloc] initWithFrame:rect];
-    label.tag = indexPath.row + 2000;
-
-    [cell.contentView addSubview:label];
+    if (cell.contentView.subviews.count == 0)
+    {
+        label = [[UILabel alloc] initWithFrame:rect];
+        label.tag = indexPath.row + 2000;
+        
+        [cell.contentView addSubview:label];
+    }
+    else
+    {
+        label = cell.contentView.subviews[0];
+        label.frame = rect;
+    }
+    
 
     cell.accessoryType = UITableViewCellAccessoryNone;
     [cell setEditingAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
