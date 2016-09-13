@@ -23,6 +23,28 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
     {
         DJOrderBackendService.login(userName.text!, password: passwordTextField.text!) { authToken, error in
             
+            if let myError = error
+            {
+                dispatch_async(dispatch_get_main_queue()) {
+                    let alertController = UIAlertController(title: "Error", message: myError.localizedDescription, preferredStyle: .Alert)
+                    let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                    alertController.addAction(okAction)
+                    self.presentViewController(alertController, animated: false, completion: nil)
+                }
+                return
+            }
+            
+            if (authToken == nil)
+            {
+                dispatch_async(dispatch_get_main_queue()) {
+                    let alertController = UIAlertController(title: "Error", message: "Invalid username or password", preferredStyle: .Alert)
+                    let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                    alertController.addAction(okAction)
+                    self.presentViewController(alertController, animated: false, completion: nil)
+                }
+                return;
+            }
+            
             self.savedAuthToken = authToken
             
             self.getOrdersAndTeams() { orders, teams in
@@ -30,7 +52,17 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
                 self.fetchedTeams = teams
                 dispatch_async(dispatch_get_main_queue())
                 {
-                    self.performSegueWithIdentifier("record", sender: self)
+                    if orders.count > 0
+                    {
+                        self.performSegueWithIdentifier("record", sender: self)
+                    }
+                    else
+                    {
+                        let alertController = UIAlertController(title: "Info", message: "There are no current voice orders requiring voicing.", preferredStyle: .Alert)
+                        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                        alertController.addAction(okAction)
+                        self.presentViewController(alertController, animated: false, completion: nil)
+                    }
                 }
             }
         }
