@@ -10,7 +10,7 @@ import UIKit
 
 class BallparkButton: FUIButton {
 
-    let mininumWidth:CGFloat = 100.0
+    let mininumWidth:CGFloat = 90.0
     let mininumHeight:CGFloat = 40.0
     
     override func intrinsicContentSize() -> CGSize {
