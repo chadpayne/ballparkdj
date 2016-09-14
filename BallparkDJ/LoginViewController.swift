@@ -14,10 +14,28 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var loginButton: BallparkButton!
     var fetchedOrders:[DJVoiceOrder]!
     var fetchedTeams:[DJTeam]!
     var teamUploader = DJTeamUploader();
     var savedAuthToken:String!
+    
+    
+    func setupButton(button:FUIButton)
+    {
+        button.buttonColor = UIColor.turquoiseColor()
+        button.shadowColor = UIColor.greenSeaColor()
+        button.shadowHeight = 3.0
+        button.cornerRadius = 6.0
+        button.titleLabel?.font = UIFont.boldFlatFontOfSize(16)
+        button.setTitleColor(UIColor.cloudsColor(), forState: .Normal)
+        button.setTitleColor(UIColor.cloudsColor(), forState: .Highlighted)
+    }
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        setupButton(loginButton)
+    }
     
     @IBAction func loginButtonClicked(sender: AnyObject)
     {
