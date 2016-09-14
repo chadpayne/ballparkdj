@@ -47,7 +47,6 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     @IBOutlet weak var currentPlayerNameLabel: UILabel!
     
     @IBOutlet weak var playButton: FUIButton!
-    @IBOutlet weak var stopButton: FUIButton!
     
     @IBOutlet weak var nextButton: FUIButton!
     var audioPlayer: AVAudioPlayer?
@@ -71,7 +70,6 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         super.viewDidLoad()
         
         setupButton(playButton)
-        setupButton(stopButton)
         setupButton(nextButton)
         setupButton(recordButton)
         setupButton(doneUploadButton)
@@ -110,13 +108,15 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             //dismissViewControllerAnimated(true, completion: nil)
         }
         
-        stopButton.enabled = false
         playButton.enabled = false
         nextButton.enabled = false
+        
+        doneUploadButton.hidden = true
     }
     
     func setupUIForTeam(team:DJTeam)
     {
+        doneUploadButton.hidden = true
         currentPlayerIndex = 0
         currentTeam = team
         
@@ -164,7 +164,6 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     func moveToNextPlayer()
     {
-        stopButton.enabled = false
         playButton.enabled = false
         nextButton.enabled = false
         
@@ -285,24 +284,38 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
 
     @IBAction func recordAudioButtonClicked(sender: AnyObject)
     {
+        if audioPlayer?.playing == true {
+            // Stop playback of current audio
+            stopAudioButtonClicked(sender)
+            return
+        }
+        
         if audioRecorder?.recording == false {
             playButton.enabled = false
-            stopButton.enabled = true
-            recordButton.enabled = false
+            recordButton.titleLabel?.text = "Stop"
+            recordButton.setTitle("Stop", forState: .Normal)
+            recordButton.setTitle("Stop", forState: .Highlighted)
 
             try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryRecord, withOptions: AVAudioSessionCategoryOptions.AllowBluetooth)
             
             audioRecorder?.prepareToRecord()
             audioRecorder?.record()
         }
+        else
+        {
+            // As Record/Stop used to be separate buttons - call code for stopAudio callback
+            stopAudioButtonClicked(sender)
+        }
+        
     }
 
     
     @IBAction func stopAudioButtonClicked(sender: AnyObject)
     {
-        stopButton.enabled = false
         playButton.enabled = true
-        recordButton.enabled = true
+        recordButton.titleLabel?.text = "Record"
+        recordButton.setTitle("Record", forState: .Normal)
+        recordButton.setTitle("Record", forState: .Highlighted)
         nextButton.enabled = true
         
         if audioRecorder?.recording == true {
@@ -316,6 +329,11 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
                 print("Sucks to be me")
             }
             
+            // If on last player - enable Done/Upload button
+            if (currentPlayerIndex+1) >= teams[currentTeamIndex].players.count
+            {
+                doneUploadButton.hidden = false
+            }
         } else {
             audioPlayer?.stop()
         }
@@ -325,8 +343,10 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     @IBAction func playRecordedAudioButtonClicked(sender: AnyObject)
     {
         if audioRecorder?.recording == false {
-            stopButton.enabled = true
-            recordButton.enabled = false
+
+            recordButton.titleLabel?.text = "Stop"
+            recordButton.setTitle("Stop", forState: .Normal)
+            recordButton.setTitle("Stop", forState: .Highlighted)
             
             var error: NSError?
             
@@ -440,14 +460,16 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     }
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
-        recordButton.enabled = true
-        stopButton.enabled = false
+        recordButton.titleLabel?.text = "Record"
+        recordButton.setTitle("Record", forState: .Normal)
+        recordButton.setTitle("Record", forState: .Highlighted)
     }
 
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: NSError?) {
         print("Error decoding!")
-        recordButton.enabled = true
-        stopButton.enabled = false
+        recordButton.titleLabel?.text = "Record"
+        recordButton.setTitle("Record", forState: .Normal)
+        recordButton.setTitle("Record", forState: .Highlighted)
     }
 
 }
