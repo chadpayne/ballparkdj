@@ -38,7 +38,7 @@
     self.league = [[DJLeague alloc] init];
     [self switchViewToLeague];
 
-    [VoiceProviderLogin login];
+//    [VoiceProviderLogin login];
     
 //    [TestFlight takeOff:@"b94a4e80-cdd2-4cde-a84d-819ff93c571a"];
     
