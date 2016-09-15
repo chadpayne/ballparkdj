@@ -85,195 +85,155 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KjY-3q-vyv">
-                                <rect key="frame" x="20" y="28" width="184" height="249"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4zt-yA-2tU">
+                                <rect key="frame" x="-51" y="28" width="162" height="36"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4zt-yA-2tU">
-                                        <rect key="frame" x="0.0" y="0.0" width="111" height="21"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZV-pR-7Bs">
-                                                <rect key="frame" x="0.0" y="0.0" width="47" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xL-qJ-QL1">
-                                                <rect key="frame" x="57" y="0.0" width="9" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="of" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyu-Qu-3IY">
-                                                <rect key="frame" x="76" y="0.0" width="16" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccx-7p-etK">
-                                                <rect key="frame" x="102" y="0.0" width="9" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Jlo-gS-DkI">
-                                        <rect key="frame" x="0.0" y="29" width="183" height="21"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Team Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8W3-62-VC4">
-                                                <rect key="frame" x="0.0" y="0.0" width="96" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="xxxxxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAq-Kx-WX6">
-                                                <rect key="frame" x="106" y="0.0" width="77" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TjO-YS-xAU">
-                                        <rect key="frame" x="0.0" y="57" width="184" height="21"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmH-Md-ddu">
-                                                <rect key="frame" x="0.0" y="0.0" width="97" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="xxxxxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-nC-5oB">
-                                                <rect key="frame" x="107" y="0.0" width="77" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m43-qo-fEY">
-                                        <rect key="frame" x="0.0" y="86" width="168" height="21"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Voice Format:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwI-3N-C9D">
-                                                <rect key="frame" x="0.0" y="0.0" width="106" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="zzzzzzz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NpW-Jj-htV">
-                                                <rect key="frame" x="106" y="0.0" width="62" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmC-fQ-lBT">
-                                        <rect key="frame" x="0.0" y="114" width="72" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rr0-gR-6dt" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
-                                                <state key="normal" title="Play Audio"/>
-                                                <connections>
-                                                    <action selector="playProvidedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="xf0-3t-ANC"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1Sq-LC-xhh">
-                                        <rect key="frame" x="0.0" y="152" width="131" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="Play"/>
-                                                <connections>
-                                                    <action selector="playRecordedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="vCn-3S-k4R"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJq-V7-elT" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
-                                                <rect key="frame" x="40" y="0.0" width="49" height="30"/>
-                                                <state key="normal" title="Record"/>
-                                                <connections>
-                                                    <action selector="recordAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="XQS-X8-Rla"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
-                                                <rect key="frame" x="99" y="0.0" width="32" height="30"/>
-                                                <state key="normal" title="Next"/>
-                                                <connections>
-                                                    <action selector="nextButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="d9s-bT-QaC"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BzY-Nl-NY0">
-                                        <rect key="frame" x="0.0" y="190" width="106" height="21"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXG-qb-6ap">
-                                                <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwB-tg-UaF">
-                                                <rect key="frame" x="52" y="0.0" width="9" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="of" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-zG-JIS">
-                                                <rect key="frame" x="71" y="0.0" width="16" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTF-VL-rVf">
-                                                <rect key="frame" x="97" y="0.0" width="9" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zkm-2x-S1H">
-                                        <rect key="frame" x="0.0" y="219" width="99" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyT-dh-5tX" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="99" height="30"/>
-                                                <state key="normal" title="Done / Upload"/>
-                                                <connections>
-                                                    <action selector="sendRecordingsToServerButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="Nvb-yH-NrC"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZV-pR-7Bs">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xL-qJ-QL1">
+                                        <rect key="frame" x="90" y="0.0" width="15" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" of " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyu-Qu-3IY">
+                                        <rect key="frame" x="105" y="0.0" width="42" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccx-7p-etK">
+                                        <rect key="frame" x="146" y="0.0" width="16" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHU-dP-7j0">
+                                <rect key="frame" x="205" y="72" width="190" height="123.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Now Batting
+Number 1
+Jordan Payne</string>
+                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KO6-e6-fVB">
+                                <rect key="frame" x="278" y="203.5" width="45" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyT-dh-5tX" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
+                                <rect key="frame" x="250.5" y="532" width="99" height="30"/>
+                                <state key="normal" title="Done / Upload"/>
+                                <connections>
+                                    <action selector="sendRecordingsToServerButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="Nvb-yH-NrC"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BzY-Nl-NY0">
+                                <rect key="frame" x="158" y="324" width="104" height="24"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXG-qb-6ap">
+                                        <rect key="frame" x="0.0" y="0.0" width="54" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwB-tg-UaF">
+                                        <rect key="frame" x="54" y="0.0" width="11" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" of " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-zG-JIS">
+                                        <rect key="frame" x="65" y="0.0" width="29" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTF-VL-rVf">
+                                        <rect key="frame" x="93" y="0.0" width="11" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1Sq-LC-xhh">
+                                <rect key="frame" x="235" y="286" width="131" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-Pv-1as" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <state key="normal" title="Play"/>
+                                        <connections>
+                                            <action selector="playRecordedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="vCn-3S-k4R"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJq-V7-elT" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
+                                        <rect key="frame" x="40" y="0.0" width="49" height="30"/>
+                                        <state key="normal" title="Record"/>
+                                        <connections>
+                                            <action selector="recordAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="XQS-X8-Rla"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-sJ-pz6" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
+                                        <rect key="frame" x="99" y="0.0" width="32" height="30"/>
+                                        <state key="normal" title="Next"/>
+                                        <connections>
+                                            <action selector="nextButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="d9s-bT-QaC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rr0-gR-6dt" customClass="BallparkButton" customModule="BallparkDJ" customModuleProvider="target">
+                                <rect key="frame" x="264" y="247.5" width="72" height="30"/>
+                                <state key="normal" title="Play Audio"/>
+                                <connections>
+                                    <action selector="playProvidedAudioButtonClicked:" destination="P7L-0l-yqx" eventType="touchUpInside" id="xf0-3t-ANC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KjY-3q-vyv" firstAttribute="leading" secondItem="gPx-rM-GJc" secondAttribute="leading" constant="2" id="LTG-Mw-A7h"/>
-                            <constraint firstItem="KjY-3q-vyv" firstAttribute="top" secondItem="5co-1Z-OYU" secondAttribute="bottom" constant="8" symbolic="YES" id="lmu-mP-NWy"/>
+                            <constraint firstItem="1Sq-LC-xhh" firstAttribute="top" secondItem="rr0-gR-6dt" secondAttribute="bottom" constant="8" symbolic="YES" id="2Ib-d1-i6Z"/>
+                            <constraint firstItem="BzY-Nl-NY0" firstAttribute="top" secondItem="1Sq-LC-xhh" secondAttribute="bottom" constant="8" symbolic="YES" id="72T-ch-QE9"/>
+                            <constraint firstItem="KO6-e6-fVB" firstAttribute="centerX" secondItem="gPx-rM-GJc" secondAttribute="centerX" id="8aN-vW-ZbF"/>
+                            <constraint firstItem="4zt-yA-2tU" firstAttribute="centerX" secondItem="gPx-rM-GJc" secondAttribute="centerX" id="DGY-6W-Lic"/>
+                            <constraint firstItem="rr0-gR-6dt" firstAttribute="centerX" secondItem="gPx-rM-GJc" secondAttribute="centerX" id="Dcb-Yf-rbl"/>
+                            <constraint firstItem="KO6-e6-fVB" firstAttribute="top" secondItem="GHU-dP-7j0" secondAttribute="bottom" constant="8" symbolic="YES" id="W7n-q7-aq7"/>
+                            <constraint firstItem="EyT-dh-5tX" firstAttribute="centerX" secondItem="gPx-rM-GJc" secondAttribute="centerX" id="XG1-Mi-QJE"/>
+                            <constraint firstItem="GHU-dP-7j0" firstAttribute="top" secondItem="4zt-yA-2tU" secondAttribute="bottom" constant="8" symbolic="YES" id="ZBB-yG-FJ4"/>
+                            <constraint firstItem="BzY-Nl-NY0" firstAttribute="centerX" secondItem="gPx-rM-GJc" secondAttribute="centerX" id="ae0-P2-Ewe"/>
+                            <constraint firstItem="EyT-dh-5tX" firstAttribute="top" secondItem="BzY-Nl-NY0" secondAttribute="bottom" constant="8" symbolic="YES" id="fsN-ic-AI9"/>
+                            <constraint firstItem="1Sq-LC-xhh" firstAttribute="centerX" secondItem="gPx-rM-GJc" secondAttribute="centerX" id="gUj-zr-qaJ"/>
+                            <constraint firstItem="4zt-yA-2tU" firstAttribute="top" secondItem="5co-1Z-OYU" secondAttribute="bottom" constant="8" symbolic="YES" id="gh5-1b-Jnn"/>
+                            <constraint firstItem="GHU-dP-7j0" firstAttribute="centerX" secondItem="gPx-rM-GJc" secondAttribute="centerX" id="nZX-zb-UWw"/>
+                            <constraint firstItem="rr0-gR-6dt" firstAttribute="top" secondItem="KO6-e6-fVB" secondAttribute="bottom" constant="8" symbolic="YES" id="wdo-Zr-wb7"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="currentPlayerNameLabel" destination="vAu-nC-5oB" id="6WI-CR-gx4"/>
                         <outlet property="currentPlayerVoiceIndexLabel" destination="0xL-qJ-QL1" id="Z5H-7f-SYL"/>
                         <outlet property="currentTeamIndexLabel" destination="wwB-tg-UaF" id="czf-wH-LY9"/>
-                        <outlet property="currentTeamNameLabel" destination="lAq-Kx-WX6" id="uiR-LI-fFY"/>
                         <outlet property="doneUploadButton" destination="EyT-dh-5tX" id="2fD-pk-Epi"/>
                         <outlet property="nextButton" destination="0ya-sJ-pz6" id="eKl-T6-MdK"/>
                         <outlet property="playAudioButton" destination="rr0-gR-6dt" id="2Xn-ff-xlf"/>
                         <outlet property="playButton" destination="Vji-Pv-1as" id="vJK-FK-Lf0"/>
+                        <outlet property="playerTextView" destination="GHU-dP-7j0" id="1kd-P4-81H"/>
                         <outlet property="recordButton" destination="LJq-V7-elT" id="GjJ-le-jcX"/>
                         <outlet property="totalTeamIndexLabel" destination="gTF-VL-rVf" id="VSg-1B-BTK"/>
                         <outlet property="totalTeamPlayersLabel" destination="ccx-7p-etK" id="I3q-oI-aop"/>
-                        <outlet property="voiceFormatLabel" destination="NpW-Jj-htV" id="EJw-VX-RXU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mIh-bN-H9b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="810" y="325"/>
+            <point key="canvasLocation" x="802" y="377"/>
         </scene>
     </scenes>
 </document>

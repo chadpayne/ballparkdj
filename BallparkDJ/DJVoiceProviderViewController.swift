@@ -27,15 +27,14 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     var delegate:DJVoiceProviderViewControllerDelegate?
     
-    @IBOutlet weak var voiceFormatLabel: UILabel!
     
+    @IBOutlet weak var playerTextView: UITextView!
 
     @IBOutlet weak var currentTeamIndexLabel: UILabel!
     @IBOutlet weak var recordButton: FUIButton!
     
     @IBOutlet weak var totalTeamIndexLabel: UILabel!
     
-    @IBOutlet weak var currentTeamNameLabel: UILabel!
     
     
     @IBOutlet weak var currentPlayerVoiceIndexLabel: UILabel!
@@ -44,7 +43,6 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     @IBOutlet weak var totalTeamPlayersLabel: UILabel!
     
     
-    @IBOutlet weak var currentPlayerNameLabel: UILabel!
     
     @IBOutlet weak var playButton: FUIButton!
     
@@ -120,14 +118,13 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         currentPlayerIndex = 0
         currentTeam = team
         
-        currentTeamNameLabel.text = team.teamName
         currentPlayerVoiceIndexLabel.text = "\(1)"
         totalTeamPlayersLabel.text = "\(team.players.count)"
 
         if (team.players.count > 0)
         {
-            currentPlayerNameLabel.text = team.players[0].name
             currentPlayer = team.players[0] as! DJPlayer
+            formatAtBatPlayer()
         }
         
         let order = getOrderForTeam(currentTeam)
@@ -147,19 +144,27 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         {
             playAudioButton.enabled = false
         }
-        
+    }
+    
+    func formatAtBatPlayer()
+    {
+        let order = getOrderForTeam(currentTeam)
         switch (order!.playerVoiceFormat)
         {
-            case .NOW_BATTING_PLAYERNUMBER_PLAYERNAME:
-                voiceFormatLabel.text = "Now Batting - Player # - Player Name"
-                break
-            case .NOW_BATTING_FORTEAM_PLAYERNUMBER_PLAYERNAME:
-                voiceFormatLabel.text = "Now Batting For Team- Player # - Player Name"
-                break
-            case .PLAYERNUMBER_PLAYERNAME:
-                voiceFormatLabel.text = "Player # - Player Name"
-                break
+        case .NOW_BATTING_PLAYERNUMBER_PLAYERNAME:
+            playerTextView.text = "Now Batting\nNumber \(currentPlayer.number)\n\(currentPlayer.name)"
+            break
+        case .NOW_BATTING_FORTEAM_PLAYERNUMBER_PLAYERNAME:
+            playerTextView.text = "Now Batting For \(currentTeam.teamName)\nNumber \(currentPlayer.number)\n\(currentPlayer.name)"
+            break
+        case .PLAYERNUMBER_PLAYERNAME:
+            playerTextView.text = "Number \(currentPlayer.number)\n\(currentPlayer.name)"
+            break
         }
+        
+        playerTextView.font = UIFont.boldSystemFontOfSize(30)
+        playerTextView.textColor = UIColor.blueColor()
+        playerTextView.textAlignment = NSTextAlignment.Center
     }
     
     func moveToNextPlayer()
@@ -194,7 +199,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         else
         {
             currentPlayer = currentTeam.players[currentPlayerIndex] as! DJPlayer
-            currentPlayerNameLabel.text = currentPlayer.name
+            formatAtBatPlayer()
             currentPlayerVoiceIndexLabel.text = "\(currentPlayerIndex+1)"
         }
         
