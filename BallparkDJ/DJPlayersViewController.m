@@ -17,6 +17,23 @@
 #define SINGLE_LABEL @"Single Play"
 #define CONTINUOUS_LABEL @"Continuous Play"
 
+@protocol ClickableImageViewDelegate
+-(void)imageClicked:(NSInteger)row;
+@end
+
+@interface ClickableImageView : UIImageView
+@property(nonatomic,assign) id<ClickableImageViewDelegate> delegate;
+@property(nonatomic,strong) DJPlayer *player;
+@property(nonatomic,assign) NSInteger row;
+@end
+
+@implementation ClickableImageView
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.delegate imageClicked:self.row];
+}
+@end
+
 @interface NSMutableArray (MoveArray)
 
 - (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to;
@@ -229,8 +246,8 @@ enum PostAuthenticationAction
     UITableViewCell *cell = nil;
     
     UILabel *label;
-    UIImageView *musicImageView;
-    UIImageView *voiceImageView;
+    ClickableImageView *musicImageView;
+    ClickableImageView *voiceImageView;
 
     //
     // ::TODO:: This code needs to be re-written to use XIB's with Auto-layout.
@@ -251,8 +268,13 @@ enum PostAuthenticationAction
         label = [[UILabel alloc] initWithFrame:rect];
         label.tag = indexPath.row + 2000;
         
-        musicImageView = [[UIImageView alloc] initWithFrame:musicImageRect];
-        voiceImageView = [[UIImageView alloc] initWithFrame:voiceImageRect];
+        musicImageView = [[ClickableImageView alloc] initWithFrame:musicImageRect];
+        voiceImageView = [[ClickableImageView alloc] initWithFrame:voiceImageRect];
+        
+        musicImageView.userInteractionEnabled = YES;
+        voiceImageView.userInteractionEnabled = YES;
+        musicImageView.delegate = self;
+        voiceImageView.delegate = self;
         
         [cell.contentView addSubview:label];
         [cell.contentView addSubview:musicImageView];
@@ -276,6 +298,11 @@ enum PostAuthenticationAction
 //    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     DJPlayer *tempPlayer = [self.team objectInPlayersAtIndex:indexPath.row];
+    
+    musicImageView.player = tempPlayer;
+    voiceImageView.player = tempPlayer;
+    musicImageView.row = indexPath.row;
+    voiceImageView.row = indexPath.row;
 
     if (tempPlayer.audio.musicURL != nil)
     {
@@ -956,6 +983,14 @@ enum PostAuthenticationAction
         [self.playerTable deselectRowAtIndexPath:[self.playerTable indexPathForSelectedRow] animated:YES];
     }
 }
+
+-(void)imageClicked:(NSInteger)row
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    playerEditing = YES;
+    [self tableView:self.playerTable didSelectRowAtIndexPath:indexPath];
+}
+
 
 
 
