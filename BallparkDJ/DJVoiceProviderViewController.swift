@@ -43,6 +43,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     @IBOutlet weak var totalTeamPlayersLabel: UILabel!
     
     
+    @IBOutlet weak var audioTimeLabel: UILabel!
     
     @IBOutlet weak var playButton: FUIButton!
     
@@ -79,6 +80,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     {
         currentTeamIndex = 0;
         currentPlayerIndex = 0;
+        audioTimeLabel.text = "\(0.00)"
 
         currentTeamIndexLabel.text = "\(1)"
         totalTeamIndexLabel.text = "\(orders.count)"
@@ -117,6 +119,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         doneUploadButton.hidden = true
         currentPlayerIndex = 0
         currentTeam = team
+        audioTimeLabel.text = "\(0.00)"
         
         currentPlayerVoiceIndexLabel.text = "\(1)"
         totalTeamPlayersLabel.text = "\(team.players.count)"
@@ -137,6 +140,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         
         if (currentPlayer.audio.announcementClip != nil)
         {
+            audioTimeLabel.text = "\(Double(round(10*currentPlayer.audio.announcementClip.duration)/10))"
             playAudioButton.enabled = true
             playProvidedAudioButtonClicked(self)
         }
@@ -213,11 +217,13 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
        
         if (currentPlayer.audio.announcementClip != nil)
         {
+            audioTimeLabel.text = "\(Double(round(10*currentPlayer.audio.announcementClip.duration)/10))"
             playAudioButton.enabled = true
             playProvidedAudioButtonClicked(self)
         }
         else
         {
+            audioTimeLabel.text = "0.0"
             playAudioButton.enabled = false
         }
         

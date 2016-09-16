@@ -219,6 +219,7 @@ Jordan Payne</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="audioTimeLabel" destination="KO6-e6-fVB" id="ZnA-Jm-boR"/>
                         <outlet property="currentPlayerVoiceIndexLabel" destination="0xL-qJ-QL1" id="Z5H-7f-SYL"/>
                         <outlet property="currentTeamIndexLabel" destination="wwB-tg-UaF" id="czf-wH-LY9"/>
                         <outlet property="doneUploadButton" destination="EyT-dh-5tX" id="2fD-pk-Epi"/>
