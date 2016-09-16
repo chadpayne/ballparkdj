@@ -27,6 +27,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     var delegate:DJVoiceProviderViewControllerDelegate?
     
+    var audioTimer:NSTimer?
     
     @IBOutlet weak var playerTextView: UITextView!
 
@@ -308,6 +309,9 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             recordButton.setTitle("Stop", forState: .Highlighted)
 
             try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryRecord, withOptions: AVAudioSessionCategoryOptions.AllowBluetooth)
+
+            audioTimeLabel.text = "0.0"
+            audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(DJVoiceProviderViewController.updateAudioTimeLabel), userInfo: nil, repeats: true)
             
             audioRecorder?.prepareToRecord()
             audioRecorder?.record()
@@ -318,6 +322,15 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             stopAudioButtonClicked(sender)
         }
         
+    }
+    
+    func updateAudioTimeLabel()
+    {
+        guard let audioRecorder = audioRecorder else { return }
+        guard audioRecorder.recording else { return }
+        
+        let currentTime = audioRecorder.currentTime
+        audioTimeLabel.text = "\(Double(round(10*currentTime)/10))"
     }
 
     
@@ -330,6 +343,9 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         nextButton.enabled = true
         
         if audioRecorder?.recording == true {
+
+            audioTimer?.invalidate()
+            audioTimer = nil
             audioRecorder?.stop()
             
             do {
