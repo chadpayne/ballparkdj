@@ -70,6 +70,10 @@
 		95560B761D860A920079B6B1 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 95560B611D860A920079B6B1 /* UITableViewCell+FlatUI.m */; };
 		95560B771D860A920079B6B1 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 95560B631D860A920079B6B1 /* UIToolbar+FlatUI.m */; };
 		95560B791D8610E50079B6B1 /* BallparkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95560B781D8610E50079B6B1 /* BallparkButton.swift */; };
+		95560B7E1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 95560B7A1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png */; };
+		95560B7F1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png in Resources */ = {isa = PBXBuildFile; fileRef = 95560B7B1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png */; };
+		95560B801D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png in Resources */ = {isa = PBXBuildFile; fileRef = 95560B7C1D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png */; };
+		95560B811D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png in Resources */ = {isa = PBXBuildFile; fileRef = 95560B7D1D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png */; };
 		9571D7ED1CDC3C9400FFCCE6 /* DataTaskOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */; };
 		9571D7EF1CDC3CB500FFCCE6 /* AsynchronousOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EE1CDC3CB500FFCCE6 /* AsynchronousOperation.h */; };
 		9571D7F11CDC3D0F00FFCCE6 /* DataTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7F01CDC3D0F00FFCCE6 /* DataTaskOperation.m */; };
@@ -246,6 +250,10 @@
 		95560B621D860A920079B6B1 /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIToolbar+FlatUI.h"; path = "FlatUI/UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
 		95560B631D860A920079B6B1 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIToolbar+FlatUI.m"; path = "FlatUI/UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
 		95560B781D8610E50079B6B1 /* BallparkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallparkButton.swift; sourceTree = "<group>"; };
+		95560B7A1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconMusicBlue.png; sourceTree = "<group>"; };
+		95560B7B1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconMusicMissing.png; sourceTree = "<group>"; };
+		95560B7C1D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconVoiceGold.png; sourceTree = "<group>"; };
+		95560B7D1D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconVoiceMissing.png; sourceTree = "<group>"; };
 		9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTaskOperation.h; sourceTree = "<group>"; };
 		9571D7EE1CDC3CB500FFCCE6 /* AsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousOperation.h; sourceTree = "<group>"; };
 		9571D7F01CDC3D0F00FFCCE6 /* DataTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTaskOperation.m; sourceTree = "<group>"; };
@@ -369,6 +377,10 @@
 		8C2C08CC16D71286000B5C1E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				95560B7A1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png */,
+				95560B7B1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png */,
+				95560B7C1D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png */,
+				95560B7D1D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png */,
 				A2B184CB17C6F66300A1FB93 /* Default.png */,
 				AB10667D188F6DE200F8EA60 /* Icons */,
 				ABDBE3801803A61D0030FE9E /* BPDJ_Slider2.png */,
@@ -763,11 +775,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABB4F8EB18974E3B00989B4B /* Action Speed Fighting.m4a in Resources */,
+				95560B7E1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png in Resources */,
 				ABB4F8EC18974E3B00989B4B /* Crank It Up.m4a in Resources */,
 				ABB4F8ED18974E3B00989B4B /* Heavy Fuel.m4a in Resources */,
 				ABB4F8EE18974E3B00989B4B /* Here Again.m4a in Resources */,
 				ABB4F8EF18974E3B00989B4B /* Just Score.m4a in Resources */,
 				ABB4F8F018974E3B00989B4B /* Knock You Out.m4a in Resources */,
+				95560B7F1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png in Resources */,
 				ABB4F8F118974E3B00989B4B /* Loud And Proud.m4a in Resources */,
 				ABB4F8F218974E3B00989B4B /* Man Up.m4a in Resources */,
 				ABB4F8F318974E3B00989B4B /* Party Smasher.m4a in Resources */,
@@ -786,6 +800,7 @@
 				8C2C08DE16D71286000B5C1E /* 1024_1024.png in Resources */,
 				ABDBE3831803A61D0030FE9E /* BPDJ_Slider2.png in Resources */,
 				8C2C08E116D71286000B5C1E /* 1536_2008.png in Resources */,
+				95560B811D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png in Resources */,
 				8C2C08E316D71286000B5C1E /* 320_480.png in Resources */,
 				8C2C08E516D71286000B5C1E /* 512_512.png in Resources */,
 				9514C89E1CE4175400B9E286 /* Security.storyboard in Resources */,
@@ -814,6 +829,7 @@
 				A2B75A1717C56E8900D2962D /* BPDJ_PE_Stop.png in Resources */,
 				A2B184C817C6F61900A1FB93 /* Default-568h@2x.png in Resources */,
 				A2B184CA17C6F62F00A1FB93 /* Default@2x.png in Resources */,
+				95560B801D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png in Resources */,
 				A2B184CC17C6F66300A1FB93 /* Default.png in Resources */,
 				A28FA26B17D82B41002829A2 /* songs.plist in Resources */,
 			);

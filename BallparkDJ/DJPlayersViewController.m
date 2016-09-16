@@ -229,25 +229,46 @@ enum PostAuthenticationAction
     UITableViewCell *cell = nil;
     
     UILabel *label;
+    UIImageView *musicImageView;
+    UIImageView *voiceImageView;
+
+    //
+    // ::TODO:: This code needs to be re-written to use XIB's with Auto-layout.
+    // Sorry, poor developer - which hopefully is not future me - but I had to add to already messy code
+    // and I was under a deadline to finish this :-(
+    //
     
     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     CGRect rect = cell.bounds;
     rect.origin.x = 20;
-    rect.size.width = 280;
+    rect.size.width = 228;
+
+    CGRect musicImageRect = CGRectMake(277, rect.origin.y + (rect.size.height - 26)/2, 26, 26);
+    CGRect voiceImageRect = CGRectMake(294, rect.origin.y + (rect.size.height - 26)/2, 26, 26);
 
     if (cell.contentView.subviews.count == 0)
     {
         label = [[UILabel alloc] initWithFrame:rect];
         label.tag = indexPath.row + 2000;
         
+        musicImageView = [[UIImageView alloc] initWithFrame:musicImageRect];
+        voiceImageView = [[UIImageView alloc] initWithFrame:voiceImageRect];
+        
         [cell.contentView addSubview:label];
+        [cell.contentView addSubview:musicImageView];
+        [cell.contentView addSubview:voiceImageView];
     }
     else
     {
         label = cell.contentView.subviews[0];
         label.frame = rect;
+
+        musicImageView = cell.contentView.subviews[1];
+        musicImageView.frame = musicImageRect;
+        
+        voiceImageView = cell.contentView.subviews[2];
+        voiceImageView.frame = voiceImageRect;
     }
-    
 
     cell.accessoryType = UITableViewCellAccessoryNone;
     [cell setEditingAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
@@ -256,6 +277,25 @@ enum PostAuthenticationAction
     
     DJPlayer *tempPlayer = [self.team objectInPlayersAtIndex:indexPath.row];
 
+    if (tempPlayer.audio.musicURL != nil)
+    {
+        musicImageView.image = [UIImage imageNamed:@"BPDJ_IconMusicBlue"];
+    }
+    else
+    {
+        musicImageView.image = [UIImage imageNamed:@"BPDJ_IconMusicMissing"];
+    }
+
+    if (tempPlayer.audio.announcementClip != nil)
+    {
+        voiceImageView.image = [UIImage imageNamed:@"BPDJ_IconVoiceGold"];
+    }
+    else
+    {
+        voiceImageView.image = [UIImage imageNamed:@"BPDJ_IconVoiceMissing"];
+    }
+
+    
     if(tempPlayer.b_isBench == NO)
         label.textColor = [UIColor blackColor];
     else
