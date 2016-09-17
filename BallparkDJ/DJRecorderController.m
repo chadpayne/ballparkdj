@@ -20,6 +20,9 @@
     NSURL *announceURL;
     
 }
+
+@property(nonatomic,assign) long recordTimeStarted;
+
 @end
 
 @implementation DJRecorderController
@@ -182,10 +185,15 @@
 
 
 -(void)countdownToRecord{
+
+    long currentTime =  (long)(NSTimeInterval)([[NSDate date] timeIntervalSince1970]);
+    long numSecondsElapsed = (currentTime - self.recordTimeStarted);
+    long numSecondsLeft = 3-numSecondsElapsed;
     
-    if (_count > 0) {
+    
+    if (numSecondsLeft > 0) {
         
-        switch (_count) {
+        switch (numSecondsLeft) {
             case 2:
                 self.mainPic.image = [UIImage imageNamed:@"RecCount2"];
                 break;
@@ -234,9 +242,10 @@
         
         self.recordButton.hidden = YES;
 
+        self.recordTimeStarted = (long)(NSTimeInterval)([[NSDate date] timeIntervalSince1970]);
         _count = 2;
         self.mainPic.image = [UIImage imageNamed:@"RecCount3"];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                   target:self
                                                 selector:@selector(countdownToRecord)
                                                 userInfo:nil
