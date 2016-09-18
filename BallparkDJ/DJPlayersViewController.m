@@ -366,7 +366,7 @@ enum PostAuthenticationAction
             topDigits = [[topDigits stringByPaddingToLength:4 withString:@" " startingAtIndex:0] stringByAppendingString:@"\t"];;
         }
         else {
-            topDigits = [NSString stringWithFormat:@"\t     "];
+            topDigits = [NSString stringWithFormat:@"    \t"];
         }
 
         label.text = [topDigits stringByAppendingString:tempPlayer.name];
