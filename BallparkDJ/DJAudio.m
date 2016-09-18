@@ -195,6 +195,8 @@
     //TODO: profile and make sure this doesn't leak the previous AVAudioPlayer
     if(temp) announcementClip = temp;
     if(self.announcementClip) self.announcementDuration = self.announcementClip.duration;
+    
+    self.announcementURL = aPath;
 }
 
 -(void)setMusicClipPath:(NSURL *)mPath {
