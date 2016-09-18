@@ -106,6 +106,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             presentViewController(alertController, animated: false, completion: nil)
 
             
+            doneUploadButton.hidden = false
             //dismissViewControllerAnimated(true, completion: nil)
         }
         
@@ -198,6 +199,8 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
                 let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
                 alertController.addAction(okAction)
                 presentViewController(alertController, animated: true, completion: nil)
+                
+                doneUploadButton.hidden = false
                 return
             }
         }
