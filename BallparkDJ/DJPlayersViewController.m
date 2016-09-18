@@ -673,7 +673,7 @@ enum PostAuthenticationAction
     return YES;
 }
 
--(void)revoiceOrder
+-(void)revoiceOrderConfirmedGoodToGo
 {
     if (![self userEmailAddressExists]) {
         
@@ -764,6 +764,25 @@ enum PostAuthenticationAction
     
     [self presentViewController:alertController animated:NO completion:nil];
 }
+
+-(void)revoiceOrder
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before resubmitting team for professional voicing, make sure you enter all players with name and number, and re-record any players that are not correct.  More options will be presented after submitting." preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self revoiceOrderConfirmedGoodToGo];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        // do not do anything
+    }];
+    
+    [alertController addAction:submitAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:NO completion:nil];
+}
+
 
 -(void)orderVoiceConfirmedGoodToGo
 {
