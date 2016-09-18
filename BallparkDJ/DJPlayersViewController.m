@@ -749,6 +749,24 @@ enum PostAuthenticationAction
 
 -(void)orderVoice
 {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before submitting team for professional voicing, make sure you enter all players with name and number, and pre-record any players that might be difficult or questionable to pronounce.  More options will be presented after submitting." preferredStyle:UIAlertControllerStyleActionSheet];
+
+    UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self orderVoiceConfirmedGoodToGo];
+    }];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        // do not do anything
+    }];
+
+    [alertController addAction:submitAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:NO completion:nil];
+}
+
+-(void)orderVoiceConfirmedGoodToGo
+{
     DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
     
     if (![self userEmailAddressExists]) {
