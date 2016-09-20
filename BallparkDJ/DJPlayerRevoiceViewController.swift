@@ -9,10 +9,16 @@
 import Foundation
 import UIKit
 
+@objc public protocol DJPlayerRevoiceViewDelegate
+{
+    func revoiceRequestCompleted()
+}
+
 public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     var team:DJTeam!
     var selectedPlayers = Set<Int>()
+    var delegate:DJPlayerRevoiceViewDelegate?
     
     @IBOutlet weak var playerTableView: UITableView!
     
@@ -80,11 +86,9 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
         
         uploader.orderVoice(team) { team in
             dispatch_async(dispatch_get_main_queue()) {
-                let alertController = UIAlertController(title: "Info", message: "Your request has been receivied.  We will notify you once we have completed the revoicing.", preferredStyle: .Alert)
-                let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-                alertController.addAction(okAction)
-                self.presentViewController(alertController, animated: false, completion: nil)
-                self.dismissViewControllerAnimated(false, completion: nil)
+                self.dismissViewControllerAnimated(false) {
+                    self.delegate?.revoiceRequestCompleted()
+                }
             }
         }
     }

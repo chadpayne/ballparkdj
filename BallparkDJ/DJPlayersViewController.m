@@ -63,7 +63,7 @@ enum PostAuthenticationAction
 };
 
 
-@interface DJPlayersViewController ()<UINavigationControllerDelegate,EmailAddressViewControllerDelegate> {
+@interface DJPlayersViewController ()<UINavigationControllerDelegate,EmailAddressViewControllerDelegate,DJPlayerRevoiceViewDelegate> {
     bool playerEditing;
 }
 
@@ -153,6 +153,16 @@ enum PostAuthenticationAction
     [self.playerTable reloadData];
 }
 
+-(void)revoiceRequestCompleted
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Your request has been successfully sent.  We will notify you via email once the revoicing is completed." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:okButton];
+    
+    [self presentViewController:alertController animated:NO completion:nil];
+}
 
 
 //===========================
@@ -692,6 +702,7 @@ enum PostAuthenticationAction
     
     DJPlayerRevoiceViewController *viewController = [[DJPlayerRevoiceViewController alloc] initWithNibName:@"DJPlayerRevoiceView" bundle:[NSBundle mainBundle]];
     viewController.team = self.team;
+    viewController.delegate = self;
     [self presentViewController:viewController animated:YES completion:nil];
 }
                                                         
@@ -767,9 +778,9 @@ enum PostAuthenticationAction
 
 -(void)revoiceOrder
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before resubmitting team for professional voicing, make sure you enter all players with name and number, and re-record any players that are not correct.  More options will be presented after submitting." preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before continuing, please ensure that you have re-recording the voices for any players that are not correct.  You will be prompted to choose the player(s) that need revoicing." preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self revoiceOrderConfirmedGoodToGo];
     }];
     
