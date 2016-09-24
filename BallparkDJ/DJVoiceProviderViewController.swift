@@ -161,7 +161,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             playerTextView.text = "Now Batting\nNumber \(currentPlayer.number)\n\(currentPlayer.name)"
             break
         case .NOW_BATTING_FORTEAM_PLAYERNUMBER_PLAYERNAME:
-            playerTextView.text = "Now Batting For \(currentTeam.teamName)\nNumber \(currentPlayer.number)\n\(currentPlayer.name)"
+            playerTextView.text = "Now Batting for the \(currentTeam.teamName)\nNumber \(currentPlayer.number)\n\(currentPlayer.name)"
             break
         case .PLAYERNUMBER_PLAYERNAME:
             playerTextView.text = "Number \(currentPlayer.number)\n\(currentPlayer.name)"
