@@ -3,3 +3,4 @@ platform :ios, "6.0"
 
 pod 'MCSwipeTableViewCell'
 pod 'MKStoreKit', '~> 4.99'
+pod 'Bugsnag'

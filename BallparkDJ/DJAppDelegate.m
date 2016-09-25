@@ -16,6 +16,9 @@
 //#include "TestFlight.h"
 //#import "MKStoreManager.h"
 
+#import <Bugsnag/Bugsnag.h>
+
+
 #import "BallparkDJ-Swift.h"
 
 @implementation DJAppDelegate
