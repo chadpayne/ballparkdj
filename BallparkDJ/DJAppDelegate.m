@@ -48,6 +48,7 @@
 //    [MKStoreManager sharedManager];
 //    [[MKStoreManager sharedManager] purchasableObjectsDescription];
 
+    [Bugsnag startBugsnagWithApiKey:@"db22974df51c851bf7ec4b0d48e647bb"];
     
     return YES;
 }
