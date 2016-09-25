@@ -726,9 +726,14 @@ enum PostAuthenticationAction
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
   //  self.team.teamOwnerEmail = @"kurtn@22ndcenturysoftware.com";
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [uploader shareTeam:self.team completion:^(DJTeam *team) {
 
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+        
         NSString *shareLink = [NSString stringWithFormat:@"com.ballparkdj.team-import://%@", team.teamId];
         
         self.mailController = [[MFMailComposeViewController alloc] init];
@@ -760,6 +765,21 @@ enum PostAuthenticationAction
 
 -(void)orderVoice
 {
+    if (![self userEmailAddressExists]) {
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
+        
+        EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
+        emailAddressViewController.delegate = self;
+        
+        self.action = ORDER_VOICE;
+        
+        [self presentViewController:emailAddressViewController animated:YES completion:nil];
+        return;
+    }
+    
+    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before submitting team for professional voicing, make sure you enter all players with name and number, and pre-record any players that might be difficult or questionable to pronounce.  More options will be presented after submitting." preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -799,24 +819,12 @@ enum PostAuthenticationAction
 {
     DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
     
-    if (![self userEmailAddressExists]) {
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
-        
-        EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
-        emailAddressViewController.delegate = self;
-        
-        self.action = ORDER_VOICE;
-        
-        [self presentViewController:emailAddressViewController animated:YES completion:nil];
-        return;
-    }
-    
-    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [uploader orderVoice:self.team completion:^(DJTeam *team) {
 
         dispatch_async(dispatch_get_main_queue(),^() {
+        [MBProgressHUD hideHUDForView:self.view animated:NO];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Success" message:@"Team Uploaded: Please check your email to complete the voice order." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
