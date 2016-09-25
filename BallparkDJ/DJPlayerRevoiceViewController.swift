@@ -19,6 +19,7 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
     var team:DJTeam!
     var selectedPlayers = Set<Int>()
     var delegate:DJPlayerRevoiceViewDelegate?
+    var HUD:MBProgressHUD?
     
     @IBOutlet weak var playerTableView: UITableView!
     
@@ -77,6 +78,7 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
     @IBAction func revoiceButtonClicked(sender: AnyObject) {
         
         let uploader = DJTeamUploader()
+        HUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
 
         for selectedPlayerIndex in selectedPlayers
         {
@@ -86,6 +88,7 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
         
         uploader.orderVoice(team) { team in
             dispatch_async(dispatch_get_main_queue()) {
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
                 self.dismissViewControllerAnimated(false) {
                     self.delegate?.revoiceRequestCompleted()
                 }
