@@ -135,7 +135,10 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         let order = getOrderForTeam(currentTeam)
         if order!.orderStatus == .REVOICING && currentPlayer?.revoicePlayer == false
         {
-            currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
+            if (currentPlayer.audio.announcementClip != nil)
+            {
+                currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
+            }
             moveToNextPlayer();
             return;
         }
@@ -214,7 +217,11 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         let order = getOrderForTeam(currentTeam)
         if order!.orderStatus == .REVOICING && currentPlayer?.revoicePlayer == false
         {
-            currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
+            if (currentPlayer.audio.announcementClip != nil)
+            {
+                currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
+            }
+
             moveToNextPlayer();
             return;
         }
@@ -410,14 +417,19 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     {
         for team in teams
         {
+            let order = getOrderForTeam(team)
+            
             var allAudioRecordedForTeam = true
             var filePaths = [NSURL]()
             for player in team.players
             {
                 if player.audio!.voiceProviderURL == nil
                 {
-                    allAudioRecordedForTeam = false
-                    break
+                    if (order!.orderStatus != .REVOICING)
+                    {
+                        allAudioRecordedForTeam = false
+                        break
+                    }
                 }
                 else
                 {
