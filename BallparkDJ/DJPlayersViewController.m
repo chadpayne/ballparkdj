@@ -649,21 +649,30 @@ enum PostAuthenticationAction
         [self revoiceOrder];
     }];
 
-    
+    UIAlertAction *orderAddOnPlayerAction = [UIAlertAction actionWithTitle:@"Order Add-On Player(s)" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self orderAddOnPlayers];
+    }];
+
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
     [alertController addAction:shareAction];
     [alertController addAction:duplicateTeamAction];
-    
+
+    // If within grace-period allow for re-order/re-do
     if (self.team.orderRevoiceExpirationDate != nil && [self.team.orderRevoiceExpirationDate compare:[NSDate date]] == NSOrderedDescending)
     {
         [alertController addAction:voiceReorderVoiceAction];
     }
-    else
+    
+    if (self.team.orderId == nil || [self.team.orderId isEqualToString:@""])
     {
         [alertController addAction:orderVoiceAction];
     }
-
+    else
+    {
+        // Order for team previously placed - display add on option
+        [alertController addAction:orderAddOnPlayerAction];
+    }
     
     [alertController addAction:cancelAction];
     
@@ -699,6 +708,11 @@ enum PostAuthenticationAction
     }
     
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    
+    for (DJPlayer *player in self.team.players)
+    {
+        player.addOnVoice = NO;
+    }
     
     DJPlayerRevoiceViewController *viewController = [[DJPlayerRevoiceViewController alloc] initWithNibName:@"DJPlayerRevoiceView" bundle:[NSBundle mainBundle]];
     viewController.team = self.team;
@@ -796,6 +810,50 @@ enum PostAuthenticationAction
     [self presentViewController:alertController animated:NO completion:nil];
 }
 
+-(void)orderAddOnPlayers
+{
+    if (![self userEmailAddressExists]) {
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
+        
+        EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
+        emailAddressViewController.delegate = self;
+        
+        self.action = ORDER_VOICE;
+        
+        [self presentViewController:emailAddressViewController animated:YES completion:nil];
+        return;
+    }
+    
+    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before ordering additional voices for new players for professional voicing, make sure you enter all new players with name and number, and pre-record any players that might be difficult or questionable to pronounce.  More options will be presented after submitting." preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self orderAddOnPlayersGoodToGo];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        // do not do anything
+    }];
+    
+    [alertController addAction:submitAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:NO completion:nil];
+}
+
+-(void)orderAddOnPlayersGoodToGo
+{
+    self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
+    
+    DJPlayerRevoiceViewController *viewController = [[DJPlayerRevoiceViewController alloc] initWithNibName:@"DJPlayerRevoiceView" bundle:[NSBundle mainBundle]];
+    viewController.team = self.team;
+    viewController.delegate = self;
+    viewController.addOnOrder = true;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
 -(void)revoiceOrder
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before continuing, please ensure that you have re-recording the voices for any players that are not correct.  You will be prompted to choose the player(s) that need revoicing." preferredStyle:UIAlertControllerStyleActionSheet];
@@ -820,6 +878,11 @@ enum PostAuthenticationAction
     DJTeamUploader *uploader = [[DJTeamUploader alloc] init];
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    for (DJPlayer *player in self.team.players)
+    {
+        player.addOnVoice = TRUE;
+    }
     
     [uploader orderVoice:self.team completion:^(DJTeam *team) {
 

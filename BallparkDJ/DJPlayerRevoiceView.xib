@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DJPlayerRevoiceViewController" customModule="BallparkDJ" customModuleProvider="target">
             <connections>
                 <outlet property="playerTableView" destination="YRp-SD-qlR" id="nx3-HM-Kvh"/>
+                <outlet property="revoiceLabel" destination="Jyj-ev-h9W" id="jkh-PC-Wq7"/>
                 <outlet property="view" destination="iN0-l3-epB" id="OXD-TA-fAk"/>
             </connections>
         </placeholder>
@@ -30,18 +31,18 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KY2-lF-S0Y">
-                    <rect key="frame" x="243" y="500" width="114" height="80"/>
+                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KY2-lF-S0Y">
+                    <rect key="frame" x="243" y="500" width="163" height="80"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dS-tF-xrL">
-                            <rect key="frame" x="0.0" y="0.0" width="114" height="30"/>
-                            <state key="normal" title="Request Revoice"/>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dS-tF-xrL">
+                            <rect key="frame" x="0.0" y="0.0" width="163" height="30"/>
+                            <state key="normal" title="Submit Voicing Request"/>
                             <connections>
                                 <action selector="revoiceButtonClicked:" destination="-1" eventType="touchUpInside" id="hwR-6l-Ic9"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDi-1A-KZ0">
-                            <rect key="frame" x="33" y="50" width="48" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDi-1A-KZ0">
+                            <rect key="frame" x="58" y="50" width="48" height="30"/>
                             <state key="normal" title="Cancel"/>
                             <connections>
                                 <action selector="cancelButtonClicked:" destination="-1" eventType="touchUpInside" id="Hxu-7r-gOK"/>

@@ -17,6 +17,8 @@ import UIKit
 public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     var team:DJTeam!
+    @IBOutlet weak var revoiceLabel: UILabel!
+    var addOnOrder:Bool = false
     var selectedPlayers = Set<Int>()
     var delegate:DJPlayerRevoiceViewDelegate?
     var HUD:MBProgressHUD?
@@ -28,6 +30,11 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
         
         playerTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "playerCell")
         playerTableView.allowsMultipleSelection = true
+        
+        if self.addOnOrder
+        {
+            revoiceLabel.text = "Select Players to Record Voice"
+        }
     }
     
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,7 +63,7 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if (!selectedPlayers.contains(indexPath.row) && selectedPlayers.count >= 3)
+        if (!selectedPlayers.contains(indexPath.row) && selectedPlayers.count >= 3 && addOnOrder == false)
         {
             // Disallow selection
             let alertController = UIAlertController(title: "Info", message: "You can only request free revoicing for up to 3 players.   If you need to request more please contact support@ballparkdj.com", preferredStyle: .Alert)
@@ -80,10 +87,21 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
         let uploader = DJTeamUploader()
         HUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
 
-        for selectedPlayerIndex in selectedPlayers
+        if (self.addOnOrder)
         {
-            let player = team.players[selectedPlayerIndex] as! DJPlayer
-            player.revoicePlayer = true
+            for selectedPlayerIndex in selectedPlayers
+            {
+                let player = team.players[selectedPlayerIndex] as! DJPlayer
+                player.addOnVoice = true
+            }
+        }
+        else
+        {
+            for selectedPlayerIndex in selectedPlayers
+            {
+                let player = team.players[selectedPlayerIndex] as! DJPlayer
+                player.revoicePlayer = true
+            }
         }
         
         uploader.orderVoice(team) { team in
