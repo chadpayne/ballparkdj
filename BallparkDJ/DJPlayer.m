@@ -22,6 +22,7 @@
     if (self) {
         self.audio = [[DJAudio alloc] init];
         self.revoicePlayer = NO;
+        self.addOnVoice = NO;
     }
     return self;
 }
@@ -33,6 +34,7 @@
     self.audio = [[DJAudio alloc] init];
     self.b_isBench = NO;
     self.revoicePlayer = NO;
+    self.addOnVoice = NO;
     
     return self;
 }
@@ -49,6 +51,11 @@
     {
         self.revoicePlayer = [coder decodeBoolForKey:@"_revoicePlayer"];
     }
+    self.addOnVoice = NO;
+    if ([coder containsValueForKey:@"_addOnVoice"])
+    {
+        self.addOnVoice = [coder decodeBoolForKey:@"_addOnVoice"];
+    }
 
     return self;
 }
@@ -59,6 +66,7 @@
     [coder encodeInt:self.number forKey:@"_number"];
     [coder encodeInt:self.b_isBench forKey:@"_bench"];
     [coder encodeBool:self.revoicePlayer forKey:@"_revoicePlayer"];
+    [coder encodeBool:self.addOnVoice forKey:@"_addOnVoice"];
 }
 
 @end
