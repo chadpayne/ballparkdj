@@ -487,9 +487,16 @@ public class DJTeamUploader : NSObject
             {
                 if voicerMode
                 {
-                    if let announcementURL = audio?.voiceProviderURL.lastPathComponent
+                    if let announcementURL = audio?.voiceProviderURL?.lastPathComponent
                     {
                         audioDict["announcementUrl"] = announcementURL
+                    }
+                    else
+                    {
+                        if let announcementURL = audio?.announcementClip?.url?.lastPathComponent
+                        {
+                            audioDict["announcementUrl"] = announcementURL
+                        }
                     }
                 }
                 else
