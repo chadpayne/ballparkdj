@@ -142,6 +142,18 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             moveToNextPlayer();
             return;
         }
+
+        // Add-on order
+        if order!.orderStatus == .ADDONPAID && currentPlayer?.addOnVoice == false
+        {
+            if (currentPlayer.audio.announcementClip != nil)
+            {
+                currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
+            }
+            moveToNextPlayer();
+            return;
+        }
+        
         
         if (currentPlayer.audio.announcementClip != nil)
         {
@@ -225,6 +237,18 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             moveToNextPlayer();
             return;
         }
+        
+        // Add-on order
+        if order!.orderStatus == .ADDONPAID && currentPlayer?.addOnVoice == false
+        {
+            if (currentPlayer.audio.announcementClip != nil)
+            {
+                currentPlayer.audio.voiceProviderURL = currentPlayer.audio.announcementClip.url
+            }
+            moveToNextPlayer();
+            return;
+        }
+
        
         if (currentPlayer.audio.announcementClip != nil)
         {
@@ -425,7 +449,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             {
                 if player.audio!.voiceProviderURL == nil
                 {
-                    if (order!.orderStatus != .REVOICING)
+                    if (order!.orderStatus != .REVOICING && order!.orderStatus != .ADDONPAID)
                     {
                         allAudioRecordedForTeam = false
                         break
