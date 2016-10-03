@@ -16,6 +16,8 @@ enum DJVoiceOrderStatus : String
     case REVOICING = "REVOICING"
     case SHARED = "SHARED"
     case VOICED = "VOICED"
+    case ADDON = "ADDON"
+    case ADDONPAID = "ADDONPAID"
 }
 
 enum PlayerVoiceFormat : String
