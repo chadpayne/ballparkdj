@@ -270,8 +270,8 @@ enum PostAuthenticationAction
     rect.origin.x = 20;
     rect.size.width = 228;
 
-    CGRect musicImageRect = CGRectMake(277, rect.origin.y + (rect.size.height - 26)/2, 26, 26);
-    CGRect voiceImageRect = CGRectMake(294, rect.origin.y + (rect.size.height - 26)/2, 26, 26);
+    CGRect musicImageRect = CGRectMake(320-38, rect.origin.y + (rect.size.height - 38)/2, 38, 38);
+    CGRect voiceImageRect = CGRectMake(320-38-38+7, rect.origin.y + (rect.size.height - 38)/2, 38, 38);
 
     if (cell.contentView.subviews.count == 0)
     {
