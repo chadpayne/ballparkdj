@@ -97,15 +97,28 @@
 
 -(void)importTeam:(DJTeam *)team
 {
-    // Check to see if we are updating a team 
+    // Check to see if we are updating a team
+    int teamIndex = 0;
+    NSInteger foundTeamIndex = NSNotFound;
     for (DJTeam *aTeam in self.teams)
     {
         if ([aTeam.teamId isEqualToString:team.teamId])
         {
-            [self encode];
-            return;
+            foundTeamIndex = teamIndex;
+            break;
         }
+        teamIndex++;
     }
+
+    // Update current array, save, and send notification
+    if (foundTeamIndex != NSNotFound)
+    {
+        self.teams[foundTeamIndex] = team;
+        [self encode];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:nil];
+        return;
+    }
+    
     
     DJTeam *newTeam = team;
     newTeam.teamName = [self generateUniqueTeamName:newTeam];
