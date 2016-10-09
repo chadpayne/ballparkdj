@@ -752,8 +752,8 @@ enum PostAuthenticationAction
         
         self.mailController = [[MFMailComposeViewController alloc] init];
         self.mailController.mailComposeDelegate = self;
-        [self.mailController setSubject:[NSString stringWithFormat:@"Sharing of my Ballpark DJ Team: %@",team.teamName]];
-        [self.mailController setMessageBody:[NSString stringWithFormat:@"Click on the following link to start the process of importing my team.\n\n%@", shareLink] isHTML:NO];
+        [self.mailController setSubject:[NSString stringWithFormat:@"BallparkDJ Team: %@",team.teamName]];
+        [self.mailController setMessageBody:[NSString stringWithFormat:@"Open this email on the iPhone or iPad on which you've installed BallparkDJ. Then click on the link below to import the shared team into BallparkDJ.\n\n%@\n\n(Note: If you are unable to open this email on your iPhone or iPad, you may alternatively open Safari on the device and type in the address/URL above)", shareLink] isHTML:NO];
          
         [self presentViewController:self.mailController animated:YES completion:nil];
         
