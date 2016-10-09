@@ -377,6 +377,18 @@ public class DJTeamUploader : NSObject
         task.resume()
     }
 
+    public func reorderVoice(team:DJTeam, completion: (DJTeam) -> Void)
+    {
+        team.voiceReOrder = true
+        orderVoice(team, completion: completion)
+    }
+
+    public func addOnVoiceOrder(team:DJTeam, completion:(DJTeam) -> Void)
+    {
+        team.voiceAddOn = true
+        orderVoice(team, completion: completion)
+    }
+    
     public func orderVoice(team:DJTeam, completion: (DJTeam) -> Void)
     {
         shareTeam(team) { team in
@@ -397,6 +409,15 @@ public class DJTeamUploader : NSObject
                 }
                 teamDict["teamName"] = team.teamName
                 teamDict["teamOwnerEmail"] = team.teamOwnerEmail
+                
+                if (team.voiceReOrder)
+                {
+                    teamDict["status"] = DJVoiceOrderStatus.REVOICING.rawValue
+                }
+                if (team.voiceAddOn)
+                {
+                    teamDict["status"] = DJVoiceOrderStatus.ADDON.rawValue
+                }
                 
                 if let orderId = team.orderId
                 {
@@ -672,7 +693,7 @@ public class DJTeamUploader : NSObject
 
         for path in paths
         {
-            let filename = NSString(string: path.absoluteString).lastPathComponent
+            let filename = NSString(string: path.absoluteString!).lastPathComponent
             let data = NSData(contentsOfURL:  path)
             let mimetype = "application/octet-stream"
             

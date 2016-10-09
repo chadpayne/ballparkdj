@@ -94,6 +94,14 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
                 let player = team.players[selectedPlayerIndex] as! DJPlayer
                 player.addOnVoice = true
             }
+            uploader.addOnVoiceOrder(team) { team in
+                dispatch_async(dispatch_get_main_queue()) {
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    self.dismissViewControllerAnimated(false) {
+                        self.delegate?.revoiceRequestCompleted()
+                    }
+                }
+            }
         }
         else
         {
@@ -102,15 +110,15 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
                 let player = team.players[selectedPlayerIndex] as! DJPlayer
                 player.revoicePlayer = true
             }
-        }
-        
-        uploader.orderVoice(team) { team in
-            dispatch_async(dispatch_get_main_queue()) {
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
-                self.dismissViewControllerAnimated(false) {
-                    self.delegate?.revoiceRequestCompleted()
+            uploader.reorderVoice(team) { team in
+                dispatch_async(dispatch_get_main_queue()) {
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    self.dismissViewControllerAnimated(false) {
+                        self.delegate?.revoiceRequestCompleted()
+                    }
                 }
             }
+            
         }
     }
  
