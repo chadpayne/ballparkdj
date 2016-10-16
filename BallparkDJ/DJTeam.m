@@ -70,6 +70,11 @@
         self.orderId = [coder decodeObjectForKey:@"_orderId"];
     }
     
+    if ([coder containsValueForKey:@"_teamId"])
+    {
+        self.teamId = [coder decodeObjectForKey:@"_teamId"];
+    }
+    
     return self;
 }
 
@@ -112,6 +117,12 @@
     {
         [coder encodeObject:self.orderId forKey:@"_orderId"];
     }
+
+    if (self.teamId)
+    {
+        [coder encodeObject:self.teamId forKey:@"_teamId"];
+    }
+
 }
 
 @end
