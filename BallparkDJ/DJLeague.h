@@ -26,6 +26,7 @@
 -(DJTeam *)duplicateTeam:(DJTeam *)team;
 -(void)importTeam:(DJTeam *)team;
 
+-(void)saveTeam:(DJTeam *)team;
 
 - (void)reorderTeams:(NSIndexPath *)origin toIndexPath:(NSIndexPath *)destination;
 //-(void)encodeWithCoder:(NSCoder *)coder;

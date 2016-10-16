@@ -568,6 +568,9 @@ public class DJTeamUploader : NSObject
                 {
                     team.teamId = teamID
                     print("Success!")
+
+                    // Force saving of team so that we have the teamID saved
+                    DJAppDelegate.sharedDelegate().league.saveTeam(team)
                     
                     if voicerMode == false
                     {

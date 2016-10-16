@@ -71,6 +71,10 @@
     [self.teams exchangeObjectAtIndex:origin.row withObjectAtIndex:destination.row];
 }
 
+-(void)saveTeam:(DJTeam *)team {
+    [self encode];
+}
+
 -(DJTeam *)duplicateTeam:(DJTeam *)team
 {
     NSData *teamData = [NSKeyedArchiver archivedDataWithRootObject:team];
@@ -100,6 +104,10 @@
     // Check to see if we are updating a team
     int teamIndex = 0;
     NSInteger foundTeamIndex = NSNotFound;
+    
+    // Temp Fix
+    ((DJTeam *)self.teams[0]).teamId = @"580387b2e4b096bce6231941";
+    
     for (DJTeam *aTeam in self.teams)
     {
         if ([aTeam.teamId isEqualToString:team.teamId])
