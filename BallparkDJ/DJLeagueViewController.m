@@ -85,6 +85,7 @@
 - (void)teamDataUpdated
 {
     [self.teamTable reloadData];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
