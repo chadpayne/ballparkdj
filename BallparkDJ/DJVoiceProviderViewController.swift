@@ -123,6 +123,8 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         currentTeam = team
         audioTimeLabel.text = "\(0.00)"
         
+        currentTeamIndexLabel.text = "\(currentTeamIndex+1)"
+        
         currentPlayerVoiceIndexLabel.text = "\(1)"
         totalTeamPlayersLabel.text = "\(team.players.count)"
 
