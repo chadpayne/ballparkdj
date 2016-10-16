@@ -105,9 +105,6 @@
     int teamIndex = 0;
     NSInteger foundTeamIndex = NSNotFound;
     
-    // Temp Fix
-    ((DJTeam *)self.teams[0]).teamId = @"580387b2e4b096bce6231941";
-    
     for (DJTeam *aTeam in self.teams)
     {
         if ([aTeam.teamId isEqualToString:team.teamId])
