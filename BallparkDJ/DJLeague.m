@@ -118,7 +118,54 @@
     // Update current array, save, and send notification
     if (foundTeamIndex != NSNotFound)
     {
-        self.teams[foundTeamIndex] = team;
+        DJTeam *foundTeam = self.teams[foundTeamIndex];
+        
+        // Replace order information
+        foundTeam.orderRevoiceExpirationDate = team.orderRevoiceExpirationDate;
+        foundTeam.orderId = team.orderId;
+        
+        // For each player in team for server - get PlayerID
+        for (DJPlayer *serverPlayer in team.players)
+        {
+            // If UUID matches - then replace recorded audio only in merge
+            BOOL audioMerged = NO;
+            if (serverPlayer.uuid != nil && ![serverPlayer.uuid isEqualToString:@""])
+            {
+                for (DJPlayer *localPlayer in foundTeam.players)
+                {
+                    if ([localPlayer.uuid isEqualToString:serverPlayer.uuid])
+                    {
+                        localPlayer.audio.announcementURL = serverPlayer.audio.announcementURL;
+                        localPlayer.audio.announcementClip = serverPlayer.audio.announcementClip;
+                        audioMerged = YES;
+                    }
+                }
+            }
+
+            if (audioMerged == NO)
+            {
+                // Attempt merge based on Player # and Name - as no 2 players should
+                // have both the same # and name (at least I hope not).
+                for (DJPlayer *localPlayer in foundTeam.players)
+                {
+                    if ([localPlayer.name isEqualToString:serverPlayer.name] && localPlayer.number == serverPlayer.number)
+                    {
+                        localPlayer.audio.announcementURL = serverPlayer.audio.announcementURL;
+                        localPlayer.audio.announcementClip = serverPlayer.audio.announcementClip;
+                        audioMerged = YES;
+                    }
+                }
+            }
+
+            // If we reach here then this must be a new player that we don't have, so
+            // lets add to team
+            if (audioMerged == NO)
+            {
+                [foundTeam.players addObject:serverPlayer];
+            }
+        }
+        
+        
         [self encode];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:nil];
         return;
