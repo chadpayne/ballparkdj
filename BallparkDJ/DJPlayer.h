@@ -19,6 +19,7 @@
 @property BOOL  b_isBench;
 @property (nonatomic,assign) BOOL revoicePlayer;
 @property (nonatomic,assign) BOOL addOnVoice;
+@property (nonatomic,strong) NSString *uuid;
 
 -(id)init;
 -(id)initWithName:(NSString *)pName andWithNumber:(int)number;

@@ -121,6 +121,11 @@ public class DJTeamUploader : NSObject
                         player.addOnVoice = addOnVoice
                     }
                     
+                    if let uuid = playerDict["uuid"] as? String
+                    {
+                        player.uuid = uuid
+                    }
+                    
                     if let audioDict = playerDict["playerAudio"] as? [String:AnyObject]
                     {
                         if let announcmentURL = audioDict["announcementUrl"] as? String
@@ -502,6 +507,7 @@ public class DJTeamUploader : NSObject
             playerDict["benched"] = NSNumber(bool: player.b_isBench)
             playerDict["revoicePlayer"] = player.revoicePlayer
             playerDict["addOnVoice"] = player.addOnVoice
+            playerDict["uuid"] = player.uuid
             
             var audioDict = [String:AnyObject]()
             if let audio = player.audio

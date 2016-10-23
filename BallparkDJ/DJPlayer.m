@@ -23,6 +23,7 @@
         self.audio = [[DJAudio alloc] init];
         self.revoicePlayer = NO;
         self.addOnVoice = NO;
+        self.uuid = [[NSUUID UUID] UUIDString];
     }
     return self;
 }
@@ -35,6 +36,7 @@
     self.b_isBench = NO;
     self.revoicePlayer = NO;
     self.addOnVoice = NO;
+    self.uuid = [[NSUUID UUID] UUIDString];
     
     return self;
 }
@@ -57,6 +59,15 @@
         self.addOnVoice = [coder decodeBoolForKey:@"_addOnVoice"];
     }
 
+    if ([coder containsValueForKey:@"_uuid"]) {
+        self.uuid = [coder decodeObjectForKey:@"_uuid"];
+    }
+    else
+    {
+        // Generate UUID
+        self.uuid = [[NSUUID UUID] UUIDString];
+    }
+    
     return self;
 }
 
@@ -67,6 +78,7 @@
     [coder encodeInt:self.b_isBench forKey:@"_bench"];
     [coder encodeBool:self.revoicePlayer forKey:@"_revoicePlayer"];
     [coder encodeBool:self.addOnVoice forKey:@"_addOnVoice"];
+    [coder encodeObject:self.uuid forKey:@"_uuid"];
 }
 
 @end
