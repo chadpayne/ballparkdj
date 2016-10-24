@@ -137,6 +137,8 @@
                     {
                         localPlayer.audio.announcementURL = serverPlayer.audio.announcementURL;
                         localPlayer.audio.announcementClip = serverPlayer.audio.announcementClip;
+                        localPlayer.audio.announcementDuration = serverPlayer.audio.announcementDuration;
+
                         audioMerged = YES;
                     }
                 }
@@ -152,6 +154,7 @@
                     {
                         localPlayer.audio.announcementURL = serverPlayer.audio.announcementURL;
                         localPlayer.audio.announcementClip = serverPlayer.audio.announcementClip;
+                        localPlayer.audio.announcementDuration = serverPlayer.audio.announcementDuration;
                         audioMerged = YES;
                     }
                 }
