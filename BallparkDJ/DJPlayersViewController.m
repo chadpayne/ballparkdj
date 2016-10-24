@@ -316,20 +316,20 @@ enum PostAuthenticationAction
 
     if (tempPlayer.audio.musicURL != nil)
     {
-        musicImageView.image = [UIImage imageNamed:@"BPDJ_IconMusicBlue"];
+        musicImageView.image = [UIImage imageNamed:@"BPDJ_IconMusicBlueScaled"];
     }
     else
     {
-        musicImageView.image = [UIImage imageNamed:@"BPDJ_IconMusicMissing"];
+        musicImageView.image = [UIImage imageNamed:@"BPDJ_IconMusicMissingScaled"];
     }
 
     if (tempPlayer.audio.announcementClip != nil)
     {
-        voiceImageView.image = [UIImage imageNamed:@"BPDJ_IconVoiceGold"];
+        voiceImageView.image = [UIImage imageNamed:@"BPDJ_IconVoiceGoldScaled"];
     }
     else
     {
-        voiceImageView.image = [UIImage imageNamed:@"BPDJ_IconVoiceMissing"];
+        voiceImageView.image = [UIImage imageNamed:@"BPDJ_IconVoiceMissingScaled"];
     }
 
     
