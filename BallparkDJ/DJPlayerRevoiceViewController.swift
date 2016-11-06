@@ -12,6 +12,7 @@ import UIKit
 @objc public protocol DJPlayerRevoiceViewDelegate
 {
     func revoiceRequestCompleted()
+    func addOnRequestCompleted()
 }
 
 public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSource, UITableViewDelegate
@@ -98,7 +99,7 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
                 dispatch_async(dispatch_get_main_queue()) {
                     MBProgressHUD.hideHUDForView(self.view, animated: true)
                     self.dismissViewControllerAnimated(false) {
-                        self.delegate?.revoiceRequestCompleted()
+                        self.delegate?.addOnRequestCompleted()
                     }
                 }
             }

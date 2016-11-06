@@ -59,7 +59,9 @@
 enum PostAuthenticationAction
 {
     SHARE_TEAM,
-    ORDER_VOICE
+    ORDER_VOICE,
+    REORDER_VOICE,
+    ADDON_VOICE
 };
 
 
@@ -156,7 +158,18 @@ enum PostAuthenticationAction
 -(void)revoiceRequestCompleted
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Your request has been successfully sent.  We will notify you via email once the revoicing is completed." preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:okButton];
+    
+    [self presentViewController:alertController animated:NO completion:nil];
+}
+
+-(void)addOnRequestCompleted
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:@"Your request has been successfully sent. Please check your email to complete the voice order." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     [alertController addAction:okButton];
@@ -768,7 +781,7 @@ enum PostAuthenticationAction
     NSString *msg = [NSString stringWithFormat:@"New Team name is %@.", newTeam.teamName];
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:msg preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.navigationController popToRootViewControllerAnimated:NO];
         
     }];
@@ -1242,6 +1255,16 @@ enum PostAuthenticationAction
     {
         self.team.teamOwnerEmail = emailAddress;
         [self orderVoice];
+    }
+    else if (self.action == REORDER_VOICE)
+    {
+        self.team.teamOwnerEmail = emailAddress;
+        [self revoiceOrder];
+    }
+    else if (self.action == ADDON_VOICE)
+    {
+        self.team.teamOwnerEmail = emailAddress;
+        [self orderAddOnPlayers];
     }
 }
 
