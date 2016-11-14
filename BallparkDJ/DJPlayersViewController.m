@@ -832,7 +832,7 @@ enum PostAuthenticationAction
         EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
         emailAddressViewController.delegate = self;
         
-        self.action = ORDER_VOICE;
+        self.action = ADDON_VOICE;
         
         [self presentViewController:emailAddressViewController animated:YES completion:nil];
         return;
@@ -842,7 +842,7 @@ enum PostAuthenticationAction
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before ordering additional voices for new players for professional voicing, make sure you enter all new players with name and number, and pre-record any players that might be difficult or questionable to pronounce.  More options will be presented after submitting." preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Select Players" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self orderAddOnPlayersGoodToGo];
     }];
     
