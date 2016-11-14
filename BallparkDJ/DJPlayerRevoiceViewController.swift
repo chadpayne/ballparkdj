@@ -90,6 +90,16 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
 
         if (self.addOnOrder)
         {
+            // Set add-on voice to false for all players (i.e only send the ones
+            // the user selected
+            var currentPlayer:DJPlayer?
+            
+            for i in 0..<team.players.count
+            {
+                currentPlayer = team.players[i] as? DJPlayer
+                currentPlayer?.addOnVoice = false
+            }
+            
             for selectedPlayerIndex in selectedPlayers
             {
                 let player = team.players[selectedPlayerIndex] as! DJPlayer
