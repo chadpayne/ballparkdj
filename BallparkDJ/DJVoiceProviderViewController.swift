@@ -292,6 +292,12 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             return
         }
         
+        if (currentPlayer.audio.announcementClip.playing)
+        {
+            currentPlayer.audio.announcementClip.pause()
+        }
+        currentPlayer.audio.announcementClip.currentTime = 0
+        
         currentPlayer.audio.announcementClip.play()
     }
     
