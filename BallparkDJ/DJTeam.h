@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSString *orderId;
 @property (assign, nonatomic) BOOL voiceReOrder;
 @property (assign, nonatomic) BOOL voiceAddOn;
+@property (assign, nonatomic) BOOL teamOrderUploaded;
 
 
 -(id)initWithName:(NSString *)name;

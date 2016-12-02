@@ -124,9 +124,10 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         audioTimeLabel.text = "\(0.00)"
         
         currentTeamIndexLabel.text = "\(currentTeamIndex+1)"
+        let totalPlayerVoices = teams.reduce(0) { $0 + $1.players.count }
         
         currentPlayerVoiceIndexLabel.text = "\(1)"
-        totalTeamPlayersLabel.text = "\(team.players.count)"
+        totalTeamPlayersLabel.text = "\(team.players.count) of \(totalPlayerVoices)"
 
         if (team.players.count > 0)
         {
@@ -469,7 +470,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
                 }
             }
             
-            if allAudioRecordedForTeam
+            if allAudioRecordedForTeam && team.teamOrderUploaded == false
             {
                 let sem = dispatch_semaphore_create(0)
                 
@@ -481,6 +482,8 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
                         
                         DJOrderBackendService.markOrderComplete(self.authToken, order: order)
                         {_,_ in
+                            
+                            team.teamOrderUploaded = true
                             dispatch_semaphore_signal(sem)
                             
                         }
