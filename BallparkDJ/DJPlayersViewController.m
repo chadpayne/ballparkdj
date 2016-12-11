@@ -327,7 +327,7 @@ enum PostAuthenticationAction
     musicImageView.row = indexPath.row;
     voiceImageView.row = indexPath.row;
 
-    if (tempPlayer.audio.musicURL != nil)
+    if (tempPlayer.audio.musicURL != nil || [tempPlayer.audio.title length] > 0)
     {
         musicImageView.image = [UIImage imageNamed:@"BPDJ_IconMusicBlueScaled"];
     }
