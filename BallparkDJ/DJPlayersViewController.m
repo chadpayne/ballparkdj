@@ -207,7 +207,6 @@ enum PostAuthenticationAction
     NSUserDefaults  *userDefaults = [NSUserDefaults standardUserDefaults];
 
     BOOL isPurchased = [userDefaults boolForKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
-    isPurchased = YES;
     
     if (self.team.players.count >= 3 && (isPurchased != YES))
     {
