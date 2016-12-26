@@ -137,7 +137,7 @@
 {
     if ([[url scheme] isEqualToString:@"com.ballparkdj.team-import"])
     {
-        DJTeamUploader *teamUploader = [[DJTeamUploader alloc] init];
+        DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
         [teamUploader importTeam:[url host]];
         
         return YES;
@@ -159,7 +159,7 @@
             
             if (order.teamId != nil)
             {
-                DJTeamUploader *teamUploader = [[DJTeamUploader alloc] init];
+                DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
                 [teamUploader importOrder:order];
             }
         }];

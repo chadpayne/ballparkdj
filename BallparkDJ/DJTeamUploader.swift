@@ -14,10 +14,17 @@ public class DJTeamUploader : NSObject
     static let baseServerURL = DJServerInfo.baseServerURL
     var operationQueue = NSOperationQueue()
     var HUD:MBProgressHUD!
+    var inInAppPurchaseAction:Bool = false
+    
+    public static var sharedInstance:DJTeamUploader = DJTeamUploader()
     
     override init()
     {
-    
+        super.init()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishPurchase), name: "InAppPurchase", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishRestore), name: "InAppPurchase", object: nil)
+        
     }
     
     static func generateBoundaryString() -> String
@@ -357,6 +364,36 @@ public class DJTeamUploader : NSObject
                     }
                 }
                 
+                // Check to see if user has purchased app - if more than 3 players
+                //let appPurchased = false // ::TODO:: add code here
+                let appPurchased = NSUserDefaults.standardUserDefaults().boolForKey("IS_ALLREADY_PURCHASED_FULL_VERSION")
+                
+                if team.players.count > 3 && !appPurchased
+                {
+                    self.HUD.hide(true)
+
+                    // display alert
+                    let alertController = UIAlertController(title: "Unable to Import Team", message: "In order to import a team with more 3 players, you must purchase the fully functional version of BallparkDJ. Upgrade to the Pro version which allows full functionality with unlimited teams and unlimited players per team.", preferredStyle: .Alert)
+
+                    let purchaseAction = UIAlertAction(title: "Upgrade to Pro ($6.99)", style: .Default) { _ in
+                            self.performInAppPurchase();
+                        }
+
+                    let alreadyPurchasedAction = UIAlertAction(title: "I've Already Purchased", style: .Default) { _ in
+                            self.restoreInAppPurchase();
+                    }
+                    let evaluateAction = UIAlertAction(title: "Continue Evaluating", style: .Cancel) { _ in }
+                    
+                    alertController.addAction(purchaseAction)
+                    alertController.addAction(alreadyPurchasedAction)
+                    alertController.addAction(evaluateAction)
+                    
+                    UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertController, animated: false, completion: nil)
+                    
+                    return
+                }
+                
+                
                 dispatch_async(dispatch_get_global_queue(0, 0))
                 {
                     //self.createTeamDirectory(team)
@@ -382,6 +419,25 @@ public class DJTeamUploader : NSObject
         task.resume()
     }
 
+    func performInAppPurchase()
+    {
+        RageIAPHelper.sharedInstance().requestProductsWithCompletionHandler() {
+            success, products in
+            if (success) {
+             
+                if products.count > 0 {
+                    RageIAPHelper.sharedInstance().buyProduct(products[0] as! SKProduct)
+                }
+            }
+            
+        }
+    }
+    
+    func restoreInAppPurchase()
+    {
+        RageIAPHelper.sharedInstance().restoreCompletedTransactions()
+    }
+    
     public func reorderVoice(team:DJTeam, completion: (DJTeam) -> Void)
     {
         team.voiceReOrder = true
@@ -717,6 +773,40 @@ public class DJTeamUploader : NSObject
         
         httpBody.appendData("--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
         return httpBody
+    }
+
+    
+    func onFinishPurchase()
+    {
+        if (inInAppPurchaseAction == false)
+        {
+            return
+        }
+        inInAppPurchaseAction = false
+        
+        let alertViewController = UIAlertController(title: "Success", message: "Purchase succeeded.  Please try reimporting your team", preferredStyle: .Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertViewController.addAction(okAction)
+        
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
+    }
+    
+    func onFinishRestore()
+    {
+        if (inInAppPurchaseAction == false)
+        {
+            return
+        }
+        inInAppPurchaseAction = false
+        
+        let alertViewController = UIAlertController(title: "Success", message: "Sucessfully Restored", preferredStyle: .Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertViewController.addAction(okAction)
+        
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
+        
     }
     
 }
