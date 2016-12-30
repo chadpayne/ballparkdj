@@ -11,6 +11,7 @@
 #import "DJPlayer.h"
 #import "DJPlayersViewController.h"
 #import "RageIAPHelper.h"
+#import "BallparkDJ-Swift.h"
 #import <StoreKit/StoreKit.h>
 
 @interface DJLeagueViewController (){
@@ -382,6 +383,10 @@ UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Upgrade!" message:@"Ballpa
 - (void) onFinishRestore
 {
     [self stopHUDLoop];
+    
+    if ([DJTeamUploader sharedInstance].inInAppPurchaseAction) {
+        return;
+    }
     
     [[[UIAlertView alloc] initWithTitle:@"Congratulation!" message:@"Successfully Restored" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     

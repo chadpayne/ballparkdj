@@ -23,7 +23,8 @@ public class DJTeamUploader : NSObject
         super.init()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishPurchase), name: "InAppPurchase", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishRestore), name: "InAppPurchase", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishRestore), name: "RestoreInAppPurchase", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishFailPurchase), name: "FailedInAppPurchase", object: nil)
         
     }
     
@@ -426,6 +427,7 @@ public class DJTeamUploader : NSObject
             if (success) {
              
                 if products.count > 0 {
+                    self.inInAppPurchaseAction = true
                     RageIAPHelper.sharedInstance().buyProduct(products[0] as! SKProduct)
                 }
             }
@@ -435,6 +437,7 @@ public class DJTeamUploader : NSObject
     
     func restoreInAppPurchase()
     {
+        inInAppPurchaseAction = true
         RageIAPHelper.sharedInstance().restoreCompletedTransactions()
     }
     
@@ -807,6 +810,11 @@ public class DJTeamUploader : NSObject
         
         UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
         
+    }
+    
+    func onFinishFailPurchase()
+    {
+        inInAppPurchaseAction = false
     }
     
 }
