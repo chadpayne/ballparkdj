@@ -206,6 +206,8 @@ NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurcha
         NSLog(@"Transaction error: %@", transaction.error.localizedDescription);
     }
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FailedInAppPurchase" object:nil];
+    
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }
 

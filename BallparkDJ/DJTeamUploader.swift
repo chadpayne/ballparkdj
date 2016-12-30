@@ -371,25 +371,27 @@ public class DJTeamUploader : NSObject
                 
                 if team.players.count > 3 && !appPurchased
                 {
-                    self.HUD.hide(true)
+                     dispatch_async(dispatch_get_main_queue()) {
+                        MBProgressHUD.hideAllHUDsForView(DJAppDelegate.sharedDelegate().window, animated: false)
 
-                    // display alert
-                    let alertController = UIAlertController(title: "Unable to Import Team", message: "In order to import a team with more 3 players, you must purchase the fully functional version of BallparkDJ. Upgrade to the Pro version which allows full functionality with unlimited teams and unlimited players per team.", preferredStyle: .Alert)
+                        // display alert
+                        let alertController = UIAlertController(title: "Unable to Import Team", message: "In order to import a team with more 3 players, you must purchase the fully functional version of BallparkDJ. Upgrade to the Pro version which allows full functionality with unlimited teams and unlimited players per team.", preferredStyle: .Alert)
 
-                    let purchaseAction = UIAlertAction(title: "Upgrade to Pro ($6.99)", style: .Default) { _ in
-                            self.performInAppPurchase();
+                        let purchaseAction = UIAlertAction(title: "Upgrade to Pro ($6.99)", style: .Default) { _ in
+                                self.performInAppPurchase();
+                            }
+
+                        let alreadyPurchasedAction = UIAlertAction(title: "I've Already Purchased", style: .Default) { _ in
+                                self.restoreInAppPurchase();
                         }
-
-                    let alreadyPurchasedAction = UIAlertAction(title: "I've Already Purchased", style: .Default) { _ in
-                            self.restoreInAppPurchase();
+                        let evaluateAction = UIAlertAction(title: "Continue Evaluating", style: .Cancel) { _ in }
+                        
+                        alertController.addAction(purchaseAction)
+                        alertController.addAction(alreadyPurchasedAction)
+                        alertController.addAction(evaluateAction)
+                        
+                        DJAppDelegate.sharedDelegate().window.rootViewController?.presentViewController(alertController, animated: false, completion: nil)
                     }
-                    let evaluateAction = UIAlertAction(title: "Continue Evaluating", style: .Cancel) { _ in }
-                    
-                    alertController.addAction(purchaseAction)
-                    alertController.addAction(alreadyPurchasedAction)
-                    alertController.addAction(evaluateAction)
-                    
-                    UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertController, animated: false, completion: nil)
                     
                     return
                 }
@@ -792,7 +794,7 @@ public class DJTeamUploader : NSObject
         let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertViewController.addAction(okAction)
         
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
+        DJAppDelegate.sharedDelegate().window.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
     }
     
     func onFinishRestore()
@@ -803,12 +805,12 @@ public class DJTeamUploader : NSObject
         }
         inInAppPurchaseAction = false
         
-        let alertViewController = UIAlertController(title: "Success", message: "Sucessfully Restored", preferredStyle: .Alert)
+        let alertViewController = UIAlertController(title: "Success", message: "Sucessfully Restored. Plrease try reimporting your team", preferredStyle: .Alert)
         
         let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertViewController.addAction(okAction)
         
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
+        DJAppDelegate.sharedDelegate().window.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
         
     }
     
