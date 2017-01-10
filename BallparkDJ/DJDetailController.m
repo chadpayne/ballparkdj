@@ -181,6 +181,12 @@
                 [(DJPlayersViewController *)self.parent addNewPlayerToTeam:self.player];
             }
         } else {
+
+            // Prevent crash
+            if (self.playerIndex >= ((DJPlayersViewController *)self.parent).team.players.count) {
+                return;
+            }
+            
             [((DJPlayersViewController *)self.parent).team.players removeObjectAtIndex:self.playerIndex];
             [((DJPlayersViewController *)self.parent).team.players insertObject:self.player atIndex:self.playerIndex];
             [((DJPlayersViewController *)self.parent).playerTable reloadData];

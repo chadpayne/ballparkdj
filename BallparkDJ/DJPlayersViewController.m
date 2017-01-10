@@ -922,6 +922,19 @@ enum PostAuthenticationAction
     //        [defaults setBool:NO forKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
     //        [defaults synchronize];
     BOOL isPurchased = [defaults boolForKey:@"IS_ALLREADY_PURCHASED_FULL_VERSION"];
+
+    // Check array bounds
+    if (self.playerIndex >= self.team.players.count) {
+        
+        NSString *msg = self.team.players.count == 0 ? @"You must add at least 1 player to the team." : @"Unable to play player";
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:msg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:NO completion:nil];
+        return;
+    }
+    
     DJAudio* audio = [[self.team.players objectAtIndex:self.playerIndex] audio];;
 
     if (audio.announcementDuration >= 10.0 && isPurchased == NO){

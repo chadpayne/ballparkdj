@@ -50,12 +50,24 @@
 
 -(NSString *)dataPath {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+    // Prevent potential crash
+    if (paths.count == 0) {
+        return nil;
+    }
+    
         return [paths objectAtIndex:0];
 }
 
 #pragma mark - Teams:
 
 -(DJTeam *)getObjectAtIndex:(int)idx {
+
+    // Prevent potential crash
+    if (idx >= self.teams.count) {
+        return nil;
+    }
+    
     return [self.teams objectAtIndex:idx];
 }
 
