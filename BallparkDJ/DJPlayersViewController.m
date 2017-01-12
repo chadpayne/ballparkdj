@@ -748,17 +748,32 @@ enum PostAuthenticationAction
         [self presentViewController:emailAddressViewController animated:YES completion:nil];
         return;
     }
+
+    if (![MFMailComposeViewController canSendMail]) {
+        // No email accounts setup!
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"No email accounts are setup on your device.  Please add an email account and retry" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertController addAction:okButton];
+        
+        [self presentViewController:alertController animated:NO completion:nil];
+        return;
+    }
     
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
-  //  self.team.teamOwnerEmail = @"kurtn@22ndcenturysoftware.com";
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [uploader shareTeam:self.team completion:^(DJTeam *team) {
+    [uploader shareTeam:self.team completion:^(DJTeam *team,BOOL success) {
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
+        
+        if (success == NO) {
+            return;
+        }
         
         NSString *shareLink = [NSString stringWithFormat:@"com.ballparkdj.team-import://%@", team.teamId];
         
@@ -896,17 +911,20 @@ enum PostAuthenticationAction
         player.addOnVoice = TRUE;
     }
     
-    [uploader orderVoice:self.team completion:^(DJTeam *team) {
+    [uploader orderVoice:self.team completion:^(DJTeam *team,BOOL success) {
 
         dispatch_async(dispatch_get_main_queue(),^() {
         [MBProgressHUD hideHUDForView:self.view animated:NO];
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Success" message:@"Team Uploaded: Please check your email to complete the voice order." preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-        
-        [alertController addAction:okAction];
-        
-        [self presentViewController:alertController animated:YES completion:nil];
+            
+            if (success) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Success" message:@"Team Uploaded: Please check your email to complete the voice order." preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+                
+                [alertController addAction:okAction];
+                
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
         });
         
     }];

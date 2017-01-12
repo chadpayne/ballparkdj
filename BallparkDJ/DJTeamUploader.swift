@@ -443,21 +443,21 @@ public class DJTeamUploader : NSObject
         RageIAPHelper.sharedInstance().restoreCompletedTransactions()
     }
     
-    public func reorderVoice(team:DJTeam, completion: (DJTeam) -> Void)
+    public func reorderVoice(team:DJTeam, completion: (DJTeam,Bool) -> Void)
     {
         team.voiceReOrder = true
         orderVoice(team, completion: completion)
     }
 
-    public func addOnVoiceOrder(team:DJTeam, completion:(DJTeam) -> Void)
+    public func addOnVoiceOrder(team:DJTeam, completion:(DJTeam,Bool) -> Void)
     {
         team.voiceAddOn = true
         orderVoice(team, completion: completion)
     }
     
-    public func orderVoice(team:DJTeam, completion: (DJTeam) -> Void)
+    public func orderVoice(team:DJTeam, completion: (DJTeam,Bool) -> Void)
     {
-        shareTeam(team) { team in
+        shareTeam(team) { team,success in
             if team.teamId != nil
             {
                 let serverURL = NSURL(string: "\(DJTeamUploader.baseServerURL)/ordervoice")
@@ -497,8 +497,9 @@ public class DJTeamUploader : NSObject
                     data, response, error in
                     if (error != nil)
                     {
-                        // ::TODO:: Display error
+                        DJTeamUploader.showErrorMessage("An error occurred sending the order request. Please try again and if the problem still persists please provide the following error code to support \(error?.code)")
                         print(error)
+                        completion(team,false)
                         return;
                     }
                     
@@ -506,40 +507,58 @@ public class DJTeamUploader : NSObject
                     {
                         let orderString = String(data: orderData, encoding: NSUTF8StringEncoding)
                         print("\(orderString)")
+
+                        var resultsDict:[String:AnyObject]?
+                        do {
+                            resultsDict = try NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+                        }
+                        catch {
+                            // Error
+                            DJTeamUploader.showErrorMessage("An error occurred sending the order request.  Pleast try again and if the problem still persists please contact support.  Error Code B");
+                            completion(team,false)
+                            return
+                        }
                         
-                        let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
+                        guard let finalResultsDict = resultsDict else {
+                            DJTeamUploader.showErrorMessage("An error occurred sending the order request.  Pleast try again and if the problem still persists please contact support.  Error Code C");
+                            completion(team,false)
+                            return
+                        }
                         
-                        if let orderId = resultsDict["id"] as? String
+                        if let orderId = finalResultsDict["id"] as? String
                         {
                             print("Success! - OrderID \(orderId)")
+                            completion(team, true)
+                            return
                         }
                         else
                         {
-                            print("Error: \(resultsDict)")
+                            DJTeamUploader.showErrorMessage("An error occured sending the order request.  Please try again and if the problem still persists please provide the following information to support \(resultsDict)")
                         }
                     }
                     else
                     {
-                        // ::TODO:: Display error
+                        DJTeamUploader.showErrorMessage("An error occurred sending the order request.  Please try again if the problem still persists please provide the following information to support.  Error Code A")
                     }
                     
-                    completion(team)
+                    completion(team,false)
                 }
                 task.resume()
             }
             else
             {
-                completion(team)
+                DJTeamUploader.showErrorMessage("An error occurred in uploading the team.  Please try again if the problem still persists please provide the following information to support.  Error Code D")
+                completion(team,false)
             }
         }
     }
 
-    public func shareTeam(team:DJTeam, completion: (DJTeam) -> Void)
+    public func shareTeam(team:DJTeam, completion: (DJTeam,Bool) -> Void)
     {
         DJTeamUploader.shareTeam(team,voicerMode: false, completion: completion)
     }
     
-    public static func shareTeam(team:DJTeam, voicerMode:Bool, completion: (DJTeam) -> Void)
+    public static func shareTeam(team:DJTeam, voicerMode:Bool, completion: (DJTeam,Bool) -> Void)
     {
         let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/team")
         let request = NSMutableURLRequest(URL: serverURL!)
@@ -622,8 +641,14 @@ public class DJTeamUploader : NSObject
            data, response, error in
            if (error != nil)
             {
-                // ::TODO:: Display error
                 print(error)
+                if (error?.code == -1009) {
+                    self.showErrorMessage("An error occured in uploading your team.  Please verify that you have network connectivity.")
+                } else {
+                    self.showErrorMessage("An error occured in uploading your team.  Please try again.")
+                }
+                
+                completion(team,false)
                 return;
             }
             
@@ -645,18 +670,21 @@ public class DJTeamUploader : NSObject
                     }
                     else
                     {
-                        completion(team)
+                        completion(team,true)
                     }
                 }
                 else
                 {
                     print("Error: \(resultsDict)")
+                    self.showErrorMessage("An error occured in uploading your team.  Please try again.")
+                    completion(team,false)
                 }
                 
             }
             else
             {
-                // ::TODO:: Display error
+                self.showErrorMessage("An error occured in uploading your team.  Please try again.")
+                completion(team,false)
             }
 
         }
@@ -665,7 +693,7 @@ public class DJTeamUploader : NSObject
     }
 
     
-    public static func shareTeamFiles(team:DJTeam, completion: (DJTeam) -> Void)
+    public static func shareTeamFiles(team:DJTeam, completion: (DJTeam,Bool) -> Void)
     {
         let boundary = DJTeamUploader.generateBoundaryString()
         
@@ -706,7 +734,7 @@ public class DJTeamUploader : NSObject
                 , encoding: NSUTF8StringEncoding)
             print(result)
             
-            completion(team)
+            completion(team,true)
         }
         
         task.resume()
@@ -817,6 +845,17 @@ public class DJTeamUploader : NSObject
     func onFinishFailPurchase()
     {
         inInAppPurchaseAction = false
+    }
+    
+    static func showErrorMessage(msg:String)
+    {
+        let alertViewController = UIAlertController(title: "Error", message: msg, preferredStyle: .Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertViewController.addAction(okAction)
+        
+        DJAppDelegate.sharedDelegate().window.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
+        
     }
     
 }
