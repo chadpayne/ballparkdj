@@ -21,7 +21,7 @@ class EmailAddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        emailAddressTextField.text = NSUserDefaults.standardUserDefaults().objectForKey("userEmailAddress") as? String
     }
 
     override func didReceiveMemoryWarning() {

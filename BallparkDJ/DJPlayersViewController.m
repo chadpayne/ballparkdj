@@ -806,19 +806,18 @@ enum PostAuthenticationAction
 
 -(void)orderVoice
 {
-    if (![self userEmailAddressExists]) {
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
-        
-        EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
-        emailAddressViewController.delegate = self;
-        
-        self.action = ORDER_VOICE;
-        
-        [self presentViewController:emailAddressViewController animated:YES completion:nil];
-        return;
-    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Security" bundle:nil];
     
+    EmailAddressViewController *emailAddressViewController = [storyboard instantiateInitialViewController];
+    emailAddressViewController.delegate = self;
+    
+    self.action = ORDER_VOICE;
+    
+    [self presentViewController:emailAddressViewController animated:YES completion:nil];
+}
+
+-(void)orderVoicePostEmailEntered
+{
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before submitting team for professional voicing, make sure you enter all players with name and number, and pre-record any players that might be difficult or questionable to pronounce.  More options will be presented after submitting." preferredStyle:UIAlertControllerStyleActionSheet];
@@ -1284,7 +1283,7 @@ enum PostAuthenticationAction
     else if (self.action == ORDER_VOICE)
     {
         self.team.teamOwnerEmail = emailAddress;
-        [self orderVoice];
+        [self orderVoicePostEmailEntered];
     }
     else if (self.action == REORDER_VOICE)
     {

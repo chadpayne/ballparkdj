@@ -514,7 +514,7 @@ public class DJTeamUploader : NSObject
                         }
                         catch {
                             // Error
-                            DJTeamUploader.showErrorMessage("An error occurred sending the order request.  Pleast try again and if the problem still persists please contact support.  Error Code B");
+                            DJTeamUploader.showErrorMessage("An error occurred sending the order request.  Please try again and ensure that you have entered in a valid email address.  If the problem still persists please contact support.  Error Code B");
                             completion(team,false)
                             return
                         }
