@@ -48,6 +48,10 @@
 		9514C8AC1CF53E0300B9E286 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8AB1CF53E0300B9E286 /* LoginViewController.swift */; };
 		9514C8AE1CF6779300B9E286 /* VoiceProvider.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9514C8AD1CF6779300B9E286 /* VoiceProvider.storyboard */; };
 		9514C8B31CFA53D600B9E286 /* DJVoiceProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514C8B21CFA53D600B9E286 /* DJVoiceProviderViewController.swift */; };
+		9528F92F1DBD7D8400B0B649 /* BPDJ_IconMusicBlueScaled.png in Resources */ = {isa = PBXBuildFile; fileRef = 9528F92B1DBD7D8400B0B649 /* BPDJ_IconMusicBlueScaled.png */; };
+		9528F9301DBD7D8400B0B649 /* BPDJ_IconMusicMissingScaled.png in Resources */ = {isa = PBXBuildFile; fileRef = 9528F92C1DBD7D8400B0B649 /* BPDJ_IconMusicMissingScaled.png */; };
+		9528F9311DBD7D8400B0B649 /* BPDJ_IconVoiceGoldScaled.png in Resources */ = {isa = PBXBuildFile; fileRef = 9528F92D1DBD7D8400B0B649 /* BPDJ_IconVoiceGoldScaled.png */; };
+		9528F9321DBD7D8400B0B649 /* BPDJ_IconVoiceMissingScaled.png in Resources */ = {isa = PBXBuildFile; fileRef = 9528F92E1DBD7D8400B0B649 /* BPDJ_IconVoiceMissingScaled.png */; };
 		954326B61CBC9214009F6927 /* DJTeamUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954326B51CBC9214009F6927 /* DJTeamUploader.swift */; };
 		95560B641D860A920079B6B1 /* FUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95560B3D1D860A920079B6B1 /* FUIAlertView.m */; };
 		95560B651D860A920079B6B1 /* FUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95560B3F1D860A920079B6B1 /* FUIButton.m */; };
@@ -70,17 +74,12 @@
 		95560B761D860A920079B6B1 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 95560B611D860A920079B6B1 /* UITableViewCell+FlatUI.m */; };
 		95560B771D860A920079B6B1 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 95560B631D860A920079B6B1 /* UIToolbar+FlatUI.m */; };
 		95560B791D8610E50079B6B1 /* BallparkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95560B781D8610E50079B6B1 /* BallparkButton.swift */; };
-		95560B7E1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 95560B7A1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png */; };
-		95560B7F1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png in Resources */ = {isa = PBXBuildFile; fileRef = 95560B7B1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png */; };
-		95560B801D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png in Resources */ = {isa = PBXBuildFile; fileRef = 95560B7C1D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png */; };
-		95560B811D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png in Resources */ = {isa = PBXBuildFile; fileRef = 95560B7D1D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png */; };
 		9571D7ED1CDC3C9400FFCCE6 /* DataTaskOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */; };
 		9571D7EF1CDC3CB500FFCCE6 /* AsynchronousOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7EE1CDC3CB500FFCCE6 /* AsynchronousOperation.h */; };
 		9571D7F11CDC3D0F00FFCCE6 /* DataTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7F01CDC3D0F00FFCCE6 /* DataTaskOperation.m */; };
 		9571D7F31CDC3D2D00FFCCE6 /* AsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7F21CDC3D2D00FFCCE6 /* AsynchronousOperation.m */; };
 		957DD4941D64A74700C2449B /* DJPlayerRevoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957DD4931D64A74600C2449B /* DJPlayerRevoiceView.xib */; };
 		957DD4961D64A80400C2449B /* DJPlayerRevoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957DD4951D64A80400C2449B /* DJPlayerRevoiceViewController.swift */; };
-		959419551CCEEC7900D8DCF4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959419541CCEEC7900D8DCF4 /* StoreKit.framework */; };
 		A2152C6716E1B38800946094 /* DJTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6616E1B38800946094 /* DJTeam.m */; };
 		A2152C6A16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
 		A2152C6B16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
@@ -206,6 +205,10 @@
 		9514C8AB1CF53E0300B9E286 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9514C8AD1CF6779300B9E286 /* VoiceProvider.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VoiceProvider.storyboard; sourceTree = "<group>"; };
 		9514C8B21CFA53D600B9E286 /* DJVoiceProviderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJVoiceProviderViewController.swift; sourceTree = "<group>"; };
+		9528F92B1DBD7D8400B0B649 /* BPDJ_IconMusicBlueScaled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconMusicBlueScaled.png; sourceTree = "<group>"; };
+		9528F92C1DBD7D8400B0B649 /* BPDJ_IconMusicMissingScaled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconMusicMissingScaled.png; sourceTree = "<group>"; };
+		9528F92D1DBD7D8400B0B649 /* BPDJ_IconVoiceGoldScaled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconVoiceGoldScaled.png; sourceTree = "<group>"; };
+		9528F92E1DBD7D8400B0B649 /* BPDJ_IconVoiceMissingScaled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconVoiceMissingScaled.png; sourceTree = "<group>"; };
 		954326B41CBC9214009F6927 /* BallparkDJ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BallparkDJ-Bridging-Header.h"; sourceTree = "<group>"; };
 		954326B51CBC9214009F6927 /* DJTeamUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJTeamUploader.swift; sourceTree = "<group>"; };
 		95560B3B1D860A920079B6B1 /* FlatUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlatUIKit.h; path = FlatUI/FlatUIKit.h; sourceTree = "<group>"; };
@@ -250,10 +253,6 @@
 		95560B621D860A920079B6B1 /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIToolbar+FlatUI.h"; path = "FlatUI/UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
 		95560B631D860A920079B6B1 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIToolbar+FlatUI.m"; path = "FlatUI/UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
 		95560B781D8610E50079B6B1 /* BallparkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallparkButton.swift; sourceTree = "<group>"; };
-		95560B7A1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconMusicBlue.png; sourceTree = "<group>"; };
-		95560B7B1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconMusicMissing.png; sourceTree = "<group>"; };
-		95560B7C1D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconVoiceGold.png; sourceTree = "<group>"; };
-		95560B7D1D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BPDJ_IconVoiceMissing.png; sourceTree = "<group>"; };
 		9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTaskOperation.h; sourceTree = "<group>"; };
 		9571D7EE1CDC3CB500FFCCE6 /* AsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousOperation.h; sourceTree = "<group>"; };
 		9571D7F01CDC3D0F00FFCCE6 /* DataTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTaskOperation.m; sourceTree = "<group>"; };
@@ -261,7 +260,6 @@
 		957DD4931D64A74600C2449B /* DJPlayerRevoiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJPlayerRevoiceView.xib; sourceTree = "<group>"; };
 		957DD4951D64A80400C2449B /* DJPlayerRevoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJPlayerRevoiceViewController.swift; sourceTree = "<group>"; };
 		959419531CCEE96400D8DCF4 /* BallparkDJ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BallparkDJ.entitlements; sourceTree = "<group>"; };
-		959419541CCEEC7900D8DCF4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A2152C6616E1B38800946094 /* DJTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJTeam.m; sourceTree = "<group>"; };
 		A2152C6816E275AC00946094 /* DJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DJPlayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A2152C6916E275AC00946094 /* DJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJPlayer.m; sourceTree = "<group>"; };
@@ -328,7 +326,6 @@
 				04E9A68719A8D5C800419267 /* libz.dylib in Frameworks */,
 				04E9A68519A8D58E00419267 /* Security.framework in Frameworks */,
 				A2729CE216E9B8FC00CA9913 /* QuartzCore.framework in Frameworks */,
-				959419551CCEEC7900D8DCF4 /* StoreKit.framework in Frameworks */,
 				8C2C08CB16D7109D000B5C1E /* CoreFoundation.framework in Frameworks */,
 				8C2C08C916D71092000B5C1E /* AVFoundation.framework in Frameworks */,
 				8C2C08C716D71086000B5C1E /* MediaPlayer.framework in Frameworks */,
@@ -377,10 +374,6 @@
 		8C2C08CC16D71286000B5C1E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				95560B7A1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png */,
-				95560B7B1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png */,
-				95560B7C1D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png */,
-				95560B7D1D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png */,
 				A2B184CB17C6F66300A1FB93 /* Default.png */,
 				AB10667D188F6DE200F8EA60 /* Icons */,
 				ABDBE3801803A61D0030FE9E /* BPDJ_Slider2.png */,
@@ -577,7 +570,6 @@
 		A272BB2E16D6D30800AE7ED1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				959419541CCEEC7900D8DCF4 /* StoreKit.framework */,
 				04E9A68619A8D5C800419267 /* libz.dylib */,
 				04E9A68419A8D58E00419267 /* Security.framework */,
 				A2729CE116E9B8FB00CA9913 /* QuartzCore.framework */,
@@ -668,6 +660,10 @@
 		AB10667D188F6DE200F8EA60 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				9528F92B1DBD7D8400B0B649 /* BPDJ_IconMusicBlueScaled.png */,
+				9528F92C1DBD7D8400B0B649 /* BPDJ_IconMusicMissingScaled.png */,
+				9528F92D1DBD7D8400B0B649 /* BPDJ_IconVoiceGoldScaled.png */,
+				9528F92E1DBD7D8400B0B649 /* BPDJ_IconVoiceMissingScaled.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -775,15 +771,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABB4F8EB18974E3B00989B4B /* Action Speed Fighting.m4a in Resources */,
-				95560B7E1D8B87F20079B6B1 /* BPDJ_IconMusicBlue.png in Resources */,
 				ABB4F8EC18974E3B00989B4B /* Crank It Up.m4a in Resources */,
+				9528F92F1DBD7D8400B0B649 /* BPDJ_IconMusicBlueScaled.png in Resources */,
 				ABB4F8ED18974E3B00989B4B /* Heavy Fuel.m4a in Resources */,
 				ABB4F8EE18974E3B00989B4B /* Here Again.m4a in Resources */,
 				ABB4F8EF18974E3B00989B4B /* Just Score.m4a in Resources */,
 				ABB4F8F018974E3B00989B4B /* Knock You Out.m4a in Resources */,
-				95560B7F1D8B87F20079B6B1 /* BPDJ_IconMusicMissing.png in Resources */,
 				ABB4F8F118974E3B00989B4B /* Loud And Proud.m4a in Resources */,
 				ABB4F8F218974E3B00989B4B /* Man Up.m4a in Resources */,
+				9528F9301DBD7D8400B0B649 /* BPDJ_IconMusicMissingScaled.png in Resources */,
 				ABB4F8F318974E3B00989B4B /* Party Smasher.m4a in Resources */,
 				ABB4F8F418974E3B00989B4B /* Power Shower.m4a in Resources */,
 				ABB4F8F518974E3B00989B4B /* Robot Race.m4a in Resources */,
@@ -800,9 +796,9 @@
 				8C2C08DE16D71286000B5C1E /* 1024_1024.png in Resources */,
 				ABDBE3831803A61D0030FE9E /* BPDJ_Slider2.png in Resources */,
 				8C2C08E116D71286000B5C1E /* 1536_2008.png in Resources */,
-				95560B811D8B87F20079B6B1 /* BPDJ_IconVoiceMissing.png in Resources */,
 				8C2C08E316D71286000B5C1E /* 320_480.png in Resources */,
 				8C2C08E516D71286000B5C1E /* 512_512.png in Resources */,
+				9528F9321DBD7D8400B0B649 /* BPDJ_IconVoiceMissingScaled.png in Resources */,
 				9514C89E1CE4175400B9E286 /* Security.storyboard in Resources */,
 				ABAB188C18DF6C1700DAE277 /* MKStoreKitConfigs.plist in Resources */,
 				AB10667F188F6E6600F8EA60 /* Images.xcassets in Resources */,
@@ -826,10 +822,10 @@
 				A2D95E9217BAE43700159A47 /* BPDJ_PE_Edit.png in Resources */,
 				A2D95E9317BAE43700159A47 /* BPDJ_PE_Play.png in Resources */,
 				A2D95E9417BAE43700159A47 /* BPDJ_PE_Record.png in Resources */,
+				9528F9311DBD7D8400B0B649 /* BPDJ_IconVoiceGoldScaled.png in Resources */,
 				A2B75A1717C56E8900D2962D /* BPDJ_PE_Stop.png in Resources */,
 				A2B184C817C6F61900A1FB93 /* Default-568h@2x.png in Resources */,
 				A2B184CA17C6F62F00A1FB93 /* Default@2x.png in Resources */,
-				95560B801D8B87F20079B6B1 /* BPDJ_IconVoiceGold.png in Resources */,
 				A2B184CC17C6F66300A1FB93 /* Default.png in Resources */,
 				A28FA26B17D82B41002829A2 /* songs.plist in Resources */,
 			);
