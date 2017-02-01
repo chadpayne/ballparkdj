@@ -80,6 +80,7 @@
 		9571D7F31CDC3D2D00FFCCE6 /* AsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9571D7F21CDC3D2D00FFCCE6 /* AsynchronousOperation.m */; };
 		957DD4941D64A74700C2449B /* DJPlayerRevoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957DD4931D64A74600C2449B /* DJPlayerRevoiceView.xib */; };
 		957DD4961D64A80400C2449B /* DJPlayerRevoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957DD4951D64A80400C2449B /* DJPlayerRevoiceViewController.swift */; };
+		9595FBA71E4171DB00E26FE0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9595FBA61E4171DB00E26FE0 /* StoreKit.framework */; };
 		A2152C6716E1B38800946094 /* DJTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6616E1B38800946094 /* DJTeam.m */; };
 		A2152C6A16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
 		A2152C6B16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
@@ -260,6 +261,7 @@
 		957DD4931D64A74600C2449B /* DJPlayerRevoiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJPlayerRevoiceView.xib; sourceTree = "<group>"; };
 		957DD4951D64A80400C2449B /* DJPlayerRevoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJPlayerRevoiceViewController.swift; sourceTree = "<group>"; };
 		959419531CCEE96400D8DCF4 /* BallparkDJ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BallparkDJ.entitlements; sourceTree = "<group>"; };
+		9595FBA61E4171DB00E26FE0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A2152C6616E1B38800946094 /* DJTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJTeam.m; sourceTree = "<group>"; };
 		A2152C6816E275AC00946094 /* DJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DJPlayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A2152C6916E275AC00946094 /* DJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJPlayer.m; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				04E9A68719A8D5C800419267 /* libz.dylib in Frameworks */,
 				04E9A68519A8D58E00419267 /* Security.framework in Frameworks */,
 				A2729CE216E9B8FC00CA9913 /* QuartzCore.framework in Frameworks */,
+				9595FBA71E4171DB00E26FE0 /* StoreKit.framework in Frameworks */,
 				8C2C08CB16D7109D000B5C1E /* CoreFoundation.framework in Frameworks */,
 				8C2C08C916D71092000B5C1E /* AVFoundation.framework in Frameworks */,
 				8C2C08C716D71086000B5C1E /* MediaPlayer.framework in Frameworks */,
@@ -570,6 +573,7 @@
 		A272BB2E16D6D30800AE7ED1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9595FBA61E4171DB00E26FE0 /* StoreKit.framework */,
 				04E9A68619A8D5C800419267 /* libz.dylib */,
 				04E9A68419A8D58E00419267 /* Security.framework */,
 				A2729CE116E9B8FB00CA9913 /* QuartzCore.framework */,
@@ -1073,6 +1077,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5G6F5VU65W;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
@@ -1093,11 +1098,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BallparkDJ.BallparkDJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ce10ec25-6959-47b9-ab51-b03dac1a6acf";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Kurt XC-wildcard";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "BallparkDJ/BallparkDJ-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1112,6 +1119,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chad Payne (P4728B6L47)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chad Payne (P4728B6L47)";
+				DEVELOPMENT_TEAM = P4728B6L47;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BallparkDJ/BallparkDJ-Prefix.pch";
@@ -1132,12 +1140,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BallparkDJ.BallparkDJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "66384c47-6dd8-463b-bf7b-0762d7a9e556";
 				"PROVISIONING_PROFILE[sdk=*]" = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Ballpark Appstore";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "BallparkDJ/BallparkDJ-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
