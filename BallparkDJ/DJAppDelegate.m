@@ -26,10 +26,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad)
+    {
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        // Override point for customization after application launch.
+        self.window.backgroundColor = [UIColor whiteColor];
+        [self.window makeKeyAndVisible];
+    }
     
     // implicitly initializes your audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -39,11 +42,20 @@
                    error:&audioSessionError];
      
     self.league = [[DJLeague alloc] init];
-    [self switchViewToLeague];
+    if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad)
+    {
+        [self switchViewToLeague];
+    }
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+        DJLeagueViewController *leagueViewController = (DJLeagueViewController *)navigationController.topViewController;
+        
+        navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.2 green:.2 blue:0.2 alpha:1.0];
+        [leagueViewController setParentDelegate:self];
+    }
 
 //    [VoiceProviderLogin login];
-    
-//    [TestFlight takeOff:@"b94a4e80-cdd2-4cde-a84d-819ff93c571a"];
     
 //    [MKStoreManager sharedManager];
 //    [[MKStoreManager sharedManager] purchasableObjectsDescription];

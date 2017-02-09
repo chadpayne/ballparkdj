@@ -48,6 +48,8 @@
 	<string>We need access to your Media Library for you to choose music to play for player announcments.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We need permission to be able to record player voices</string>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>BallparkDJ-Main</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -58,6 +60,13 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
