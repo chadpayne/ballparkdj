@@ -22,6 +22,4 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *teamTable;
 @property (strong, nonatomic) DJAppDelegate* parentDelegate;
-@property (strong, nonatomic) IBOutlet UIView *teamNameView;
-@property (strong, nonatomic) IBOutlet UITextField *teamNameField;
 @end

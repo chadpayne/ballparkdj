@@ -26,13 +26,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad)
-    {
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        // Override point for customization after application launch.
-        self.window.backgroundColor = [UIColor whiteColor];
-        [self.window makeKeyAndVisible];
-    }
+    self.window.backgroundColor = [UIColor whiteColor];
     
     // implicitly initializes your audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -42,18 +36,7 @@
                    error:&audioSessionError];
      
     self.league = [[DJLeague alloc] init];
-    if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad)
-    {
-        [self switchViewToLeague];
-    }
-    
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        DJLeagueViewController *leagueViewController = (DJLeagueViewController *)navigationController.topViewController;
-        
-        navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.2 green:.2 blue:0.2 alpha:1.0];
-        [leagueViewController setParentDelegate:self];
-    }
+    [self switchViewToLeague];
 
 //    [VoiceProviderLogin login];
     
@@ -130,13 +113,11 @@
 
 
 -(void)switchViewToLeague{
-    DJLeagueViewController* leagueViewController = [[DJLeagueViewController alloc] initWithNibName:@"DJLeagueView" bundle:nil];
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    DJLeagueViewController *leagueViewController = (DJLeagueViewController *)navigationController.topViewController;
     
-    [leagueViewController setParentDelegate:self];
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:leagueViewController];
     navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.2 green:.2 blue:0.2 alpha:1.0];
-    [self.window setRootViewController:navigationController];
+    [leagueViewController setParentDelegate:self];
 }
 
 

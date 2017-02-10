@@ -66,20 +66,9 @@
 	// Do any additional setup after loading the view.
     self.editButtonItem.action = @selector(setEditing);
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
 }
 
--(bool)textFieldShouldReturn:(UITextField*)textField{
-    if(selectedTeamIdx != -1){
-        [[self.parentDelegate.league getObjectAtIndex:selectedTeamIdx] setTeamName:textField.text];
-        selectedTeamIdx = -1;
-        [self.teamTable reloadData];
-    } else if(textField.text.length > 0){
-        [self addNewTeam];
-    }
-    [textField resignFirstResponder];
-    [self.teamNameView setHidden:TRUE];
-    return YES;
-}
 
 
 #pragma mark - TABLE VIEW FUNCTIONS
@@ -118,6 +107,8 @@
     [cell setEditingAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     cell.showsReorderControl = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+  
+    cell.separatorInset = UIEdgeInsetsZero;
 
     if([self.parentDelegate.league getObjectAtIndex:indexPath.row]){
 //        NSLog(@"%d",indexPath.row);
@@ -155,7 +146,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(editingTeam){
         selectedTeamIdx = indexPath.row;
-        self.teamNameField.text = [self.teamTable cellForRowAtIndexPath:indexPath].textLabel.text;
         [self editTeamOnRow:selectedTeamIdx];
     }
     else{
@@ -212,19 +202,14 @@
 //  Add a new Team to the league!
 //
 //======================================
-- (IBAction)addNewTeam {
-    DJTeam *t = [[DJTeam alloc] initWithName:self.teamNameField.text];
-//    [t setTeamName: self.teamNameField.text];
+- (IBAction)addNewTeam:(NSString *)teamName {
+    DJTeam *t = [[DJTeam alloc] initWithName:teamName];
     [self.parentDelegate.league addTeam:t];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow: [self.teamTable numberOfRowsInSection:0] inSection:0];
     [self.teamTable insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     [[self.teamTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.teamTable numberOfRowsInSection:0]inSection:0]] setHidden:FALSE];
-    self.teamNameField.text = @"";
-    DJPlayersViewController *playersView = [[DJPlayersViewController alloc] initWithNibName:@"DJPlayersView" bundle:nil];
-    [playersView setParentDelegate:self.parentDelegate];
-    [playersView setTeam: t];
  
-#pragma mark - THIS IS A PLACE WHERE NEW SAVE DATA FOR A NEW TEAM SHOULD BE HANDLED IN SOME WAY SHAPE OR FORM
+    [self.parentDelegate.league saveTeam:t];
 }
 
 -(void)editTeamName:(UIGestureRecognizer*)gestureRecognizer{
@@ -237,8 +222,9 @@
 
 -(void)editTeamOnRow:(NSInteger)selectedRow{
     selectedTeamIdx = selectedRow;
-    [self.teamNameView setHidden:FALSE];
-    [self.teamNameField becomeFirstResponder];
+    DJTeam *selectedTeam = [self.parentDelegate.league getObjectAtIndex:selectedTeamIdx];
+
+    [self presentTeamNameController:selectedTeam];
 }
 
 -(void) showTeamNameView:(UIBarButtonItem *)sender{
@@ -268,10 +254,57 @@
     } else {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
+
+    [self presentTeamNameController:nil];
+}
+
+-(void)presentTeamNameController:(DJTeam *)team
+{
+    NSString *alertTitle = @"Add Team";
+    if (team != nil) {
+        alertTitle = @"Edit Team Name";
+    }
     
-    self.teamNameField.text = @"";
-    [self.teamNameView setHidden:FALSE];
-    [self.teamNameField becomeFirstResponder];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:@"Name Your Team!" preferredStyle:UIAlertControllerStyleAlert];
+    
+    __weak DJLeagueViewController *weakSelf = self;
+    
+    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *teamTextField = alertController.textFields[0];
+
+        if (team == nil)
+        {
+            // Create Team
+            if (teamTextField.text.length > 0) {
+                [weakSelf addNewTeam:teamTextField.text];
+            }
+        }
+        else
+        {
+            // Update Team Name
+            if(selectedTeamIdx != -1){
+                [[weakSelf.parentDelegate.league getObjectAtIndex:selectedTeamIdx] setTeamName:teamTextField.text];
+                selectedTeamIdx = -1;
+                [weakSelf.teamTable reloadData];
+                [self.parentDelegate.league saveTeam:team];
+            }
+        }
+        
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel    handler:nil];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Enter Team Name";
+        if (team.teamName) {
+            textField.text = team.teamName;
+        }
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:saveAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)removeHud
@@ -289,8 +322,6 @@
 }
 
 - (void)viewDidUnload {
-    [self setTeamNameField:nil];
-    [self setTeamNameView:nil];
     [self setTeamTable:nil];
     [self setParentDelegate:nil];
     [super viewDidUnload];

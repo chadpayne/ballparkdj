@@ -107,7 +107,6 @@
 		A28AD01816EA65BD0015EEEC /* DJClipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28AD01616EA633A0015EEEC /* DJClipsView.xib */; };
 		A28FA26B17D82B41002829A2 /* songs.plist in Resources */ = {isa = PBXBuildFile; fileRef = A28FA26A17D82B41002829A2 /* songs.plist */; };
 		A29D096516E86D070032F51A /* DJMusicEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C9440F916E70EBD007898BC /* DJMusicEditorView.xib */; };
-		A29D096616E86D070032F51A /* DJLeagueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C42AC9916E2ED8C0040FFE1 /* DJLeagueView.xib */; };
 		A29D096716E86D070032F51A /* DJPlayersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C42AC9A16E2ED8C0040FFE1 /* DJPlayersView.xib */; };
 		A29D096816E86D070032F51A /* DJIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C42AC9616E2ED7F0040FFE1 /* DJIntroViewController.xib */; };
 		A29D096916E86D070032F51A /* DJDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E2FF416E6B5BD0065493B /* DJDetailView.xib */; };
@@ -184,7 +183,6 @@
 		8C2C095B16D73F79000B5C1E /* DJMusicEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJMusicEditorController.m; sourceTree = "<group>"; };
 		8C3E2FF416E6B5BD0065493B /* DJDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJDetailView.xib; sourceTree = "<group>"; };
 		8C42AC9616E2ED7F0040FFE1 /* DJIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJIntroViewController.xib; sourceTree = "<group>"; };
-		8C42AC9916E2ED8C0040FFE1 /* DJLeagueView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJLeagueView.xib; sourceTree = "<group>"; };
 		8C42AC9A16E2ED8C0040FFE1 /* DJPlayersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJPlayersView.xib; sourceTree = "<group>"; };
 		8C9440F916E70EBD007898BC /* DJMusicEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJMusicEditorView.xib; sourceTree = "<group>"; };
 		8CB00D2A16E854870088FB13 /* DJRecorderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJRecorderController.h; sourceTree = "<group>"; };
@@ -429,7 +427,6 @@
 			children = (
 				8CB00D4F16E8927D0088FB13 /* DJRecorderController.xib */,
 				8C9440F916E70EBD007898BC /* DJMusicEditorView.xib */,
-				8C42AC9916E2ED8C0040FFE1 /* DJLeagueView.xib */,
 				8C42AC9A16E2ED8C0040FFE1 /* DJPlayersView.xib */,
 				957DD4931D64A74600C2449B /* DJPlayerRevoiceView.xib */,
 				8C42AC9616E2ED7F0040FFE1 /* DJIntroViewController.xib */,
@@ -739,7 +736,7 @@
 				ORGANIZATIONNAME = "Payne Software";
 				TargetAttributes = {
 					A272BB2B16D6D30800AE7ED1 = {
-						DevelopmentTeam = P4728B6L47;
+						DevelopmentTeam = 5G6F5VU65W;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -795,7 +792,6 @@
 				ABB4F8F818974E3B00989B4B /* The Race For Action.m4a in Resources */,
 				ABB4F8F918974E3B00989B4B /* Undefeated.m4a in Resources */,
 				A29D096516E86D070032F51A /* DJMusicEditorView.xib in Resources */,
-				A29D096616E86D070032F51A /* DJLeagueView.xib in Resources */,
 				A29D096716E86D070032F51A /* DJPlayersView.xib in Resources */,
 				A29D096816E86D070032F51A /* DJIntroViewController.xib in Resources */,
 				A29D096916E86D070032F51A /* DJDetailView.xib in Resources */,
