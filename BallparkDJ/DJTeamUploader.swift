@@ -659,6 +659,10 @@ public class DJTeamUploader : NSObject
                 if let teamID = resultsDict["id"] as? String
                 {
                     team.teamId = teamID
+                    
+                    // ::TODO:: Get this value from the server
+                    team.shareExpirationDate = NSDate().dateByAddingTimeInterval(60*60*24*14)
+                    
                     print("Success!")
 
                     // Force saving of team so that we have the teamID saved

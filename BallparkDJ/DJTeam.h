@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSString *teamId;
 @property (strong, nonatomic) NSString *teamOwnerEmail;
 @property (strong, nonatomic) NSDate *orderRevoiceExpirationDate;
+@property (strong, nonatomic) NSDate *shareExpirationDate;
 @property (strong, nonatomic) NSString *orderId;
 @property (assign, nonatomic) BOOL voiceReOrder;
 @property (assign, nonatomic) BOOL voiceAddOn;
