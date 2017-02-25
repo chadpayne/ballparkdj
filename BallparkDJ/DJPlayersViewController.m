@@ -778,7 +778,7 @@ enum PostAuthenticationAction
         NSString *shareLink = [NSString stringWithFormat:@"com.ballparkdj.team-import://%@", team.teamId];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         
         NSString *formatedShareExpirationDate = [dateFormatter stringFromDate:self.team.shareExpirationDate];

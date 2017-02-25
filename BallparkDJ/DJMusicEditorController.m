@@ -74,8 +74,14 @@
     AVAudioPlayer *tmp = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&err];
 
     if(err && !tmp) {
-        [NSException raise:@"failure to create audio "
-                    format:@"failure to create audio from url '%@' with error '%@'", url, err];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unable to play audio." preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+
+        NSAssert(false, @"Failure to create autio from url '%@' with error '%@'", url, err);
     }
     else {
         _audioURL = url;
