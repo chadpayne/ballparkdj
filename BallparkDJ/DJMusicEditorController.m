@@ -81,7 +81,7 @@
         
         [self presentViewController:alertController animated:YES completion:nil];
 
-        NSAssert(false, @"Failure to create autio from url '%@' with error '%@'", url, err);
+        //NSAssert(false, @"Failure to create audio from url '%@' with error '%@'", url, err);
     }
     else {
         _audioURL = url;
@@ -309,8 +309,27 @@
 #pragma mark - iTunes
 
 - (IBAction)songLibrarySelector:(UISegmentedControl *)sender {
+    
+    static MPMediaPickerController *mediaPicker = nil;
+    static NSDate *mediaPickerInstantiedDate = nil;
+    static dispatch_once_t onceToken;
+
+    dispatch_once (&onceToken, ^{
+        mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAny];
+        mediaPickerInstantiedDate = [NSDate date];
+    });
+    
     if(sender.selectedSegmentIndex == 0){
-        MPMediaPickerController* mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAny];
+        
+        if ([[NSDate date] timeIntervalSinceDate:mediaPickerInstantiedDate] > 3600) {
+            onceToken = 0;
+            
+            dispatch_once (&onceToken, ^{
+                mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAny];
+                mediaPickerInstantiedDate = [NSDate date];
+            });
+        }
+        
         mediaPicker.delegate = self;
         mediaPicker.allowsPickingMultipleItems = NO;
         mediaPicker.showsCloudItems = NO;
