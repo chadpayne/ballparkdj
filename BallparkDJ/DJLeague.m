@@ -80,7 +80,11 @@
 }
 
 - (void)reorderTeams:(NSIndexPath *)origin toIndexPath:(NSIndexPath *)destination{
-    [self.teams exchangeObjectAtIndex:origin.row withObjectAtIndex:destination.row];
+    DJTeam *movedTeam = [self.teams objectAtIndex:origin.row];
+    [self.teams removeObjectAtIndex:origin.row];
+    [self.teams insertObject:movedTeam atIndex:destination.row];
+    
+    [self encode];
 }
 
 -(void)saveTeam:(DJTeam *)team {
