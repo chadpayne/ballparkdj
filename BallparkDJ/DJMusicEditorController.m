@@ -541,7 +541,7 @@
         NSURL *assetURL = [[mediaItemCollection.items objectAtIndex:0] valueForProperty: MPMediaItemPropertyAssetURL];
         if(nil == assetURL) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"DRM Unsupported"
-                                                            message:@"Due to the FairPlay DRM on this song, it cannot be played using BallparkDJ. Visit BallparkDJ.com for more info."
+                                                            message:@"Due to the FairPlay DRM on this song, it cannot be played using BallparkDJ. Visit www.BallparkDJ.com/faq for more info."
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
