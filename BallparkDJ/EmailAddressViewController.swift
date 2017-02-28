@@ -17,6 +17,7 @@ class EmailAddressViewController: UIViewController {
 
     @IBOutlet weak var emailAddressTextField: UITextField!
     weak var delegate:EmailAddressViewControllerDelegate?
+    var emailConfirmed:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +33,26 @@ class EmailAddressViewController: UIViewController {
 
     @IBAction func continueButtonClicked(sender: AnyObject)
     {
-        dismissViewControllerAnimated(true) { 
-            self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
+        if (emailConfirmed == false) {
+         
+            let alertController = UIAlertController(title: "Please confirm email address", message: "Is \(self.emailAddressTextField.text!) your email address?", preferredStyle: .Alert)
+            
+            let correctAction = UIAlertAction(title: "Email Correct", style: .Default) { _ in
+                self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
+            }
+
+            let incorrectAction = UIAlertAction(title: "Email Not Correct", style: .Default) { _ in
+            }
+            
+            alertController.addAction(correctAction)
+            alertController.addAction(incorrectAction)
+            
+            presentViewController(alertController,animated: true) {}
+            
+        } else {
+            dismissViewControllerAnimated(true) {
+                self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
+            }
         }
     }
     
