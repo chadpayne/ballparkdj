@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 #import "DJLeague.h"
 @interface DJAppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
@@ -23,3 +24,6 @@
 + (DJAppDelegate*)sharedDelegate;
 
 @end
+
+// This is bad - but we need a mechanism to reset this on app going to background :-(
+extern MPMediaPickerController *theMediaPicker;
