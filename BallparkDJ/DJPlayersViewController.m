@@ -502,7 +502,7 @@ enum PostAuthenticationAction
         if(player.b_isBench == YES)
             return;
 
-        if([self.continuousBtn.title isEqualToString:CONTINUOUS_LABEL])
+        if(![self.continuousBtn.title isEqualToString:CONTINUOUS_LABEL])
         {
             [self cancelQueue];
             upNext = [self.playerTable cellForRowAtIndexPath:indexPath];
@@ -987,8 +987,7 @@ enum PostAuthenticationAction
     }
     [sender setEnabled:NO];
     if([[self.playBtn title] isEqual:@"Play"]) {
-//        if (UIBarButtonItemStyleDone == self.continuousBtn.style) { //continuous
-        if([self.continuousBtn.title isEqualToString:CONTINUOUS_LABEL]) {
+        if(![self.continuousBtn.title isEqualToString:CONTINUOUS_LABEL]) {
             [self playSet];
         } else {
             if(nil != upNext) {
