@@ -278,6 +278,8 @@ enum PostAuthenticationAction
     //
     
     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    [cell setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
+
     CGRect rect = cell.bounds;
     rect.origin.x = 20;
     rect.size.width = 228;
@@ -394,6 +396,11 @@ enum PostAuthenticationAction
         label.text = [topDigits stringByAppendingString:tempPlayer.name];
         UIFont *defaultFont = label.font;
         label.font = [UIFont fontWithName:@"Courier" size:defaultFont.pointSize];
+    }
+ 
+    if (self.upNextIndexPath.row == indexPath.row) {
+        [[cell contentView] addSubview:nextUpLabel];
+        [cell setBackgroundColor:[UIColor colorWithRed:191/255.0f green:238/255.0f blue:252/255.0f alpha:1.0f]];
     }
     
     return cell;
@@ -1034,6 +1041,7 @@ enum PostAuthenticationAction
     
     //Add the contentview to the new up next
     upNext = [self.playerTable cellForRowAtIndexPath:indexPath];
+    self.upNextIndexPath = indexPath;
     [[upNext contentView] addSubview:nextUpLabel];
     [upNext setBackgroundColor:[UIColor colorWithRed:191/255.0f green:238/255.0f blue:252/255.0f alpha:1.0f]];
 }

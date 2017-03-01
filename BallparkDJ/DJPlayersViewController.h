@@ -50,6 +50,8 @@
 @property (weak, nonatomic) DJAudio *audioPlayer;
 @property (strong, nonatomic) DJAppDelegate* parentDelegate;
 
+@property (nonatomic,strong) NSIndexPath *upNextIndexPath;
+
 - (void)save;
 - (IBAction)play:(id)sender;
 - (IBAction)setContinuous:(id)sender;
