@@ -38,7 +38,9 @@ class EmailAddressViewController: UIViewController {
             let alertController = UIAlertController(title: "Please confirm email address", message: "Is \(self.emailAddressTextField.text!) your email address?", preferredStyle: .Alert)
             
             let correctAction = UIAlertAction(title: "Email Correct", style: .Default) { _ in
-                self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
+                self.dismissViewControllerAnimated(false) {
+                    self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
+                }
             }
 
             let incorrectAction = UIAlertAction(title: "Email Not Correct", style: .Default) { _ in
@@ -50,7 +52,7 @@ class EmailAddressViewController: UIViewController {
             presentViewController(alertController,animated: true) {}
             
         } else {
-            dismissViewControllerAnimated(true) {
+            dismissViewControllerAnimated(false) {
                 self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
             }
         }
