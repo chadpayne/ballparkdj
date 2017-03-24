@@ -583,7 +583,7 @@ public class DJTeamUploader : NSObject
             var playerDict = [String:AnyObject]()
             playerDict["name"] = player.name
             
-            playerDict["number"] = player.number!
+            playerDict["number"] = NSNumber(int: player.number)
             playerDict["benched"] = NSNumber(bool: player.b_isBench)
             playerDict["revoicePlayer"] = player.revoicePlayer
             playerDict["addOnVoice"] = player.addOnVoice
