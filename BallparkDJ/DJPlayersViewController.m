@@ -789,11 +789,11 @@ enum PostAuthenticationAction
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         
         NSString *formatedShareExpirationDate = [dateFormatter stringFromDate:self.team.shareExpirationDate];
-        
+                
         self.mailController = [[MFMailComposeViewController alloc] init];
         self.mailController.mailComposeDelegate = self;
         [self.mailController setSubject:[NSString stringWithFormat:@"BallparkDJ Team: %@",team.teamName]];
-        [self.mailController setMessageBody:[NSString stringWithFormat:@"Open this email on the iPhone or iPad on which you've installed BallparkDJ. Then click on the link below to import the shared team into BallparkDJ.\n\n%@\n\n(Note: If you are unable to open this email on your iPhone or iPad, you may alternatively open Safari on the device and type in the address/URL above.  This link expires on %@).", shareLink, formatedShareExpirationDate] isHTML:NO];
+        [self.mailController setMessageBody:[NSString stringWithFormat:@"I am sharing my BallparkDJ team TeamName with you.  To open this team in BallparkDJ, simply open this email on the iPhone or iPad on which you've installed BallparkDJ and click on the link below:\n\n%@\n\nThe team should then appear in BallparkDJ.  Feel free to share the team with other parents, grandparents, kids, coaches, or friends using the Actions: Share Team option.\n\n(Note: If you are unable to open this email on your iPhone or iPad, you may alternatively open Safari on the device and type in the address/URL above.  This link expires on %@).", shareLink, formatedShareExpirationDate] isHTML:NO];
          
         [self presentViewController:self.mailController animated:YES completion:nil];
         
