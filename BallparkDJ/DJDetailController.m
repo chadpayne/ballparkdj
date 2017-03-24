@@ -485,6 +485,22 @@
     else if(self.player.audio.isPlaying){
         [self.player.audio stop];
     }
+    
+    switch ([[AVAudioSession sharedInstance] recordPermission]) {
+        case AVAudioSessionRecordPermissionDenied:
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Unable to Record" message:@"Please enable microphone access for BallparkDJ in the Settings app." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            
+            [alertController addAction:okAction];
+            
+            [self presentViewController:alertController animated:NO completion:nil];
+        }
+            break;
+        default:
+            break;
+    }
  
     DJRecorderController* voiceRecorder = [[DJRecorderController alloc] initWithNibName:@"DJRecorderController" bundle:nil];
     NSDateFormatter *formatter;
