@@ -64,10 +64,10 @@ public class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSo
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if (!selectedPlayers.contains(indexPath.row) && selectedPlayers.count >= 3 && addOnOrder == false)
+        if (!selectedPlayers.contains(indexPath.row) && selectedPlayers.count >= 30 && addOnOrder == false)
         {
             // Disallow selection
-            let alertController = UIAlertController(title: "Info", message: "You can only request free revoicing for up to 3 players.   If you need to request more please contact support@ballparkdj.com", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Info", message: "You can only request free revoicing for up to 30 players.   If you need to request more please contact support@ballparkdj.com", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
             alertController.addAction(okAction)
             presentViewController(alertController, animated: false, completion: nil)
