@@ -160,6 +160,16 @@ MPMediaPickerController *theMediaPicker = nil;
         
         [DJOrderBackendService getPurchasedVoiceOrder:voiceOrderID completion:^(DJVoiceOrder *order,NSError *error) {
             
+            if (order == nil) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unable to import team.  Please verify that your link is correct." preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
+                [alertController addAction:okButton];
+                
+                [self.window.rootViewController presentViewController:alertController animated:NO completion:nil];
+                return;
+            }
+            
             NSLog(@"Voice re-voice expiration date = %@", order.revoicingExpirationDate);
             
             if (order.teamId != nil)

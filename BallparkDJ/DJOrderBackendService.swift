@@ -172,18 +172,21 @@ import Foundation
                 let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
                 print("\(orderDataString)")
                 
-                // ::TODO:: Check that we are not nil
+                do {
+                    let resultsDict = try NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
                 
-                let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
-                
-                if let dict = resultsDict as?  [String:AnyObject]
-                {
-                    let voiceOrder = DJVoiceOrder(dictionary: dict)
-                    completion(voiceOrder,nil)
-                    return
+                    if let dict = resultsDict as?  [String:AnyObject]
+                    {
+                        let voiceOrder = DJVoiceOrder(dictionary: dict)
+                        completion(voiceOrder,nil)
+                        return
+                    }
+                    
+                    completion(nil, nil)
+                } catch {
+                    // ::TODO:: Return more descriptive error
+                    completion(nil, nil)
                 }
-                
-                completion(nil, nil)
             }
             else
             {
