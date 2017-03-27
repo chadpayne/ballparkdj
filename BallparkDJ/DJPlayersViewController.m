@@ -833,7 +833,7 @@ enum PostAuthenticationAction
 {
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Before submitting team for professional voicing, make sure you enter all players with name and number, and pre-record any players that might be difficult or questionable to pronounce.  More options will be presented after submitting." preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"VERY IMPORTANT" message:@"Before submitting a team for professional voicing, please ensure you’ve entered all players names and numbers and PRE-RECORD ANY PLAYERS that might be difficult or questionable to pronounce.  More options will be presented after submitted.  For more information, visit www.ballparkdj.com/faq" preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *submitAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self orderVoiceConfirmedGoodToGo];
