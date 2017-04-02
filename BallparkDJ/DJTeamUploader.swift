@@ -743,7 +743,34 @@ public class DJTeamUploader : NSObject
         
         task.resume()
     }
-  
+
+    public static func uploadNextTeamFile(teamId:String, paths:[NSURL], index:Int, completion: () -> Void)
+    {
+        let currentURL:NSURL! = paths[index]
+      
+        uploadTeamFiles(teamId, paths: [currentURL]) {
+            let newIndex = index + 1
+            
+            if (newIndex >= paths.count) {
+                // we are done!
+                completion()
+            } else {
+                uploadNextTeamFile(teamId, paths: paths, index: newIndex, completion: completion)
+            }
+        }
+        
+    }
+
+    public static func uploadTeamFilesVoicer(teamId:String, paths:[NSURL], completion: () -> Void)
+    {
+        guard paths.count > 0 else { completion(); return; }
+
+        uploadNextTeamFile(teamId, paths: paths, index: 0) {
+            completion()
+        }
+    }
+
+    
     public static func uploadTeamFiles(teamId:String, paths:[NSURL], completion: () -> Void)
     {
         let boundary = generateBoundaryString()

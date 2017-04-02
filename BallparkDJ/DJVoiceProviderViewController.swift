@@ -476,7 +476,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
                 
                 DJTeamUploader.shareTeam(team, voicerMode: true)
                 { team,success in
-                    DJTeamUploader.uploadTeamFiles(team.teamId, paths: filePaths) {
+                    DJTeamUploader.uploadTeamFilesVoicer(team.teamId, paths: filePaths) {
                         
                         guard let order = self.getOrderForTeam(team) else { dispatch_semaphore_signal(sem); return }
                         
