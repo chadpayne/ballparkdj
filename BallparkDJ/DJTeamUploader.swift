@@ -837,7 +837,7 @@ public class DJTeamUploader : NSObject
         }
         inInAppPurchaseAction = false
         
-        let alertViewController = UIAlertController(title: "Success", message: "Sucessfully Restored. Plrease try reimporting your team", preferredStyle: .Alert)
+        let alertViewController = UIAlertController(title: "Success", message: "Sucessfully Restored. Please try reimporting your team", preferredStyle: .Alert)
         
         let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertViewController.addAction(okAction)
