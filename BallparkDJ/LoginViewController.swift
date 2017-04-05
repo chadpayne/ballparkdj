@@ -20,6 +20,7 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
     var teamUploader = DJTeamUploader();
     var savedAuthToken:String!
     
+    @IBOutlet weak var productionEnvSwitch: UISwitch!
     
     func setupButton(button:FUIButton)
     {
@@ -39,6 +40,12 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
     
     @IBAction func loginButtonClicked(sender: AnyObject)
     {
+        if productionEnvSwitch.on {
+            DJServerInfo.baseServerURL = DJServerInfo.productionServerURL
+        } else {
+            DJServerInfo.baseServerURL = DJServerInfo.testServerURL
+        }
+        
         DJOrderBackendService.login(userName.text!, password: passwordTextField.text!) { authToken, error in
             
             if let myError = error
