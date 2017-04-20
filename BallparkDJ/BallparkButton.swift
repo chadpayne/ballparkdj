@@ -13,8 +13,8 @@ class BallparkButton: FUIButton {
     let mininumWidth:CGFloat = 90.0
     let mininumHeight:CGFloat = 40.0
     
-    override func intrinsicContentSize() -> CGSize {
-        var size = super.intrinsicContentSize()
+    override var intrinsicContentSize : CGSize {
+        var size = super.intrinsicContentSize
         
         if (size.width < mininumWidth)
         {

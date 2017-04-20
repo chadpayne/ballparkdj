@@ -9,79 +9,79 @@
 import Foundation
 import UIKit
 
-public class DJTeamUploader : NSObject
+open class DJTeamUploader : NSObject
 {
     static let baseServerURL = DJServerInfo.baseServerURL
-    var operationQueue = NSOperationQueue()
+    var operationQueue = OperationQueue()
     var HUD:MBProgressHUD!
     var inInAppPurchaseAction:Bool = false
     
-    public static var sharedInstance:DJTeamUploader = DJTeamUploader()
+    open static var sharedInstance:DJTeamUploader = DJTeamUploader()
     
     override init()
     {
         super.init()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishPurchase), name: "InAppPurchase", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishRestore), name: "RestoreInAppPurchase", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onFinishFailPurchase), name: "FailedInAppPurchase", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onFinishPurchase), name: NSNotification.Name(rawValue: "InAppPurchase"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onFinishRestore), name: NSNotification.Name(rawValue: "RestoreInAppPurchase"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onFinishFailPurchase), name: NSNotification.Name(rawValue: "FailedInAppPurchase"), object: nil)
         
     }
     
     static func generateBoundaryString() -> String
     {
-        return NSUUID().UUIDString
+        return UUID().uuidString
     }
     
-    func fileURL(fileName:String) -> NSURL? {
+    func fileURL(_ fileName:String) -> URL? {
         
-        let fileManager = NSFileManager.defaultManager()
-        let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let fileManager = FileManager.default
+        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         
         // If array of path is empty the document folder not found
         guard urls.count != 0 else { return nil }
         
-        let url = urls.first!.URLByAppendingPathComponent(fileName)
+        let url = urls.first!.appendingPathComponent(fileName)
         return url
     }
     
-    func createTeamDirectory(team:DJTeam)
+    func createTeamDirectory(_ team:DJTeam)
     {
         let url = fileURL(team.teamId)
         
-        if NSFileManager.defaultManager().fileExistsAtPath((url?.path)!) == false
+        if FileManager.default.fileExists(atPath: (url?.path)!) == false
         {
-            try! NSFileManager.defaultManager().createDirectoryAtURL(url!, withIntermediateDirectories: true, attributes: nil)
+            try! FileManager.default.createDirectory(at: url!, withIntermediateDirectories: true, attributes: nil)
         }
     }
     
-    func importTeamAudioFiles(team:DJTeam)
+    func importTeamAudioFiles(_ team:DJTeam)
     {
         for player in team.players
         {
-            if let url = player.audio?.announcementURL?.lastPathComponent
+            if let url = (player as AnyObject).audio.announcementURL?.lastPathComponent
             {
-                let myURL = NSURL(string: "\(DJServerInfo.baseServerURL)/teamfiles/\(team.teamId)/\(url)")
+                let myURL = URL(string: "\(DJServerInfo.baseServerURL)/teamfiles/\(team.teamId)/\(url)")
 
-                let operation = DataTaskOperation.init(URL: myURL!)
+                let operation = DataTaskOperation.init(url: myURL!)
                                 {
                                     data, response, error in
                                     
-                                    guard let httpResponse = response as? NSHTTPURLResponse else { return }
+                                    guard let httpResponse = response as? HTTPURLResponse else { return }
                                     guard httpResponse.statusCode == 200 || httpResponse.statusCode == 302 else { return }
                                     
                                     
-                                    player.audio?.announcementURL = self.fileURL("\(team.teamId)-\(url)")
+                                    (player as AnyObject).audio.announcementURL = self.fileURL("\(team.teamId)-\(url)")
                                     
-                                    data?.writeToURL((player.audio?.announcementURL!)!, atomically: true)
+                                    try? data?.write(to: ((player as AnyObject).audio?.announcementURL!)!, options: [.atomic])
                                     
-                                    player.audio?.announcementClip = try! AVAudioPlayer(contentsOfURL:(player.audio?.announcementURL!)!)
+                                    (player as AnyObject).audio?.announcementClip = try! AVAudioPlayer(contentsOf:((player as AnyObject).audio?.announcementURL!)!)
                                     
-                                    if player.audio?.isDJClip == true
+                                    if (player as AnyObject).audio?.isDJClip == true
                                     {
-                                        if let audioURL = NSBundle.mainBundle().pathForResource(player.audio?.title, ofType: "m4a")
+                                        if let audioURL = Bundle.main.path(forResource: (player as AnyObject).audio?.title, ofType: "m4a")
                                         {
-                                            player.audio?.musicClip = try! AVAudioPlayer(contentsOfURL:NSURL(fileURLWithPath: audioURL))
+                                            (player as AnyObject).audio?.musicClip = try! AVAudioPlayer(contentsOf:URL(fileURLWithPath: audioURL))
                                         }
 
                                     }
@@ -92,9 +92,9 @@ public class DJTeamUploader : NSObject
         }
     }
     
-    public func parseTeamFromData(data:NSData) -> DJTeam?
+    open func parseTeamFromData(_ data:Data) -> DJTeam?
     {
-        if let teamDict = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+        if let teamDict = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:AnyObject]
         {
             let team = DJTeam()
             
@@ -111,7 +111,7 @@ public class DJTeamUploader : NSObject
                     
                     if let playerNumber = playerDict["number"] as? NSNumber
                     {
-                        player.number = playerNumber.intValue
+                        player.number = playerNumber.int32Value
                     }
                     
                     if let playerBenched = playerDict["benched"] as? NSNumber
@@ -158,7 +158,7 @@ public class DJTeamUploader : NSObject
                         
                         if let djFileName = audioDict["djFileName"] as? String
                         {
-                            player.audio.DJAudioFileName = djFileName
+                            player.audio.djAudioFileName = djFileName
                         }
                         
                         if let djClip = audioDict["djClip"] as? Bool
@@ -196,7 +196,7 @@ public class DJTeamUploader : NSObject
                             player.audio.announcementDuration = announcementDuration
                         }
                     }
-                    team.players.addObject(player)
+                    team.players.add(player)
                 }
             }
             
@@ -206,21 +206,21 @@ public class DJTeamUploader : NSObject
         return nil;
     }
 
-    public func performImportTeams(teamIDs:[String], completion:(teams:[DJTeam]) -> ())
+    open func performImportTeams(_ teamIDs:[String], completion:@escaping (_ teams:[DJTeam]) -> ())
     {
-        dispatch_async(dispatch_get_global_queue(0, 0))
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async
         {
             var teams:[DJTeam] = [DJTeam]()
             
             for teamID in teamIDs
             {
-                let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/team/\(teamID)")
+                let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/team/\(teamID)")
                 
-                let operation = DataTaskOperation.init(URL: serverURL!)
+                let operation = DataTaskOperation.init(url: serverURL!)
                                 {
                                     data, response, error in
                                     
-                                    guard let httpResponse = response as? NSHTTPURLResponse else { return }
+                                    guard let httpResponse = response as? HTTPURLResponse else { return }
                                     guard httpResponse.statusCode == 200 || httpResponse.statusCode == 302 else { return }
                                     
                                     guard let data = data else { return }
@@ -235,11 +235,11 @@ public class DJTeamUploader : NSObject
             
             self.operationQueue.waitUntilAllOperationsAreFinished()
             
-            completion(teams: teams)
+            completion(teams)
         }
     }
 
-    public func importOrder(voiceOrder:DJVoiceOrder)
+    open func importOrder(_ voiceOrder:DJVoiceOrder)
     {
         importTeam(voiceOrder.teamId) {
             team in
@@ -252,29 +252,29 @@ public class DJTeamUploader : NSObject
         }
     }
 
-    public func importTeam(teamID:String?)
+    open func importTeam(_ teamID:String?)
     {
         importTeam(teamID, completionBlock: nil)
     }
 
     
-    public func importTeam(teamID:String?, completionBlock:((team:DJTeam) -> ())?)
+    open func importTeam(_ teamID:String?, completionBlock:((_ team:DJTeam) -> ())?)
     {
         guard let teamID = teamID else { return }
         
-        HUD = MBProgressHUD.showHUDAddedTo(DJAppDelegate.sharedDelegate().window, animated: true)
-        DJAppDelegate.sharedDelegate().window.addSubview(HUD)
+        HUD = MBProgressHUD.showAdded(to: DJAppDelegate.shared().window, animated: true)
+        DJAppDelegate.shared().window.addSubview(HUD)
         HUD.labelText = "Importing..";
         HUD.show(true)
 
         
-        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/team/\(teamID)")
-        let request = NSMutableURLRequest(URL: serverURL!)
-        request.HTTPMethod = "GET"
+        let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/team/\(teamID)")
+        let request = NSMutableURLRequest(url: serverURL!)
+        request.httpMethod = "GET"
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, error in
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
 
-            if let teamDict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+            if let teamDict = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:AnyObject]
             {
                 let team = DJTeam()
                 
@@ -291,7 +291,7 @@ public class DJTeamUploader : NSObject
                         
                         if let playerNumber = playerDict["number"] as? NSNumber
                         {
-                            player.number = playerNumber.intValue
+                            player.number = playerNumber.int32Value
                         }
                         
                         if let playerBenched = playerDict["benched"] as? NSNumber
@@ -323,7 +323,7 @@ public class DJTeamUploader : NSObject
                             
                             if let djFileName = audioDict["djFileName"] as? String
                             {
-                                player.audio.DJAudioFileName = djFileName
+                                player.audio.djAudioFileName = djFileName
                             }
 
                             if let djClip = audioDict["djClip"] as? Bool
@@ -361,54 +361,54 @@ public class DJTeamUploader : NSObject
                                 player.audio.announcementDuration = announcementDuration
                             }
                         }
-                        team.players.addObject(player)
+                        team.players.add(player)
                     }
                 }
                 
                 // Check to see if user has purchased app - if more than 3 players
                 //let appPurchased = false // ::TODO:: add code here
-                let appPurchased = NSUserDefaults.standardUserDefaults().boolForKey("IS_ALLREADY_PURCHASED_FULL_VERSION")
+                let appPurchased = UserDefaults.standard.bool(forKey: "IS_ALLREADY_PURCHASED_FULL_VERSION")
                 
                 if team.players.count > 3 && !appPurchased
                 {
-                     dispatch_async(dispatch_get_main_queue()) {
-                        MBProgressHUD.hideAllHUDsForView(DJAppDelegate.sharedDelegate().window, animated: false)
+                     DispatchQueue.main.async {
+                        MBProgressHUD.hideAllHUDs(for: DJAppDelegate.shared().window, animated: false)
 
                         // display alert
-                        let alertController = UIAlertController(title: "Unable to Import Team", message: "In order to import a team with more 3 players, you must purchase the fully functional version of BallparkDJ. Upgrade to the Pro version which allows full functionality with unlimited teams and unlimited players per team.", preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: "Unable to Import Team", message: "In order to import a team with more 3 players, you must purchase the fully functional version of BallparkDJ. Upgrade to the Pro version which allows full functionality with unlimited teams and unlimited players per team.", preferredStyle: .alert)
 
-                        let purchaseAction = UIAlertAction(title: "Upgrade to Pro ($6.99)", style: .Default) { _ in
+                        let purchaseAction = UIAlertAction(title: "Upgrade to Pro ($6.99)", style: .default) { _ in
                                 self.performInAppPurchase();
                             }
 
-                        let alreadyPurchasedAction = UIAlertAction(title: "I've Already Purchased", style: .Default) { _ in
+                        let alreadyPurchasedAction = UIAlertAction(title: "I've Already Purchased", style: .default) { _ in
                                 self.restoreInAppPurchase();
                         }
-                        let evaluateAction = UIAlertAction(title: "Continue Evaluating", style: .Cancel) { _ in }
+                        let evaluateAction = UIAlertAction(title: "Continue Evaluating", style: .cancel) { _ in }
                         
                         alertController.addAction(purchaseAction)
                         alertController.addAction(alreadyPurchasedAction)
                         alertController.addAction(evaluateAction)
                         
-                        DJAppDelegate.sharedDelegate().window.rootViewController?.presentViewController(alertController, animated: false, completion: nil)
+                        DJAppDelegate.shared().window.rootViewController?.present(alertController, animated: false, completion: nil)
                     }
                     
                     return
                 }
                 
                 
-                dispatch_async(dispatch_get_global_queue(0, 0))
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async
                 {
                     //self.createTeamDirectory(team)
                     self.importTeamAudioFiles(team)
                     self.operationQueue.waitUntilAllOperationsAreFinished()
       
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if let appDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate
+                    DispatchQueue.main.async {
+                        if let appDelegate = UIApplication.shared.delegate as? DJAppDelegate
                         {
                             if let completionBlock = completionBlock
                             {
-                                completionBlock(team:team)
+                                completionBlock(team)
                             }
                             appDelegate.league.importTeam(team)
                             
@@ -424,13 +424,13 @@ public class DJTeamUploader : NSObject
 
     func performInAppPurchase()
     {
-        RageIAPHelper.sharedInstance().requestProductsWithCompletionHandler() {
+        RageIAPHelper.sharedInstance().requestProducts() {
             success, products in
             if (success) {
              
-                if products.count > 0 {
+                if (products?.count)! > 0 {
                     self.inInAppPurchaseAction = true
-                    RageIAPHelper.sharedInstance().buyProduct(products[0] as! SKProduct)
+                    RageIAPHelper.sharedInstance().buy(products?[0] as! SKProduct)
                 }
             }
             
@@ -443,32 +443,32 @@ public class DJTeamUploader : NSObject
         RageIAPHelper.sharedInstance().restoreCompletedTransactions()
     }
     
-    public func reorderVoice(team:DJTeam, completion: (DJTeam,Bool) -> Void)
+    open func reorderVoice(_ team:DJTeam, completion: @escaping (DJTeam,Bool) -> Void)
     {
         team.voiceReOrder = true
         orderVoice(team, completion: completion)
     }
 
-    public func addOnVoiceOrder(team:DJTeam, completion:(DJTeam,Bool) -> Void)
+    open func addOnVoiceOrder(_ team:DJTeam, completion:@escaping (DJTeam,Bool) -> Void)
     {
         team.voiceAddOn = true
         orderVoice(team, completion: completion)
     }
     
-    public func orderVoice(team:DJTeam, completion: (DJTeam,Bool) -> Void)
+    open func orderVoice(_ team:DJTeam, completion: @escaping (DJTeam,Bool) -> Void)
     {
         shareTeam(team) { team,success in
             if team.teamId != nil
             {
-                let serverURL = NSURL(string: "\(DJTeamUploader.baseServerURL)/ordervoice")
-                let request = NSMutableURLRequest(URL: serverURL!)
+                let serverURL = URL(string: "\(DJTeamUploader.baseServerURL)/ordervoice")
+                let request = NSMutableURLRequest(url: serverURL!)
                 
-                request.HTTPMethod = "POST"
+                request.httpMethod = "POST"
                 
                 let contentType = "application/json"
                 request.setValue(contentType, forHTTPHeaderField: "Content-Type")
                 
-                var teamDict = [String:AnyObject]()
+                var teamDict = [String:Any]()
                 if let teamID = team.teamId
                 {
                     teamDict["teamId"] = teamID
@@ -490,14 +490,13 @@ public class DJTeamUploader : NSObject
                     teamDict["id"] = orderId
                 }
                 
-                let httpBody = try! NSJSONSerialization.dataWithJSONObject(teamDict, options: .PrettyPrinted)
+                let httpBody = try! JSONSerialization.data(withJSONObject: teamDict, options: .prettyPrinted)
                 
-                let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: httpBody)
-                {
+                let task = URLSession.shared.uploadTask(with: request as URLRequest, from: httpBody, completionHandler: {
                     data, response, error in
                     if (error != nil)
                     {
-                        DJTeamUploader.showErrorMessage("An error occurred sending the order request. Please try again and if the problem still persists please provide the following error code to support \(error?.code)")
+                        DJTeamUploader.showErrorMessage("An error occurred sending the order request. Please try again and if the problem still persists please provide the following error code to support \(error?._code)")
                         print(error)
                         completion(team,false)
                         return;
@@ -505,12 +504,12 @@ public class DJTeamUploader : NSObject
                     
                     if let orderData = data
                     {
-                        let orderString = String(data: orderData, encoding: NSUTF8StringEncoding)
+                        let orderString = String(data: orderData, encoding: String.Encoding.utf8)
                         print("\(orderString)")
 
                         var resultsDict:[String:AnyObject]?
                         do {
-                            resultsDict = try NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+                            resultsDict = try JSONSerialization.jsonObject(with: orderData, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:AnyObject]
                         }
                         catch {
                             // Error
@@ -542,7 +541,8 @@ public class DJTeamUploader : NSObject
                     }
                     
                     completion(team,false)
-                }
+                })                
+
                 task.resume()
             }
             else
@@ -553,22 +553,22 @@ public class DJTeamUploader : NSObject
         }
     }
 
-    public func shareTeam(team:DJTeam, completion: (DJTeam,Bool) -> Void)
+    open func shareTeam(_ team:DJTeam, completion: @escaping (DJTeam,Bool) -> Void)
     {
         DJTeamUploader.shareTeam(team,voicerMode: false, completion: completion)
     }
     
-    public static func shareTeam(team:DJTeam, voicerMode:Bool, completion: (DJTeam,Bool) -> Void)
+    open static func shareTeam(_ team:DJTeam, voicerMode:Bool, completion: @escaping (DJTeam,Bool) -> Void)
     {
-        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/team")
-        let request = NSMutableURLRequest(URL: serverURL!)
+        let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/team")
+        let request = NSMutableURLRequest(url: serverURL!)
 
-        request.HTTPMethod = "PUT"
+        request.httpMethod = "PUT"
         
         let contentType = "application/json"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
-        var teamDict = [String:AnyObject]()
+        var teamDict = [String:Any]()
         if let teamID = team.teamId
         {
             teamDict["id"] = teamID
@@ -576,31 +576,33 @@ public class DJTeamUploader : NSObject
         teamDict["name"] = team.teamName
         teamDict["teamOwnerEmail"] = team.teamOwnerEmail
         
-        var playersDict = [[String:AnyObject]]()
+        var playersDict = [[String:Any]]()
         
-        for player in team.players
+        for playerItem in team.players
         {
-            var playerDict = [String:AnyObject]()
+            let player = playerItem as! DJPlayer
+            
+            var playerDict = [String:Any]()
             playerDict["name"] = player.name
             
-            playerDict["number"] = NSNumber(int: player.number)
-            playerDict["benched"] = NSNumber(bool: player.b_isBench)
+            playerDict["number"] = NSNumber(value: player.number as Int32)
+            playerDict["benched"] = NSNumber(value: player.b_isBench as Bool)
             playerDict["revoicePlayer"] = player.revoicePlayer
             playerDict["addOnVoice"] = player.addOnVoice
             playerDict["uuid"] = player.uuid
             
-            var audioDict = [String:AnyObject]()
-            if let audio = player.audio
-            {
+            var audioDict = [String:Any]()
+            let audio = player.audio
+          //  {
                 if voicerMode
                 {
-                    if let announcementURL = audio?.voiceProviderURL?.lastPathComponent
+                    if let announcementURL = audio.voiceProviderURL?.lastPathComponent
                     {
                         audioDict["announcementUrl"] = announcementURL
                     }
                     else
                     {
-                        if let announcementURL = audio?.announcementClip?.url?.lastPathComponent
+                        if let announcementURL = audio.announcementClip?.url?.lastPathComponent
                         {
                             audioDict["announcementUrl"] = announcementURL
                         }
@@ -608,7 +610,7 @@ public class DJTeamUploader : NSObject
                 }
                 else
                 {
-                    if let announcementURL = audio?.announcementClip?.url?.lastPathComponent
+                    if let announcementURL = audio.announcementClip?.url?.lastPathComponent
                     {
                         audioDict["announcementUrl"] = announcementURL
                     }
@@ -617,15 +619,15 @@ public class DJTeamUploader : NSObject
                 audioDict["musicStartTime"] = audio.musicStartTime
                 audioDict["musicDuration"] = audio.musicDuration
                 audioDict["shouldFade"] = audio.shouldFade
-                audioDict["djFileName"] = audio.DJAudioFileName
+                audioDict["djFileName"] = audio.djAudioFileName
                 audioDict["djClip"] = audio.isDJClip
                 audioDict["announcmentVolume"] = audio.announcementVolume
                 audioDict["shouldPlayAll"] = audio.shouldPlayAll
                 audioDict["title"] = audio.title
                 audioDict["musicVolume"] = audio.musicVolume
-                audioDict["currentVolumeMode"] = NSNumber(int:audio.currentVolumeMode)
+                audioDict["currentVolumeMode"] = NSNumber(value: audio.currentVolumeMode as Int32)
                 audioDict["announcmentDuration"] = audio.announcementDuration
-            }
+            //}
             playerDict["playerAudio"] = audioDict
             
             playersDict.append(playerDict)
@@ -634,15 +636,14 @@ public class DJTeamUploader : NSObject
         teamDict["players"] = playersDict
         
         
-        let httpBody = try! NSJSONSerialization.dataWithJSONObject(teamDict, options: .PrettyPrinted)
+        let httpBody = try! JSONSerialization.data(withJSONObject: teamDict, options: .prettyPrinted)
         
-        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: httpBody)
-        {
+        let task = URLSession.shared.uploadTask(with: request as URLRequest, from: httpBody, completionHandler: {
            data, response, error in
            if (error != nil)
             {
                 print(error)
-                if (error?.code == -1009) {
+                if (error?._code == -1009) {
                     self.showErrorMessage("An error occured in uploading your team.  Please verify that you have network connectivity.")
                 } else {
                     self.showErrorMessage("An error occured in uploading your team.  Please try again.")
@@ -654,19 +655,19 @@ public class DJTeamUploader : NSObject
             
             if let teamData = data
             {
-                let resultsDict = try! NSJSONSerialization.JSONObjectWithData(teamData, options: NSJSONReadingOptions.MutableLeaves)
+                let resultsDict = try! JSONSerialization.jsonObject(with: teamData, options: JSONSerialization.ReadingOptions.mutableLeaves) as! [String:Any]
                 
                 if let teamID = resultsDict["id"] as? String
                 {
                     team.teamId = teamID
                     
                     // ::TODO:: Get this value from the server
-                    team.shareExpirationDate = NSDate().dateByAddingTimeInterval(60*60*24*14)
+                    team.shareExpirationDate = Date().addingTimeInterval(60*60*24*14)
                     
                     print("Success!")
 
                     // Force saving of team so that we have the teamID saved
-                    DJAppDelegate.sharedDelegate().league.saveTeam(team)
+                    DJAppDelegate.shared().league.saveTeam(team)
                     
                     if voicerMode == false
                     {
@@ -691,32 +692,34 @@ public class DJTeamUploader : NSObject
                 completion(team,false)
             }
 
-        }
+        })        
+
         
         task.resume()
     }
 
     
-    public static func shareTeamFiles(team:DJTeam, completion: (DJTeam,Bool) -> Void)
+    open static func shareTeamFiles(_ team:DJTeam, completion: @escaping (DJTeam,Bool) -> Void)
     {
         let boundary = DJTeamUploader.generateBoundaryString()
         
-        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/uploadTeamFiles")
-        let request = NSMutableURLRequest(URL: serverURL!)
+        let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/uploadTeamFiles")
+        let request = NSMutableURLRequest(url: serverURL!)
         
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         
         let contentType = "multipart/form-data; boundary=\(boundary)"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
         var params = [String:String]()
-        var paths = [NSURL]()
+        var paths = [URL]()
 
         params["teamId"] = team.teamId
         
-        for player in team.players
+        for playerItem in team.players
         {
-            if let announcementURL = player.audio?.announcementClip?.url
+            let player = playerItem as! DJPlayer
+            if let announcementURL = player.audio.announcementClip?.url
             {
                 paths.append(announcementURL)
             }
@@ -725,8 +728,7 @@ public class DJTeamUploader : NSObject
 
         let httpBody = DJTeamUploader.createBodyWithBoundary(boundary, params: params, paths: paths, fieldName: "file")
         
-        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: httpBody)
-        {
+        let task = URLSession.shared.uploadTask(with: request as URLRequest, from: httpBody, completionHandler: {
             data, response, error in
             if ((error) != nil)
             {
@@ -735,18 +737,19 @@ public class DJTeamUploader : NSObject
             }
             
             let result = NSString(data: data!
-                , encoding: NSUTF8StringEncoding)
+                , encoding: String.Encoding.utf8.rawValue)
             print(result)
             
             completion(team,true)
-        }
+        })        
+
         
         task.resume()
     }
 
-    public static func uploadNextTeamFile(teamId:String, paths:[NSURL], index:Int, completion: () -> Void)
+    open static func uploadNextTeamFile(_ teamId:String, paths:[URL], index:Int, completion: @escaping () -> Void)
     {
-        let currentURL:NSURL! = paths[index]
+        let currentURL:URL! = paths[index]
       
         uploadTeamFiles(teamId, paths: [currentURL]) {
             let newIndex = index + 1
@@ -761,7 +764,7 @@ public class DJTeamUploader : NSObject
         
     }
 
-    public static func uploadTeamFilesVoicer(teamId:String, paths:[NSURL], completion: () -> Void)
+    open static func uploadTeamFilesVoicer(_ teamId:String, paths:[URL], completion: @escaping () -> Void)
     {
         guard paths.count > 0 else { completion(); return; }
 
@@ -771,14 +774,14 @@ public class DJTeamUploader : NSObject
     }
 
     
-    public static func uploadTeamFiles(teamId:String, paths:[NSURL], completion: () -> Void)
+    open static func uploadTeamFiles(_ teamId:String, paths:[URL], completion: @escaping () -> Void)
     {
         let boundary = generateBoundaryString()
         
-        let serverURL = NSURL(string: "\(baseServerURL)/uploadTeamFiles")
-        let request = NSMutableURLRequest(URL: serverURL!)
+        let serverURL = URL(string: "\(baseServerURL)/uploadTeamFiles")
+        let request = NSMutableURLRequest(url: serverURL!)
         
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         
         let contentType = "multipart/form-data; boundary=\(boundary)"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
@@ -789,8 +792,7 @@ public class DJTeamUploader : NSObject
         
         let httpBody = createBodyWithBoundary(boundary, params: params, paths: paths, fieldName: "file")
         
-        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: httpBody)
-        {
+        let task = URLSession.shared.uploadTask(with: request as URLRequest, from: httpBody, completionHandler: {
             data, response, error in
             if ((error) != nil)
             {
@@ -799,44 +801,45 @@ public class DJTeamUploader : NSObject
             }
             
             let result = NSString(data: data!
-                , encoding: NSUTF8StringEncoding)
+                , encoding: String.Encoding.utf8.rawValue)
             print(result)
             
             completion()
-        }
+        })        
+
         
         task.resume()
     }
 
     
-    static func createBodyWithBoundary(boundary:String, params:[String:String], paths:[NSURL], fieldName:String) -> NSData
+    static func createBodyWithBoundary(_ boundary:String, params:[String:String], paths:[URL], fieldName:String) -> Data
     {
         let httpBody = NSMutableData()
         
         for (key,value) in params
         {
-            httpBody.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            httpBody.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            httpBody.appendData("\(value)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            httpBody.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
+            httpBody.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
+            httpBody.append("\(value)\r\n".data(using: String.Encoding.utf8)!)
         }
 
         for path in paths
         {
-            let filename = NSString(string: path.absoluteString!).lastPathComponent
-            let data = NSData(contentsOfURL:  path)
+            let filename = NSString(string: path.absoluteString).lastPathComponent
+            let data = try? Data(contentsOf: path)
             let mimetype = "application/octet-stream"
             
-            httpBody.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            httpBody.appendData("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(filename)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            httpBody.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
+            httpBody.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(filename)\"\r\n".data(using: String.Encoding.utf8)!)
 
-            httpBody.appendData("Content-Transfer-Encoding: \(mimetype)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            httpBody.append("Content-Transfer-Encoding: \(mimetype)\r\n\r\n".data(using: String.Encoding.utf8)!)
             
-            httpBody.appendData(data!)
-            httpBody.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            httpBody.append(data!)
+            httpBody.append("\r\n".data(using: String.Encoding.utf8)!)
         }
         
-        httpBody.appendData("--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        return httpBody
+        httpBody.append("--\(boundary)--\r\n".data(using: String.Encoding.utf8)!)
+        return httpBody as Data
     }
 
     
@@ -848,12 +851,12 @@ public class DJTeamUploader : NSObject
         }
         inInAppPurchaseAction = false
         
-        let alertViewController = UIAlertController(title: "Success", message: "Purchase succeeded.  Please try reimporting your team", preferredStyle: .Alert)
+        let alertViewController = UIAlertController(title: "Success", message: "Purchase succeeded.  Please try reimporting your team", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertViewController.addAction(okAction)
         
-        DJAppDelegate.sharedDelegate().window.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
+        DJAppDelegate.shared().window.rootViewController?.present(alertViewController, animated: false, completion: nil)
     }
     
     func onFinishRestore()
@@ -864,12 +867,12 @@ public class DJTeamUploader : NSObject
         }
         inInAppPurchaseAction = false
         
-        let alertViewController = UIAlertController(title: "Success", message: "Sucessfully Restored. Please try reimporting your team", preferredStyle: .Alert)
+        let alertViewController = UIAlertController(title: "Success", message: "Sucessfully Restored. Please try reimporting your team", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertViewController.addAction(okAction)
         
-        DJAppDelegate.sharedDelegate().window.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
+        DJAppDelegate.shared().window.rootViewController?.present(alertViewController, animated: false, completion: nil)
         
     }
     
@@ -878,14 +881,14 @@ public class DJTeamUploader : NSObject
         inInAppPurchaseAction = false
     }
     
-    static func showErrorMessage(msg:String)
+    static func showErrorMessage(_ msg:String)
     {
-        let alertViewController = UIAlertController(title: "Error", message: msg, preferredStyle: .Alert)
+        let alertViewController = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertViewController.addAction(okAction)
         
-        DJAppDelegate.sharedDelegate().window.rootViewController?.presentViewController(alertViewController, animated: false, completion: nil)
+        DJAppDelegate.shared().window.rootViewController?.present(alertViewController, animated: false, completion: nil)
         
     }
     

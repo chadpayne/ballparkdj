@@ -8,8 +8,9 @@
 
 import Foundation
 
-public class LoginViewController : UIViewController,DJVoiceProviderViewControllerDelegate
+open class LoginViewController : UIViewController,DJVoiceProviderViewControllerDelegate
 {
+
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -22,25 +23,25 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
     
     @IBOutlet weak var productionEnvSwitch: UISwitch!
     
-    func setupButton(button:FUIButton)
+    func setupButton(_ button:FUIButton)
     {
-        button.buttonColor = UIColor.turquoiseColor()
-        button.shadowColor = UIColor.greenSeaColor()
+        button.buttonColor = UIColor.turquoise()
+        button.shadowColor = UIColor.greenSea()
         button.shadowHeight = 3.0
         button.cornerRadius = 6.0
-        button.titleLabel?.font = UIFont.boldFlatFontOfSize(16)
-        button.setTitleColor(UIColor.cloudsColor(), forState: .Normal)
-        button.setTitleColor(UIColor.cloudsColor(), forState: .Highlighted)
+        button.titleLabel?.font = UIFont.boldFlatFont(ofSize: 16)
+        button.setTitleColor(UIColor.clouds(), for: UIControlState())
+        button.setTitleColor(UIColor.clouds(), for: .highlighted)
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         setupButton(loginButton)
     }
     
-    @IBAction func loginButtonClicked(sender: AnyObject)
+    @IBAction func loginButtonClicked(_ sender: AnyObject)
     {
-        if productionEnvSwitch.on {
+        if productionEnvSwitch.isOn {
             DJServerInfo.baseServerURL = DJServerInfo.productionServerURL
         } else {
             DJServerInfo.baseServerURL = DJServerInfo.testServerURL
@@ -50,22 +51,22 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
             
             if let myError = error
             {
-                dispatch_async(dispatch_get_main_queue()) {
-                    let alertController = UIAlertController(title: "Error", message: myError.localizedDescription, preferredStyle: .Alert)
-                    let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Error", message: myError.localizedDescription, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(okAction)
-                    self.presentViewController(alertController, animated: false, completion: nil)
+                    self.present(alertController, animated: false, completion: nil)
                 }
                 return
             }
             
             if (authToken == nil)
             {
-                dispatch_async(dispatch_get_main_queue()) {
-                    let alertController = UIAlertController(title: "Error", message: "Invalid username or password", preferredStyle: .Alert)
-                    let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Error", message: "Invalid username or password", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(okAction)
-                    self.presentViewController(alertController, animated: false, completion: nil)
+                    self.present(alertController, animated: false, completion: nil)
                 }
                 return;
             }
@@ -75,28 +76,28 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
             self.getOrdersAndTeams() { orders, teams in
                 self.fetchedOrders = orders
                 self.fetchedTeams = teams
-                dispatch_async(dispatch_get_main_queue())
+                DispatchQueue.main.async
                 {
                     if orders.count > 0
                     {
-                        self.performSegueWithIdentifier("record", sender: self)
+                        self.performSegue(withIdentifier: "record", sender: self)
                     }
                     else
                     {
-                        let alertController = UIAlertController(title: "Info", message: "There are no current voice orders requiring voicing.", preferredStyle: .Alert)
-                        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                        let alertController = UIAlertController(title: "Info", message: "There are no current voice orders requiring voicing.", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                         alertController.addAction(okAction)
-                        self.presentViewController(alertController, animated: false, completion: nil)
+                        self.present(alertController, animated: false, completion: nil)
                     }
                 }
             }
         }
     }
     
-    public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "record"
         {
-            if let voiceProviderViewController = segue.destinationViewController as? DJVoiceProviderViewController
+            if let voiceProviderViewController = segue.destination as? DJVoiceProviderViewController
             {
                 voiceProviderViewController.orders = fetchedOrders
                 voiceProviderViewController.teams = fetchedTeams
@@ -105,20 +106,20 @@ public class LoginViewController : UIViewController,DJVoiceProviderViewControlle
             }
         }
     }
-    
-    public func getOrdersAndTeams(completion:(orders:[DJVoiceOrder], teams:[DJTeam]) -> ())
+
+    func getOrdersAndTeams(_ completion:@escaping (_ orders:[DJVoiceOrder], _ teams:[DJTeam]) -> ())
     {
         DJOrderBackendService.getRecordingOrders(savedAuthToken)
         {
             orders, error in
             
             var teamIds:[String] = [String]()
-            orders.forEach() { order in teamIds.append(order.teamId!) }
+            orders?.forEach() { order in teamIds.append(order.teamId!) }
             
             self.teamUploader.performImportTeams(teamIds) {
                 teams in
 
-                completion(orders: orders,teams: teams)
+                completion(orders!,teams)
             }
         }
         

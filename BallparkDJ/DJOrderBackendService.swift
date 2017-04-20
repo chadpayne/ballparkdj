@@ -8,76 +8,75 @@
 
 import Foundation
 
-@objc public class DJOrderBackendService : NSObject
+@objc open class DJOrderBackendService : NSObject
 {
-    public static func login(user:String, password:String, completion: (String!, NSError?) -> Void)
+    open static func login(_ user:String, password:String, completion: @escaping (String?, Error?) -> Void)
     {
-        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/restuser/login")
-        let request = NSMutableURLRequest(URL: serverURL!)
+        let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/restuser/login")
+        let request = NSMutableURLRequest(url: serverURL!)
         
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         
         let contentType = "application/json"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
-        var loginDict = [String:AnyObject]()
+        var loginDict = [String:Any]()
         loginDict["name"] = user
         loginDict["password"] = password
         
-        let httpBody = try! NSJSONSerialization.dataWithJSONObject(loginDict, options: .PrettyPrinted)
+        let httpBody = try! JSONSerialization.data(withJSONObject: loginDict, options: .prettyPrinted)
         
-        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: httpBody)
-        {
+        let task = URLSession.shared.uploadTask(with: request as URLRequest, from: httpBody, completionHandler: {
             data, response, error in
             if (error != nil)
             {
-                completion(nil,error!)
+                completion(nil,error)
                 return;
             }
             
             if let tokenData = data
             {
-                let tokenString = String(data: tokenData, encoding: NSUTF8StringEncoding)
-                print("\(tokenString)")
+                let tokenString = String(data: tokenData, encoding: String.Encoding.utf8)
+                print("\(String(describing: tokenString))")
                 
-                let resultsDict = try! NSJSONSerialization.JSONObjectWithData(tokenData, options: NSJSONReadingOptions.MutableLeaves)
+                let resultsDict = try! JSONSerialization.jsonObject(with: tokenData, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:Any]
                 
-                completion(resultsDict["token"] as? String, nil)
+                completion(resultsDict?["token"] as? String, nil)
             }
             else
             {
                 completion(nil,nil)
             }
-        }
+        })        
+
         task.resume()
     }
     
-    public static func getRecordingOrders(authToken:String, completion: ([DJVoiceOrder]!, NSError?) -> Void)
+    open static func getRecordingOrders(_ authToken:String, completion: @escaping ([DJVoiceOrder]?, Error?) -> Void)
     {
-        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/admin-api/recordingOrder")
-        let request = NSMutableURLRequest(URL: serverURL!)
+        let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/admin-api/recordingOrder")
+        let request = NSMutableURLRequest(url: serverURL!)
         
-        request.HTTPMethod = "GET"
+        request.httpMethod = "GET"
         
         let contentType = "application/json"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request)
-        {
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
             data, response, error in
             if (error != nil)
             {
-                completion(nil,error!)
+                completion(nil,error)
                 return;
             }
             
             if let orderData = data
             {
-                let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
+                let orderDataString = String(data: orderData, encoding: String.Encoding.utf8)
                 print("\(orderDataString)")
                 
-                let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
+                let resultsDict = try! JSONSerialization.jsonObject(with: orderData, options: JSONSerialization.ReadingOptions.mutableLeaves)
                 
                 var voiceOrders = [DJVoiceOrder]()
                 
@@ -97,16 +96,17 @@ import Foundation
                 completion(nil,nil)
             }
         }
+
         task.resume()
     }
 
     
-    public static func markOrderComplete(authToken:String, order:DJVoiceOrder, completion: (DJVoiceOrder!, NSError?) -> Void)
+    open static func markOrderComplete(_ authToken:String, order:DJVoiceOrder, completion: @escaping (DJVoiceOrder?, Error?) -> Void)
     {
-        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/admin-api/recordingOrder")
-        let request = NSMutableURLRequest(URL: serverURL!)
+        let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/admin-api/recordingOrder")
+        let request = NSMutableURLRequest(url: serverURL!)
         
-        request.HTTPMethod = "PUT"
+        request.httpMethod = "PUT"
         
         let contentType = "application/json"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
@@ -115,24 +115,23 @@ import Foundation
         order.orderStatus = DJVoiceOrderStatus.VOICED
         
         guard let orderData = order.toJSON() else { completion(nil,nil); return; }
-        let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
-        print("\(orderDataString)")
+        let orderDataString = String(data: orderData, encoding: String.Encoding.utf8)
+        print("\(String(describing: orderDataString))")
         
-        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: orderData)
-        {
+        let task = URLSession.shared.uploadTask(with: request as URLRequest, from: orderData, completionHandler: {
             data, response, error in
             if (error != nil)
             {
-                completion(nil,error!)
+                completion(nil,error)
                 return;
             }
             
             if let orderData = data
             {
-                let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
-                print("\(orderDataString)")
+                let orderDataString = String(data: orderData, encoding: String.Encoding.utf8)
+                print("\(String(describing: orderDataString))")
                 
-                if let resultsDict = try! NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves) as? [String:AnyObject]
+                if let resultsDict = try! JSONSerialization.jsonObject(with: orderData, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:AnyObject]
                 {
                     let voiceOrder = DJVoiceOrder(dictionary: resultsDict)
                     completion(voiceOrder, nil)
@@ -144,36 +143,36 @@ import Foundation
             {
                 completion(nil,nil)
             }
-        }
+        })        
+
         task.resume()
     }
     
-    public static func getPurchasedVoiceOrder(orderId:String, completion: (DJVoiceOrder!, NSError?) -> Void)
+    open static func getPurchasedVoiceOrder(_ orderId:String, completion: @escaping (DJVoiceOrder?, Error?) -> Void)
     {
-        let serverURL = NSURL(string: "\(DJServerInfo.baseServerURL)/ordervoice/\(orderId)")
-        let request = NSMutableURLRequest(URL: serverURL!)
+        let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/ordervoice/\(orderId)")
+        let request = NSMutableURLRequest(url: serverURL!)
         
-        request.HTTPMethod = "GET"
+        request.httpMethod = "GET"
         
         let contentType = "application/json"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request)
-        {
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
             data, response, error in
             if (error != nil)
             {
-                completion(nil,error!)
+                completion(nil,error)
                 return;
             }
             
             if let orderData = data
             {
-                let orderDataString = String(data: orderData, encoding: NSUTF8StringEncoding)
+                let orderDataString = String(data: orderData, encoding: String.Encoding.utf8)
                 print("\(orderDataString)")
                 
                 do {
-                    let resultsDict = try NSJSONSerialization.JSONObjectWithData(orderData, options: NSJSONReadingOptions.MutableLeaves)
+                    let resultsDict = try JSONSerialization.jsonObject(with: orderData, options: JSONSerialization.ReadingOptions.mutableLeaves)
                 
                     if let dict = resultsDict as?  [String:AnyObject]
                     {
@@ -193,6 +192,7 @@ import Foundation
                 completion(nil,nil)
             }
         }
+
         task.resume()
     }
 

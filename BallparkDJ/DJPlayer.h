@@ -13,7 +13,7 @@
     
 }
 
-@property (nonatomic,strong) DJAudio *audio;
+@property (nonatomic,strong) DJAudio * _Nonnull audio;
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,assign) int number;
 @property BOOL  b_isBench;
@@ -21,12 +21,12 @@
 @property (nonatomic,assign) BOOL addOnVoice;
 @property (nonatomic,strong) NSString *uuid;
 
--(id)init;
--(id)initWithName:(NSString *)pName andWithNumber:(int)number;
+-(nonnull instancetype)init;
+-(nonnull instancetype)initWithName:(NSString *_Nonnull)pName andWithNumber:(int)number;
 
 /*
  * NSCoding methods
  */
--(id)initWithCoder:(NSCoder *)coder;
--(void)encodeWithCoder:(NSCoder *)coder;
+-(id _Nonnull )initWithCoder:(NSCoder *_Nonnull)coder;
+-(void)encodeWithCoder:(NSCoder *_Nonnull)coder;
 @end

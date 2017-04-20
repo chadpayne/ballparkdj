@@ -10,7 +10,7 @@ import UIKit
 
 @objc protocol EmailAddressViewControllerDelegate
 {
-    func emailAddressEntered(emailAddress:String)
+    func emailAddressEntered(_ emailAddress:String)
 }
 
 class EmailAddressViewController: UIViewController {
@@ -22,7 +22,7 @@ class EmailAddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        emailAddressTextField.text = NSUserDefaults.standardUserDefaults().objectForKey("userEmailAddress") as? String
+        emailAddressTextField.text = UserDefaults.standard.object(forKey: "userEmailAddress") as? String
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,28 +31,28 @@ class EmailAddressViewController: UIViewController {
     }
     
 
-    @IBAction func continueButtonClicked(sender: AnyObject)
+    @IBAction func continueButtonClicked(_ sender: AnyObject)
     {
         if (emailConfirmed == false) {
          
-            let alertController = UIAlertController(title: "Please confirm email address", message: "Is \(self.emailAddressTextField.text!) your email address?", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Please confirm email address", message: "Is \(self.emailAddressTextField.text!) your email address?", preferredStyle: .alert)
             
-            let correctAction = UIAlertAction(title: "Email Correct", style: .Default) { _ in
-                self.dismissViewControllerAnimated(false) {
+            let correctAction = UIAlertAction(title: "Email Correct", style: .default) { _ in
+                self.dismiss(animated: false) {
                     self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
                 }
             }
 
-            let incorrectAction = UIAlertAction(title: "Email Not Correct", style: .Default) { _ in
+            let incorrectAction = UIAlertAction(title: "Email Not Correct", style: .default) { _ in
             }
             
             alertController.addAction(correctAction)
             alertController.addAction(incorrectAction)
             
-            presentViewController(alertController,animated: true) {}
+            present(alertController,animated: true) {}
             
         } else {
-            dismissViewControllerAnimated(false) {
+            dismiss(animated: false) {
                 self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
             }
         }

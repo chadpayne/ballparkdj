@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class DJServerInfo
+open class DJServerInfo
 {
     static let productionServerURL = "http://order.ballparkdj.com"
     static let testServerURL = "http://159.203.186.116"

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DJVoiceProviderViewControllerDelegate {
-    func getOrdersAndTeams(completion:(orders:[DJVoiceOrder], teams:[DJTeam]) -> ())
+    func getOrdersAndTeams(_ completion:@escaping (_ orders:[DJVoiceOrder], _ teams:[DJTeam]) -> ())
 }
 
 class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
@@ -27,7 +27,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     
     var delegate:DJVoiceProviderViewControllerDelegate?
     
-    var audioTimer:NSTimer?
+    var audioTimer:Timer?
     
     @IBOutlet weak var playerTextView: UITextView!
 
@@ -53,17 +53,17 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     var audioRecorder: AVAudioRecorder?
     
     @IBOutlet weak var doneUploadButton: FUIButton!
-    var currentSoundFileURL:NSURL?
+    var currentSoundFileURL:URL?
 
-    func setupButton(button:FUIButton)
+    func setupButton(_ button:FUIButton)
     {
-        button.buttonColor = UIColor.turquoiseColor()
-        button.shadowColor = UIColor.greenSeaColor()
+        button.buttonColor = UIColor.turquoise()
+        button.shadowColor = UIColor.greenSea()
         button.shadowHeight = 3.0
         button.cornerRadius = 6.0
-        button.titleLabel?.font = UIFont.boldFlatFontOfSize(16)
-        button.setTitleColor(UIColor.cloudsColor(), forState: .Normal)
-        button.setTitleColor(UIColor.cloudsColor(), forState: .Highlighted)
+        button.titleLabel?.font = UIFont.boldFlatFont(ofSize: 16)
+        button.setTitleColor(UIColor.clouds(), for: UIControlState())
+        button.setTitleColor(UIColor.clouds(), for: .highlighted)
     }
     
     override func viewDidLoad() {
@@ -100,25 +100,25 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         // ::TODO:: Handle case where there is No work - UI should be all zero's
         if teams.count == 0
         {
-            let alertController = UIAlertController(title: "Info", message: "No voices to record", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+            let alertController = UIAlertController(title: "Info", message: "No voices to record", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(okAction)
-            presentViewController(alertController, animated: false, completion: nil)
+            present(alertController, animated: false, completion: nil)
 
             
-            doneUploadButton.hidden = false
+            doneUploadButton.isHidden = false
             //dismissViewControllerAnimated(true, completion: nil)
         }
         
-        playButton.enabled = false
-        nextButton.enabled = false
+        playButton.isEnabled = false
+        nextButton.isEnabled = false
         
-        doneUploadButton.hidden = true
+        doneUploadButton.isHidden = true
     }
     
-    func setupUIForTeam(team:DJTeam)
+    func setupUIForTeam(_ team:DJTeam)
     {
-        doneUploadButton.hidden = true
+        doneUploadButton.isHidden = true
         currentPlayerIndex = 0
         currentTeam = team
         audioTimeLabel.text = "\(0.00)"
@@ -161,12 +161,12 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         if (currentPlayer.audio.announcementClip != nil)
         {
             audioTimeLabel.text = "\(Double(round(10*currentPlayer.audio.announcementClip.duration)/10))"
-            playAudioButton.enabled = true
+            playAudioButton.isEnabled = true
             playProvidedAudioButtonClicked(self)
         }
         else
         {
-            playAudioButton.enabled = false
+            playAudioButton.isEnabled = false
         }
     }
     
@@ -186,15 +186,15 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             break
         }
         
-        playerTextView.font = UIFont.boldSystemFontOfSize(30)
-        playerTextView.textColor = UIColor.blueColor()
-        playerTextView.textAlignment = NSTextAlignment.Center
+        playerTextView.font = UIFont.boldSystemFont(ofSize: 30)
+        playerTextView.textColor = UIColor.blue
+        playerTextView.textAlignment = NSTextAlignment.center
     }
     
     func moveToNextPlayer()
     {
-        playButton.enabled = false
-        nextButton.enabled = false
+        playButton.isEnabled = false
+        nextButton.isEnabled = false
         
         currentPlayerIndex += 1
         
@@ -213,12 +213,12 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             else
             {
                 // We are done!
-                let alertController = UIAlertController(title: "Info", message: "No more voices left to record!", preferredStyle: .Alert)
-                let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                let alertController = UIAlertController(title: "Info", message: "No more voices left to record!", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 alertController.addAction(okAction)
-                presentViewController(alertController, animated: true, completion: nil)
+                present(alertController, animated: true, completion: nil)
                 
-                doneUploadButton.hidden = false
+                doneUploadButton.isHidden = false
                 return
             }
         }
@@ -256,19 +256,19 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         if (currentPlayer.audio.announcementClip != nil)
         {
             audioTimeLabel.text = "\(Double(round(10*currentPlayer.audio.announcementClip.duration)/10))"
-            playAudioButton.enabled = true
+            playAudioButton.isEnabled = true
             playProvidedAudioButtonClicked(self)
         }
         else
         {
             audioTimeLabel.text = "0.0"
-            playAudioButton.enabled = false
+            playAudioButton.isEnabled = false
         }
         
         prepareRecorder()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resetUI()
         prepareRecorder()
@@ -281,19 +281,19 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     }
     
 
-    @IBAction func playProvidedAudioButtonClicked(sender: AnyObject)
+    @IBAction func playProvidedAudioButtonClicked(_ sender: AnyObject)
     {
         if (currentPlayer.audio.announcementClip == nil)
         {
-            let alertController = UIAlertController(title: "Info", message: "No supplied audio for player!", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+            let alertController = UIAlertController(title: "Info", message: "No supplied audio for player!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(okAction)
-            presentViewController(alertController, animated: false, completion: nil)
+            present(alertController, animated: false, completion: nil)
             
             return
         }
         
-        if (currentPlayer.audio.announcementClip.playing)
+        if (currentPlayer.audio.announcementClip.isPlaying)
         {
             currentPlayer.audio.announcementClip.pause()
         }
@@ -306,19 +306,19 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     {
         var error:NSError?
         
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "ddMMyyyyHHmmSS";
-        let dateString = formatter.stringFromDate(NSDate())
+        let dateString = formatter.string(from: Date())
         
-        let dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let docsDir = dirPaths[0]
-        let soundFilePath = (docsDir as NSString).stringByAppendingPathComponent(dateString)
-        let soundFileURL = NSURL(fileURLWithPath: soundFilePath)
-        let recordSettings = [AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue,
-                              AVEncoderBitRateKey: 96, AVNumberOfChannelsKey: 2, AVSampleRateKey: 44100.0, AVLinearPCMBitDepthKey: 32, AVLinearPCMIsBigEndianKey: 0, AVLinearPCMIsFloatKey: 0, AVEncoderBitDepthHintKey: 16, AVFormatIDKey: Int(kAudioFormatAppleIMA4)]
+        let soundFilePath = (docsDir as NSString).appendingPathComponent(dateString)
+        let soundFileURL = URL(fileURLWithPath: soundFilePath)
+        let recordSettings = [AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue,
+                              AVEncoderBitRateKey: 96, AVNumberOfChannelsKey: 2, AVSampleRateKey: 44100.0, AVLinearPCMBitDepthKey: 32, AVLinearPCMIsBigEndianKey: 0, AVLinearPCMIsFloatKey: 0, AVEncoderBitDepthHintKey: 16, AVFormatIDKey: Int(kAudioFormatAppleIMA4)] as [String : Any]
         
         do {
-            audioRecorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings as! [String:AnyObject])
+            audioRecorder = try AVAudioRecorder(url: soundFileURL, settings: recordSettings)
         } catch let error1 as NSError {
             error = error1
             audioRecorder = nil
@@ -337,24 +337,24 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         currentSoundFileURL = soundFileURL
     }
 
-    @IBAction func recordAudioButtonClicked(sender: AnyObject)
+    @IBAction func recordAudioButtonClicked(_ sender: AnyObject)
     {
-        if audioPlayer?.playing == true {
+        if audioPlayer?.isPlaying == true {
             // Stop playback of current audio
             stopAudioButtonClicked(sender)
             return
         }
         
-        if audioRecorder?.recording == false {
-            playButton.enabled = false
+        if audioRecorder?.isRecording == false {
+            playButton.isEnabled = false
             recordButton.titleLabel?.text = "Stop"
-            recordButton.setTitle("Stop", forState: .Normal)
-            recordButton.setTitle("Stop", forState: .Highlighted)
+            recordButton.setTitle("Stop", for: UIControlState())
+            recordButton.setTitle("Stop", for: .highlighted)
 
-            try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryRecord, withOptions: AVAudioSessionCategoryOptions.AllowBluetooth)
+            try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryRecord, with: AVAudioSessionCategoryOptions.allowBluetooth)
 
             audioTimeLabel.text = "0.0"
-            audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(DJVoiceProviderViewController.updateAudioTimeLabel), userInfo: nil, repeats: true)
+            audioTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DJVoiceProviderViewController.updateAudioTimeLabel), userInfo: nil, repeats: true)
             
             audioRecorder?.prepareToRecord()
             audioRecorder?.record()
@@ -370,22 +370,22 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     func updateAudioTimeLabel()
     {
         guard let audioRecorder = audioRecorder else { return }
-        guard audioRecorder.recording else { return }
+        guard audioRecorder.isRecording else { return }
         
         let currentTime = audioRecorder.currentTime
         audioTimeLabel.text = "\(Double(round(10*currentTime)/10))"
     }
 
     
-    @IBAction func stopAudioButtonClicked(sender: AnyObject)
+    @IBAction func stopAudioButtonClicked(_ sender: AnyObject)
     {
-        playButton.enabled = true
+        playButton.isEnabled = true
         recordButton.titleLabel?.text = "Record"
-        recordButton.setTitle("Record", forState: .Normal)
-        recordButton.setTitle("Record", forState: .Highlighted)
-        nextButton.enabled = true
+        recordButton.setTitle("Record", for: UIControlState())
+        recordButton.setTitle("Record", for: .highlighted)
+        nextButton.isEnabled = true
         
-        if audioRecorder?.recording == true {
+        if audioRecorder?.isRecording == true {
 
             audioTimer?.invalidate()
             audioTimer = nil
@@ -402,7 +402,7 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
             // If on last player - enable Done/Upload button
             if (currentPlayerIndex+1) >= teams[currentTeamIndex].players.count
             {
-                doneUploadButton.hidden = false
+                doneUploadButton.isHidden = false
             }
         } else {
             audioPlayer?.stop()
@@ -410,18 +410,18 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     }
 
     
-    @IBAction func playRecordedAudioButtonClicked(sender: AnyObject)
+    @IBAction func playRecordedAudioButtonClicked(_ sender: AnyObject)
     {
-        if audioRecorder?.recording == false {
+        if audioRecorder?.isRecording == false {
 
             recordButton.titleLabel?.text = "Stop"
-            recordButton.setTitle("Stop", forState: .Normal)
-            recordButton.setTitle("Stop", forState: .Highlighted)
+            recordButton.setTitle("Stop", for: UIControlState())
+            recordButton.setTitle("Stop", for: .highlighted)
             
             var error: NSError?
             
             do {
-                audioPlayer = try AVAudioPlayer(contentsOfURL:currentSoundFileURL!)
+                audioPlayer = try AVAudioPlayer(contentsOf:currentSoundFileURL!)
             } catch let error1 as NSError {
                 error = error1
                 audioPlayer = nil
@@ -442,21 +442,22 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         }
     }
     
-    @IBAction func nextButtonClicked(sender: AnyObject) {
+    @IBAction func nextButtonClicked(_ sender: AnyObject) {
         moveToNextPlayer()
     }
     
-    @IBAction func sendRecordingsToServerButtonClicked(sender: AnyObject)
+    @IBAction func sendRecordingsToServerButtonClicked(_ sender: AnyObject)
     {
         for team in teams
         {
             let order = getOrderForTeam(team)
             
             var allAudioRecordedForTeam = true
-            var filePaths = [NSURL]()
-            for player in team.players
+            var filePaths = [URL]()
+            for playerItem in team.players
             {
-                if player.audio!.voiceProviderURL == nil
+                let player = playerItem as! DJPlayer
+                if player.audio.voiceProviderURL == nil
                 {
                     if (order!.orderStatus != .REVOICING && order!.orderStatus != .ADDONPAID)
                     {
@@ -466,42 +467,42 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
                 }
                 else
                 {
-                    filePaths.append(player.audio!.voiceProviderURL)
+                    filePaths.append(player.audio.voiceProviderURL)
                 }
             }
             
             if allAudioRecordedForTeam && team.teamOrderUploaded == false
             {
-                let sem = dispatch_semaphore_create(0)
+                let sem = DispatchSemaphore(value: 0)
                 
                 DJTeamUploader.shareTeam(team, voicerMode: true)
                 { team,success in
                     DJTeamUploader.uploadTeamFilesVoicer(team.teamId, paths: filePaths) {
                         
-                        guard let order = self.getOrderForTeam(team) else { dispatch_semaphore_signal(sem); return }
+                        guard let order = self.getOrderForTeam(team) else { sem.signal(); return }
                         
                         DJOrderBackendService.markOrderComplete(self.authToken, order: order)
                         {_,_ in
                             
                             team.teamOrderUploaded = true
-                            dispatch_semaphore_signal(sem)
+                            sem.signal()
                             
                         }
                     }
                 }
 
-                dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER)
+                sem.wait(timeout: DispatchTime.distantFuture)
             }
             
         }
         
-        let alertController = UIAlertController(title: "Info", message: "Orders uploaded to server", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        let alertController = UIAlertController(title: "Info", message: "Orders uploaded to server", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
-    func getOrderForTeam(team:DJTeam) -> DJVoiceOrder?
+    func getOrderForTeam(_ team:DJTeam) -> DJVoiceOrder?
     {
         for order in orders {
             if order.teamId == team.teamId
@@ -513,15 +514,15 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         return nil
     }
     
-    @IBAction func refreshButtonClicked(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Info", message: "Not implemented yet", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+    @IBAction func refreshButtonClicked(_ sender: AnyObject) {
+        let alertController = UIAlertController(title: "Info", message: "Not implemented yet", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     
-    @IBAction func resetButtonClicked(sender: AnyObject)
+    @IBAction func resetButtonClicked(_ sender: AnyObject)
     {
         delegate?.getOrdersAndTeams() {
             orders, teams in
@@ -532,21 +533,21 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
 
     }
   
-    func audioRecorderBeginInterruption(recorder: AVAudioRecorder) {
+    func audioRecorderBeginInterruption(_ recorder: AVAudioRecorder) {
         print("Here1!!!")
     }
     
-    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         recordButton.titleLabel?.text = "Record"
-        recordButton.setTitle("Record", forState: .Normal)
-        recordButton.setTitle("Record", forState: .Highlighted)
+        recordButton.setTitle("Record", for: UIControlState())
+        recordButton.setTitle("Record", for: .highlighted)
     }
 
-    func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: NSError?) {
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
         print("Error decoding!")
         recordButton.titleLabel?.text = "Record"
-        recordButton.setTitle("Record", forState: .Normal)
-        recordButton.setTitle("Record", forState: .Highlighted)
+        recordButton.setTitle("Record", for: UIControlState())
+        recordButton.setTitle("Record", for: .highlighted)
     }
 
 }

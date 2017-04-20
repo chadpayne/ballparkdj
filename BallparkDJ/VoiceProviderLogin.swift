@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class VoiceProviderLogin : NSObject
+open class VoiceProviderLogin : NSObject
 {
-    public static func login()
+    open static func login()
     {
-        guard let djAppDelegate = UIApplication.sharedApplication().delegate as? DJAppDelegate else { return }
+        guard let djAppDelegate = UIApplication.shared.delegate as? DJAppDelegate else { return }
         
         let voiceProviderStoryBoard = UIStoryboard(name: "VoiceProvider", bundle: nil)
         

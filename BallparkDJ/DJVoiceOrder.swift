@@ -27,7 +27,7 @@ enum PlayerVoiceFormat : String
     case PLAYERNUMBER_PLAYERNAME = "PLAYERNUMBER_PLAYERNAME"
 }
 
-public class DJVoiceOrder : NSObject
+open class DJVoiceOrder : NSObject
 {
     var voiceProviderId:String?
     var orderId:String?
@@ -36,9 +36,9 @@ public class DJVoiceOrder : NSObject
     var teamOwnerEmail:String?
     var orderStatus:DJVoiceOrderStatus
     var playerVoiceFormat:PlayerVoiceFormat
-    var orderCompletionDate:NSDate?
+    var orderCompletionDate:Date?
     var revoicingAvailable:Bool?
-    var revoicingExpirationDate:NSDate?
+    var revoicingExpirationDate:Date?
     
     
     init(orderId:String, voiceProviderId:String, teamName:String, teamOwnerEmail:String, orderStatus:DJVoiceOrderStatus, teamId:String, revoicingAvailable:Bool, playerVoiceFormat:PlayerVoiceFormat)
@@ -82,22 +82,22 @@ public class DJVoiceOrder : NSObject
         
         revoicingAvailable = dictionary["revoicingAvailable"] as? Bool
         
-        if let revoiceMilliSeconds = dictionary["revoicingExpirationDate"] as? NSTimeInterval
+        if let revoiceMilliSeconds = dictionary["revoicingExpirationDate"] as? TimeInterval
         {
             let revoiceSeconds = revoiceMilliSeconds / 1000.0
-            revoicingExpirationDate = NSDate(timeIntervalSince1970: revoiceSeconds)
+            revoicingExpirationDate = Date(timeIntervalSince1970: revoiceSeconds)
         }
  
-        if let orderCompleteMilliSeconds = dictionary["orderCompletionDate"] as? NSTimeInterval
+        if let orderCompleteMilliSeconds = dictionary["orderCompletionDate"] as? TimeInterval
         {
             let orderCompleteSeconds = orderCompleteMilliSeconds / 1000.0
-            orderCompletionDate = NSDate(timeIntervalSince1970: orderCompleteSeconds)
+            orderCompletionDate = Date(timeIntervalSince1970: orderCompleteSeconds)
         }
     }
     
-    func toDictionary() -> [String:AnyObject]
+    func toDictionary() -> [String:Any]
     {
-        var dict = [String:AnyObject]()
+        var dict = [String:Any]()
        
         dict["id"] = orderId
         dict["teamName"] = teamName
@@ -110,11 +110,11 @@ public class DJVoiceOrder : NSObject
         
     }
 
-    func toJSON() -> NSData?
+    func toJSON() -> Data?
     {
         do
         {
-            let jsonData = try NSJSONSerialization.dataWithJSONObject(toDictionary(), options: .PrettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: toDictionary(), options: .prettyPrinted)
             return jsonData
         }
         catch _ as NSError
