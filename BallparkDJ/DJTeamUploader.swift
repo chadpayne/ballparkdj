@@ -61,7 +61,8 @@ open class DJTeamUploader : NSObject
         {
             if let url = (player as AnyObject).audio.announcementURL?.lastPathComponent
             {
-                let myURL = URL(string: "\(DJServerInfo.baseServerURL)/teamfiles/\(team.teamId)/\(url)")
+                
+                let myURL = URL(string: "\(DJServerInfo.baseServerURL)/teamfiles/\(team.teamId!)/\(url)")
 
                 let operation = DataTaskOperation.init(url: myURL!)
                                 {
@@ -71,7 +72,7 @@ open class DJTeamUploader : NSObject
                                     guard httpResponse.statusCode == 200 || httpResponse.statusCode == 302 else { return }
                                     
                                     
-                                    (player as AnyObject).audio.announcementURL = self.fileURL("\(team.teamId)-\(url)")
+                                    (player as AnyObject).audio.announcementURL = self.fileURL("\(team.teamId!)-\(url)")
                                     
                                     try? data?.write(to: ((player as AnyObject).audio?.announcementURL!)!, options: [.atomic])
                                     
