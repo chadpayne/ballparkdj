@@ -13,7 +13,7 @@ import UIKit
     func emailAddressEntered(_ emailAddress:String)
 }
 
-class EmailAddressViewController: UIViewController {
+class EmailAddressViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var emailAddressTextField: UITextField!
     weak var delegate:EmailAddressViewControllerDelegate?
@@ -23,6 +23,7 @@ class EmailAddressViewController: UIViewController {
         super.viewDidLoad()
 
         emailAddressTextField.text = UserDefaults.standard.object(forKey: "userEmailAddress") as? String
+        emailAddressTextField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +57,11 @@ class EmailAddressViewController: UIViewController {
                 self.delegate?.emailAddressEntered(self.emailAddressTextField.text!)
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        continueButtonClicked(self)
+        return true
     }
     
     

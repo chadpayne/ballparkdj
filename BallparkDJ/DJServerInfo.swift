@@ -8,10 +8,10 @@
 
 import Foundation
 
-open class DJServerInfo
+open class DJServerInfo : NSObject
 {
     static let productionServerURL = "http://order.ballparkdj.com"
-    static let testServerURL = "http://159.203.186.116"
+    static let testServerURL = "https://devtest.ballparkdj.com"
     
-    static var baseServerURL = "http://order.ballparkdj.com"
+    static var baseServerURL = "https://devtest.ballparkdj.com"
 }

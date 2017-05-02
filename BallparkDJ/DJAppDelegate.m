@@ -138,6 +138,91 @@ MPMediaPickerController *theMediaPicker = nil;
     return (DJAppDelegate*)[[UIApplication sharedApplication] delegate];
 }
 
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+
+    if (![userActivity.activityType isEqualToString:@"NSUserActivityTypeBrowsingWeb"]) {
+        return NO;
+    }
+
+    NSString *host = [userActivity.webpageURL host];
+    NSString *action = nil;
+    NSString *teamId = nil;
+
+    if (userActivity.webpageURL.pathComponents.count >= 3) {
+        action = userActivity.webpageURL.pathComponents[1];
+        teamId = userActivity.webpageURL.pathComponents[2];
+    }
+    
+    
+    if ([host isEqualToString:@"devtest.ballparkdj.com"]) {
+        if ([action isEqualToString:@"importteam"]) {
+            DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
+            [teamUploader importTeam:teamId];
+            return YES;
+        }
+
+        if ([action isEqualToString:@"importorder"]) {
+            [DJOrderBackendService getPurchasedVoiceOrder:teamId completion:^(DJVoiceOrder *order,NSError *error) {
+                
+                if (order == nil) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unable to import team.  Please verify that your link is correct." preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
+                    [alertController addAction:okButton];
+                    
+                    [self.window.rootViewController presentViewController:alertController animated:NO completion:nil];
+                    return;
+                }
+                
+                NSLog(@"Voice re-voice expiration date = %@", order.revoicingExpirationDate);
+                
+                if (order.teamId != nil)
+                {
+                    DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
+                    [teamUploader importOrder:order];
+                }
+            }];
+            return YES;
+        }
+        
+    }
+
+    if ([host isEqualToString:@"order.ballparkdj.com"]) {
+        if ([action isEqualToString:@"importteam"]) {
+            DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
+            [teamUploader importTeam:teamId];
+            return YES;
+        }
+        
+        if ([action isEqualToString:@"importorder"]) {
+            [DJOrderBackendService getPurchasedVoiceOrder:teamId completion:^(DJVoiceOrder *order,NSError *error) {
+                
+                if (order == nil) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unable to import team.  Please verify that your link is correct." preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
+                    [alertController addAction:okButton];
+                    
+                    [self.window.rootViewController presentViewController:alertController animated:NO completion:nil];
+                    return;
+                }
+                
+                NSLog(@"Voice re-voice expiration date = %@", order.revoicingExpirationDate);
+                
+                if (order.teamId != nil)
+                {
+                    DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
+                    [teamUploader importOrder:order];
+                }
+            }];
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
+
 -(BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     if ([[url scheme] isEqualToString:@"com.ballparkdj.team-import"])

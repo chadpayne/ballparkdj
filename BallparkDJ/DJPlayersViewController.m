@@ -782,7 +782,7 @@ enum PostAuthenticationAction
             return;
         }
         
-        NSString *shareLink = [NSString stringWithFormat:@"com.ballparkdj.team-import://%@", team.teamId];
+        NSString *shareLink = [NSString stringWithFormat:@"%@/importteam/%@", [DJServerInfo baseServerURL], team.teamId];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];
@@ -793,7 +793,7 @@ enum PostAuthenticationAction
         self.mailController = [[MFMailComposeViewController alloc] init];
         self.mailController.mailComposeDelegate = self;
         [self.mailController setSubject:[NSString stringWithFormat:@"BallparkDJ Team: %@",team.teamName]];
-        [self.mailController setMessageBody:[NSString stringWithFormat:@"I am sharing my BallparkDJ team TeamName with you.  To open this team in BallparkDJ, simply open this email on the iPhone or iPad on which you've installed BallparkDJ and click on the link below:\n\n%@\n\nThe team should then appear in BallparkDJ.  Feel free to share the team with other parents, grandparents, kids, coaches, or friends using the Actions: Share Team option.\n\n(Note: If you are unable to open this email on your iPhone or iPad, you may alternatively open Safari on the device and type in the address/URL above.  This link expires on %@).", shareLink, formatedShareExpirationDate] isHTML:NO];
+        [self.mailController setMessageBody:[NSString stringWithFormat:@"I am sharing my BallparkDJ team %@ with you.  To open this team in BallparkDJ, simply open this email on the iPhone or iPad on which you've installed BallparkDJ and click on the link below:\n\n%@\n\nThe team should then appear in BallparkDJ.  Feel free to share the team with other parents, grandparents, kids, coaches, or friends using the Actions: Share Team option.\n\n(Note: If you are unable to open this email on your iPhone or iPad, you may alternatively open Safari on the device and type in the address/URL above.  This link expires on %@).", team.teamName, shareLink, formatedShareExpirationDate] isHTML:NO];
          
         [self presentViewController:self.mailController animated:YES completion:nil];
         
