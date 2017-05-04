@@ -26,6 +26,10 @@
     self = [super init];
     self.teamName = name;
     self.players = [[NSMutableArray alloc] init];
+    
+    // ::TODO:: Remove this before going into Production
+    self.teamImportedOrderedOnTestEnvironment = YES;
+    
     return self;
 }
 
@@ -73,6 +77,10 @@
     if ([coder containsValueForKey:@"_teamId"])
     {
         self.teamId = [coder decodeObjectForKey:@"_teamId"];
+    }
+    
+    if ([coder containsValueForKey:@"_teamImportedOnTestEnvironment"]) {
+        _teamImportedOrderedOnTestEnvironment = [coder decodeObjectForKey:@"_teamImportedOnTestEnvironment"];
     }
     
     return self;
@@ -123,6 +131,7 @@
         [coder encodeObject:self.teamId forKey:@"_teamId"];
     }
 
+    [coder encodeBool:self.teamImportedOrderedOnTestEnvironment forKey:@"_teamImportedOnTestEnvironment"];
 }
 
 @end

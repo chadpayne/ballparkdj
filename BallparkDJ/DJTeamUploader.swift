@@ -279,6 +279,12 @@ open class DJTeamUploader : NSObject
             {
                 let team = DJTeam()
                 
+                if DJServerInfo.baseServerURL == DJServerInfo.testServerURL {
+                    team.teamImportedOrderedOnTestEnvironment = true
+                } else {
+                    team.teamImportedOrderedOnTestEnvironment = false
+                }
+                
                 team.teamId = teamDict["id"] as? String
                 team.teamName = teamDict["name"] as? String
                 team.players = NSMutableArray()

@@ -23,7 +23,7 @@
 @property (assign, nonatomic) BOOL voiceReOrder;
 @property (assign, nonatomic) BOOL voiceAddOn;
 @property (assign, nonatomic) BOOL teamOrderUploaded;
-
+@property (assign, nonatomic) BOOL teamImportedOrderedOnTestEnvironment;
 
 -(id)initWithName:(NSString *)name;
 
