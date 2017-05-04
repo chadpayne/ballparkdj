@@ -771,6 +771,12 @@ enum PostAuthenticationAction
     self.team.teamOwnerEmail = [[NSUserDefaults standardUserDefaults] objectForKey:@"userEmailAddress"];
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    if (self.team.teamImportedOrderedOnTestEnvironment) {
+        [DJServerInfo setBaseServerURL:[DJServerInfo testServerURL]];
+    } else {
+        [DJServerInfo setBaseServerURL:[DJServerInfo productionServerURL]];
+    }
     
     [uploader shareTeam:self.team completion:^(DJTeam *team,BOOL success) {
 

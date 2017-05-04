@@ -155,6 +155,7 @@ MPMediaPickerController *theMediaPicker = nil;
     
     
     if ([host isEqualToString:@"devtest.ballparkdj.com"]) {
+        [DJServerInfo setBaseServerURL:[DJServerInfo testServerURL]];
         if ([action isEqualToString:@"importteam"]) {
             DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
             [teamUploader importTeam:teamId];
@@ -188,6 +189,7 @@ MPMediaPickerController *theMediaPicker = nil;
     }
 
     if ([host isEqualToString:@"order.ballparkdj.com"]) {
+        [DJServerInfo setBaseServerURL:[DJServerInfo productionServerURL]];
         if ([action isEqualToString:@"importteam"]) {
             DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
             [teamUploader importTeam:teamId];

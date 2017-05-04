@@ -11,7 +11,6 @@ import UIKit
 
 open class DJTeamUploader : NSObject
 {
-    static let baseServerURL = DJServerInfo.baseServerURL
     var operationQueue = OperationQueue()
     var HUD:MBProgressHUD!
     var inInAppPurchaseAction:Bool = false
@@ -467,7 +466,7 @@ open class DJTeamUploader : NSObject
         shareTeam(team) { team,success in
             if team.teamId != nil
             {
-                let serverURL = URL(string: "\(DJTeamUploader.baseServerURL)/ordervoice")
+                let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/ordervoice")
                 let request = NSMutableURLRequest(url: serverURL!)
                 
                 request.httpMethod = "POST"
@@ -785,7 +784,7 @@ open class DJTeamUploader : NSObject
     {
         let boundary = generateBoundaryString()
         
-        let serverURL = URL(string: "\(baseServerURL)/uploadTeamFiles")
+        let serverURL = URL(string: "\(DJServerInfo.baseServerURL)/uploadTeamFiles")
         let request = NSMutableURLRequest(url: serverURL!)
         
         request.httpMethod = "POST"
