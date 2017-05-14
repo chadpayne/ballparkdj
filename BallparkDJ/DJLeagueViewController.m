@@ -140,7 +140,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
          [self.parentDelegate.league.teams removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self setEditing:FALSE];
+
         [tableView reloadData];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         
