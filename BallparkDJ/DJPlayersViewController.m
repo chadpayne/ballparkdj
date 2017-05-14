@@ -7,6 +7,7 @@
 //
 
 #import "DJPlayersViewController.h"
+#import "DJLeagueViewController.h"
 #import "BallparkDJ-Swift.h"
 //#import "MKStoreKitConfigs.h"
 //#import "MKStoreManager.h"
@@ -815,8 +816,9 @@ enum PostAuthenticationAction
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Info" message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self.navigationController popToRootViewControllerAnimated:NO];
         
+        DJLeagueViewController *leagueController = (DJLeagueViewController *)self.navigationController.viewControllers[0];
+        [leagueController teamDataUpdated];
     }];
     [alertController addAction:okButton];
     
