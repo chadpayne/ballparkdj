@@ -788,12 +788,7 @@ enum PostAuthenticationAction
             return;
         }
 
-        // ::TODO:: Change this before we submit!!!!
-        NSString *shareLink = [NSString stringWithFormat:@"com.ballparkdj.team-import://%@", team.teamId];
-
-        if (team.teamImportedOrderedOnTestEnvironment) {
-            shareLink = [NSString stringWithFormat:@"%@/importteam/%@", [DJServerInfo testServerURL], team.teamId];
-        }
+        NSString *shareLink =  [NSString stringWithFormat:@"%@/importteam/%@", [DJServerInfo baseServerURL], team.teamId];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];

@@ -229,8 +229,6 @@ MPMediaPickerController *theMediaPicker = nil;
 {
     if ([[url scheme] isEqualToString:@"com.ballparkdj.team-import"])
     {
-        // Always force old URL mechanism to point to Production
-        [DJServerInfo setBaseServerURL:[DJServerInfo productionServerURL]];
         DJTeamUploader *teamUploader = [DJTeamUploader sharedInstance];
         [teamUploader importTeam:[url host]];
         
@@ -245,9 +243,6 @@ MPMediaPickerController *theMediaPicker = nil;
 
     if ([[url scheme] isEqualToString:@"com.ballparkdj.order-import"])
     {
-        // Always force old URL mechanism to point to Production
-        [DJServerInfo setBaseServerURL:[DJServerInfo productionServerURL]];
-        
         NSString *voiceOrderID = [url host];
         
         [DJOrderBackendService getPurchasedVoiceOrder:voiceOrderID completion:^(DJVoiceOrder *order,NSError *error) {

@@ -26,9 +26,7 @@
     self = [super init];
     self.teamName = name;
     self.players = [[NSMutableArray alloc] init];
-    
-    // ::TODO:: Remove this before going into Production
-    self.teamImportedOrderedOnTestEnvironment = YES;
+    self.teamImportedOrderedOnTestEnvironment = NO;
     
     return self;
 }
