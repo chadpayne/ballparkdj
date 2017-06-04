@@ -151,10 +151,12 @@
                 {
                     if ([localPlayer.uuid isEqualToString:serverPlayer.uuid])
                     {
-                        localPlayer.audio.announcementURL = serverPlayer.audio.announcementURL;
-                        localPlayer.audio.announcementClip = serverPlayer.audio.announcementClip;
-                        localPlayer.audio.announcementDuration = serverPlayer.audio.announcementDuration;
-                        localPlayer.audio.announcementVolume = serverPlayer.audio.announcementVolume;
+                        if (serverPlayer.audio.announcementURL != nil) {
+                            localPlayer.audio.announcementURL = serverPlayer.audio.announcementURL;
+                            localPlayer.audio.announcementClip = serverPlayer.audio.announcementClip;
+                            localPlayer.audio.announcementDuration = serverPlayer.audio.announcementDuration;
+                            localPlayer.audio.announcementVolume = serverPlayer.audio.announcementVolume;
+                        }
 
                         audioMerged = YES;
                     }
@@ -169,10 +171,12 @@
                 {
                     if ([localPlayer.name isEqualToString:serverPlayer.name] && localPlayer.number == serverPlayer.number)
                     {
-                        localPlayer.audio.announcementURL = serverPlayer.audio.announcementURL;
-                        localPlayer.audio.announcementClip = serverPlayer.audio.announcementClip;
-                        localPlayer.audio.announcementDuration = serverPlayer.audio.announcementDuration;
-                        localPlayer.audio.announcementVolume = serverPlayer.audio.announcementVolume;
+                        if (serverPlayer.audio.announcementURL != nil) {
+                            localPlayer.audio.announcementURL = serverPlayer.audio.announcementURL;
+                            localPlayer.audio.announcementClip = serverPlayer.audio.announcementClip;
+                            localPlayer.audio.announcementDuration = serverPlayer.audio.announcementDuration;
+                            localPlayer.audio.announcementVolume = serverPlayer.audio.announcementVolume;
+                        }
                         audioMerged = YES;
                     }
                 }
