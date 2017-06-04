@@ -75,15 +75,19 @@ open class DJTeamUploader : NSObject
                                     
                                     try? data?.write(to: ((player as AnyObject).audio?.announcementURL!)!, options: [.atomic])
                                     
-                                    (player as AnyObject).audio?.announcementClip = try! AVAudioPlayer(contentsOf:((player as AnyObject).audio?.announcementURL!)!)
-                                    
-                                    if (player as AnyObject).audio?.isDJClip == true
-                                    {
-                                        if let audioURL = Bundle.main.path(forResource: (player as AnyObject).audio?.title, ofType: "m4a")
+                                    do {
+                                        (player as AnyObject).audio?.announcementClip = try AVAudioPlayer(contentsOf:((player as AnyObject).audio?.announcementURL!)!)
+                                        
+                                        if (player as AnyObject).audio?.isDJClip == true
                                         {
-                                            (player as AnyObject).audio?.musicClip = try! AVAudioPlayer(contentsOf:URL(fileURLWithPath: audioURL))
-                                        }
+                                            if let audioURL = Bundle.main.path(forResource: (player as AnyObject).audio?.title, ofType: "m4a")
+                                            {
+                                                (player as AnyObject).audio?.musicClip = try AVAudioPlayer(contentsOf:URL(fileURLWithPath: audioURL))
+                                            }
 
+                                        }
+                                    } catch {
+                                        // Stop us from crashing if unable to create AVAudioPlayer
                                     }
                                 }
                 

@@ -46,7 +46,9 @@ open class DJPlayerRevoiceViewController : UIViewController, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath)
         
         let player = team.players[indexPath.row] as! DJPlayer
-        let cellText = "#\(player.number) \(player.name)"
+        
+        let playerName = player.name ?? ""
+        let cellText = "#\(player.number) \(playerName)"
         
         cell.textLabel?.text = cellText
         
