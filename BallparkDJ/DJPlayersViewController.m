@@ -147,13 +147,7 @@ enum PostAuthenticationAction
         }
     }
     
-    
-    for(DJPlayer *player in self.team.players)
-    {
-        NSLog(@"%@", player.name);
-    }
-    
-    [self.playerTable reloadData];
+     [self.playerTable reloadData];
 }
 
 -(void)revoiceRequestCompleted
