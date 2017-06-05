@@ -110,7 +110,7 @@
     [self encode];
 
     // Send Notification so main UI can refresh
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:newTeam];
     
     return newTeam;
 }
@@ -192,7 +192,7 @@
         
         
         [self encode];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:foundTeam];
         return;
     }
     
@@ -206,7 +206,7 @@
     [self encode];
     
     // Send Notification so main UI can refresh
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DJTeamDataUpdated" object:newTeam];
 }
 
 

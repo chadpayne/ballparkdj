@@ -133,9 +133,14 @@ enum PostAuthenticationAction
     [super viewWillDisappear:animated];
 }
 
+- (void)teamDataUpdated {
+    [self.playerTable reloadData];
+}
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teamDataUpdated) name:@"DJTeamDataUpdated" object:self.team];
     
     for (int i = 0; i < [self.team.players count]; i++)
     {
