@@ -173,16 +173,18 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
     func formatAtBatPlayer()
     {
         let order = getOrderForTeam(currentTeam)
+        let playerName = currentPlayer.name ?? ""
+        let playerTeam = currentTeam.teamName ?? ""
         switch (order!.playerVoiceFormat)
         {
         case .NOW_BATTING_PLAYERNUMBER_PLAYERNAME:
-            playerTextView.text = "Now Batting\nNumber \(currentPlayer.number)\n\(currentPlayer.name!)"
+            playerTextView.text = "Now Batting\nNumber \(currentPlayer.number)\n\(playerName)"
             break
         case .NOW_BATTING_FORTEAM_PLAYERNUMBER_PLAYERNAME:
-            playerTextView.text = "Now Batting for the \(currentTeam.teamName)\nNumber \(currentPlayer.number)\n\(currentPlayer.name!)"
+            playerTextView.text = "Now Batting for the \(playerTeam)\nNumber \(currentPlayer.number)\n\(playerName)"
             break
         case .PLAYERNUMBER_PLAYERNAME:
-            playerTextView.text = "Number \(currentPlayer.number)\n\(currentPlayer.name!)"
+            playerTextView.text = "Number \(currentPlayer.number)\n\(playerName)"
             break
         }
         
