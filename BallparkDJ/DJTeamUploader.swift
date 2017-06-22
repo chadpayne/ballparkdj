@@ -757,16 +757,23 @@ open class DJTeamUploader : NSObject
         task.resume()
     }
 
-    open static func uploadNextTeamFile(_ teamId:String, paths:[URL], index:Int, completion: @escaping () -> Void)
+    open static func uploadNextTeamFile(_ teamId:String, paths:[URL], index:Int, completion: @escaping (Bool) -> Void)
     {
         let currentURL:URL! = paths[index]
       
         uploadTeamFiles(teamId, paths: [currentURL]) {
+            success in
             let newIndex = index + 1
+
+            // If we have an error we need to stop/abort
+            if (!success) {
+                completion(success)
+                return
+            }
             
             if (newIndex >= paths.count) {
                 // we are done!
-                completion()
+                completion(success)
             } else {
                 uploadNextTeamFile(teamId, paths: paths, index: newIndex, completion: completion)
             }
@@ -774,17 +781,18 @@ open class DJTeamUploader : NSObject
         
     }
 
-    open static func uploadTeamFilesVoicer(_ teamId:String, paths:[URL], completion: @escaping () -> Void)
+    open static func uploadTeamFilesVoicer(_ teamId:String, paths:[URL], completion: @escaping (Bool) -> Void)
     {
-        guard paths.count > 0 else { completion(); return; }
+        guard paths.count > 0 else { completion(false); return; }
 
         uploadNextTeamFile(teamId, paths: paths, index: 0) {
-            completion()
+            success in
+            completion(success)
         }
     }
 
     
-    open static func uploadTeamFiles(_ teamId:String, paths:[URL], completion: @escaping () -> Void)
+    open static func uploadTeamFiles(_ teamId:String, paths:[URL], completion: @escaping (Bool) -> Void)
     {
         let boundary = generateBoundaryString()
         
@@ -804,17 +812,20 @@ open class DJTeamUploader : NSObject
         
         let task = URLSession.shared.uploadTask(with: request as URLRequest, from: httpBody, completionHandler: {
             data, response, error in
-            if ((error) != nil)
+            if (error != nil)
             {
-                print(error)
+                completion(false)
                 return;
             }
             
-            let result = NSString(data: data!
-                , encoding: String.Encoding.utf8.rawValue)
-            print(result)
+            var result = true
+            if let httpURLResponse = response as? HTTPURLResponse {
+                if let httpStatusCode = HTTPStatusCode(HTTPResponse:httpURLResponse) {
+                    result = httpStatusCode.isSuccess
+                }
+            }
             
-            completion()
+            completion(result)
         })        
 
         

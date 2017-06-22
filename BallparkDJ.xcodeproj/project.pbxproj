@@ -80,6 +80,8 @@
 		957DD4941D64A74700C2449B /* DJPlayerRevoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957DD4931D64A74600C2449B /* DJPlayerRevoiceView.xib */; };
 		957DD4961D64A80400C2449B /* DJPlayerRevoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957DD4951D64A80400C2449B /* DJPlayerRevoiceViewController.swift */; };
 		9595FBA71E4171DB00E26FE0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9595FBA61E4171DB00E26FE0 /* StoreKit.framework */; };
+		95C9A7791EFB456100A981A4 /* HTTPStatusCodes+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9A7781EFB456100A981A4 /* HTTPStatusCodes+Extensions.swift */; };
+		95C9A77B1EFB458800A981A4 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9A77A1EFB458800A981A4 /* HTTPStatusCodes.swift */; };
 		A2152C6716E1B38800946094 /* DJTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6616E1B38800946094 /* DJTeam.m */; };
 		A2152C6A16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
 		A2152C6B16E275AC00946094 /* DJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2152C6916E275AC00946094 /* DJPlayer.m */; };
@@ -260,6 +262,8 @@
 		957DD4951D64A80400C2449B /* DJPlayerRevoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJPlayerRevoiceViewController.swift; sourceTree = "<group>"; };
 		959419531CCEE96400D8DCF4 /* BallparkDJ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BallparkDJ.entitlements; sourceTree = "<group>"; };
 		9595FBA61E4171DB00E26FE0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		95C9A7781EFB456100A981A4 /* HTTPStatusCodes+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HTTPStatusCodes+Extensions.swift"; sourceTree = "<group>"; };
+		95C9A77A1EFB458800A981A4 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
 		A2152C6616E1B38800946094 /* DJTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJTeam.m; sourceTree = "<group>"; };
 		A2152C6816E275AC00946094 /* DJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DJPlayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A2152C6916E275AC00946094 /* DJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJPlayer.m; sourceTree = "<group>"; };
@@ -543,6 +547,8 @@
 			isa = PBXGroup;
 			children = (
 				9571D7EC1CDC3C9400FFCCE6 /* DataTaskOperation.h */,
+				95C9A7781EFB456100A981A4 /* HTTPStatusCodes+Extensions.swift */,
+				95C9A77A1EFB458800A981A4 /* HTTPStatusCodes.swift */,
 				9571D7F01CDC3D0F00FFCCE6 /* DataTaskOperation.m */,
 				9571D7EE1CDC3CB500FFCCE6 /* AsynchronousOperation.h */,
 				9571D7F21CDC3D2D00FFCCE6 /* AsynchronousOperation.m */,
@@ -921,6 +927,7 @@
 				9514C8A31CF1598E00B9E286 /* DJOrderBackendService.swift in Sources */,
 				95560B731D860A920079B6B1 /* UISlider+FlatUI.m in Sources */,
 				9571D7EF1CDC3CB500FFCCE6 /* AsynchronousOperation.h in Sources */,
+				95C9A77B1EFB458800A981A4 /* HTTPStatusCodes.swift in Sources */,
 				95560B691D860A920079B6B1 /* FUISwitch.m in Sources */,
 				A272BB3E16D6D30800AE7ED1 /* main.m in Sources */,
 				A272BB4216D6D30800AE7ED1 /* DJAppDelegate.m in Sources */,
@@ -934,6 +941,7 @@
 				954326B61CBC9214009F6927 /* DJTeamUploader.swift in Sources */,
 				9571D7F11CDC3D0F00FFCCE6 /* DataTaskOperation.m in Sources */,
 				95560B771D860A920079B6B1 /* UIToolbar+FlatUI.m in Sources */,
+				95C9A7791EFB456100A981A4 /* HTTPStatusCodes+Extensions.swift in Sources */,
 				95560B741D860A920079B6B1 /* UIStepper+FlatUI.m in Sources */,
 				8C2C095916D73F4E000B5C1E /* DJDetailController.m in Sources */,
 				04E9A67419A7AA7600419267 /* IAPHelper.m in Sources */,

@@ -479,7 +479,21 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
                 
                 DJTeamUploader.shareTeam(team, voicerMode: true)
                 { team,success in
+
+                    if (success == false) {
+                        self.displayErrorMsg("Unable to share team \(team.teamName!)")
+                        sem.signal()
+                        return
+                    }
+                    
                     DJTeamUploader.uploadTeamFilesVoicer(team.teamId, paths: filePaths) {
+                        success in
+                        
+                        if (success == false) {
+                            self.displayErrorMsg("Unable to upload one or more audio file(s) for team \(team.teamName!)")
+                            sem.signal()
+                            return
+                        }
                         
                         guard let order = self.getOrderForTeam(team) else { sem.signal(); return }
                         
@@ -499,6 +513,13 @@ class DJVoiceProviderViewController: UIViewController, AVAudioPlayerDelegate, AV
         }
         
         let alertController = UIAlertController(title: "Info", message: "Orders uploaded to server", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func displayErrorMsg(_ msg:String) {
+        let alertController = UIAlertController(title: "Critical Error occured", message: "Please force-quit the application to prevent data corruption! Details:\(msg)", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
